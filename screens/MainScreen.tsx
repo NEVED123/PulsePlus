@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, SafeAreaView } from 'react-native';
+import { StyleSheet, View, Text, SafeAreaView, Button } from 'react-native';
 
 /**
  * The components will be broken down into individual functions once the main screen layout is complete
@@ -10,6 +10,20 @@ export default function MainScreen() {
             </View>
             <View style={meterChanger.container}>
             </View>
+            <View style={meterChanger.container}>
+            </View>
+            <Button style={buttonStyles.container}>
+            
+            </Button>
+            <Button style={buttonStyles.container}>
+            
+            </Button>
+            <Button style={buttonStyles.container}>
+            
+            </Button>
+            <Button style={buttonStyles.container}>
+            
+            </Button>
         </View>
     );
 }
@@ -40,10 +54,22 @@ const clickSpace = StyleSheet.create({
     }
 })
 
+const buttonStyles = StyleSheet.create({
+    container:{
+        justifyContent: 'space-evenly',
+        backgroundColor:'blue',
+        margin: 30,
+        flex:1,
+       }
+    
+    
+
+})
+
 const meterChanger = StyleSheet.create({
     container:{
         flexDirection:'row',
-        flex:1
+        flex:1,
     }
 })
 
