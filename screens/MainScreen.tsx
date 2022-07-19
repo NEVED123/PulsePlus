@@ -12,35 +12,37 @@ export default function MainScreen() {
             </View>
             <View style={meterChanger.container}>
             </View>
-            <Button style={buttonStyles.container}>
-            
+        <View style= {buttonStyles.container} >
+            <Button style={buttonStyles.metronome} title="metronome" color="#841584">
+            metronome
             </Button>
-            <Button style={buttonStyles.container}>
-            
+            <Button style={buttonStyles.buildSong} title="build song" color="#841584">
+            build song
             </Button>
-            <Button style={buttonStyles.container}>
-            
+            <Button style={buttonStyles.tuner} title="tuner" color="#841584">
+            tuner
             </Button>
-            <Button style={buttonStyles.container}>
-            
+            <Button style={buttonStyles.settings} title='settings'color="#841584">
+            settings
             </Button>
+            </View>
         </View>
     );
 }
 
 /**
  * a defined space for our beat visualization
- */
+ 
 function ClickSpace() {
 }
 
 function MeterChanger(){
     
 }
-  
+  */
 const mainScreen = StyleSheet.create({
     container: {
-      flex: 1,
+      flex:1,
       backgroundColor: '#3F3F3F',
       flexDirection:'column',
     },
@@ -55,15 +57,28 @@ const clickSpace = StyleSheet.create({
 })
 
 const buttonStyles = StyleSheet.create({
-    container:{
-        justifyContent: 'space-evenly',
-        backgroundColor:'blue',
+    container: {
+        flexDirection: 'row',
         margin: 30,
         flex:1,
-       }
-    
-    
+    },
+    metronome:{
+        backgroundColor: "red",
+        padding: 25,
+    },
+    buildSong:{
+        backgroundColor: "red",
+        padding: 25,
+    },
+    tuner:{
+        backgroundColor: "red",
+        padding: 25,
+    },
+    settings:{
+        backgroundColor: "red",
+        padding: 25,
 
+    },
 })
 
 const meterChanger = StyleSheet.create({
