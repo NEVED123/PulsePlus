@@ -1,5 +1,6 @@
 import { StyleSheet, View, Text, SafeAreaView, Pressable, StatusBar } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useState } from 'react'
 
 /**
  * The components will be broken down into individual functions once the main screen layout is complete
@@ -21,21 +22,28 @@ function ClickSpace(){
     return(
         //needs behavior for determining how many blocks appear
         <View style={homeStyles.clickSpace}>
-            <MetronomeBlock/>
-            <MetronomeBlock/>
-            <MetronomeBlock/>
+            <MetronomeBlockGroup/>
         </View>
     )
 
 }
 
+function MetronomeBlockGroup(){
+    return(
+        <View style={homeStyles.metronomeBlockGroup}>
+            <MetronomeBlock/>
+            <MetronomeBlock/>
+            <MetronomeBlock/>
+        </View>
+    )
+}
+
 function MetronomeBlock(){
     return(
         //This view will eventually have children for the different accent options
-        <View style={homeStyles.metronomeBlock}>
-        </View> 
+        <Pressable style={homeStyles.metronomeBlock}>
+        </Pressable> 
     )
-
 }
 
 function TimeSignature(){
@@ -64,17 +72,29 @@ function TempoWheel(){
 }
 
 export function StartButton(){
+    const [running, setRunning] = useState(false)
     return(
-        <Pressable style={({ pressed }) => [
+        <Pressable 
+            style={({ pressed }) => [
             {
-              backgroundColor: pressed
+              backgroundColor: running
                 ? '#707070'
                 : '#3f3f3f'
             },
             homeStyles.startButton
-          ]}>
+          ]}
+            onPress={
+                ()=>{
+                    if(running){
+                        setRunning(false)
+                    }
+                    else{
+                        setRunning(true)
+                    }
+                } //startMetronomeFunction
+            }>
             <Text style={homeStyles.startText}>
-                Start
+                {running ? "Stop" : "Start"}
             </Text>
         </Pressable>
     )
@@ -87,6 +107,9 @@ const homeStyles = StyleSheet.create({
     },
     background:{
         flex:1,
+    },
+    clickSpace:{
+        flex:1
     },
     metronomeBlock:{
         flex:1,
@@ -101,7 +124,7 @@ const homeStyles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5
     },
-    clickSpace:{
+    metronomeBlockGroup:{
         flex:1,
         flexDirection:'row',
         padding:20
