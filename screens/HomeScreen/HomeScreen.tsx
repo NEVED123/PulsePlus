@@ -1,44 +1,51 @@
 import { StyleSheet, View, Text, SafeAreaView, Pressable, StatusBar } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from 'react'
+//import { homeStyles } from './HomeElements'
 
 /**
  * The components will be broken down into individual functions once the main screen layout is complete
  */
 export default function HomeScreen() {
+    const [meter, setMeter] = useState(new Array(16).fill(0))
     return (
         <LinearGradient colors={['#666666','#333333']} style={homeStyles.container}>
             <SafeAreaView style={homeStyles.background}>
-                <ClickSpace/>
+                <ClickSpace meter={meter}/>
                 <TimeSignature/>
                 <TempoWheel/>
-                <StartButton/>
+                <StartButton />
             </SafeAreaView>
         </LinearGradient>
     );
 }
 
-function ClickSpace(){
+export type Meter={
+    meter:number[]
+}
+
+export function ClickSpace({meter=[0,0,0,0]}:Meter){
     return(
         //needs behavior for determining how many blocks appear
         <View style={homeStyles.clickSpace}>
-            <MetronomeBlockGroup/>
+            <MetronomeBlockGroup meter={meter}/>
         </View>
     )
 
 }
 
-function MetronomeBlockGroup(){
+
+
+export function MetronomeBlockGroup({meter=[]}:Meter){
     return(
         <View style={homeStyles.metronomeBlockGroup}>
-            <MetronomeBlock/>
-            <MetronomeBlock/>
-            <MetronomeBlock/>
+            {meter.map(x => <MetronomeBlock/>)}
         </View>
     )
 }
 
-function MetronomeBlock(){
+
+export function MetronomeBlock(){
     return(
         //This view will eventually have children for the different accent options
         <Pressable style={homeStyles.metronomeBlock}>
@@ -46,18 +53,26 @@ function MetronomeBlock(){
     )
 }
 
-function TimeSignature(){
+export function TimeSignature(){
     return(
         <View style={homeStyles.timeSignature}>
-            <Text style={homeStyles.timeSignatureNumber}>3</Text>
+            <Pressable
+            style={homeStyles.timeSignatureNumberSelector}
+            onPress={()=>{/*drop down menu*/}}>
+                <Text style={homeStyles.timeSignatureNumber}>3</Text>
+            </Pressable>
             <Text style={homeStyles.timeSignatureDivider}>/</Text>
-            <Text style={homeStyles.timeSignatureNumber}>3</Text>
+            <Pressable 
+            style={homeStyles.timeSignatureNumberSelector}
+            onPress={()=>{/*drop down menu*/}}>
+                <Text style={homeStyles.timeSignatureNumber}>4</Text>
+            </Pressable>
         </View>
         
     )
 }
 
-function TempoWheel(){
+export function TempoWheel(){
     return(
         <View style={{alignItems:'center'}}>
             <View style={homeStyles.tempoWheel}>
@@ -71,8 +86,8 @@ function TempoWheel(){
     )
 }
 
-export function StartButton(){
-    const [running, setRunning] = useState(false)
+export function StartButton(){ 
+    const [running, setRunning] = useState(false) //move state up to top level component
     return(
         <Pressable 
             style={({ pressed }) => [
@@ -100,7 +115,6 @@ export function StartButton(){
     )
 }
 
-
 const homeStyles = StyleSheet.create({
     container:{
         flex:1
@@ -114,7 +128,7 @@ const homeStyles = StyleSheet.create({
     metronomeBlock:{
         flex:1,
         backgroundColor:'#D9D9D9',
-        margin:10,
+        margin:5,
         shadowColor: "#000",
         shadowOffset: {
 	        width: 0,
@@ -135,11 +149,7 @@ const homeStyles = StyleSheet.create({
         justifyContent:'center',
         alignItems:'center'
     },
-    timeSignatureNumber:{
-        fontSize:30,
-        lineHeight:75,
-        width:75, 
-        textAlign:'center',
+    timeSignatureNumberSelector:{
         backgroundColor:'#D9D9D9',
         shadowColor: "#000",
         shadowOffset: {
@@ -149,6 +159,12 @@ const homeStyles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 4,
         elevation: 5
+    },
+    timeSignatureNumber:{
+        fontSize:30,
+        lineHeight:75,
+        width:75, 
+        textAlign:'center'
     },
     timeSignatureDivider:{
         fontSize:30, 
@@ -213,4 +229,5 @@ const homeStyles = StyleSheet.create({
         fontSize:36
     }
 })
+
 
