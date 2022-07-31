@@ -2,7 +2,7 @@ import { View, Text, SafeAreaView, Pressable, StatusBar } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from 'react';
 import { homeStyles } from './HomeElements';
-//import ModalDropdown from 'react-native-modal-dropdown'
+//import ModalDropdown from 'react-native-modal-dropdown';
 
 /**
  * The components will be broken down into individual functions once the main screen layout is complete
@@ -74,12 +74,12 @@ export function TimeSignature(){
     )
 }
 
-type tempoHook={
+export type tempoHook={
     tempo:number,
     setTempo:Function
 }
 
-//Here we pass in the tempo and setTempo hook, i don't think this is the 'correct' way to do it but it works ;/
+//Here we pass in the tempo and setTempo hook, i don't think this is the 'correct' way to do it but it works :/
 export function TempoWheel({tempo=60, setTempo}:tempoHook){ 
     const[theta1, setTheta1] = useState(0)
     return(
@@ -88,8 +88,6 @@ export function TempoWheel({tempo=60, setTempo}:tempoHook){
             onTouchStart={(e)=>{
                 const x1 = e.nativeEvent.locationX-125
                 const y1 = 125-e.nativeEvent.locationY
-                console.log(`x=${x1}`)
-                console.log(`y=${y1}`)
             }}
             onTouchMove={(e)=>{
                     const x2 = e.nativeEvent.locationX-125
