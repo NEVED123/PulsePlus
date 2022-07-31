@@ -15,7 +15,7 @@ export default function HomeScreen() {
                 <StatusBar/>
                 <ClickSpace meter={meter}/>
                 <TimeSignature/>
-                <TempoWheel/>
+                <TempoWheel />
                 <StartButton />
             </SafeAreaView>
         </LinearGradient>
@@ -74,15 +74,41 @@ export function TimeSignature(){
 }
 
 export function TempoWheel(){
+    const[theta1, setTheta1] = useState(0)
+    const[tempo, setTempo] = useState(60)
     return(
         <View style={{alignItems:'center'}}>
-            <View style={homeStyles.tempoWheel}>
+            <View style={homeStyles.tempoWheel}
+            onTouchStart={(e)=>{
+                const x1 = e.nativeEvent.locationX-125
+                const y1 = 125-e.nativeEvent.locationY
+                console.log(`x=${x1}`)
+                console.log(`y=${y1}`)
+            }}
+            onTouchMove={(e)=>{
+                const x2 = e.nativeEvent.locationX-125
+                const y2 = 125-e.nativeEvent.locationY
+                if(x2 != 0){
+                    const theta2 = Math.atan(x2/y2)
+                    const deltaTheta = theta2-theta1
+                    if(deltaTheta > 0){
+                        setTempo(tempo + 1)
+                    }
+                    else{
+                        setTempo(tempo - 1)
+                    }
+                    setTheta1(theta2)
+                
+                }
+
+
+            }}>
                 <View style={{width:250, flexDirection:'row', justifyContent:'space-between'}}>
                     <Text style={homeStyles.tempoDirectionText}>-</Text>
                     <Text style={homeStyles.tempoDirectionText}>+</Text>
                 </View>
             </View>
-            <Text style={homeStyles.tempoText}>78</Text>
+            <Text style={homeStyles.tempoText}>{tempo}</Text>
         </View>
     )
 }
