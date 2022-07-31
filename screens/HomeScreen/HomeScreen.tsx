@@ -74,13 +74,13 @@ export function TimeSignature(){
     )
 }
 
-type tempoInfo={
+type tempoHook={
     tempo:number,
     setTempo:Function
 }
 
 //Here we pass in the tempo and setTempo hook, i don't think this is the 'correct' way to do it but it works ;/
-export function TempoWheel({tempo=60, setTempo}:tempoInfo){ 
+export function TempoWheel({tempo=60, setTempo}:tempoHook){ 
     const[theta1, setTheta1] = useState(0)
     return(
         <View style={{alignItems:'center'}}>
