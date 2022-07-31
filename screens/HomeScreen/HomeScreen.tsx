@@ -9,13 +9,14 @@ import { homeStyles } from './HomeElements';
  */
 export default function HomeScreen() {
     const [meter, setMeter] = useState(new Array(4).fill(0))
+    const[tempo, setTempo] = useState(60)
     return (
         <LinearGradient colors={['#666666','#333333']} style={homeStyles.container}>
             <SafeAreaView style={homeStyles.background}>
                 <StatusBar/>
                 <ClickSpace meter={meter}/>
                 <TimeSignature/>
-                <TempoWheel />
+                <TempoWheel tempo={tempo} setTempo={setTempo}/>
                 <StartButton />
             </SafeAreaView>
         </LinearGradient>
@@ -73,9 +74,14 @@ export function TimeSignature(){
     )
 }
 
-export function TempoWheel(){
+type tempoInfo={
+    tempo:number,
+    setTempo:Function
+}
+
+//Here we pass in the tempo and setTempo hook, i don't think this is the 'correct' way to do it but it works ;/
+export function TempoWheel({tempo=60, setTempo}:tempoInfo){ 
     const[theta1, setTheta1] = useState(0)
-    const[tempo, setTempo] = useState(60)
     return(
         <View style={{alignItems:'center'}}>
             <View style={homeStyles.tempoWheel}
@@ -108,8 +114,12 @@ export function TempoWheel(){
 
             }}>
                 <View style={{width:250, flexDirection:'row', justifyContent:'space-between'}}>
-                    <Text style={homeStyles.tempoDirectionText}>-</Text>
-                    <Text style={homeStyles.tempoDirectionText}>+</Text>
+                    <Text 
+                    style={homeStyles.tempoDirectionText}
+                    onPress={(e)=>{setTempo(tempo-1)}}>-</Text>
+                    <Text 
+                    style={homeStyles.tempoDirectionText}
+                    onPress={(e)=>{setTempo(tempo+1)}}>+</Text>
                 </View>
             </View>
             <Text style={homeStyles.tempoText}>{tempo}</Text>
