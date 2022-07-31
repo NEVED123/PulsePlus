@@ -2,13 +2,13 @@ import { View, Text, SafeAreaView, Pressable, StatusBar } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from 'react';
 import { homeStyles } from './HomeElements';
-//import ModalDropdown from 'react-native-modal-dropdown';
+import ModalDropdown from 'react-native-modal-dropdown';
 
 /**
  * The components will be broken down into individual functions once the main screen layout is complete
  */
 export default function HomeScreen() {
-    const [meter, setMeter] = useState(new Array(4).fill(0))
+    const[meter, setMeter] = useState(new Array(4).fill(0))
     const[tempo, setTempo] = useState(60)
     return (
         <LinearGradient colors={['#666666','#333333']} style={homeStyles.container}>
@@ -23,20 +23,15 @@ export default function HomeScreen() {
     );
 }
 
-export type Meter={
-    meter:number[]
-}
-
-export function ClickSpace({meter=[0,0,0,0]}:Meter){
+export function ClickSpace({ meter }:{meter:number[]}){
     return(
-        //needs behavior for determining how many blocks appear
         <View style={homeStyles.clickSpace}>
             <MetronomeBlockGroup meter={meter}/>
         </View>
     )
 }
 
-export function MetronomeBlockGroup({meter=[]}:Meter){
+export function MetronomeBlockGroup({ meter }:{ meter:number[] }){
     //The 'index' gives each metronome block a seperate ID based on its position in the array, for now its only purpose
     //is to get a warning to shut up but it will probably become useful
     return(
@@ -74,13 +69,9 @@ export function TimeSignature(){
     )
 }
 
-export type tempoHook={
-    tempo:number,
-    setTempo:Function
-}
 
 //Here we pass in the tempo and setTempo hook, i don't think this is the 'correct' way to do it but it works :/
-export function TempoWheel({tempo=60, setTempo}:tempoHook){ 
+export function TempoWheel({tempo=60, setTempo}:{tempo:number, setTempo:Function}){ 
     const[theta1, setTheta1] = useState(0)
     return(
         <View style={{alignItems:'center'}}>
