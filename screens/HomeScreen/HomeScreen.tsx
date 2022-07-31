@@ -2,7 +2,6 @@ import { View, Text, SafeAreaView, Pressable, StatusBar } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from 'react';
 import { homeStyles } from './HomeElements';
-import ModalDropdown from 'react-native-modal-dropdown';
 
 /**
  * The components will be broken down into individual functions once the main screen layout is complete
@@ -53,10 +52,10 @@ export function MetronomeBlock(){
 export function TimeSignature(){
     return(
         <View style={homeStyles.timeSignature}>
-            <Pressable
+            <Pressable 
             style={homeStyles.timeSignatureNumberSelector}
             onPress={()=>{/*drop down menu*/}}>
-                <Text style={homeStyles.timeSignatureNumber}>3</Text>
+                <Text style={homeStyles.timeSignatureNumber}>4</Text>
             </Pressable>
             <Text style={homeStyles.timeSignatureDivider}>/</Text>
             <Pressable 
@@ -76,31 +75,23 @@ export function TempoWheel({tempo=60, setTempo}:{tempo:number, setTempo:Function
     return(
         <View style={{alignItems:'center'}}>
             <View style={homeStyles.tempoWheel}
-            onTouchStart={(e)=>{
-                const x1 = e.nativeEvent.locationX-125
-                const y1 = 125-e.nativeEvent.locationY
-            }}
-            onTouchMove={(e)=>{
-                    const x2 = e.nativeEvent.locationX-125
-                    if(x2 != 0){
-                        const y2 = 125-e.nativeEvent.locationY
-                        const theta2 = Math.atan(x2/y2)
-                        const deltaTheta = theta2-theta1
-                        if(deltaTheta > 0){
-                            if(tempo < 800) {
-                                setTempo(tempo + 1)
-                            }
+            onTouchMove={(e)=>{ //I HAVE NO IDEA WHY THIS WORKS
+                    const x = e.nativeEvent.locationX-125
+                    const y = 125-e.nativeEvent.locationY
+                    const theta2 = Math.atan(x/y) //GENIUS TYPO
+                    const deltaTheta = theta2-theta1
+                    if(deltaTheta > 0){
+                        if(tempo < 800) {
+                            setTempo(tempo + 1)
                         }
-                        else {
-                            if(tempo > 10){
-                                setTempo(tempo - 1)
-                            }
-                            
-                        }
-                        setTheta1(theta2)
                     }
-                
-
+                    else {
+                        if(tempo > 10){
+                            setTempo(tempo - 1)
+                        }
+                        
+                    }
+                    setTheta1(theta2)
             }}>
                 <View style={{width:250, flexDirection:'row', justifyContent:'space-between'}}>
                     <Text 
