@@ -2,6 +2,7 @@ import { View, Text, SafeAreaView, Pressable, StatusBar } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from 'react';
 import { homeStyles } from './HomeElements';
+import ModalDropdown from 'react-native-modal-dropdown';
 
 /**
  * The components will be broken down into individual functions once the main screen layout is complete
@@ -9,6 +10,7 @@ import { homeStyles } from './HomeElements';
 export default function HomeScreen() {
     const[meter, setMeter] = useState(new Array(4).fill(0))
     const[tempo, setTempo] = useState(60)
+    const [running, setRunning] = useState(false)
     return (
         <LinearGradient colors={['#666666','#333333']} style={homeStyles.container}>
             <SafeAreaView style={homeStyles.background}>
@@ -16,7 +18,7 @@ export default function HomeScreen() {
                 <ClickSpace meter={meter}/>
                 <TimeSignature/>
                 <TempoWheel tempo={tempo} setTempo={setTempo}/>
-                <StartButton />
+                <StartButton running={running} setRunning={setRunning}/>
             </SafeAreaView>
         </LinearGradient>
     );
@@ -109,8 +111,7 @@ export function TempoWheel({tempo=60, setTempo}:{tempo:number, setTempo:Function
     )
 }
 
-export function StartButton(){ 
-    const [running, setRunning] = useState(false) //move state up to top level component
+export function StartButton({ running, setRunning }:{ running:boolean, setRunning:Function }){ 
     return(
         <Pressable 
             style={({ pressed }) => [
