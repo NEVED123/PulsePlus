@@ -72,8 +72,9 @@ export function TimeSignature(){
 
 
 //Here we pass in the tempo and setTempo hook, i don't think this is the 'correct' way to do it but it works :/
-export function TempoWheel({tempo=60, setTempo}:{tempo:number, setTempo:Function}){ 
+export function TempoWheel({ tempo, setTempo }:{ tempo:number, setTempo:Function }){ 
     const[theta1, setTheta1] = useState(0)
+    const[internalTempo, setinternalTempo] = useState(tempo) //can be a decimal for fine tuning, end result is an integer
     return(
         <View style={{alignItems:'center'}}>
             <View style={homeStyles.tempoWheel}
@@ -82,20 +83,27 @@ export function TempoWheel({tempo=60, setTempo}:{tempo:number, setTempo:Function
                     const y = 125-e.nativeEvent.locationY
                     const theta2 = Math.atan(y/x)
                     const deltaTheta = theta2-theta1
-                    const distance = Math.hypot(x,y) //will be used for fine-tuning 
-                    //if moving clockwise
-                    if(deltaTheta < 0) { 
-                        if(tempo < 800) {
-                            setTempo(tempo + 1)
+                    const distance = Math.hypot(x,y)
+                    //if finger is in circle
+                    if(distance <=125){
+                        //if moving clockwise
+                        if(deltaTheta < 0) { 
+                            if(tempo < 800) {
+                                
+                                setinternalTempo(internalTempo + 1 * (distance/125))
+                            }
                         }
-                    }
-                    else {
-                        if(tempo > 10){
-                            setTempo(tempo - 1)
+                        else {
+                            if(tempo > 10){
+                                setinternalTempo(internalTempo - 1 * (distance/125))
+                            }
+                            
                         }
-                        
+                        setTempo(Math.floor(internalTempo))
+                        setTheta1(theta2)
                     }
-                    setTheta1(theta2)
+
+                    
             }}>
                 <View style={{width:250, flexDirection:'row', justifyContent:'space-between'}}>
                     <Text 
