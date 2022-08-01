@@ -1,49 +1,110 @@
-import { StyleSheet, View, Text, SafeAreaView, Button } from 'react-native';
+import { StyleSheet } from 'react-native';
 
-const mainScreen = StyleSheet.create({
-    container: {
-      flex:1,
-      backgroundColor: '#3F3F3F',
-      flexDirection:'column',
-    },
-  });
-
-const clickSpace = StyleSheet.create({
+export const homeStyles = StyleSheet.create({
     container:{
-        flex:1,
-        backgroundColor:'black',
-        margin:30
-    }
-})
-
-const buttonStyles = StyleSheet.create({
-    container: {
-        flexDirection: 'row',
-        margin: 30,
+        flex:1
+    },
+    background:{
         flex:1,
     },
-    metronome:{
-        backgroundColor: "red",
-        padding: 25,
+    clickSpace:{
+        flex:1
     },
-    buildSong:{
-        backgroundColor: "red",
-        padding: 25,
+    metronomeBlock:{
+        flex:1,
+        backgroundColor:'#D9D9D9',
+        margin:5,
+        shadowColor: "#000",
+        shadowOffset: {
+	        width: 0,
+	        height: 4,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
     },
-    tuner:{
-        backgroundColor: "red",
-        padding: 25,
-    },
-    settings:{
-        backgroundColor: "red",
-        padding: 25,
-
-    },
-})
-
-const meterChanger = StyleSheet.create({
-    container:{
+    metronomeBlockGroup:{
+        flex:1,
         flexDirection:'row',
-        flex:1,
+        padding:20
+    },
+    timeSignature:{
+        height:75,
+        width:125,
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center',
+        alignSelf:'center'
+    },
+    timeSignatureDropdown:{
+        backgroundColor:'#D9D9D9',
+        shadowColor: "#000",
+        shadowOffset: {
+	        width: 0,
+	        height: 4,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4
+    },
+    timeSignatureDivider:{
+        fontSize:30, 
+        color:'#D9D9D9', 
+        marginLeft:20, 
+        marginRight:20,
+        textShadowColor: "#000",
+        textShadowOffset: {
+            width: 0, 
+            height: 4
+        },
+        textShadowRadius: 4
+    },
+    tempoWheel:{
+        backgroundColor:'#D9D9D9',
+        width: 250,
+        height: 250,
+        borderRadius: 125,
+        marginTop:20,
+        marginLeft:20,
+        marginRight:20,
+        marginBottom:5,
+        shadowColor: "#000",
+        shadowOffset: {
+	        width: 0,
+	        height: 4,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4
+    },
+    tempoText:{
+        color:'white',
+        fontSize:36,
+        textShadowColor: "#000",
+        textShadowOffset: {
+            width: 0, 
+            height: 4
+        },
+        textShadowRadius: 4,
+        marginBottom:20
+    },
+    tempoDirectionText:{
+        //text for + and - for wheel
+        fontSize:36,
+        color:'white'
+    },
+    startButton:{
+        height:75,
+        borderColor:'#909090',
+        borderWidth:1,
+        borderRadius:20,
+        alignItems:'center',
+        justifyContent:'center',
+        marginLeft:20,
+        marginRight:20,
+        marginBottom:20,
+        //figure out shadow in buttons, this is apparently a nightmare to do with the "overflow:'hidden'" style in parent container
+    },
+    startText:{
+        color:'white',
+        fontSize:36
     }
 })
