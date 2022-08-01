@@ -36,7 +36,7 @@ export const homeStyles = StyleSheet.create({
         alignItems:'center',
         alignSelf:'center'
     },
-    timeSignatureNumberSelector:{
+    timeSignatureDropdown:{
         backgroundColor:'#D9D9D9',
         shadowColor: "#000",
         shadowOffset: {
@@ -45,12 +45,6 @@ export const homeStyles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 4
-    },
-    timeSignatureNumber:{
-        fontSize:30,
-        lineHeight:75,
-        width:75, 
-        textAlign:'center'
     },
     timeSignatureDivider:{
         fontSize:30, 
