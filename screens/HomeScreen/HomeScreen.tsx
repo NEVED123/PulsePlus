@@ -166,7 +166,7 @@ export function StartButton({ running, setRunning }:{ running:boolean, setRunnin
         <Pressable
             style={({ pressed }) => [
             {
-              backgroundColor: running
+              backgroundColor: running || pressed
                 ? '#707070'
                 : '#3f3f3f'
             },
