@@ -75,12 +75,14 @@ export function TempoWheel({tempo=60, setTempo}:{tempo:number, setTempo:Function
     return(
         <View style={{alignItems:'center'}}>
             <View style={homeStyles.tempoWheel}
-            onTouchMove={(e)=>{ //I HAVE NO IDEA WHY THIS WORKS
+            onTouchMove={(e)=>{
                     const x = e.nativeEvent.locationX-125
                     const y = 125-e.nativeEvent.locationY
-                    const theta2 = Math.atan(x/y) //GENIUS TYPO
+                    const theta2 = Math.atan(y/x)
                     const deltaTheta = theta2-theta1
-                    if(deltaTheta > 0){
+                    const distance = Math.hypot(x,y) //will be used for fine-tuning 
+                    //if moving clockwise
+                    if(deltaTheta < 0) { 
                         if(tempo < 800) {
                             setTempo(tempo + 1)
                         }
