@@ -2,7 +2,7 @@ import { View, Text, SafeAreaView, Pressable, StatusBar } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from 'react';
 import { homeStyles } from './HomeElements';
-import ModalDropdown from 'react-native-modal-dropdown';
+import DropDownPicker from 'react-native-dropdown-picker'
 
 /**
  * The components will be broken down into individual functions once the main screen layout is complete
@@ -52,19 +52,44 @@ export function MetronomeBlock(){
 }
 
 export function TimeSignature(){
+    const [open, setOpen] = useState(false);
+    const [value, setValue] = useState(4);
+    const [items, setItems] = useState([
+      {label: '1', value: 1},
+      {label: '2', value: 2},
+      {label: '3', value: 3},
+      {label: '4', value: 4},
+      {label: '5', value: 5},
+      {label: '6', value: 6},
+      {label: '7', value: 7},
+      {label: '8', value: 8},
+      {label: '9', value: 9},
+      {label: '10', value: 10}
+    ]);
     return(
         <View style={homeStyles.timeSignature}>
-            <Pressable 
-            style={homeStyles.timeSignatureNumberSelector}
-            onPress={()=>{/*drop down menu*/}}>
-                <Text style={homeStyles.timeSignatureNumber}>4</Text>
-            </Pressable>
+            <DropDownPicker
+                style={homeStyles.timeSignatureNumberSelector}
+                dropDownDirection='TOP'
+                open={open}
+                value={value}
+                items={items}
+                setOpen={setOpen}
+                setValue={setValue}
+                setItems={setItems}
+                zIndex={3000}
+            />
             <Text style={homeStyles.timeSignatureDivider}>/</Text>
-            <Pressable 
-            style={homeStyles.timeSignatureNumberSelector}
-            onPress={()=>{/*drop down menu*/}}>
-                <Text style={homeStyles.timeSignatureNumber}>4</Text>
-            </Pressable>
+            <DropDownPicker
+                style={homeStyles.timeSignatureNumberSelector}
+                dropDownDirection='TOP'
+                open={open}
+                value={value}
+                items={items}
+                setOpen={setOpen}
+                setValue={setValue}
+                setItems={setItems}
+            />
         </View>
         
     )
@@ -101,9 +126,7 @@ export function TempoWheel({ tempo, setTempo }:{ tempo:number, setTempo:Function
                         }
                         setTempo(Math.floor(internalTempo))
                         setTheta1(theta2)
-                    }
-
-                    
+                    }      
             }}>
                 <View style={{width:250, flexDirection:'row', justifyContent:'space-between'}}>
                     <Text 

@@ -30,9 +30,11 @@ export const homeStyles = StyleSheet.create({
     },
     timeSignature:{
         height:75,
+        width:125,
         flexDirection:'row',
         justifyContent:'center',
-        alignItems:'center'
+        alignItems:'center',
+        alignSelf:'center'
     },
     timeSignatureNumberSelector:{
         backgroundColor:'#D9D9D9',
@@ -42,8 +44,7 @@ export const homeStyles = StyleSheet.create({
 	        height: 4,
         },
         shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5
+        shadowRadius: 4
     },
     timeSignatureNumber:{
         fontSize:30,
@@ -78,8 +79,7 @@ export const homeStyles = StyleSheet.create({
 	        height: 4,
         },
         shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5
+        shadowRadius: 4
     },
     tempoText:{
         color:'white',
