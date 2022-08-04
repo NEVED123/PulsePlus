@@ -12,7 +12,6 @@ export const homeStyles = StyleSheet.create({
     },
     metronomeBlock:{
         flex:1,
-        backgroundColor:'#D9D9D9',
         margin:5,
         shadowColor: "#000",
         shadowOffset: {

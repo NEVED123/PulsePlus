@@ -23,7 +23,7 @@ export default function HomeScreen() {
         <LinearGradient colors={['#666666','#333333']} style={homeStyles.container}>
             <SafeAreaView style={homeStyles.background}>
                 <StatusBar/>
-                <ClickSpace meter={meter}/>
+                <ClickSpace meter={meter} setMeter={setMeter}/>
                 <TimeSignature 
                     numValue={numValue}
                     setNumValue={setNumValue}
@@ -36,29 +36,49 @@ export default function HomeScreen() {
     );
 }
 
-export function ClickSpace({ meter }:{meter:number[]}){
+//will need to provide support for other click spaces
+export function ClickSpace({ meter, setMeter }:{meter:number[], setMeter:Function}){
     return(
         <View style={homeStyles.clickSpace}>
-            <MetronomeBlockGroup meter={meter}/>
+            <MetronomeBlockGroup meter={meter} setMeter={setMeter} />
         </View>
     )
 }
 
-export function MetronomeBlockGroup({ meter }:{ meter:number[] }){
+export function MetronomeBlockGroup({ meter, setMeter }:{ meter:number[], setMeter:Function}){
     //The 'index' gives each metronome block a seperate ID based on its position in the array, for now its only purpose
     //is to get a warning to shut up but it will probably become useful
     return(
         <View style={homeStyles.metronomeBlockGroup}>
-            {meter.map((x,index) => <MetronomeBlock key={index}/>)}
+            {meter.map((x,index) => <MetronomeBlock 
+                key={index} 
+                beatNumber={index} 
+                meter={meter} 
+                setMeter={setMeter}/>)}
         </View>
     )
 }
 
 
-export function MetronomeBlock(){
+export function MetronomeBlock({ beatNumber, meter, setMeter }:
+    { beatNumber:number, meter: number[], setMeter:Function }){
+    const [accentType, setAccentType] = useState(0)
+    const backgroundColors =["#D9D9D9", "#AAAAAA", "#737373"]
     return(
         //This view will eventually have children for the different accent options
-        <Pressable style={homeStyles.metronomeBlock}>
+        <Pressable 
+            style={[{backgroundColor: backgroundColors[accentType]}, homeStyles.metronomeBlock]}
+            onPress={(e)=>{
+                if(accentType < 2){
+                    setAccentType(accentType+1)
+                }
+                else{
+                    setAccentType(0)
+                }
+                const updatedMeter = meter
+                updatedMeter[beatNumber] = accentType
+                setMeter(updatedMeter)
+            }}>
         </Pressable> 
     )
 }
