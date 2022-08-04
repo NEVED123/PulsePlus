@@ -7,9 +7,6 @@ export const homeStyles = StyleSheet.create({
     background:{
         flex:1,
     },
-    clickSpace:{
-        flex:1
-    },
     metronomeBlock:{
         flex:1,
         margin:5,

@@ -1,7 +1,7 @@
-import { View, Text, SafeAreaView, Pressable, StatusBar, TouchableOpacity } from 'react-native';
+import { View, Text, SafeAreaView, Pressable, StatusBar, TouchableOpacity, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useEffect, useState } from 'react';
-import { homeStyles } from './HomeElements';
+import { ClickSpace } from './HomeElements/ClickSpace';
 import DropDownPicker from 'react-native-dropdown-picker'
 
 /**
@@ -20,8 +20,8 @@ export default function HomeScreen() {
     },[numValue])
 
     return (
-        <LinearGradient colors={['#666666','#333333']} style={homeStyles.container}>
-            <SafeAreaView style={homeStyles.background}>
+        <LinearGradient colors={['#666666','#333333']} style={{flex:1}}>
+            <SafeAreaView style={{flex:1}}>
                 <StatusBar/>
                 <ClickSpace meter={meter} setMeter={setMeter}/>
                 <TimeSignature 
@@ -34,53 +34,6 @@ export default function HomeScreen() {
             </SafeAreaView>
         </LinearGradient>
     );
-}
-
-//will need to provide support for other click spaces
-export function ClickSpace({ meter, setMeter }:{meter:number[], setMeter:Function}){
-    return(
-        <View style={homeStyles.clickSpace}>
-            <MetronomeBlockGroup meter={meter} setMeter={setMeter} />
-        </View>
-    )
-}
-
-export function MetronomeBlockGroup({ meter, setMeter }:{ meter:number[], setMeter:Function}){
-    //The 'index' gives each metronome block a seperate ID based on its position in the array, for now its only purpose
-    //is to get a warning to shut up but it will probably become useful
-    return(
-        <View style={homeStyles.metronomeBlockGroup}>
-            {meter.map((x,index) => <MetronomeBlock 
-                key={index} 
-                beatNumber={index} 
-                meter={meter} 
-                setMeter={setMeter}/>)}
-        </View>
-    )
-}
-
-
-export function MetronomeBlock({ beatNumber, meter, setMeter }:
-    { beatNumber:number, meter: number[], setMeter:Function }){
-    const [accentType, setAccentType] = useState(0)
-    const backgroundColors =["#D9D9D9", "#AAAAAA", "#737373"]
-    return(
-        //This view will eventually have children for the different accent options
-        <Pressable 
-            style={[{backgroundColor: backgroundColors[accentType]}, homeStyles.metronomeBlock]}
-            onPress={(e)=>{
-                if(accentType < 2){
-                    setAccentType(accentType+1)
-                }
-                else{
-                    setAccentType(0)
-                }
-                const updatedMeter = meter
-                updatedMeter[beatNumber] = accentType
-                setMeter(updatedMeter)
-            }}>
-        </Pressable> 
-    )
 }
 
 export function TimeSignature({numValue,setNumValue,denValue,setDenValue}: //real typescript moment
@@ -208,5 +161,110 @@ export function StartButton({ running, setRunning }:{ running:boolean, setRunnin
         </Pressable>
     )
 }
+
+export const homeStyles = StyleSheet.create({
+    container:{
+        flex:1
+    },
+    background:{
+        flex:1,
+    },
+    metronomeBlock:{
+        flex:1,
+        margin:5,
+        shadowColor: "#000",
+        shadowOffset: {
+	        width: 0,
+	        height: 4,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5
+    },
+    metronomeBlockGroup:{
+        flex:1,
+        flexDirection:'row',
+        padding:20
+    },
+    timeSignature:{
+        height:75,
+        width:125,
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center',
+        alignSelf:'center'
+    },
+    timeSignatureDropdown:{
+        backgroundColor:'#D9D9D9',
+        shadowColor: "#000",
+        shadowOffset: {
+	        width: 0,
+	        height: 4,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4
+    },
+    timeSignatureDivider:{
+        fontSize:30, 
+        color:'#D9D9D9', 
+        marginLeft:20, 
+        marginRight:20,
+        textShadowColor: "#000",
+        textShadowOffset: {
+            width: 0, 
+            height: 4
+        },
+        textShadowRadius: 4
+    },
+    tempoWheel:{
+        backgroundColor:'#D9D9D9',
+        width: 250,
+        height: 250,
+        borderRadius: 125,
+        marginTop:20,
+        marginLeft:20,
+        marginRight:20,
+        marginBottom:5,
+        shadowColor: "#000",
+        shadowOffset: {
+	        width: 0,
+	        height: 4,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4
+    },
+    tempoText:{
+        color:'white',
+        fontSize:36,
+        textShadowColor: "#000",
+        textShadowOffset: {
+            width: 0, 
+            height: 4
+        },
+        textShadowRadius: 4,
+        marginBottom:20
+    },
+    tempoDirectionText:{
+        //text for + and - for wheel
+        fontSize:36,
+        color:'white'
+    },
+    startButton:{
+        height:75,
+        borderColor:'#909090',
+        borderWidth:1,
+        borderRadius:20,
+        alignItems:'center',
+        justifyContent:'center',
+        marginLeft:20,
+        marginRight:20,
+        marginBottom:20,
+        //figure out shadow in buttons, this is apparently a nightmare to do with the "overflow:'hidden'" style in parent container
+    },
+    startText:{
+        color:'white',
+        fontSize:36
+    }
+})
 
 
