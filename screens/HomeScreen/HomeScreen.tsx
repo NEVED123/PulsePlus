@@ -2,6 +2,7 @@ import { View, Text, SafeAreaView, Pressable, StatusBar, TouchableOpacity, Style
 import { LinearGradient } from 'expo-linear-gradient';
 import { useEffect, useState } from 'react';
 import { ClickSpace } from './HomeElements/ClickSpace';
+import { TimeSignature } from "./HomeElements/TimeSignature"
 import DropDownPicker from 'react-native-dropdown-picker'
 
 /**
@@ -36,57 +37,6 @@ export default function HomeScreen() {
     );
 }
 
-export function TimeSignature({numValue,setNumValue,denValue,setDenValue}: //real typescript moment
-    {numValue:number,setNumValue:React.Dispatch<React.SetStateAction<number>>, 
-    denValue:number, setDenValue:React.Dispatch<React.SetStateAction<number>>}){
-    
-    const [numOpen, setNumOpen] = useState(false)
-    const [denOpen, setdenOpen] = useState(false)
-    const [numItems, setNumItems] = useState(numItemsArray(32))
-    const [denItems, setDenItems] = useState([
-        {label: '1', value: 1},
-        {label: '2', value: 2},
-        {label: '4', value: 4},
-        {label: '8', value: 8},
-        {label: '16', value: 16},
-        {label: '32', value: 32},
-        {label: '64', value: 64},
-      ])
-    return(
-        <View style={homeStyles.timeSignature}>
-            <DropDownPicker
-                style={homeStyles.timeSignatureDropdown}
-                dropDownDirection='TOP'
-                open={numOpen}
-                value={numValue}
-                items={numItems}
-                setOpen={setNumOpen}
-                setValue={setNumValue}
-                setItems={setNumItems}
-            />
-            <Text style={homeStyles.timeSignatureDivider}>/</Text>
-            <DropDownPicker
-                style={homeStyles.timeSignatureDropdown}
-                dropDownDirection='TOP'
-                open={denOpen}
-                value={denValue}
-                items={denItems}
-                setOpen={setdenOpen}
-                setValue={setDenValue}
-                setItems={setDenItems}
-            />
-        </View>
-        
-    )
-}
-
-function numItemsArray(maxSize:number){
-    const itemArray = []
-    for(let i = 1; i<(maxSize+1); i++){
-        itemArray.push({label:(i.toString()), value:i})
-    }
-    return itemArray
-}
 
 //Here we pass in the tempo and setTempo hook, i don't think this is the 'correct' way to do it but it works :/
 export function TempoWheel({ tempo, setTempo }:{ tempo:number, setTempo:Function }){ 
