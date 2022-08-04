@@ -4,12 +4,10 @@ import { useState } from 'react'
 export function MetronomeBlock({ beatNumber, meter, setMeter }:
     { beatNumber:number, meter: number[], setMeter:Function }){
     const [accentType, setAccentType] = useState(0)
-    const backgroundColors =["#D9D9D9", "#AAAAAA", "#737373"]
     return(
-        //This view will eventually have children for the different accent options
         <Pressable 
             style={[{backgroundColor: backgroundColors[accentType]}, styles.metronomeBlock]}
-            onPress={(e)=>{
+            onPress={()=>{
                 if(accentType < 2){
                     setAccentType(accentType+1)
                 }
@@ -23,6 +21,8 @@ export function MetronomeBlock({ beatNumber, meter, setMeter }:
         </Pressable> 
     )
 }
+
+const backgroundColors = ["#D9D9D9", "#AAAAAA", "#737373"]
 
 const styles = StyleSheet.create({
     metronomeBlock:{
