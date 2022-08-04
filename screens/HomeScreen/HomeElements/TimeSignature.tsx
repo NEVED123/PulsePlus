@@ -1,10 +1,11 @@
 import { View, StyleSheet, Text } from 'react-native'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import DropDownPicker from 'react-native-dropdown-picker'
 
-export function TimeSignature({numValue,setNumValue,denValue,setDenValue}: //real typescript moment
+export function TimeSignature({numValue,setNumValue,denValue,setDenValue,setMeter}: //real typescript moment
     {numValue:number,setNumValue:React.Dispatch<React.SetStateAction<number>>, 
-    denValue:number, setDenValue:React.Dispatch<React.SetStateAction<number>>}){
+    denValue:number, setDenValue:React.Dispatch<React.SetStateAction<number>>,
+    setMeter:React.Dispatch<React.SetStateAction<number[]>>}){
     
     const [numOpen, setNumOpen] = useState(false)
     const [denOpen, setdenOpen] = useState(false)
@@ -18,6 +19,9 @@ export function TimeSignature({numValue,setNumValue,denValue,setDenValue}: //rea
         {label: '32', value: 32},
         {label: '64', value: 64},
       ])
+
+    useEffect(()=>{ setMeter(new Array(numValue).fill(0)) }, [numValue])
+
     return(
         <View style={styles.timeSignature}>
             <DropDownPicker

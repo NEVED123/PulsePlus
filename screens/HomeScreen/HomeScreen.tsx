@@ -16,11 +16,6 @@ export default function HomeScreen() {
     const [denValue, setDenValue] = useState(4)
     const[meter, setMeter] = useState(new Array(4).fill(0))
     const [running, setRunning] = useState(false)
-    useEffect(()=>{
-        setMeter(new Array(numValue).fill(0))
-        //will also update according to accents
-    },[numValue])
-
     return (
         <LinearGradient colors={['#666666','#333333']} style={{flex:1}}>
             <SafeAreaView style={{flex:1}}>
@@ -30,7 +25,8 @@ export default function HomeScreen() {
                     numValue={numValue}
                     setNumValue={setNumValue}
                     denValue={denValue}
-                    setDenValue={setDenValue}/>
+                    setDenValue={setDenValue}
+                    setMeter={setMeter}/>
                 <TempoWheel tempo={tempo} setTempo={setTempo}/>
                 <StartButton running={running} setRunning={setRunning}/>
             </SafeAreaView>
