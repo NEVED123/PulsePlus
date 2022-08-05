@@ -16,7 +16,7 @@ export function MetronomeBlockGroup({ meter, setMeter }:{ meter:number[], setMet
         )
     }
     else{
-        const topRow = meter.slice(0,15)
+        const topRow = meter.slice(0,16)
         const bottomRow = meter.slice(16, meter.length)
         return(
             <View style={{flex:1}}>
