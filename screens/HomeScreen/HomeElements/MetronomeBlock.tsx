@@ -27,7 +27,7 @@ const backgroundColors = ["#D9D9D9", "#AAAAAA", "#737373"]
 const styles = StyleSheet.create({
     metronomeBlock:{
         flex:1,
-        margin:5,
+        margin:3,
         shadowColor: "#000",
         shadowOffset: {
 	        width: 0,
