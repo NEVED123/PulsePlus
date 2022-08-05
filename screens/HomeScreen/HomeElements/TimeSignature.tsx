@@ -17,8 +17,8 @@ export function TimeSignature({numValue,setNumValue,denValue,setDenValue,setMete
         {label: '8', value: 8},
         {label: '16', value: 16},
         {label: '32', value: 32},
-        {label: '64', value: 64},
-      ])
+        {label: '64', value: 64}
+    ])
 
     useEffect(()=>{ setMeter(new Array(numValue).fill(0)) }, [numValue])
 
@@ -26,6 +26,11 @@ export function TimeSignature({numValue,setNumValue,denValue,setDenValue,setMete
         <View style={styles.timeSignature}>
             <DropDownPicker
                 style={styles.timeSignatureDropdown}
+                textStyle={styles.dropDownText}
+                labelStyle={{fontSize:36}}
+                showTickIcon={false}
+                showArrowIcon={false}
+                autoScroll={true}
                 dropDownDirection='TOP'
                 open={numOpen}
                 value={numValue}
@@ -37,6 +42,11 @@ export function TimeSignature({numValue,setNumValue,denValue,setDenValue,setMete
             <Text style={styles.timeSignatureDivider}>/</Text>
             <DropDownPicker
                 style={styles.timeSignatureDropdown}
+                textStyle={styles.dropDownText}
+                labelStyle={{fontSize:36}}
+                showTickIcon={false}
+                showArrowIcon={false}
+                autoScroll={true}
                 dropDownDirection='TOP'
                 open={denOpen}
                 value={denValue}
@@ -88,5 +98,9 @@ const styles = StyleSheet.create({
             height: 4
         },
         textShadowRadius: 4
+    },
+    dropDownText:{
+        fontSize:24, 
+        textAlign:'center'
     }
 })
