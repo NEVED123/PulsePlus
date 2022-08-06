@@ -30,7 +30,7 @@ export function MetronomeBlockGroup({ meter, setMeter }:{ meter:number[], setMet
                 <View style={styles.metronomeBlockGroup}>
                 {bottomRow.map((x,index) => <MetronomeBlock 
                 key={index} 
-                beatNumber={index} 
+                beatNumber={index + 16} 
                 meter={meter} 
                 setMeter={setMeter}/>)}
                 </View> 
