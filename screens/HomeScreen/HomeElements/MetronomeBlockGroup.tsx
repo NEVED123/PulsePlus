@@ -5,7 +5,7 @@ import { MetronomeBlock } from './MetronomeBlock'
 export function MetronomeBlockGroup({ meter, setMeter }:{ meter:number[], setMeter:Function}){
     //The 'index' gives each metronome block a seperate ID based on its position in the array, for now its only purpose
     //is to get a warning to shut up but it will probably become useful
-    console.log(rowDistributionArray(meter.length))
+    console.log("distribution",rowDistributionArray(meter))
     return(  
         <View style={{flex:1}}>  
             <View style={styles.metronomeBlockGroup}>
@@ -33,17 +33,33 @@ function numberOfRows(beats: number): number{
     return 1
 }
 
-function rowDistributionArray(beats: number): number[]{
-    const amountOfRows = numberOfRows(beats) //confusing naming but naming is hard
-    const rows = new Array(amountOfRows).fill(Math.floor(beats/amountOfRows))
-    
-    const remainder = beats % amountOfRows
+function rowDistributionArray(meter: number[]): number[][]{
+    const length = meter.length
+    const amountOfRows = numberOfRows(length) //confusing naming but naming is hard
+    const rowSizes = new Array(amountOfRows).fill(Math.floor(length/amountOfRows))    
+    const remainder = length % amountOfRows
 
     for(let i = 0;i<remainder;i++){
-        rows[i] += 1
+        rowSizes[i] += 1
     }
 
-    return rows    
+    const rowedMeter: number[][] = []
+    let meterIndex = 0
+
+    rowSizes.forEach((rowSize)=>{
+        const row = []
+
+        for(let i=meterIndex;i<meterIndex+rowSize;i++){
+            row.push(meter[i])
+        }
+
+        rowedMeter.push(row)
+
+        meterIndex += rowSize
+    })
+
+    return rowedMeter
+
 }
 
 const styles = StyleSheet.create({
