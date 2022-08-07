@@ -5,16 +5,22 @@ import { MetronomeBlock } from './MetronomeBlock'
 export function MetronomeBlockGroup({ meter, setMeter }:{ meter:number[], setMeter:Function}){
     //The 'index' gives each metronome block a seperate ID based on its position in the array, for now its only purpose
     //is to get a warning to shut up but it will probably become useful
-    console.log("distribution",rowDistributionArray(meter))
+    const rows = rowDistributionArray(meter)
+    console.log({rows})
     return(  
-        <View style={{flex:1}}>  
-            <View style={styles.metronomeBlockGroup}>
-                {meter.map((x,index) => <MetronomeBlock 
-                    key={index} 
-                    beatNumber={index} 
-                    meter={meter} 
-                    setMeter={setMeter}/>)}
-            </View>
+        <View style={{flex:1}}>
+            {rows.map((row, index)=>
+                <View 
+                    style={styles.metronomeBlockGroup}>
+                    {row.map((x,index) => 
+                    <MetronomeBlock 
+                        key={index} 
+                        beatNumber={index} 
+                        meter={meter} 
+                        setMeter={setMeter}/>)}
+                </View>     
+            )}
+                  
         </View>  
     )
 
