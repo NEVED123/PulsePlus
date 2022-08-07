@@ -1,26 +1,29 @@
-import { array } from 'prop-types'
 import { View, StyleSheet } from 'react-native'
 import { MetronomeBlock } from './MetronomeBlock'
+import { useState } from 'react'
 
 export function MetronomeBlockGroup({ meter, setMeter }:{ meter:number[], setMeter:Function}){
     //The 'index' gives each metronome block a seperate ID based on its position in the array, for now its only purpose
     //is to get a warning to shut up but it will probably become useful
     const rows = rowDistributionArray(meter)
-    console.log({rows})
+    const rowSizeArray = rowSizes(meter)
+    //some of the worst code I've ever written, I'm so sorry
+    const meterIndexHelper = rowSizeArray.map((sum => value => sum += value)(-rowSizeArray[0]))
     return(  
-        <View style={{flex:1}}>
-            {rows.map((row, index)=>
+        <View 
+            style={{flex:1}}>
+            {rows.map((row, rowNumber)=>
                 <View 
-                    style={styles.metronomeBlockGroup}>
-                    {row.map((x,index) => 
-                    <MetronomeBlock 
-                        key={index} 
-                        beatNumber={index} 
-                        meter={meter} 
-                        setMeter={setMeter}/>)}
+                    style={styles.metronomeBlockGroup}
+                    key={rowNumber}>
+                    {row.map((beat,rowPosition) => 
+                        <MetronomeBlock 
+                            key={rowPosition} 
+                            beatNumber={meterIndexHelper[rowNumber] + rowPosition} 
+                            meter={meter} 
+                            setMeter={setMeter}/>)}
                 </View>     
-            )}
-                  
+            )}                  
         </View>  
     )
 
@@ -40,19 +43,13 @@ function numberOfRows(beats: number): number{
 }
 
 function rowDistributionArray(meter: number[]): number[][]{
-    const length = meter.length
-    const amountOfRows = numberOfRows(length) //confusing naming but naming is hard
-    const rowSizes = new Array(amountOfRows).fill(Math.floor(length/amountOfRows))    
-    const remainder = length % amountOfRows
 
-    for(let i = 0;i<remainder;i++){
-        rowSizes[i] += 1
-    }
+    const rowSizeArray = rowSizes(meter)
 
     const rowedMeter: number[][] = []
     let meterIndex = 0
 
-    rowSizes.forEach((rowSize)=>{
+    rowSizeArray.forEach((rowSize)=>{
         const row = []
 
         for(let i=meterIndex;i<meterIndex+rowSize;i++){
@@ -68,10 +65,24 @@ function rowDistributionArray(meter: number[]): number[][]{
 
 }
 
+function rowSizes(meter: number[]){
+    const length = meter.length
+    const amountOfRows = numberOfRows(length) //confusing naming but naming is hard
+    const rowSizeArray = new Array(amountOfRows).fill(Math.floor(length/amountOfRows))    
+    const remainder = length % amountOfRows
+
+    for(let i = 0;i<remainder;i++){
+        rowSizeArray[i] += 1
+    }
+
+    return rowSizeArray
+}
+
 const styles = StyleSheet.create({
     metronomeBlockGroup:{
         flex:1,
         flexDirection:'row',
-        padding:20
+        padding:20,
+        paddingVertical:2
     }
 })

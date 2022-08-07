@@ -2,7 +2,7 @@ import { View, Pressable, StyleSheet } from 'react-native'
 import { useState } from 'react'
 
 export function MetronomeBlock({ beatNumber, meter, setMeter }:
-    { beatNumber:number, meter: number[], setMeter:Function}){
+    { beatNumber:number, meter: number[], setMeter:Function }){
 
     const accent = meter[beatNumber]
 
