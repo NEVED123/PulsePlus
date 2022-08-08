@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, GestureResponderEvent } from 'react-native'
+import { View, Text, StyleSheet, GestureResponderEvent, Pressable } from 'react-native'
 import { useState } from 'react'
 
 //Here we pass in the tempo and setTempo hook, i don't think this is the 'correct' way to do it but it works :/
@@ -7,20 +7,20 @@ export function TempoWheel({ tempo, setTempo }:{ tempo:number, setTempo:Function
     const[internalTempo, setInternalTempo] = useState(tempo) //can be a decimal for fine tuning, end result is an integer
     return(
         <View style={{alignItems:'center'}}>
-            <View 
+            <Pressable
                 style={styles.tempoWheel}
                 onTouchMove={(e)=>handleMove(e, tempo, setTempo, internalTempo, setInternalTempo, theta, setTheta)}>
                 <View style={{width:250, flexDirection:'row', justifyContent:'space-between'}}>
                     <Text 
                         style={styles.tempoDirectionText}
-                        onPress={()=>{setTempo(tempo-1)}}>-
+                        onPress={()=>{if(tempo > 10) setTempo(tempo - 1)}}>-
                     </Text>
                     <Text 
                         style={styles.tempoDirectionText}
-                        onPress={()=>{setTempo(tempo+1)}}>+
+                        onPress={()=>{if(tempo < 800) setTempo(tempo+1)}}>+
                     </Text>
                 </View>
-            </View>
+            </Pressable>
             <Text style={styles.tempoText}>{tempo}</Text>
         </View>
     )
@@ -38,7 +38,6 @@ function handleMove(e: GestureResponderEvent, tempo:number, setTempo: Function,
         //if moving clockwise
         if(deltaTheta < 0) { 
             if(tempo < 800) {
-                
                 setinternalTempo(internalTempo + 1 * (distance/125))
             }
         }
