@@ -85,7 +85,8 @@ const styles = StyleSheet.create({
 	        height: 4,
         },
         shadowOpacity: 0.25,
-        shadowRadius: 4
+        shadowRadius: 4,
+        borderColor:"#D9D9D9"
     },
     timeSignatureDivider:{
         fontSize:30, 
