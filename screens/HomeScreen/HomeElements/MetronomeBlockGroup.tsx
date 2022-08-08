@@ -6,9 +6,8 @@ export function MetronomeBlockGroup({ meter, setMeter }:{ meter:number[], setMet
     //The 'index' gives each metronome block a seperate ID based on its position in the array, for now its only purpose
     //is to get a warning to shut up but it will probably become useful
     const rows = rowDistributionArray(meter)
-    const rowSizeArray = rowSizes(meter)
-    //some of the worst code I've ever written, I'm so sorry
-    const meterIndexHelper = rowSizeArray.map((sum => value => sum += value)(-rowSizeArray[0]))
+    const indexHelper = indexAtBeginningOfEachRow(meter)
+
     return(  
         <View 
             style={{flex:1}}>
@@ -19,7 +18,7 @@ export function MetronomeBlockGroup({ meter, setMeter }:{ meter:number[], setMet
                     {row.map((beat,rowPosition) => 
                         <MetronomeBlock 
                             key={rowPosition} 
-                            beatNumber={meterIndexHelper[rowNumber] + rowPosition} 
+                            beatNumber={indexHelper[rowNumber] + rowPosition} 
                             meter={meter} 
                             setMeter={setMeter}/>)}
                 </View>     
@@ -37,9 +36,8 @@ function numberOfRows(beats: number): number{
     if(beats % 2 == 0) return 2
     if(beats % 4 == 1) return 4
     if(beats % 3 == 1) return 3
-    if(beats % 2 == 1) return 2
     
-    return 1
+    return 2
 }
 
 function rowDistributionArray(meter: number[]): number[][]{
@@ -76,6 +74,19 @@ function rowSizes(meter: number[]){
     }
 
     return rowSizeArray
+}
+
+function indexAtBeginningOfEachRow(meter:number[]){
+    const rowSizeArray = rowSizes(meter)
+    const meterIndexHelper = rowSizeArray.map((sum => value => sum += value)(-rowSizeArray[0]))
+    
+    if(rowSizeArray[0] > rowSizeArray[1]){
+        for(let i = 1;i<rowSizeArray.length;i++){
+            meterIndexHelper[i]++ 
+        }
+    }
+
+    return meterIndexHelper
 }
 
 const styles = StyleSheet.create({
