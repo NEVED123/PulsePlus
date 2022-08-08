@@ -1,5 +1,4 @@
 import { View, Pressable, StyleSheet } from 'react-native'
-import { useState } from 'react'
 
 export function MetronomeBlock({ beatNumber, meter, setMeter }:
     { beatNumber:number, meter: number[], setMeter:Function }){
@@ -8,8 +7,9 @@ export function MetronomeBlock({ beatNumber, meter, setMeter }:
 
     return(
         <Pressable 
-            style={[{
-                backgroundColor: backgroundColors[accent]}, 
+            style={ ({pressed}) => [{
+                backgroundColor: backgroundColors[accent]},
+                {shadowRadius: pressed ? 20 : 4}, 
                 styles.metronomeBlock]}
             onPress={()=>{
                 const newMeter = meter.slice()
@@ -30,7 +30,6 @@ const styles = StyleSheet.create({
 	        height: 4,
         },
         shadowOpacity: 0.25,
-        shadowRadius: 4,
         elevation: 5
     },
 })

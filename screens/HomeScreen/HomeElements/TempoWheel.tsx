@@ -8,7 +8,9 @@ export function TempoWheel({ tempo, setTempo }:{ tempo:number, setTempo:Function
     return(
         <View style={{alignItems:'center'}}>
             <Pressable
-                style={styles.tempoWheel}
+                style={({pressed}) => [
+                    {shadowRadius: pressed ? 30 : 4}, 
+                    styles.tempoWheel]}
                 onTouchMove={(e)=>handleMove(e, tempo, setTempo, internalTempo, setInternalTempo, theta, setTheta)}>
                 <View style={{width:250, flexDirection:'row', justifyContent:'space-between'}}>
                     <Text 
@@ -68,8 +70,7 @@ const styles = StyleSheet.create({
 	        width: 0,
 	        height: 4,
         },
-        shadowOpacity: 0.25,
-        shadowRadius: 4
+        shadowOpacity: 0.25
     },
     tempoText:{
         color:'white',
