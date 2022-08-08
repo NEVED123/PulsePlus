@@ -1,4 +1,5 @@
-import { View, Pressable, StyleSheet } from 'react-native'
+import { View, Pressable, StyleSheet, Dimensions } from 'react-native'
+import { rowSizes } from './MetronomeBlockGroupBehavior'
 
 export function MetronomeBlock({ beatNumber, meter, setMeter }:
     { beatNumber:number, meter: number[], setMeter:Function }){
@@ -9,7 +10,9 @@ export function MetronomeBlock({ beatNumber, meter, setMeter }:
         <Pressable 
             style={ ({pressed}) => [{
                 backgroundColor: backgroundColors[accent]},
-                {shadowRadius: pressed ? 20 : 4}, 
+                {shadowRadius: pressed ? 20 : 4},
+                //40 == padding on left + padding on right
+                {width: (Dimensions.get('window').width-40-rowSizes(meter)[0] * MARGIN*2)/rowSizes(meter)[0]}, 
                 styles.metronomeBlock]}
             onPress={()=>{
                 const newMeter = meter.slice()
@@ -20,10 +23,11 @@ export function MetronomeBlock({ beatNumber, meter, setMeter }:
     )
 }
 
+const MARGIN = 3
+
 const styles = StyleSheet.create({
     metronomeBlock:{
-        flex:1,
-        margin:3,
+        margin: MARGIN,
         shadowColor: "#000",
         shadowOffset: {
 	        width: 0,
