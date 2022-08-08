@@ -1,7 +1,8 @@
 import { View, StyleSheet } from 'react-native'
 import { MetronomeBlock } from './MetronomeBlock'
 import { useState } from 'react'
-import { rowDistributionArray, indexAtBeginningOfEachRow} from './MetronomeBlockGroupBehavior'
+import { rowDistributionArray, indexAtBeginningOfEachRow,
+    METRONOME_BLOCK_GROUP_PADDING} from './MetronomeBlockGroupBehavior'
 
 export function MetronomeBlockGroup({ meter, setMeter }:{ meter:number[], setMeter:Function}){
     //The 'key' gives each metronome block a seperate ID based on its position in the array, for now its only purpose
@@ -32,7 +33,7 @@ const styles = StyleSheet.create({
     metronomeBlockGroup:{
         flex:1,
         flexDirection:'row',
-        padding:20,
+        padding:METRONOME_BLOCK_GROUP_PADDING,
         paddingVertical:2,
         justifyContent:'center'
     }

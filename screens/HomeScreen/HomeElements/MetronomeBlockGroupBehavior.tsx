@@ -60,3 +60,5 @@ export function indexAtBeginningOfEachRow(meter:number[]){
 
     return meterIndexHelper
 }
+
+export const METRONOME_BLOCK_GROUP_PADDING = 20
