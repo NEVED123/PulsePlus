@@ -28,6 +28,7 @@ export function TimeSignature({numValue,setNumValue,denValue,setDenValue,setMete
                 style={styles.timeSignatureDropdown}
                 textStyle={styles.dropDownText}
                 labelStyle={{fontSize:36}}
+                listMode='SCROLLVIEW'
                 showTickIcon={false}
                 showArrowIcon={false}
                 autoScroll={true}
@@ -44,6 +45,7 @@ export function TimeSignature({numValue,setNumValue,denValue,setDenValue,setMete
                 style={styles.timeSignatureDropdown}
                 textStyle={styles.dropDownText}
                 labelStyle={{fontSize:36}}
+                listMode='SCROLLVIEW'
                 showTickIcon={false}
                 showArrowIcon={false}
                 autoScroll={true}
