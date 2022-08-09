@@ -1,6 +1,7 @@
 function numberOfRows(beats: number): number{
     //there's probably a simpler way to do this works
     if(beats <= 8) return 1
+    if(beats == 23) return 4 
     if(beats % 4 == 0) return 4
     if(beats % 3 == 0) return 3
     if(beats % 2 == 0) return 2
