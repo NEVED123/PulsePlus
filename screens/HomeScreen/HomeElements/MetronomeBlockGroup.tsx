@@ -23,7 +23,7 @@ export function MetronomeBlockGroup({ meter, setMeter }:{ meter:number[], setMet
                             key={rowPosition} 
                             beatNumber={indexHelper[rowNumber] + rowPosition} 
                             meter={meter} 
-                            setMeter={setMeter}/>)} //index++
+                            setMeter={setMeter}/>)}
                 </View>     
             )}                  
         </View>  
