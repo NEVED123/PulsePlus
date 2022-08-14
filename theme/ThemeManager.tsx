@@ -5,14 +5,13 @@ export const ThemeContext = createContext({theme : '', toggleTheme : ()=>{}}) //
 
 export function ThemeProvider({ children } : { children : any }){
 
-    const [theme, setTheme] = useState('light')
+    const [theme, setTheme] = useState('dark')
 
     const toggleTheme = () => {
         if(theme === 'light')
             setTheme('dark')
         else   
             setTheme('light')
-        console.log(theme)
     }
 
     return(

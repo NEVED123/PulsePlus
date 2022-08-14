@@ -7,6 +7,6 @@ export default function ToggleThemeButton(){
     const { theme, toggleTheme } = useContext(ThemeContext)
 
     return(
-        <SettingButtonBase text='change mode' behavior={()=>toggleTheme()}/>
+        <SettingButtonBase text={theme === 'dark' ? 'Light Mode' : 'Dark Mode' } behavior={()=>toggleTheme()}/>
     )
 }
