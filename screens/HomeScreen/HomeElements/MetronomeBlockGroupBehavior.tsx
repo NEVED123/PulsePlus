@@ -12,6 +12,8 @@ function numberOfRows(beats: number): number{
 }
 
 //splices the meter into seperate rows
+//[0,0,0,1,0,0]
+//[[0,0,0],[1,0,0]]
 export function rowDistributionArray(meter: number[]): number[][]{
 
     const rowSizeArray = rowSizes(meter)
@@ -36,6 +38,8 @@ export function rowDistributionArray(meter: number[]): number[][]{
 }
 
 //returns array indicating the size of each row based on the meter
+//[0,0,0,0,0,0,0,0]
+//[4,4]
 export function rowSizes(meter: number[]){
     const length = meter.length
     const amountOfRows = numberOfRows(length) //confusing naming but naming is hard

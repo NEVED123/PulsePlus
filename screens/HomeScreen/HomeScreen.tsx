@@ -15,7 +15,7 @@ export default function HomeScreen() {
     const [tempo, setTempo] = useState(60)
     const [numValue, setNumValue] = useState(4)
     const [denValue, setDenValue] = useState(4)
-    const [meter, setMeter] = useState(new Array(4).fill(0)) //[0,0,0,0]
+    const [meter, setMeter] = useState(new Array(4).fill(0))
     const [running, setRunning] = useState(false)
     return (
         <LinearGradient colors={['#666666','#333333']} style={{flex:1}}>

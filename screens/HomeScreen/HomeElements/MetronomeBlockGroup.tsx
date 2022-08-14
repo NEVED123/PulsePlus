@@ -10,6 +10,7 @@ export function MetronomeBlockGroup({ meter, setMeter }:{ meter:number[], setMet
     //is to get a warning to shut up but it will probably become useful
     const rows = rowDistributionArray(meter)
     const indexHelper = indexAtBeginningOfEachRow(meter)
+    //index = 0
     return(  
         <View 
             style={{flex:1}}>
@@ -22,7 +23,7 @@ export function MetronomeBlockGroup({ meter, setMeter }:{ meter:number[], setMet
                             key={rowPosition} 
                             beatNumber={indexHelper[rowNumber] + rowPosition} 
                             meter={meter} 
-                            setMeter={setMeter}/>)}
+                            setMeter={setMeter}/>)} //index++
                 </View>     
             )}                  
         </View>  
