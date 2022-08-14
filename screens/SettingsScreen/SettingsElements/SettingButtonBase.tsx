@@ -1,10 +1,7 @@
 import {StyleSheet, Pressable, Text} from 'react-native' 
 
-type DisplayName={
-    text:string
-}
-
-export function SettingButton({text= ''}:DisplayName){
+//THIS IS ONLY TO BE USED AS A BASE FOR OTHER SETTING BUTTONS
+export default function SettingButtonBase({ text, behavior } : { text : string, behavior: Function }){
     return(
         <Pressable style={({ pressed }) => [
             {
@@ -19,7 +16,8 @@ export function SettingButton({text= ''}:DisplayName){
                 justifyContent:'center'
                 //figure out shadow in buttons, this is apparently a nightmare to do with the "overflow:'hidden'" style in parent container
             },
-          ]}>
+          ]}
+          onPress={()=>behavior()}>
             <Text style={settingStyles.settingText}>
                 {text}
             </Text>
@@ -27,27 +25,7 @@ export function SettingButton({text= ''}:DisplayName){
     )
 }
 
-export const settingStyles = StyleSheet.create({
-    container:{
-        flex:1
-    },
-    background:{
-        flex:1,
-    },
-    settingTitle:{
-        color:'white',
-        fontSize:40,
-        textAlign:'center',
-        margin:20
-    },
-    settingsBox:{
-        overflow:'hidden',
-        backgroundColor:'black',
-        borderRadius:20,
-        margin:20,
-        borderBottomColor:'#909090', //the settings all have top border only
-        borderBottomWidth:1,
-    },
+const settingStyles = StyleSheet.create({
     settingText:{
         color:'white',
         fontSize:18,
