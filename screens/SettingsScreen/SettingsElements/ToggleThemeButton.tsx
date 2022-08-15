@@ -6,6 +6,8 @@ export default function ToggleThemeButton(){
 
     const { theme, toggleTheme } = useContext(ThemeContext)
 
+    //ADD BEHAVIOR TO STORE USER PREF ON LOCAL MACHINE
+
     return(
         <SettingButtonBase text={theme === 'dark' ? 'Light Mode' : 'Dark Mode' } behavior={()=>toggleTheme()}/>
     )
