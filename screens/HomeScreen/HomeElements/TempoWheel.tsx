@@ -113,6 +113,6 @@ const text = {
 }
 
 const textShadow = {
-    light: "#999",
+    light: "#DDD",
     dark: "#000"
 }
