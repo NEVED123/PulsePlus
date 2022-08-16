@@ -11,13 +11,14 @@ function Tabs() {
     screenOptions = {{
       headerShown: false,
         tabBarStyle: {
-          position: 'absolute',
-          bottom: 25,
-          left:20,
-          right: 20,
+          position: 'relative',
+          bottom:25,
+          left:0,
+          right: 0,
+          top: 0,
           elevation: 0,
           backgroundColor: '#303030',
-          borderRadius: 15,
+          borderRadius: 0,
           height: 90,
         }
       }}
