@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, GestureResponderEvent, Pressable } from 'react-native'
 import { useState, useContext } from 'react'
 import { ThemeContext } from '../../../theme/ThemeManager'
+import { buttonColors, borderWidths, textTitleColors, textShadowColors } from '../../../theme/Colors'
 
 //Here we pass in the tempo and setTempo hook, i don't think this is the 'correct' way to do it but it works :/
 export function TempoWheel({ tempo, setTempo }:{ tempo:number, setTempo:Function }){ 
@@ -14,26 +15,26 @@ export function TempoWheel({ tempo, setTempo }:{ tempo:number, setTempo:Function
                 style={({pressed}) => [
                     {
                         shadowRadius: pressed ? 30 : 4,
-                        backgroundColor: color[theme as keyof typeof color],
-                        borderWidth: borderwidth[theme as keyof typeof borderwidth]
+                        backgroundColor: buttonColors[theme as keyof typeof buttonColors],
+                        borderWidth: borderWidths[theme as keyof typeof borderWidths]
                     }, 
                     styles.tempoWheel]}
                 onTouchMove={(e)=>handleMove(e, tempo, setTempo, internalTempo, setInternalTempo, theta, setTheta)}>
                 <View style={{width:250, flexDirection:'row', justifyContent:'space-between'}}>
                     <Text 
-                        style={[{color: text[theme as keyof typeof text]},
+                        style={[{color: buttonColors[theme as keyof typeof buttonColors]},
                             styles.tempoDirectionText]}
                         onPress={()=>{if(tempo > 10) setTempo(tempo - 1)}}>-
                     </Text>
                     <Text 
-                        style={[{color: text[theme as keyof typeof text]},
+                        style={[{color: buttonColors[theme as keyof typeof buttonColors]},
                         styles.tempoDirectionText]}
                         onPress={()=>{if(tempo < 800) setTempo(tempo+1)}}>+
                     </Text>
                 </View>
             </Pressable>
-            <Text style={[{color: text[theme as keyof typeof text],
-                           textShadowColor: textShadow[theme as keyof typeof textShadow] },
+            <Text style={[{color: textTitleColors[theme as keyof typeof textTitleColors],
+                           textShadowColor: textShadowColors[theme as keyof typeof textShadowColors] },
                            styles.tempoText]}>{tempo}</Text>
         </View>
     )
@@ -96,23 +97,3 @@ const styles = StyleSheet.create({
         fontSize:36
     }
 })
-
-const color = {
-    light: '#FFFFFF',
-    dark: '#D9D9D9'
-}
-
-const borderwidth = {
-    light:1,
-    dark:0
-}
-
-const text = {
-    light: "#000000",
-    dark: "#FFFFFF"
-}
-
-const textShadow = {
-    light: "#DDD",
-    dark: "#000"
-}

@@ -2,6 +2,7 @@ import { View, StyleSheet, Text } from 'react-native'
 import { useEffect, useState, useContext } from 'react'
 import DropDownPicker from 'react-native-dropdown-picker'
 import { ThemeContext } from '../../../theme/ThemeManager'
+import { buttonColors, borderColors, textTitleColors as timeSignatureColors, textShadowColors } from '../../../theme/Colors'
 
 export function TimeSignature({numValue,setNumValue,denValue,setDenValue,setMeter}: //real typescript moment
     {numValue:number,setNumValue:React.Dispatch<React.SetStateAction<number>>, 
@@ -28,8 +29,8 @@ export function TimeSignature({numValue,setNumValue,denValue,setDenValue,setMete
         <View style={[styles.timeSignature]}>
             <DropDownPicker
                 style={[styles.timeSignatureDropdown,
-                    {backgroundColor : color[theme as keyof typeof color],
-                    borderColor : border[theme as keyof typeof border]}]}
+                    {backgroundColor : buttonColors[theme as keyof typeof buttonColors],
+                    borderColor : borderColors[theme as keyof typeof borderColors]}]}
                 textStyle={styles.dropDownText}
                 labelStyle={{fontSize:36}}
                 listMode='SCROLLVIEW'
@@ -44,11 +45,15 @@ export function TimeSignature({numValue,setNumValue,denValue,setDenValue,setMete
                 setValue={setNumValue}
                 setItems={setNumItems}
             />
-            <Text style={[{color : text[theme as keyof typeof text]}, styles.timeSignatureDivider]}>/</Text>
+            <Text style={[{
+                    color : timeSignatureColors[theme as keyof typeof timeSignatureColors],
+                    textShadowColor : textShadowColors[theme as keyof typeof textShadowColors]
+                    }, 
+                    styles.timeSignatureDivider]}>/</Text>
             <DropDownPicker
                 style={[styles.timeSignatureDropdown,
-                    {backgroundColor : color[theme as keyof typeof color],
-                    borderColor : border[theme as keyof typeof border]},]}
+                    {backgroundColor : buttonColors[theme as keyof typeof buttonColors],
+                        borderColor : borderColors[theme as keyof typeof borderColors]}]}
                 textStyle={styles.dropDownText}
                 labelStyle={{fontSize:36}}
                 listMode='SCROLLVIEW'
@@ -111,18 +116,3 @@ const styles = StyleSheet.create({
         textAlign:'center'
     }
 })
-
-const color = {
-    light: "#FFFFFF",
-    dark: "#D9D9D9"
-}
-
-const border = {
-    light: "#000000",
-    dark: "#D9D9D9"
-}
-
-const text = {
-    light: "#000000",
-    dark: "#FFFFFF"
-}

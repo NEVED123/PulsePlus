@@ -1,6 +1,7 @@
 import { Pressable, Text, StyleSheet} from 'react-native'
 import { useContext } from 'react'
 import { ThemeContext } from '../../../theme/ThemeManager'
+import { altButtonColors, textTitleColors } from '../../../theme/Colors'
 
 export function StartButton({ running, setRunning }:{ running:boolean, setRunning:Function }){ 
 
@@ -9,7 +10,7 @@ export function StartButton({ running, setRunning }:{ running:boolean, setRunnin
     return(
         <Pressable
             style={({ pressed }) => [
-            {backgroundColor: running || pressed? '#707070': color[theme as keyof typeof color]},
+            {backgroundColor: running || pressed? '#707070': altButtonColors[theme as keyof typeof altButtonColors]},
             styles.startButton
           ]}
             onPress={
@@ -22,7 +23,7 @@ export function StartButton({ running, setRunning }:{ running:boolean, setRunnin
                     }
                 } //startMetronomeFunction
             }>
-            <Text style={[{color: text[theme as keyof typeof text]},
+            <Text style={[{color: textTitleColors[theme as keyof typeof textTitleColors]},
                             styles.startText]}>
                 {running ? "Stop" : "Start"}
             </Text>
@@ -47,13 +48,3 @@ const styles = StyleSheet.create({
         fontSize:36
     }
 })
-
-const color = {
-    light: '#FFFFFF',
-    dark: '#3f3f3f'
-}
-
-const text = {
-    light: '#000000',
-    dark: '#FFFFFF'
-}

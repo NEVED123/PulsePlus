@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
 import SettingsScreen from '../screens/SettingsScreen/SettingsScreen';
 import TunerScreen from '../screens/TunerScreen/TunerScreen';
-import SoundScreen from '../SoundScreen/SoundScreen';
+import SoundScreen from '../screens/SoundScreen/SoundScreen';
 import { View, Image, StyleSheet } from 'react-native'
 
 const Tab = createBottomTabNavigator();

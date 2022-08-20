@@ -8,15 +8,16 @@ import FlashlightOnDownBeatButton from './SettingsElements/FlashlightOnDownbeatB
 import VibrateOnDownbeat from './SettingsElements/VibrateOnDownbeatButton';
 import ChangeSoundSetButton from './SettingsElements/SoundSetButton';
 import RateUsOnAppStoreButton from './SettingsElements/RateUsOnAppStoreButton';
+import { settingBackgroundColors, textTitleColors } from '../../theme/Colors';
 
 export default function Settings(){
 
     const { theme } = useContext(ThemeContext)
 
     return(
-        <LinearGradient colors={gradients[theme as keyof typeof gradients]} style={styles.background}>
+        <LinearGradient colors={settingBackgroundColors[theme as keyof typeof settingBackgroundColors]} style={styles.background}>
             <SafeAreaView style={styles.container}>
-                <Text style={[styles.title, {color : titleColors[theme as keyof typeof titleColors]}]}>
+                <Text style={[styles.title, {color : textTitleColors[theme as keyof typeof textTitleColors]}]}>
                     Settings
                 </Text>
                 <View style={styles.settingsBox}>
@@ -54,16 +55,6 @@ const styles = StyleSheet.create({
         borderBottomWidth:1
     }
 })
-
-const gradients = {
-    light : ['#F0EFF5','#F0EFF5'],
-    dark : ['#333333','#000000']
-}
-
-const titleColors = {
-    light : 'black',
-    dark : 'white'
-}
 
 
 

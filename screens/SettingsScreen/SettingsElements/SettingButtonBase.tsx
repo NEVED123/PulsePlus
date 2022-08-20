@@ -1,5 +1,6 @@
 import {StyleSheet, Pressable, Text} from 'react-native' 
 import { ThemeContext } from '../../../theme/ThemeManager'
+import { altButtonColors, textTitleColors } from '../../../theme/Colors'
 import { useContext } from 'react'
 
 //THIS IS ONLY TO BE USED AS A BASE FOR OTHER SETTING BUTTONS, OR AS A PLACEHOLDER
@@ -12,12 +13,12 @@ export default function SettingButtonBase({ text, behavior } : { text : string, 
             {
               backgroundColor: pressed
                 ? '#707070'
-                : buttonColors[theme as keyof typeof buttonColors]
+                : altButtonColors[theme as keyof typeof altButtonColors]
             },
             styles.settingButton
           ]}
           onPress={()=>behavior()}>
-            <Text style={[styles.settingText, {color:textColors[theme as keyof typeof textColors]}]}>
+            <Text style={[styles.settingText, {color:textTitleColors[theme as keyof typeof textTitleColors]}]}>
                 {text}
             </Text>
         </Pressable>
@@ -37,14 +38,4 @@ const styles = StyleSheet.create({
         //figure out shadow in buttons, this is apparently a nightmare to do with the "overflow:'hidden'" style in parent container
     }
 })
-
-const buttonColors = {
-    light: '#ffffff',
-    dark: '#3f3f3f'
-}
-
-const textColors = {
-    light: 'black',
-    dark : 'white'
-}
 
