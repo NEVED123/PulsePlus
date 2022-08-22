@@ -15,58 +15,59 @@ export default function Tabs() {
         tabBarStyle: {
           position: 'relative',
           bottom:25,
-          left:0,
-          right: 0,
           top: 0,
-          elevation: 0,
           backgroundColor: '#303030',
-          borderRadius: 0,
-          height: 90,
+          height: 95,
         }
       }}
       >
       <Tab.Screen name="Metronome" component={HomeScreen} 
-        options={{tabBarIcon: ()=>{
+        options={{tabBarIcon: ({ focused })=>{
           return(
             <View style={styles.iconContainer}>
               <Image
-              source={require('../assets/tab-logos/MetronomeLogo.png')}
+              source={ focused ? require('../assets/tab-logos/BlueMetronomeLogo.png') : 
+                                 require('../assets/tab-logos/MetronomeLogo.png')}
+              resizeMode="contain"
               style={styles.image}
               />
             </View>
           )
         }}}/>
       <Tab.Screen name="Tuner" component={TunerScreen}
-        options={{tabBarIcon: ()=>{
+        options={{tabBarIcon: ( { focused })=>{
           return(
             <View style={styles.iconContainer}>
               <Image
-              source={require('../assets/tab-logos/TuningForkLogo.png')}
+              source={ focused ? require('../assets/tab-logos/BlueTuningForkLogo.png') : 
+                                 require('../assets/tab-logos/TuningForkLogo.png')}
+              resizeMode="contain"
               style={styles.image}
               />
             </View>
           )
         }}}/>      
       <Tab.Screen name='Sounds' component={SoundScreen}
-        options={{tabBarIcon: ()=>{
+        options={{tabBarIcon: ({ focused })=>{
           return(
             <View style={styles.iconContainer}>
               <Image
-              source={require('../assets/tab-logos/SoundsLogo.png')}
-              style={{
-                height:40,
-                width:40
-              }}
+              source={ focused ? require('../assets/tab-logos/BlueSoundsLogo.png') : 
+                                 require('../assets/tab-logos/SoundsLogo.png')}
+              resizeMode="contain"
+              style={styles.image}
               />
             </View>
           )
         }}}/>  
       <Tab.Screen name="Settings" component={SettingsScreen}
-        options={{tabBarIcon: ()=>{
+        options={{tabBarIcon: ({ focused })=>{
           return(
             <View style={styles.iconContainer}>
               <Image
-              source={require('../assets/tab-logos/SettingsLogo.png')}
+              source={ focused ? require('../assets/tab-logos/BlueSettingsLogo.png') : 
+                                 require('../assets/tab-logos/SettingsLogo.png')}
+              resizeMode="contain"
               style={styles.image}
               />
             </View>
