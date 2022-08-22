@@ -29,19 +29,24 @@ export function TempoWheel({ tempo, setTempo }:{ tempo:number, setTempo:Function
     )
 }
 
-let lastTimeStamp: number;
-let newTempo: number;
+let lastTimeStamp: number = 0,
+    newTempo: number,
+    numTaps: number;
 
 function tapTempo(e: GestureResponderEvent, tempo: number, setTempo: Function) {
-    if (lastTimeStamp == undefined || // if there isn't a last time stamp yet
-        (e.nativeEvent.timestamp - lastTimeStamp) > 3000 || // or the time between stamps is greater than 3 seconds
-        e.nativeEvent.timestamp == lastTimeStamp) { // or the last time stamp is the same as this one
+    if (e.nativeEvent.timestamp - lastTimeStamp > 3000) {
+    // if the time between stamps is greater than 3000 milliseconds (3 seconds)
         newTempo = tempo;
+        numTaps = 1;
     }
-    else newTempo = 60000/(e.nativeEvent.timestamp - lastTimeStamp)
-    if (newTempo > 800) newTempo = 800
+    else {
+        newTempo = 60000 / (e.nativeEvent.timestamp - lastTimeStamp)
+        setTempo(Math.trunc(
+            numTaps == 1 ? newTempo : (newTempo + tempo) / 2
+        ));
+        numTaps++;
+    }
     lastTimeStamp = e.nativeEvent.timestamp;
-    setTempo(Math.trunc((newTempo + tempo) / 2));
 }
 
 function handleMove(e: GestureResponderEvent, tempo:number, setTempo: Function, 
