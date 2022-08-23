@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, GestureResponderEvent, Pressable } from 'react-native'
+import { View, Text, StyleSheet, GestureResponderEvent, Pressable, Platform } from 'react-native'
 import { useState, useContext } from 'react'
 import { ThemeContext } from '../../../theme/ThemeManager'
 import { buttonColors, borderWidths, textTitleColors, textShadowColors, altButtonColors, textColors} from '../../../theme/Colors'
@@ -15,6 +15,7 @@ export function TempoWheel({ tempo, setTempo }:{ tempo:number, setTempo:Function
                 style={({pressed}) => [
                     {
                         shadowRadius: pressed ? 30 : 4,
+                        elevation: pressed ? 30 : 4,
                         backgroundColor: buttonColors[theme as keyof typeof buttonColors],
                         borderWidth: borderWidths[theme as keyof typeof borderWidths]
                     }, 
@@ -134,7 +135,7 @@ const styles = StyleSheet.create({
         shadowColor: "#000",
         shadowOpacity: 0.25,
         alignSelf:'center',
-        marginTop:19.5, //gross way to get it in the center, this probably needs a refactor lmao
+        marginTop: Platform.OS === 'ios' ? 19.5 : 15, //gross way to get it in the center, this probably needs a refactor lmao
         alignItems:'center',
         justifyContent:'center'
     },
