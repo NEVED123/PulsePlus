@@ -11,7 +11,8 @@ export function TempoWheel({ tempo, setTempo }:{ tempo:number, setTempo:Function
                 style={({pressed}) => [
                     {shadowRadius: pressed ? 30 : 4}, 
                     styles.tempoWheel]}
-                onTouchMove={(e)=>handleMove(e, tempo, setTempo, internalTempo, setInternalTempo, theta, setTheta)}>
+                onTouchMove={(e)=>handleMove(e, tempo, setTempo, internalTempo, setInternalTempo, theta, setTheta)}
+                onPress={e => tapTempo(e, tempo, setTempo)}>
                 <View style={{width:250, flexDirection:'row', justifyContent:'space-between'}}>
                     <Text 
                         style={styles.tempoDirectionText}
@@ -28,6 +29,26 @@ export function TempoWheel({ tempo, setTempo }:{ tempo:number, setTempo:Function
     )
 }
 
+let lastTimeStamp: number = 0,
+    newTempo: number,
+    numTaps: number;
+
+function tapTempo(e: GestureResponderEvent, tempo: number, setTempo: Function) {
+    if (e.nativeEvent.timestamp - lastTimeStamp > 3000) {
+    // if the time between stamps is greater than 3000 milliseconds (3 seconds)
+        newTempo = tempo;
+        numTaps = 1;
+    }
+    else {
+        newTempo = 60000 / (e.nativeEvent.timestamp - lastTimeStamp)
+        setTempo(Math.trunc(
+            numTaps == 1 ? newTempo : (newTempo + tempo) / 2
+        ));
+        numTaps++;
+    }
+    lastTimeStamp = e.nativeEvent.timestamp;
+}
+
 function handleMove(e: GestureResponderEvent, tempo:number, setTempo: Function, 
     internalTempo:number, setinternalTempo: Function, theta:number, setTheta:Function){
     const x = e.nativeEvent.locationX-125
@@ -40,12 +61,12 @@ function handleMove(e: GestureResponderEvent, tempo:number, setTempo: Function,
         //if moving clockwise
         if(deltaTheta < 0) { 
             if(tempo < 800) {
-                setinternalTempo(internalTempo + 1 * (distance/125))
+                setinternalTempo(internalTempo + (distance/125))
             }
         }
         else {
             if(tempo > 10){
-                setinternalTempo(internalTempo - 1 * (distance/125))
+                setinternalTempo(internalTempo - (distance/125))
             }
             
         }
