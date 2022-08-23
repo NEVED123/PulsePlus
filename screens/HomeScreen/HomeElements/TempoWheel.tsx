@@ -1,7 +1,7 @@
-import { View, Text, StyleSheet, GestureResponderEvent, Pressable } from 'react-native'
+import { View, Text, StyleSheet, GestureResponderEvent, Pressable, Platform } from 'react-native'
 import { useState, useContext } from 'react'
 import { ThemeContext } from '../../../theme/ThemeManager'
-import { buttonColors, borderWidths, textTitleColors, textShadowColors } from '../../../theme/Colors'
+import { buttonColors, borderWidths, textTitleColors, textShadowColors, altButtonColors, textColors} from '../../../theme/Colors'
 
 //Here we pass in the tempo and setTempo hook, i don't think this is the 'correct' way to do it but it works :/
 export function TempoWheel({ tempo, setTempo }:{ tempo:number, setTempo:Function }){ 
@@ -10,33 +10,45 @@ export function TempoWheel({ tempo, setTempo }:{ tempo:number, setTempo:Function
     const[theta, setTheta] = useState(0)
     const[internalTempo, setInternalTempo] = useState(tempo) //can be a decimal for fine tuning, end result is an integer
     return(
-        <View style={{alignItems:'center'}}>
+        <View style={{alignItems:'center', justifyContent:'center'}}>
             <Pressable
                 style={({pressed}) => [
                     {
                         shadowRadius: pressed ? 30 : 4,
+                        elevation: pressed ? 30 : 4,
                         backgroundColor: buttonColors[theme as keyof typeof buttonColors],
                         borderWidth: borderWidths[theme as keyof typeof borderWidths]
                     }, 
                     styles.tempoWheel]}
-                onTouchMove={(e)=>handleMove(e, tempo, setTempo, internalTempo, setInternalTempo, theta, setTheta)}
-                onPress={e => tapTempo(e, tempo, setTempo)}>
+                onTouchMove={(e)=>handleMove(e, tempo, setTempo, internalTempo, setInternalTempo, theta, setTheta)}>
                 <View style={{width:250, flexDirection:'row', justifyContent:'space-between'}}>
                     <Text 
-                        style={[{color: buttonColors[theme as keyof typeof buttonColors]},
+                        style={[{color: textColors[theme as keyof typeof textColors]},
                             styles.tempoDirectionText]}
                         onPress={()=>{if(tempo > 10) setTempo(tempo - 1)}}>-
                     </Text>
                     <Text 
-                        style={[{color: buttonColors[theme as keyof typeof buttonColors]},
+                        style={[{color: textColors[theme as keyof typeof textColors]},
                         styles.tempoDirectionText]}
                         onPress={()=>{if(tempo < 800) setTempo(tempo+1)}}>+
                     </Text>
                 </View>
+                <Pressable
+                    style={[{backgroundColor:altButtonColors[theme as keyof typeof altButtonColors],
+                            borderWidth:borderWidths[theme as keyof typeof borderWidths]},
+                            styles.tapTempo]}
+                    onPress={e => tapTempo(e, tempo, setTempo)}>
+                    <Text style={[{color:textColors[theme as keyof typeof textColors],
+                                   textShadowColor:textShadowColors[theme as keyof typeof textShadowColors]},
+                                   styles.tapTempoText]}>
+                        TAP
+                    </Text>
+                </Pressable>
             </Pressable>
             <Text style={[{color: textTitleColors[theme as keyof typeof textTitleColors],
                            textShadowColor: textShadowColors[theme as keyof typeof textShadowColors] },
-                           styles.tempoText]}>{tempo}</Text>
+                           styles.tempoText]}>{tempo}
+            </Text>
         </View>
     )
 }
@@ -84,7 +96,6 @@ function handleMove(e: GestureResponderEvent, tempo:number, setTempo: Function,
         }
         setTempo(Math.floor(internalTempo))
         setTheta(theta2)
-                
     }
 }
 
@@ -115,6 +126,20 @@ const styles = StyleSheet.create({
     },
     tempoDirectionText:{
         //text for + and - for wheel
+        fontSize:36
+    },
+    tapTempo:{
+        width: 125,
+        height: 125,
+        borderRadius: 125,
+        shadowColor: "#000",
+        shadowOpacity: 0.25,
+        alignSelf:'center',
+        marginTop: Platform.OS === 'ios' ? 19.5 : 15, //gross way to get it in the center, this probably needs a refactor lmao
+        alignItems:'center',
+        justifyContent:'center'
+    },
+    tapTempoText:{
         fontSize:36
     }
 })
