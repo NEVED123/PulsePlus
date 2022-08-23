@@ -1,21 +1,26 @@
 import { View, Pressable, StyleSheet, Dimensions } from 'react-native'
 import { rowSizes, METRONOME_BLOCK_GROUP_PADDING } from './MetronomeBlockGroupBehavior'
+import { useContext } from 'react'
+import { ThemeContext } from '../../../theme/ThemeManager'
+import { accentColors, borderWidths } from '../../../theme/Colors'
 
 export function MetronomeBlock({ beatNumber, meter, setMeter }:
     { beatNumber:number, meter: number[], setMeter:Function }){
 
+    const { theme } = useContext(ThemeContext)
     const accent = meter[beatNumber]
     const topRowNumber = rowSizes(meter)[0]
 
     return(
         <Pressable 
             style={ ({pressed}) => [{
-                backgroundColor: backgroundColors[accent]},
-                {shadowRadius: pressed ? 20 : 4},
-                {width: (Dimensions.get('window').width
-                -METRONOME_BLOCK_GROUP_PADDING*2
-                -topRowNumber * MARGIN*2)/topRowNumber}, 
-                styles.metronomeBlock]}
+                backgroundColor: accentColors[theme as keyof typeof accentColors][accent]},
+                {
+                    shadowRadius: pressed ? 20 : 4,
+                    width: (Dimensions.get('window').width-METRONOME_BLOCK_GROUP_PADDING*2-topRowNumber * MARGIN*2)/topRowNumber,
+                    borderWidth: borderWidths[theme as keyof typeof borderWidths]}, 
+                    styles.metronomeBlock]
+                }
             onPress={()=>{
                 const newMeter = meter.slice()
                 newMeter[beatNumber] = accent < backgroundColorLength ? accent + 1 : 0
@@ -37,8 +42,7 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         elevation: 5
-    },
+    }
 })
 
-const backgroundColors = ["#D9D9D9", "#AAAAAA", "#737373"]
-const backgroundColorLength = backgroundColors.length - 1
+const backgroundColorLength = accentColors.light.length - 1

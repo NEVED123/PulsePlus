@@ -2,32 +2,88 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
 import SettingsScreen from '../screens/SettingsScreen/SettingsScreen';
 import TunerScreen from '../screens/TunerScreen/TunerScreen';
-import SoundScreen from '../SoundScreen/SoundScreen';
+import SoundScreen from '../screens/SoundScreen/SoundScreen';
+import { View, Image, StyleSheet } from 'react-native'
+
 const Tab = createBottomTabNavigator();
 
-function Tabs() {
+export default function Tabs() {
   return (
     <Tab.Navigator
     screenOptions = {{
       headerShown: false,
         tabBarStyle: {
-          position: 'absolute',
-          bottom: 25,
-          left:20,
-          right: 20,
-          elevation: 0,
+          position: 'relative',
+          bottom:25,
+          top: 0,
           backgroundColor: '#303030',
-          borderRadius: 15,
-          height: 90,
+          height: 95,
         }
       }}
       >
-      <Tab.Screen name="Metronome" component={HomeScreen} />
-      <Tab.Screen name="tuner" component={TunerScreen} />
-      <Tab.Screen name='Sounds' component={SoundScreen} />
-      <Tab.Screen name="Settings" component={SettingsScreen} />
+      <Tab.Screen name="Metronome" component={HomeScreen} 
+        options={{tabBarIcon: ({ focused })=>{
+          return(
+            <View style={styles.iconContainer}>
+              <Image
+              source={ focused ? require('../assets/tab-logos/BlueMetronomeLogo.png') : 
+                                 require('../assets/tab-logos/MetronomeLogo.png')}
+              resizeMode="contain"
+              style={styles.image}
+              />
+            </View>
+          )
+        }}}/>
+      <Tab.Screen name="Tuner" component={TunerScreen}
+        options={{tabBarIcon: ( { focused })=>{
+          return(
+            <View style={styles.iconContainer}>
+              <Image
+              source={ focused ? require('../assets/tab-logos/BlueTuningForkLogo.png') : 
+                                 require('../assets/tab-logos/TuningForkLogo.png')}
+              resizeMode="contain"
+              style={styles.image}
+              />
+            </View>
+          )
+        }}}/>      
+      <Tab.Screen name='Sounds' component={SoundScreen}
+        options={{tabBarIcon: ({ focused })=>{
+          return(
+            <View style={styles.iconContainer}>
+              <Image
+              source={ focused ? require('../assets/tab-logos/BlueSoundsLogo.png') : 
+                                 require('../assets/tab-logos/SoundsLogo.png')}
+              resizeMode="contain"
+              style={styles.image}
+              />
+            </View>
+          )
+        }}}/>  
+      <Tab.Screen name="Settings" component={SettingsScreen}
+        options={{tabBarIcon: ({ focused })=>{
+          return(
+            <View style={styles.iconContainer}>
+              <Image
+              source={ focused ? require('../assets/tab-logos/BlueSettingsLogo.png') : 
+                                 require('../assets/tab-logos/SettingsLogo.png')}
+              resizeMode="contain"
+              style={styles.image}
+              />
+            </View>
+          )
+        }}}/>  
     </Tab.Navigator>
   );
 }
 
-export default Tabs;
+const styles = StyleSheet.create({
+  image:{
+    height:40,
+    width:30
+  },
+  iconContainer:{
+    alignItems:'center', 
+    justifyContent:'center'
+  }
+})

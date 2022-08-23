@@ -1,6 +1,7 @@
 import { View, StyleSheet } from 'react-native'
 import { MetronomeBlock } from './MetronomeBlock'
 import { useState } from 'react'
+import { Platform } from 'react-native'
 import { rowDistributionArray, indexAtBeginningOfEachRow,
     METRONOME_BLOCK_GROUP_PADDING} from './MetronomeBlockGroupBehavior'
 
@@ -9,6 +10,7 @@ export function MetronomeBlockGroup({ meter, setMeter }:{ meter:number[], setMet
     //is to get a warning to shut up but it will probably become useful
     const rows = rowDistributionArray(meter)
     const indexHelper = indexAtBeginningOfEachRow(meter)
+    //index = 0
     return(  
         <View 
             style={{flex:1}}>
@@ -34,7 +36,8 @@ const styles = StyleSheet.create({
         flex:1,
         flexDirection:'row',
         padding:METRONOME_BLOCK_GROUP_PADDING,
-        paddingVertical:2,
+        paddingBottom : 2,
+        paddingTop: Platform.OS === 'ios' ? 2 : 40,
         justifyContent:'center'
     }
 })

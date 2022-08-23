@@ -1,12 +1,15 @@
 import { View, StyleSheet, Text } from 'react-native'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import DropDownPicker from 'react-native-dropdown-picker'
+import { ThemeContext } from '../../../theme/ThemeManager'
+import { buttonColors, borderColors, textTitleColors as timeSignatureColors, textShadowColors } from '../../../theme/Colors'
 
 export function TimeSignature({numValue,setNumValue,denValue,setDenValue,setMeter}: //real typescript moment
     {numValue:number,setNumValue:React.Dispatch<React.SetStateAction<number>>, 
     denValue:number, setDenValue:React.Dispatch<React.SetStateAction<number>>,
     setMeter:React.Dispatch<React.SetStateAction<number[]>>}){
-    
+
+    const { theme } = useContext(ThemeContext)
     const [numOpen, setNumOpen] = useState(false)
     const [denOpen, setdenOpen] = useState(false)
     const [numItems, setNumItems] = useState(numItemsArray(32))
@@ -23,11 +26,14 @@ export function TimeSignature({numValue,setNumValue,denValue,setDenValue,setMete
     useEffect(()=>{ setMeter(new Array(numValue).fill(0)) }, [numValue])
 
     return(
-        <View style={styles.timeSignature}>
+        <View style={[styles.timeSignature]}>
             <DropDownPicker
-                style={styles.timeSignatureDropdown}
+                style={[styles.timeSignatureDropdown,
+                    {backgroundColor : buttonColors[theme as keyof typeof buttonColors],
+                    borderColor : borderColors[theme as keyof typeof borderColors]}]}
                 textStyle={styles.dropDownText}
                 labelStyle={{fontSize:36}}
+                listMode='SCROLLVIEW'
                 showTickIcon={false}
                 showArrowIcon={false}
                 autoScroll={true}
@@ -39,11 +45,18 @@ export function TimeSignature({numValue,setNumValue,denValue,setDenValue,setMete
                 setValue={setNumValue}
                 setItems={setNumItems}
             />
-            <Text style={styles.timeSignatureDivider}>/</Text>
+            <Text style={[{
+                    color : timeSignatureColors[theme as keyof typeof timeSignatureColors],
+                    textShadowColor : textShadowColors[theme as keyof typeof textShadowColors]
+                    }, 
+                    styles.timeSignatureDivider]}>/</Text>
             <DropDownPicker
-                style={styles.timeSignatureDropdown}
+                style={[styles.timeSignatureDropdown,
+                    {backgroundColor : buttonColors[theme as keyof typeof buttonColors],
+                        borderColor : borderColors[theme as keyof typeof borderColors]}]}
                 textStyle={styles.dropDownText}
                 labelStyle={{fontSize:36}}
+                listMode='SCROLLVIEW'
                 showTickIcon={false}
                 showArrowIcon={false}
                 autoScroll={true}
@@ -78,7 +91,6 @@ const styles = StyleSheet.create({
         alignSelf:'center'
     },
     timeSignatureDropdown:{
-        backgroundColor:'#D9D9D9',
         shadowColor: "#000",
         shadowOffset: {
 	        width: 0,
@@ -90,7 +102,6 @@ const styles = StyleSheet.create({
     },
     timeSignatureDivider:{
         fontSize:30, 
-        color:'#D9D9D9', 
         marginLeft:20, 
         marginRight:20,
         textShadowColor: "#000",
