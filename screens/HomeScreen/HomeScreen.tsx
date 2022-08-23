@@ -14,17 +14,20 @@ import { backgroundColors } from '../../theme/Colors';
  */
 export default function HomeScreen() {
     
+    /*useEffect(){
+        load default song
+    }*/
     const { theme } = useContext(ThemeContext)
     const [tempo, setTempo] = useState(60)
     const [numValue, setNumValue] = useState(4)
     const [denValue, setDenValue] = useState(4)
-    const [meter, setMeter] = useState(new Array(4).fill(0))
+    const [meter, setMeter] = useState(new Array(4).fill(0)) //set to default song
     const [running, setRunning] = useState(false)
     return (
         <LinearGradient colors={backgroundColors[theme as keyof typeof backgroundColors]} style={{flex:1}}>
             <SafeAreaView style={{flex:1}}>
                 <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'}/>
-                <ClickSpace meter={meter} setMeter={setMeter}/>
+                <ClickSpace meter={meter} setMeter={setMeter} /*input song instead of meter*//> 
                 <TimeSignature 
                     numValue={numValue}
                     setNumValue={setNumValue}
