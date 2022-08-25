@@ -1,20 +1,20 @@
-type Beat = {
+export type Beat = {
     beatSound : number, //refers to the index of the preset the user is using
     subDiv : number[] //from subdivisions constant
     beatDuration : number //milliseconds
     active : boolean //property to determine whether this beat is currently alive for UI purposes, may not be necessary
 }
 
-type Meter = {
+export type Meter = {
     initBpm : number
     finalBpm : number //for accel/decel
-    numerator : number
     denominator : number
     repeat : number //for measures with the same traits
+    active: boolean
     beats : Beat[]
 }
 
-type Song = {
+export type Song = {
     song : Meter[]
     repeat : boolean 
     name : string
@@ -24,7 +24,7 @@ type Song = {
 
 
 //possible to have more numbers indicating different sounds, tbd
-const Subdivisions = {
+export const Subdivisions = {
     none: [1],
     two:{
         "01":[0,1],
@@ -78,9 +78,9 @@ export const defaultMetronomeSong : Song = {
     song:[{
         initBpm: 100,
         finalBpm : 100,
-        numerator: 4,
         denominator: 4,
         repeat : 1,
+        active: true,
         beats:[{
             beatSound : 0,
             subDiv : Subdivisions.none,

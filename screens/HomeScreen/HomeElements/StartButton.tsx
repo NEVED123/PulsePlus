@@ -2,6 +2,7 @@ import { Pressable, Text, StyleSheet} from 'react-native'
 import { useContext } from 'react'
 import { ThemeContext } from '../../../theme/ThemeManager'
 import { altButtonColors, textTitleColors } from '../../../theme/Colors'
+import { Song } from '../../../logic/structure'
 
 export function StartButton({ running, setRunning }:{ running:boolean, setRunning:Function }){ 
 
@@ -21,7 +22,7 @@ export function StartButton({ running, setRunning }:{ running:boolean, setRunnin
                     else{
                         setRunning(true)
                     }
-                } //startMetronomeFunction
+                }
             }>
             <Text style={[{color: textTitleColors[theme as keyof typeof textTitleColors]},
                             styles.startText]}>

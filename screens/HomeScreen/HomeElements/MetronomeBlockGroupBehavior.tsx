@@ -1,3 +1,5 @@
+import { Beat, Meter } from '../../../logic/structure'
+
 function numberOfRows(beats: number): number{
     //there's probably a simpler way to do this works
     if(beats <= 7) return 1
@@ -15,18 +17,19 @@ function numberOfRows(beats: number): number{
 //splices the meter into seperate rows
 //[0,0,0,1,0,0]
 //[[0,0,0],[1,0,0]]
-export function rowDistributionArray(meter: number[]): number[][]{
+export function rowDistributionArray(meter: Meter): Beat[][]{
 
     const rowSizeArray = rowSizes(meter)
+    const meterClone = {...meter}
 
-    const rowedMeter: number[][] = []
+    const rowedMeter: Beat[][] = []
     let meterIndex = 0
 
     rowSizeArray.forEach((rowSize)=>{
-        const row = []
+        const row : Beat[] = []
 
         for(let i=meterIndex;i<meterIndex+rowSize;i++){
-            row.push(meter[i])
+            row.push(meterClone.beats[i])
         }
 
         rowedMeter.push(row)
@@ -41,8 +44,8 @@ export function rowDistributionArray(meter: number[]): number[][]{
 //returns array indicating the size of each row based on the meter
 //[0,0,0,0,0,0,0,0]
 //[4,4]
-export function rowSizes(meter: number[]){
-    const length = meter.length
+export function rowSizes(meter: Meter): number[]{
+    const length = meter.beats.length
     const amountOfRows = numberOfRows(length) //confusing naming but naming is hard
     const rowSizeArray = new Array(amountOfRows).fill(Math.floor(length/amountOfRows))    
     const remainder = length % amountOfRows
@@ -56,7 +59,7 @@ export function rowSizes(meter: number[]){
 
 //returns an array that gives the index for the block at 
 //the beginning of each row, used to give assign each block a beat in the meter
-export function indexAtBeginningOfEachRow(meter:number[]){
+export function indexAtBeginningOfEachRow(meter:Meter){
     const rowSizeArray = rowSizes(meter)
     const meterIndexHelper = rowSizeArray.map((sum => value => sum += value)(-rowSizeArray[0]))
     

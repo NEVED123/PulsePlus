@@ -1,11 +1,14 @@
 import { View, StyleSheet } from 'react-native'
 import { MetronomeBlockGroup } from './MetronomeBlockGroup'
+import { Song } from '../../../logic/structure'
+import { useContext } from 'react'
+
+export function ClickSpace(){
 
 
-export function ClickSpace({ meter, setMeter }:{meter:number[], setMeter:Function}){
     return(
         <View style={styles.clickSpace}>
-            <MetronomeBlockGroup meter={meter} setMeter={setMeter} />
+            <MetronomeBlockGroup/>
         </View>
     )
 }
@@ -15,3 +18,5 @@ const styles = StyleSheet.create({
         flex:1
     }
 })
+
+//function processSong()
