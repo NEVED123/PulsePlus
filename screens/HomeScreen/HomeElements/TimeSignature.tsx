@@ -10,7 +10,7 @@ import { SongContext } from '../../../logic/SongManager'
 export function TimeSignature(){
 
     const { theme } = useContext(ThemeContext)
-    const { song, updateNumerator, updateDenominator} = useContext(SongContext)
+    const { song, setNumerator, setDenominator} = useContext(SongContext)
     const [numOpen, setNumOpen] = useState(false)
     const [denOpen, setdenOpen] = useState(false)
     const [numValue, setNumValue] = useState(ActiveMeter(song).beats.length)
@@ -46,7 +46,7 @@ export function TimeSignature(){
                 setValue={setNumValue}
                 setItems={setNumItems}
                 onSelectItem={(num)=>{
-                    updateNumerator(num.value as number); console.log(song)
+                    setNumerator(num.value as number); console.log(song)
                 }}
             />
             <Text style={[{
@@ -71,7 +71,7 @@ export function TimeSignature(){
                 setOpen={setdenOpen}
                 setValue={setDenValue}
                 setItems={setDenItems}
-                onSelectItem={(den)=>{updateDenominator(den.value as number)}}
+                onSelectItem={(den)=>{setDenominator(den.value as number)}}
             />
         </View>
         

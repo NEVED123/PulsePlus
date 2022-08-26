@@ -4,11 +4,11 @@ import { changeDenominator, changeAccent, changeNumerator, ActiveMeter, changeTe
 
 const contextInitialValues = {
     song: defaultMetronomeSong, 
-    updateNumerator:(numerator: number, resetAccents : boolean = true)=>{},
-    updateDenominator:(denominator: number)=>{},
-    updateAccent:(beatNumber: number)=>{},
+    setNumerator:(numerator: number, resetAccents : boolean = true)=>{},
+    setDenominator:(denominator: number)=>{},
+    setAccent:(beatNumber: number)=>{},
     getActiveMeter: () : Meter => {return {initBpm: 0, finalBpm: 0, denominator: 0, repeat: 0, active: false, beats:[]}},
-    updateTempo: (newTempo: number) => {},
+    setTempo: (newTempo: number) => {},
     getTempo: (): number => {return 0}
 }
 
@@ -19,15 +19,15 @@ export function SongProvider({ children } : { children : any }){
 
     const [song, setSong] = useState(defaultMetronomeSong)
 
-    function updateNumerator(numerator: number, resetAccents : boolean = true){
+    function setNumerator(numerator: number, resetAccents : boolean = true){
         setSong(changeNumerator(song, numerator, resetAccents))
     }
 
-    function updateDenominator(denominator: number){
+    function setDenominator(denominator: number){
         setSong(changeDenominator(song, denominator))
     }
 
-    function updateAccent(beatNumber: number){
+    function setAccent(beatNumber: number){
         setSong(changeAccent(song, beatNumber))
     }
 
@@ -35,7 +35,7 @@ export function SongProvider({ children } : { children : any }){
         return ActiveMeter(song)
     }
 
-    function updateTempo(newTempo: number){
+    function setTempo(newTempo: number){
         return setSong(changeTempo(song, newTempo))
     }
 
@@ -43,10 +43,8 @@ export function SongProvider({ children } : { children : any }){
         return tempo(song)
     }
 
-    //console.assert(getTempo === undefined)
-
     return(
-        <SongContext.Provider value={{song, updateNumerator, updateDenominator, updateAccent, getActiveMeter, updateTempo, getTempo}}>
+        <SongContext.Provider value={{song, setNumerator, setDenominator, setAccent, getActiveMeter, setTempo, getTempo}}>
             {children}
         </SongContext.Provider>
     )

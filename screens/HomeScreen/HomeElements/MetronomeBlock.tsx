@@ -10,7 +10,7 @@ import { SongContext } from '../../../logic/SongManager'
 export function MetronomeBlock({ beatNumber }:{ beatNumber:number }){
 
     const { theme } = useContext(ThemeContext)
-    const { updateAccent, getActiveMeter } = useContext(SongContext)
+    const { setAccent, getActiveMeter } = useContext(SongContext)
     const accent = getActiveMeter().beats[beatNumber].beatSound
     const topRowNumber = rowSizes(getActiveMeter())[0] //used to calculate width of blocks
 
@@ -24,7 +24,7 @@ export function MetronomeBlock({ beatNumber }:{ beatNumber:number }){
                     borderWidth: borderWidths[theme as keyof typeof borderWidths]}, 
                     styles.metronomeBlock]
                 }
-            onPress={()=>{updateAccent(beatNumber)}}>
+            onPress={()=>{setAccent(beatNumber)}}>
         </Pressable> 
     )
 }
