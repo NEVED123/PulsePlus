@@ -43,5 +43,3 @@ const styles = StyleSheet.create({
         elevation: 5
     }
 })
-
-const backgroundColorLength = accentColors.light.length - 1

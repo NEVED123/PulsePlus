@@ -1,4 +1,4 @@
-import { Song, Meter, Beat, Subdivisions } from './structure'
+import { Song, Meter, Beat, Subdivisions, BeatSoundPresets } from './structure'
 
 /**
  * 
@@ -31,7 +31,7 @@ export function changeNumerator(song : Song, numerator: number, resetAccents : b
 
     if(resetAccents){
         const newMeter : Beat[] = new Array(numerator)
-        for(let i = 0;i<numerator;i++){
+        for(let i = 0;i<numerator;i++){ //your java is showing
             newMeter[i] = ({beatSound: 0, 
                 subDiv: Subdivisions.none, 
                 beatDuration: beatDuration, 
@@ -60,7 +60,6 @@ export function changeNumerator(song : Song, numerator: number, resetAccents : b
         }
     }
 
-    console.log(updatedSong)
     return updatedSong
 }
 
@@ -85,11 +84,24 @@ export function changeDenominator(song: Song, denominator: number): Song {
 export function changeAccent(song: Song, beatNumber: number): Song {
     const updatedSong = {...song}
     const accent = ActiveMeter(updatedSong).beats[beatNumber].beatSound
-    ActiveMeter(updatedSong).beats[beatNumber].beatSound = accent < 2 ? accent + 1 : 0
+    ActiveMeter(updatedSong).beats[beatNumber].beatSound = accent < BeatSoundPresets['default'].length - 1 ? accent + 1 : 0
 
     return updatedSong
 }
 
+export function changeTempo(song: Song, newTempo: number){
+    const updatedSong = {...song}
+
+    ActiveMeter(song).initBpm = newTempo
+
+    return updatedSong
+}
+
+export function tempo(song: Song){
+    const updatedSong = {...song}
+
+    return ActiveMeter(updatedSong).initBpm
+}
 
 //add section to song
 

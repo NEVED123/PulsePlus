@@ -46,7 +46,7 @@ export function TimeSignature(){
                 setValue={setNumValue}
                 setItems={setNumItems}
                 onSelectItem={(num)=>{
-                    updateNumerator(num.value as number)
+                    updateNumerator(num.value as number); console.log(song)
                 }}
             />
             <Text style={[{
@@ -57,7 +57,7 @@ export function TimeSignature(){
             <DropDownPicker
                 style={[styles.timeSignatureDropdown,
                     {backgroundColor : buttonColors[theme as keyof typeof buttonColors],
-                        borderColor : borderColors[theme as keyof typeof borderColors]}]}
+                    borderColor : borderColors[theme as keyof typeof borderColors]}]}
                 textStyle={styles.dropDownText}
                 labelStyle={{fontSize:36}}
                 listMode='SCROLLVIEW'

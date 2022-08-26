@@ -7,7 +7,7 @@ export type Beat = {
 
 export type Meter = {
     initBpm : number
-    finalBpm : number //for accel/decel
+    finalBpm? : number //for accel/decel
     denominator : number
     repeat : number //for measures with the same traits
     active: boolean
@@ -69,7 +69,7 @@ const BeatSounds = {
     //etc.
 }
 
-const BeatSoundPresets = {
+export const BeatSoundPresets = {
     "default" : [BeatSounds.woodblock, BeatSounds.clave, BeatSounds.silence]
     //More settings, the user could add their own
 }
