@@ -1,19 +1,35 @@
 import { Song, Meter, Beat, Subdivisions, BeatSoundPresets } from './structure'
 
+
 /**
- * 
- * @param song 
- * @returns copy of meter where "active" == true
+ * @returns copy of active meter
  */
-export function ActiveMeter(song : Song) : Meter {
-    const songClone = {...song}
-    const meter = songClone.song.find(meter => meter.active == true)
+export function activeMeter(song: Song){
+    return activeMeterReference({...song})
+}
+
+/**
+ * @returns numerator of active meter
+ */
+export function numerator(song: Song){
+    return activeMeterReference({...song}).beats.length
+}
+
+/**
+ * DO NOT EXPORT, ONLY USE AS A HELPER FUNCTION
+ * @param song 
+ * @returns refence to meter where "active" == true
+ */
+function activeMeterReference(song : Song) : Meter {
+
+    const meter = song.song.find(meter => meter.active == true)
 
     if(meter != undefined){
         return meter
     }
 
     throw new Error('No active meter in song')
+
 }
 
 /**
@@ -25,9 +41,8 @@ export function ActiveMeter(song : Song) : Meter {
  */
 export function changeNumerator(song : Song, numerator: number, resetAccents : boolean = true): Song {
     
-    console.log(numerator)
     const updatedSong = {...song} //copies instance of song
-    const { beatDuration } = ActiveMeter(updatedSong).beats[0]
+    const { beatDuration } = activeMeterReference(updatedSong).beats[0]
 
     if(resetAccents){
         const newMeter : Beat[] = new Array(numerator)
@@ -38,29 +53,41 @@ export function changeNumerator(song : Song, numerator: number, resetAccents : b
                 active: false})
         }
 
-        ActiveMeter(updatedSong).beats = newMeter
+        activeMeterReference(updatedSong).beats = newMeter
     }
     else{
-        const originalNumerator = ActiveMeter(updatedSong).beats.length
+
+        const originalNumerator = activeMeterReference(updatedSong).beats.length
+
         const beatsToAdd = numerator - originalNumerator
+
         if(beatsToAdd > 0){
             const addedBeats : Beat[] = new Array(beatsToAdd)
-                .fill({beatSound: 0,
-                    subDiv: Subdivisions.none,
-                    beatDuration: beatDuration,
-                    active: false})
+            for(let i = 0; i<beatsToAdd; i++){ //your java is showing
+                addedBeats[i] = {beatSound: 0, 
+                    subDiv: Subdivisions.none, 
+                    beatDuration: beatDuration, 
+                    active: false}
+            }
             
-            ActiveMeter(updatedSong).beats.concat(addedBeats)
+            activeMeterReference(updatedSong).beats = activeMeterReference(updatedSong).beats.concat(addedBeats)
         }
         else{
             const beatsToRemove = Math.abs(beatsToAdd)
             for(let i = 0;i<beatsToRemove;i++){
-                ActiveMeter(updatedSong).beats.pop()
+                activeMeterReference(updatedSong).beats.pop()
             }
         }
     }
 
     return updatedSong
+}
+
+/**
+ * @returns denominator of active meter
+ */
+export function denominator(song: Song){
+    return activeMeterReference({...song}).denominator
 }
 
 /**
@@ -71,7 +98,7 @@ export function changeNumerator(song : Song, numerator: number, resetAccents : b
  */
 export function changeDenominator(song: Song, denominator: number): Song {
     const updatedSong = {...song} //copies instance of song
-    ActiveMeter(updatedSong).denominator = denominator
+    activeMeterReference(updatedSong).denominator = denominator
     return updatedSong
 }
 
@@ -83,8 +110,8 @@ export function changeDenominator(song: Song, denominator: number): Song {
  */
 export function changeAccent(song: Song, beatNumber: number): Song {
     const updatedSong = {...song}
-    const accent = ActiveMeter(updatedSong).beats[beatNumber].beatSound
-    ActiveMeter(updatedSong).beats[beatNumber].beatSound = accent < BeatSoundPresets['default'].length - 1 ? accent + 1 : 0
+    const accent = activeMeterReference(updatedSong).beats[beatNumber].beatSound
+    activeMeterReference(updatedSong).beats[beatNumber].beatSound = accent < BeatSoundPresets['default'].length - 1 ? accent + 1 : 0
 
     return updatedSong
 }
@@ -92,16 +119,17 @@ export function changeAccent(song: Song, beatNumber: number): Song {
 export function changeTempo(song: Song, newTempo: number){
     const updatedSong = {...song}
 
-    ActiveMeter(song).initBpm = newTempo
+    activeMeterReference(updatedSong).initBpm = newTempo
 
     return updatedSong
 }
 
 export function tempo(song: Song){
-    const updatedSong = {...song}
-
-    return ActiveMeter(updatedSong).initBpm
+    return activeMeterReference({...song}).initBpm
 }
 
 //add section to song
 
+//nextBeat
+
+//nextMeter

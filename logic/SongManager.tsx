@@ -1,15 +1,22 @@
 import { createContext, useState } from 'react'
 import { Song, Meter, defaultMetronomeSong } from './structure'
-import { changeDenominator, changeAccent, changeNumerator, ActiveMeter, changeTempo, tempo} from './SongFunctions'
+import { activeMeter, changeDenominator, 
+    changeAccent, denominator, 
+    changeNumerator, 
+    changeTempo, 
+    tempo, 
+    numerator} from './SongFunctions'
 
 const contextInitialValues = {
-    song: defaultMetronomeSong, 
+    song: defaultMetronomeSong,
+    getActiveMeter: (): Meter => {return {initBpm: 0, denominator: 0, repeat: 0, active: false, beats: []}},
+    getNumerator:(): number => {return 0},
     setNumerator:(numerator: number, resetAccents : boolean = true)=>{},
+    getDenominator: (): number => {return 0},
     setDenominator:(denominator: number)=>{},
     setAccent:(beatNumber: number)=>{},
-    getActiveMeter: () : Meter => {return {initBpm: 0, finalBpm: 0, denominator: 0, repeat: 0, active: false, beats:[]}},
+    getTempo: (): number => {return 0},
     setTempo: (newTempo: number) => {},
-    getTempo: (): number => {return 0}
 }
 
 
@@ -19,8 +26,20 @@ export function SongProvider({ children } : { children : any }){
 
     const [song, setSong] = useState(defaultMetronomeSong)
 
+    function getActiveMeter(){
+        return activeMeter({...song})
+    }
+
+    function getNumerator(){
+        return numerator(song)
+    }
+
     function setNumerator(numerator: number, resetAccents : boolean = true){
         setSong(changeNumerator(song, numerator, resetAccents))
+    }
+
+    function getDenominator(){
+        return denominator(song)
     }
 
     function setDenominator(denominator: number){
@@ -31,20 +50,28 @@ export function SongProvider({ children } : { children : any }){
         setSong(changeAccent(song, beatNumber))
     }
 
-    function getActiveMeter(){
-        return ActiveMeter(song)
+    function getTempo(){
+        return tempo(song)
     }
 
     function setTempo(newTempo: number){
         return setSong(changeTempo(song, newTempo))
     }
 
-    function getTempo(){
-        return tempo(song)
+    const contextValues = {
+        song: defaultMetronomeSong,
+        getActiveMeter: getActiveMeter,
+        getNumerator: getNumerator,
+        setNumerator: setNumerator,
+        getDenominator: getDenominator,
+        setDenominator: setDenominator,
+        setAccent: setAccent,
+        getTempo: getTempo,
+        setTempo: setTempo
     }
-
+    
     return(
-        <SongContext.Provider value={{song, setNumerator, setDenominator, setAccent, getActiveMeter, setTempo, getTempo}}>
+        <SongContext.Provider value={contextValues}>
             {children}
         </SongContext.Provider>
     )
