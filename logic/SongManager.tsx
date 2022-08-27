@@ -7,20 +7,7 @@ import { activeMeter, changeDenominator,
     tempo, 
     numerator} from './SongFunctions'
 
-const contextInitialValues = {
-    song: defaultMetronomeSong,
-    getActiveMeter: (): Meter => {return {initBpm: 0, denominator: 0, repeat: 0, active: false, beats: []}},
-    getNumerator:(): number => {return 0},
-    setNumerator:(numerator: number, resetAccents : boolean = true)=>{},
-    getDenominator: (): number => {return 0},
-    setDenominator:(denominator: number)=>{},
-    setAccent:(beatNumber: number)=>{},
-    getTempo: (): number => {return 0},
-    setTempo: (newTempo: number) => {},
-}
-
-
-export const SongContext = createContext(contextInitialValues) //initial values make compiler happy
+export const SongContext = createContext({})
 
 export function SongProvider({ children } : { children : any }){
 
