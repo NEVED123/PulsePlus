@@ -8,7 +8,7 @@ import { activeMeter, changeDenominator,
     numerator} from './SongFunctions'
 
 const contextInitialValues = {
-    song: defaultMetronomeSong,
+    getSong: (): Song => {return defaultMetronomeSong},
     getActiveMeter: (): Meter => {return {initBpm: 0, denominator: 0, repeat: 0, active: false, beats: []}},
     getNumerator:(): number => {return 0},
     setNumerator:(numerator: number, resetAccents : boolean = true)=>{},
@@ -25,6 +25,10 @@ export const SongContext = createContext(contextInitialValues) //initial values 
 export function SongProvider({ children } : { children : any }){
 
     const [song, setSong] = useState(defaultMetronomeSong)
+
+    function getSong(){
+        return {...song}
+    }
 
     function getActiveMeter(){
         return activeMeter({...song})
@@ -59,7 +63,7 @@ export function SongProvider({ children } : { children : any }){
     }
 
     const contextValues = {
-        song: defaultMetronomeSong,
+        getSong: getSong,
         getActiveMeter: getActiveMeter,
         getNumerator: getNumerator,
         setNumerator: setNumerator,

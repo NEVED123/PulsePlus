@@ -1,5 +1,22 @@
 import { Song, Meter, Beat, Subdivisions, BeatSoundPresets } from './structure'
 
+/**
+ * DO NOT EXPORT, ONLY USE AS A HELPER FUNCTION
+ * @param song 
+ * @returns refence to meter where "active" == true
+ */
+ function activeMeterReference(song : Song) : Meter {
+
+    const meter = song.song.find(meter => meter.active == true)
+
+    if(meter != undefined){
+        return meter
+    }
+
+    throw new Error('No active meter in song')
+}
+
+//getSong() is only one line, and is defined in SongManager.tsx
 
 /**
  * @returns copy of active meter
@@ -13,23 +30,6 @@ export function activeMeter(song: Song){
  */
 export function numerator(song: Song){
     return activeMeterReference({...song}).beats.length
-}
-
-/**
- * DO NOT EXPORT, ONLY USE AS A HELPER FUNCTION
- * @param song 
- * @returns refence to meter where "active" == true
- */
-function activeMeterReference(song : Song) : Meter {
-
-    const meter = song.song.find(meter => meter.active == true)
-
-    if(meter != undefined){
-        return meter
-    }
-
-    throw new Error('No active meter in song')
-
 }
 
 /**
