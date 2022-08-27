@@ -20,7 +20,6 @@ export default function HomeScreen() {
         load default song
     }*/
     const { theme } = useContext(ThemeContext)
-    const [tempo, setTempo] = useState(60)
     const [running, setRunning] = useState(false)
     return (
         <SongProvider>
@@ -29,7 +28,7 @@ export default function HomeScreen() {
                     <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'}/>
                     <ClickSpace/>
                     <TimeSignature /*should only be displayed during normal metronome use, otherwise a scroll bar may be necessary *//> 
-                    <TempoWheel tempo={tempo} setTempo={setTempo}/>
+                    <TempoWheel/>
                     <StartButton running={running} setRunning={setRunning}/>
                 </SafeAreaView>
             </LinearGradient>
