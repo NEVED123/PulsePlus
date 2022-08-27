@@ -1,7 +1,7 @@
 import { createContext, useState } from 'react'
 import { Appearance } from 'react-native'
 
-export const ThemeContext = createContext({}) //initial values make compiler happy
+export const ThemeContext = createContext({theme : '', toggleTheme : ()=>{}}) //initial values make compiler happy
 
 export function ThemeProvider({ children } : { children : any }){
 
