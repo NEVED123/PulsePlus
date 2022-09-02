@@ -2,13 +2,15 @@ import { View, Text, StyleSheet, GestureResponderEvent, Pressable, Platform } fr
 import { useState, useContext } from 'react'
 import { ThemeContext } from '../../../theme/ThemeManager'
 import { buttonColors, borderWidths, textTitleColors, textShadowColors, altButtonColors, textColors} from '../../../theme/Colors'
+import { SongContext } from '../../../logic/SongManager'
 
 //Here we pass in the tempo and setTempo hook, i don't think this is the 'correct' way to do it but it works :/
-export function TempoWheel({ tempo, setTempo }:{ tempo:number, setTempo:Function }){ 
+export function TempoWheel(){ 
 
     const { theme } = useContext(ThemeContext)
-    const[theta, setTheta] = useState(0)
-    const[internalTempo, setInternalTempo] = useState(tempo) //can be a decimal for fine tuning, end result is an integer
+    const { setTempo, getTempo } = useContext(SongContext)
+    const [theta, setTheta] = useState(0)
+    const [internalTempo, setInternalTempo] = useState(getTempo()) //can be a decimal for fine tuning, end result is an integer
     return(
         <View style={{alignItems:'center', justifyContent:'center'}}>
             <Pressable
@@ -20,24 +22,24 @@ export function TempoWheel({ tempo, setTempo }:{ tempo:number, setTempo:Function
                         borderWidth: borderWidths[theme as keyof typeof borderWidths]
                     }, 
                     styles.tempoWheel]}
-                onTouchMove={(e)=>handleMove(e, tempo, setTempo, internalTempo, setInternalTempo, theta, setTheta)}>
+                onTouchMove={(e)=>handleMove(e, getTempo(), setTempo, internalTempo, setInternalTempo, theta, setTheta)}>
                 <View style={{width:250, flexDirection:'row', justifyContent:'space-between'}}>
                     <Text 
                         style={[{color: textColors[theme as keyof typeof textColors]},
                             styles.tempoDirectionText]}
-                        onPress={()=>{if(tempo > 10) setTempo(tempo - 1)}}>-
+                        onPress={()=>{if(getTempo() > 10) setTempo(getTempo() - 1)}}>-
                     </Text>
                     <Text 
                         style={[{color: textColors[theme as keyof typeof textColors]},
                         styles.tempoDirectionText]}
-                        onPress={()=>{if(tempo < 800) setTempo(tempo+1)}}>+
+                        onPress={()=>{if(getTempo() < 800) setTempo(getTempo()+1)}}>+
                     </Text>
                 </View>
                 <Pressable
                     style={[{backgroundColor:altButtonColors[theme as keyof typeof altButtonColors],
                             borderWidth:borderWidths[theme as keyof typeof borderWidths]},
                             styles.tapTempo]}
-                    onPress={e => tapTempo(e, tempo, setTempo)}>
+                    onPress={e => tapTempo(e, getTempo(), setTempo)}>
                     <Text style={[{color:textColors[theme as keyof typeof textColors],
                                    textShadowColor:textShadowColors[theme as keyof typeof textShadowColors]},
                                    styles.tapTempoText]}>
@@ -47,7 +49,7 @@ export function TempoWheel({ tempo, setTempo }:{ tempo:number, setTempo:Function
             </Pressable>
             <Text style={[{color: textTitleColors[theme as keyof typeof textTitleColors],
                            textShadowColor: textShadowColors[theme as keyof typeof textShadowColors] },
-                           styles.tempoText]}>{tempo}
+                           styles.tempoText]}>{getTempo()}
             </Text>
         </View>
     )
@@ -73,7 +75,7 @@ function tapTempo(e: GestureResponderEvent, tempo: number, setTempo: Function) {
     lastTimeStamp = e.nativeEvent.timestamp;
 }
 
-function handleMove(e: GestureResponderEvent, tempo:number, setTempo: Function, 
+function handleMove(e: GestureResponderEvent, tempo:number, setTempo: Function,
     internalTempo:number, setinternalTempo: Function, theta:number, setTheta:Function){
     const x = e.nativeEvent.locationX-125
     const y = 125-e.nativeEvent.locationY

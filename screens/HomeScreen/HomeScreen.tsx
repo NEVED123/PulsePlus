@@ -8,33 +8,31 @@ import { TempoWheel } from "./HomeElements/TempoWheel"
 import { StartButton } from "./HomeElements/StartButton"
 import { ThemeContext } from '../../theme/ThemeManager'
 import { backgroundColors } from '../../theme/Colors';
+import { defaultMetronomeSong } from '../../logic/structure';
+import { SongProvider } from '../../logic/SongManager';
 
 /**
  * The components will be broken down into individual functions once the main screen layout is complete
  */
 export default function HomeScreen() {
     
+    /*useEffect(){
+        load default song
+    }*/
     const { theme } = useContext(ThemeContext)
-    const [tempo, setTempo] = useState(60)
-    const [numValue, setNumValue] = useState(4)
-    const [denValue, setDenValue] = useState(4)
-    const [meter, setMeter] = useState(new Array(4).fill(0))
     const [running, setRunning] = useState(false)
     return (
-        <LinearGradient colors={backgroundColors[theme as keyof typeof backgroundColors]} style={{flex:1}}>
-            <SafeAreaView style={{flex:1}}>
-                <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'}/>
-                <ClickSpace meter={meter} setMeter={setMeter}/>
-                <TimeSignature 
-                    numValue={numValue}
-                    setNumValue={setNumValue}
-                    denValue={denValue}
-                    setDenValue={setDenValue}
-                    setMeter={setMeter}/>
-                <TempoWheel tempo={tempo} setTempo={setTempo}/>
-                <StartButton running={running} setRunning={setRunning}/>
-            </SafeAreaView>
-        </LinearGradient>
+        <SongProvider>
+            <LinearGradient colors={backgroundColors[theme as keyof typeof backgroundColors]} style={{flex:1}}>
+                <SafeAreaView style={{flex:1}}>
+                    <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'}/>
+                    <ClickSpace/>
+                    <TimeSignature /*should only be displayed during normal metronome use, otherwise a scroll bar may be necessary *//> 
+                    <TempoWheel/>
+                    <StartButton running={running} setRunning={setRunning}/>
+                </SafeAreaView>
+            </LinearGradient>
+        </SongProvider>
     );
 }
 

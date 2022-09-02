@@ -3,13 +3,16 @@ import { rowSizes, METRONOME_BLOCK_GROUP_PADDING } from './MetronomeBlockGroupBe
 import { useContext } from 'react'
 import { ThemeContext } from '../../../theme/ThemeManager'
 import { accentColors, borderWidths } from '../../../theme/Colors'
+import { Meter, Song } from '../../../logic/structure'
+import { ActiveMeter, changeAccent } from '../../../logic/SongFunctions'
+import { SongContext } from '../../../logic/SongManager'
 
-export function MetronomeBlock({ beatNumber, meter, setMeter }:
-    { beatNumber:number, meter: number[], setMeter:Function }){
+export function MetronomeBlock({ beatNumber }:{ beatNumber:number }){
 
     const { theme } = useContext(ThemeContext)
-    const accent = meter[beatNumber]
-    const topRowNumber = rowSizes(meter)[0]
+    const { setAccent, getActiveMeter } = useContext(SongContext)
+    const accent = getActiveMeter().beats[beatNumber].beatSound
+    const topRowNumber = rowSizes(getActiveMeter())[0] //used to calculate width of blocks
 
     return(
         <Pressable 
@@ -21,11 +24,7 @@ export function MetronomeBlock({ beatNumber, meter, setMeter }:
                     borderWidth: borderWidths[theme as keyof typeof borderWidths]}, 
                     styles.metronomeBlock]
                 }
-            onPress={()=>{
-                const newMeter = meter.slice()
-                newMeter[beatNumber] = accent < backgroundColorLength ? accent + 1 : 0
-                setMeter(newMeter)
-            }}>
+            onPress={()=>{setAccent(beatNumber)}}>
         </Pressable> 
     )
 }
@@ -44,5 +43,3 @@ const styles = StyleSheet.create({
         elevation: 5
     }
 })
-
-const backgroundColorLength = accentColors.light.length - 1
