@@ -8,7 +8,7 @@ import { SongContext } from '../../../logic/SongManager'
 export function TempoWheel(){ 
 
     const { theme } = useContext(ThemeContext)
-    const { setTempo, getTempo } = useContext(SongContext)
+    const { setTempo, getTempo, getSong } = useContext(SongContext)
     const [theta, setTheta] = useState(0)
     const [internalTempo, setInternalTempo] = useState(getTempo()) //can be a decimal for fine tuning, end result is an integer
     return(
@@ -22,7 +22,9 @@ export function TempoWheel(){
                         borderWidth: borderWidths[theme as keyof typeof borderWidths]
                     }, 
                     styles.tempoWheel]}
-                onTouchMove={(e)=>handleMove(e, getTempo(), setTempo, internalTempo, setInternalTempo, theta, setTheta)}>
+                onTouchMove={(e)=>{
+                    handleMove(e, getTempo(), setTempo, internalTempo, setInternalTempo, theta, setTheta)
+                    }}>
                 <View style={{width:250, flexDirection:'row', justifyContent:'space-between'}}>
                     <Text 
                         style={[{color: textColors[theme as keyof typeof textColors]},
@@ -99,6 +101,7 @@ function handleMove(e: GestureResponderEvent, tempo:number, setTempo: Function,
         setTempo(Math.floor(internalTempo))
         setTheta(theta2)
     }
+
 }
 
 const styles = StyleSheet.create({

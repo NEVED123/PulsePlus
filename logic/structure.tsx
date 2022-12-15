@@ -77,32 +77,31 @@ export const BeatSoundPresets = {
 export const defaultMetronomeSong : Song = {
     song:[{
         initBpm: 100,
-        finalBpm : 100,
         denominator: 4,
         repeat : 1,
         active: true,
         beats:[{
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
+            beatDuration: 1000, // 60/100 * 1000 
+            active : true
+        },
+        {
+            beatSound : 0,
+            subDiv : Subdivisions.none,
+            beatDuration: 1000, // 60/100 * 1000 
             active : false
         },
         {
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
+            beatDuration: 1000, // 60/100 * 1000 
             active : false
         },
         {
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
-            active : false
-        },
-        {
-            beatSound : 0,
-            subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
+            beatDuration: 1000, // 60/100 * 1000 
             active : false
         }
         ]

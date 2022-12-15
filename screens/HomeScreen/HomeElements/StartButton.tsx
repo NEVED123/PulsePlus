@@ -1,12 +1,15 @@
 import { Pressable, Text, StyleSheet} from 'react-native'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { ThemeContext } from '../../../theme/ThemeManager'
 import { altButtonColors, textTitleColors } from '../../../theme/Colors'
-import { Song } from '../../../logic/structure'
+import { SongContext } from '../../../logic/SongManager'
 
-export function StartButton({ running, setRunning }:{ running:boolean, setRunning:Function }){ 
+
+export function StartButton(){ 
 
     const { theme } = useContext(ThemeContext)
+    const { toggle } = useContext(SongContext)
+    const [running, setRunning] = useState(false)
 
     return(
         <Pressable
@@ -16,12 +19,8 @@ export function StartButton({ running, setRunning }:{ running:boolean, setRunnin
           ]}
             onPress={
                 ()=>{
-                    if(running){
-                        setRunning(false)
-                    }
-                    else{
-                        setRunning(true)
-                    }
+                    setRunning(running == true ? false : true)
+                    toggle()
                 }
             }>
             <Text style={[{color: textTitleColors[theme as keyof typeof textTitleColors]},

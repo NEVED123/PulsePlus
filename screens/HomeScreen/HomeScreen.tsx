@@ -29,7 +29,7 @@ export default function HomeScreen() {
                     <ClickSpace/>
                     <TimeSignature /*should only be displayed during normal metronome use, otherwise a scroll bar may be necessary *//> 
                     <TempoWheel/>
-                    <StartButton running={running} setRunning={setRunning}/>
+                    <StartButton/>
                 </SafeAreaView>
             </LinearGradient>
         </SongProvider>

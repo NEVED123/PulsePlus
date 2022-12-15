@@ -119,7 +119,12 @@ export function changeAccent(song: Song, beatNumber: number): Song {
 export function changeTempo(song: Song, newTempo: number){
     const updatedSong = {...song}
 
-    activeMeterReference(updatedSong).initBpm = newTempo
+    const meter = activeMeterReference(updatedSong)
+    meter.initBpm = newTempo
+
+    for(let i = 0; i<meter.beats.length;i++){
+        meter.beats[i].beatDuration = 60000/newTempo
+    }
 
     return updatedSong
 }
@@ -127,6 +132,8 @@ export function changeTempo(song: Song, newTempo: number){
 export function tempo(song: Song){
     return activeMeterReference({...song}).initBpm
 }
+
+
 
 //add section to song
 

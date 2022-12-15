@@ -4,13 +4,12 @@ import DropDownPicker from 'react-native-dropdown-picker'
 import { ThemeContext } from '../../../theme/ThemeManager'
 import { buttonColors, borderColors, textTitleColors as timeSignatureColors, textShadowColors } from '../../../theme/Colors'
 import { Song, Beat } from '../../../logic/structure'
-import { ActiveMeter, changeDenominator, changeNumerator } from '../../../logic/SongFunctions'
 import { SongContext } from '../../../logic/SongManager'
 
 export function TimeSignature(){
 
     const { theme } = useContext(ThemeContext)
-    const { song, getNumerator, setNumerator, getDenominator, setDenominator} = useContext(SongContext)
+    const { getNumerator, setNumerator, getDenominator, setDenominator} = useContext(SongContext)
     const [numOpen, setNumOpen] = useState(false)
     const [denOpen, setdenOpen] = useState(false)
     const [numValue, setNumValue] = useState(getNumerator())
