@@ -83,25 +83,25 @@ export const defaultMetronomeSong : Song = {
         beats:[{
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 1000, // 60/100 * 1000 
+            beatDuration: 600, // 60/100 * 1000 
             active : true
         },
         {
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 1000, // 60/100 * 1000 
+            beatDuration: 600, // 60/100 * 1000 
             active : false
         },
         {
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 1000, // 60/100 * 1000 
+            beatDuration: 600, // 60/100 * 1000 
             active : false
         },
         {
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 1000, // 60/100 * 1000 
+            beatDuration: 600, // 60/100 * 1000 
             active : false
         }
         ]

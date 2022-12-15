@@ -1,5 +1,6 @@
-import { createContext, useState, useRef } from 'react'
+import React, { createContext, useState, useRef } from 'react'
 import { Song, Meter, Beat, defaultMetronomeSong } from './structure'
+import { Audio } from 'expo-av'
 import { activeMeter, changeDenominator, 
     changeAccent, denominator, 
     changeNumerator, 
@@ -131,36 +132,46 @@ export function SongProvider({ children } : { children : any }){
 
     }
 
-    const intervalId = useRef(0 as any)
+    
+    const timeOutId = useRef(0 as any)
+    const [sound, setSound] = useState(0 as any)
+
+    async function playSound() {
+        const { sound } = await Audio.Sound.createAsync( require('../assets/sounds/clave.mp3')
+        );
+        setSound(sound);
+    
+        await sound.playAsync();
+    }
+    
+    React.useEffect(() => {
+    return sound
+        ? () => {
+            sound.unloadAsync();
+        }
+        : undefined;
+    }, [sound]);  
 
     function toggle(){
+
         setRunning(running == true ? false : true)
 
         if(running){
-            clearInterval(intervalId.current as NodeJS.Timer)
+            clearTimeout(timeOutId.current as NodeJS.Timeout)
             return
+            //TODO: reset song back to beat 1 if it is one meter
         }
-
-        function test(){
-            //play click sound
-            clearInterval(intervalId.current)
-            incrementBeat()
-            intervalId.current = setInterval(()=>test(),getActiveBeat().beatDuration)
-            // const id = setInterval(test, 1000)
-            // setIntervalId(id)
-        }
-
-        intervalId.current = setInterval(()=>test(),getActiveBeat().beatDuration)
-        // function play(){
-        //     console.log("click")
-        //     clearInterval(intervalId as NodeJS.Timer)
-        //     const id = setInterval(()=>play(), 1000)
-        //     setIntervalId(id)
-        // }
-
-
         
+        let expected = Date.now() + getActiveBeat().beatDuration
+        step()
 
+        function step(){
+            incrementBeat()
+            playSound()
+            const dt = Date.now() - expected
+            expected += getActiveBeat().beatDuration
+            timeOutId.current = setTimeout(()=>step(),Math.max(0, getActiveBeat().beatDuration-dt))
+        }
     }
 
     const contextValues = {
