@@ -8,9 +8,9 @@ import { SongContext } from '../../../logic/SongManager'
 export function TempoWheel(){ 
 
     const { theme } = useContext(ThemeContext)
-    const { setTempo, getTempo, getSong } = useContext(SongContext)
+    const { setTempo, tempo } = useContext(SongContext)
     const [theta, setTheta] = useState(0)
-    const [internalTempo, setInternalTempo] = useState(getTempo()) //can be a decimal for fine tuning, end result is an integer
+    const [internalTempo, setInternalTempo] = useState(tempo) //can be a decimal for fine tuning, end result is an integer
     return(
         <View style={{alignItems:'center', justifyContent:'center'}}>
             <Pressable
@@ -23,25 +23,25 @@ export function TempoWheel(){
                     }, 
                     styles.tempoWheel]}
                 onTouchMove={(e)=>{
-                    handleMove(e, getTempo(), setTempo, internalTempo, setInternalTempo, theta, setTheta)
+                    handleMove(e, tempo, setTempo, internalTempo, setInternalTempo, theta, setTheta)
                     }}>
                 <View style={{width:250, flexDirection:'row', justifyContent:'space-between'}}>
                     <Text 
                         style={[{color: textColors[theme as keyof typeof textColors]},
                             styles.tempoDirectionText]}
-                        onPress={()=>{if(getTempo() > 10) setTempo(getTempo() - 1)}}>-
+                        onPress={()=>{if(tempo > 10) setTempo(tempo - 1)}}>-
                     </Text>
                     <Text 
                         style={[{color: textColors[theme as keyof typeof textColors]},
                         styles.tempoDirectionText]}
-                        onPress={()=>{if(getTempo() < 800) setTempo(getTempo()+1)}}>+
+                        onPress={()=>{if(tempo < 800) setTempo(tempo+1)}}>+
                     </Text>
                 </View>
                 <Pressable
                     style={[{backgroundColor:altButtonColors[theme as keyof typeof altButtonColors],
                             borderWidth:borderWidths[theme as keyof typeof borderWidths]},
                             styles.tapTempo]}
-                    onPress={e => tapTempo(e, getTempo(), setTempo)}>
+                    onPress={e => tapTempo(e, tempo, setTempo)}>
                     <Text style={[{color:textColors[theme as keyof typeof textColors],
                                    textShadowColor:textShadowColors[theme as keyof typeof textShadowColors]},
                                    styles.tapTempoText]}>
@@ -51,7 +51,7 @@ export function TempoWheel(){
             </Pressable>
             <Text style={[{color: textTitleColors[theme as keyof typeof textTitleColors],
                            textShadowColor: textShadowColors[theme as keyof typeof textShadowColors] },
-                           styles.tempoText]}>{getTempo()}
+                           styles.tempoText]}>{tempo}
             </Text>
         </View>
     )

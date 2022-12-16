@@ -10,9 +10,9 @@ import { SongContext } from '../../../logic/SongManager'
 export function MetronomeBlockGroup(){
     //The 'key' gives each metronome block a seperate ID based on its position in the array, for now its only purpose
     //is to get a warning to shut up but it will probably become useful
-    const { getActiveMeter } = useContext(SongContext)
-    const rows = rowDistributionArray(getActiveMeter())
-    const indexHelper = indexAtBeginningOfEachRow(getActiveMeter())
+    const { activeMeter } = useContext(SongContext)
+    const rows = rowDistributionArray(activeMeter)
+    const indexHelper = indexAtBeginningOfEachRow(activeMeter)
     
     return(  
         <View 

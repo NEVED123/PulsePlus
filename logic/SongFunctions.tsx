@@ -1,13 +1,10 @@
 import { Song, Meter, Beat, Subdivisions, BeatSoundPresets } from './structure'
 
 /**
- * DO NOT EXPORT, ONLY USE AS A HELPER FUNCTION
- * @param song 
- * @returns refence to meter where "active" == true
+ * @returns copy of active meter
  */
- function activeMeterReference(song : Song) : Meter {
-
-    const meter = song.song.find(meter => meter.active == true)
+export function getActiveMeter(song: Song) : Meter{
+    const meter = {...song}.song.find(meter => meter.active == true)
 
     if(meter != undefined){
         return meter
@@ -16,20 +13,44 @@ import { Song, Meter, Beat, Subdivisions, BeatSoundPresets } from './structure'
     throw new Error('No active meter in song')
 }
 
-//getSong() is only one line, and is defined in SongManager.tsx
+export function getActiveMeterIndex(song: Song) : number {
+    const meterIndex = {...song}.song.findIndex(meter => meter.active == true)
 
-/**
- * @returns copy of active meter
- */
-export function activeMeter(song: Song){
-    return activeMeterReference({...song})
+    if(meterIndex != -1){
+        return meterIndex
+    }
+
+    throw new Error('No active meter in song')
+}
+
+export function getActiveBeat(song: Song) : Beat {
+
+    const activeMeter = getActiveMeter(song)
+    const beat = activeMeter.beats.find(beat => beat.active == true)
+
+    if(beat != undefined){
+        return beat
+    }
+
+    throw new Error('No active beat in song')
+}
+
+export function getActiveBeatIndex(song: Song) : number{
+    const activeMeter = getActiveMeter(song)
+    const beatIndex = activeMeter.beats.findIndex(beat => beat.active == true)
+
+    if(beatIndex != -1){
+        return beatIndex
+    }
+
+    throw new Error('No active beat in song')
 }
 
 /**
  * @returns numerator of active meter
  */
-export function numerator(song: Song){
-    return activeMeterReference({...song}).beats.length
+export function getNumerator(song: Song) : number{
+    return getActiveMeter(song).beats.length
 }
 
 /**
@@ -37,12 +58,14 @@ export function numerator(song: Song){
  * @param song 
  * @param numerator 
  * @param resetAccents 
- * @returns new instance of song with updated numerator to active meter
+ * @returns void
+ * @description new instance of song with updated numerator to active meter
  */
-export function changeNumerator(song : Song, numerator: number, resetAccents : boolean = true): Song {
+export function setNumerator(song : Song, numerator: number, resetAccents : boolean = true): Song {
     
     const updatedSong = {...song} //copies instance of song
-    const { beatDuration } = activeMeterReference(updatedSong).beats[0]
+    const activeMeter = getActiveMeter(updatedSong)
+    const { beatDuration } = activeMeter.beats[0]
 
     if(resetAccents){
         const newMeter : Beat[] = new Array(numerator)
@@ -53,11 +76,11 @@ export function changeNumerator(song : Song, numerator: number, resetAccents : b
                 active: false})
         }
 
-        activeMeterReference(updatedSong).beats = newMeter
+        activeMeter.beats = newMeter
     }
     else{
 
-        const originalNumerator = activeMeterReference(updatedSong).beats.length
+        const originalNumerator = activeMeter.beats.length
 
         const beatsToAdd = numerator - originalNumerator
 
@@ -70,12 +93,12 @@ export function changeNumerator(song : Song, numerator: number, resetAccents : b
                     active: false}
             }
             
-            activeMeterReference(updatedSong).beats = activeMeterReference(updatedSong).beats.concat(addedBeats)
+            activeMeter.beats = activeMeter.beats.concat(addedBeats)
         }
         else{
             const beatsToRemove = Math.abs(beatsToAdd)
             for(let i = 0;i<beatsToRemove;i++){
-                activeMeterReference(updatedSong).beats.pop()
+                activeMeter.beats.pop()
             }
         }
     }
@@ -89,8 +112,8 @@ export function changeNumerator(song : Song, numerator: number, resetAccents : b
 /**
  * @returns denominator of active meter
  */
-export function denominator(song: Song){
-    return activeMeterReference({...song}).denominator
+export function getDenominator(song: Song){
+    return getActiveMeter(song).denominator
 }
 
 /**
@@ -99,9 +122,9 @@ export function denominator(song: Song){
  * @param denominator 
  * @returns new instance of song with updaed denominator in active meter
  */
-export function changeDenominator(song: Song, denominator: number): Song {
+export function setDenominator(song: Song, denominator: number): Song {
     const updatedSong = {...song} //copies instance of song
-    activeMeterReference(updatedSong).denominator = denominator
+    getActiveMeter(updatedSong).denominator = denominator
     return updatedSong
 }
 
@@ -111,18 +134,25 @@ export function changeDenominator(song: Song, denominator: number): Song {
  * @param beatNumber 
  * @returns new instance of song with updated accent on beat in active meter 
  */
-export function changeAccent(song: Song, beatNumber: number): Song {
+export function setAccent(song: Song, beatNumber: number): Song {
     const updatedSong = {...song}
-    const accent = activeMeterReference(updatedSong).beats[beatNumber].beatSound
-    activeMeterReference(updatedSong).beats[beatNumber].beatSound = accent < BeatSoundPresets['default'].length - 1 ? accent + 1 : 0
+    const accent = getActiveMeter(updatedSong).beats[beatNumber].beatSound
+    getActiveMeter(updatedSong).beats[beatNumber].beatSound = accent < BeatSoundPresets['default'].length - 1 ? accent + 1 : 0
 
     return updatedSong
 }
 
-export function changeTempo(song: Song, newTempo: number){
+/**
+ * 
+ * @param song 
+ * @param newTempo 
+ * @returns void
+ * @description sets tempo for each beat in active meter
+ */
+export function setTempo(song: Song, newTempo: number){
     const updatedSong = {...song}
 
-    const meter = activeMeterReference(updatedSong)
+    const meter = getActiveMeter(updatedSong)
     meter.initBpm = newTempo
 
     for(let i = 0; i<meter.beats.length;i++){
@@ -132,14 +162,70 @@ export function changeTempo(song: Song, newTempo: number){
     return updatedSong
 }
 
-export function tempo(song: Song){
-    return activeMeterReference({...song}).initBpm
+/**
+ * 
+ * @param song 
+ * @returns number
+ * @description gets tempo from active meter
+ */
+export function getTempo(song: Song){
+    return getActiveMeter({...song}).initBpm
 }
 
+/**
+ * 
+ * @param song 
+ * @returns void
+ * @description resets song
+ */
+export function resetSong(song: Song) : Song{
+    const updatedSong = {...song}
+    
+    updatedSong.song[getActiveMeterIndex(song)].beats[getActiveBeatIndex(song)].active = false
+    updatedSong.song[getActiveMeterIndex(song)].active = false
 
+    updatedSong.song[0].active = true
+    updatedSong.song[0].beats[0].active = true
 
-//add section to song
+    return updatedSong
+}
 
-//nextBeat
+/**
+ * 
+ * @param song 
+ * @returns void
+ * @description sets the active attribute from the current active beat to the one
+ * after, skipping to the next meter if necessary
+ *
+ */
 
-//nextMeter
+//TODO: CHECK FOR REPEAT ATTRIBUTES ON SONG, METER
+export function incrementBeat(song: Song){
+
+    const updatedSong = {...song}
+
+    const activeMeter = getActiveMeter(song)
+    const meterIndex = getActiveMeterIndex(song)
+    const beatIndex = getActiveBeatIndex(song)
+
+    updatedSong.song[meterIndex].beats[beatIndex].active = false 
+    if(beatIndex < activeMeter.beats.length-1) 
+        //we still have more beats in the active meter
+        updatedSong.song[meterIndex].beats[beatIndex + 1].active = true
+    else{ 
+        //we have no more beats in the active meter, and must switch to the next meter
+        if(meterIndex < updatedSong.song.length-1){ 
+            //there is another meter in the measure
+            updatedSong.song[meterIndex+1].active=true
+            updatedSong.song[meterIndex+1].beats[0].active=true
+        }
+        else{
+            //loops back to beginning for now, will depend on repeat attribute
+            updatedSong.song[0].active=true
+            updatedSong.song[0].beats[0].active=true
+        }
+    }
+
+    return updatedSong
+}
+

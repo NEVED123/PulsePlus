@@ -9,11 +9,11 @@ import { SongContext } from '../../../logic/SongManager'
 export function MetronomeBlock({ beatNumber }:{ beatNumber:number }){
 
     const { theme } = useContext(ThemeContext)
-    const { setAccent, getActiveMeter } = useContext(SongContext)
-    const beat = getActiveMeter().beats[beatNumber]
+    const { setAccent, activeMeter } = useContext(SongContext)
+    const beat = activeMeter.beats[beatNumber]
     const accent = beat.beatSound
     const active = beat.active
-    const topRowNumber = rowSizes(getActiveMeter())[0] //used to calculate width of blocks
+    const topRowNumber = rowSizes(activeMeter)[0] //used to calculate width of blocks
 
     return(
         <Pressable 
