@@ -80,6 +80,9 @@ export function changeNumerator(song : Song, numerator: number, resetAccents : b
         }
     }
 
+    updatedSong.song[0].active = true
+    updatedSong.song[0].beats[0].active = true
+
     return updatedSong
 }
 
