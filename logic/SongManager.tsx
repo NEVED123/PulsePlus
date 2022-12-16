@@ -58,7 +58,7 @@ export function SongProvider({ children } : { children : any }){
             return beat
         }
 
-        throw new Error('No active meter in song')
+        throw new Error('No active beat in song')
     }
 
     function getActiveBeatIndex(){
@@ -69,10 +69,20 @@ export function SongProvider({ children } : { children : any }){
             return beatIndex
         }
 
-        throw new Error('No active meter in song')
+        throw new Error('No active beat in song')
     }
 
+    function resetSong(){
+        const updatedSong = getSong()
 
+        updatedSong.song[getActiveMeterIndex()].beats[getActiveBeatIndex()].active = false
+        updatedSong.song[getActiveMeterIndex()].active = false
+
+        updatedSong.song[0].active = true
+        updatedSong.song[0].beats[0].active = true
+        
+        setSong(updatedSong)
+    }
 
     function getNumerator(){
         return numerator(song)
@@ -132,6 +142,7 @@ export function SongProvider({ children } : { children : any }){
 
     }
 
+    //'ENGINE' OF THE METRONOME
     
     const timeOutId = useRef(0 as any)
     const [sound, setSound] = useState(0 as any)
@@ -158,8 +169,8 @@ export function SongProvider({ children } : { children : any }){
 
         if(running){
             clearTimeout(timeOutId.current as NodeJS.Timeout)
+            resetSong()
             return
-            //TODO: reset song back to beat 1 if it is one meter
         }
         
         let expected = Date.now() + getActiveBeat().beatDuration
