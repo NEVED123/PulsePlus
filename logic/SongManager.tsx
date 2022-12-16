@@ -170,23 +170,39 @@ export function SongProvider({ children } : { children : any }){
         setRunning(running == true ? false : true)
 
         if(running){
-            clearTimeout(timeOutId.current as NodeJS.Timeout)
-            resetSong()
+            stopMetronome()
             return
         }
         
-        playSound()
-        timeOutId.current = setTimeout(()=>step(), getActiveBeat().beatDuration)
+        startMetronome()
+    }
+
+    function startMetronome(){
+
         let expected = Date.now() + getActiveBeat().beatDuration
 
+        playSound()
+        timeOutId.current = setTimeout(()=>step(), getActiveBeat().beatDuration)
+
         function step(){
+            const dt = Date.now() - expected
+
             incrementBeat()
             playSound()
-            const dt = Date.now() - expected
+
+            console.log(dt)
+            console.log(getActiveBeat().beatDuration-dt)
             expected += getActiveBeat().beatDuration
-            timeOutId.current = setTimeout(()=>step(),Math.max(0, getActiveBeat().beatDuration-dt))
+            timeOutId.current = setTimeout(()=>step(),getActiveBeat().beatDuration-dt)
         }
     }
+
+    function stopMetronome(){
+        clearTimeout(timeOutId.current as NodeJS.Timeout)
+        resetSong()
+    }
+
+
 
     const contextValues = {
         getSong: getSong,
@@ -208,4 +224,3 @@ export function SongProvider({ children } : { children : any }){
         </SongContext.Provider>
     )
 }
-
