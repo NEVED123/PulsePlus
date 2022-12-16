@@ -146,11 +146,13 @@ export function SongProvider({ children } : { children : any }){
     
     const timeOutId = useRef(0 as any)
     const [sound, setSound] = useState(0 as any)
+    const clave = require('../assets/sounds/clave.mp3')
 
     async function playSound() {
-        const { sound } = await Audio.Sound.createAsync( require('../assets/sounds/clave.mp3')
-        );
-        setSound(sound);
+
+        const { sound } = await Audio.Sound.createAsync(clave);
+
+        setSound(sound)
     
         await sound.playAsync();
     }
@@ -173,8 +175,9 @@ export function SongProvider({ children } : { children : any }){
             return
         }
         
+        playSound()
+        timeOutId.current = setTimeout(()=>step(), getActiveBeat().beatDuration)
         let expected = Date.now() + getActiveBeat().beatDuration
-        step()
 
         function step(){
             incrementBeat()
