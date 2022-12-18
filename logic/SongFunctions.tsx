@@ -1,10 +1,11 @@
 import { Song, Meter, Beat, Subdivisions, BeatSoundPresets } from './structure'
+import _ from 'lodash'
 
 /**
  * @returns copy of active meter
  */
-export function getActiveMeter(song: Song) : Meter{
-    const meter = {...song}.song.find(meter => meter.active == true)
+export function getActiveMeter(song: Song) : Meter {
+    const meter = _.clone(song).song.find(meter => meter.active == true)
 
     if(meter != undefined){
         return meter
@@ -14,7 +15,7 @@ export function getActiveMeter(song: Song) : Meter{
 }
 
 export function getActiveMeterIndex(song: Song) : number {
-    const meterIndex = {...song}.song.findIndex(meter => meter.active == true)
+    const meterIndex = _.clone(song).song.findIndex(meter => meter.active == true)
 
     if(meterIndex != -1){
         return meterIndex
@@ -63,7 +64,7 @@ export function getNumerator(song: Song) : number{
  */
 export function setNumerator(song : Song, numerator: number, resetAccents : boolean = true): Song {
     
-    const updatedSong = {...song} //copies instance of song
+    const updatedSong = _.clone(song)
     const activeMeter = getActiveMeter(updatedSong)
     const { beatDuration } = activeMeter.beats[0]
 
@@ -103,6 +104,7 @@ export function setNumerator(song : Song, numerator: number, resetAccents : bool
         }
     }
 
+    updatedSong.song[getActiveMeterIndex(song)] = activeMeter
     updatedSong.song[0].active = true
     updatedSong.song[0].beats[0].active = true
 
@@ -123,7 +125,7 @@ export function getDenominator(song: Song){
  * @returns new instance of song with updaed denominator in active meter
  */
 export function setDenominator(song: Song, denominator: number): Song {
-    const updatedSong = {...song} //copies instance of song
+    const updatedSong = _.clone(song)
     getActiveMeter(updatedSong).denominator = denominator
     return updatedSong
 }
@@ -135,9 +137,10 @@ export function setDenominator(song: Song, denominator: number): Song {
  * @returns new instance of song with updated accent on beat in active meter 
  */
 export function setAccent(song: Song, beatNumber: number): Song {
-    const updatedSong = {...song}
-    const accent = getActiveMeter(updatedSong).beats[beatNumber].beatSound
-    getActiveMeter(updatedSong).beats[beatNumber].beatSound = accent < BeatSoundPresets['default'].length - 1 ? accent + 1 : 0
+    const updatedSong = _.clone(song)
+    const activeMeter = getActiveMeter(song)
+    const accent = activeMeter.beats[beatNumber].beatSound
+    updatedSong.song[getActiveMeterIndex(song)].beats[beatNumber].beatSound = accent < BeatSoundPresets['default'].length - 1 ? accent + 1 : 0
 
     return updatedSong
 }
@@ -150,7 +153,7 @@ export function setAccent(song: Song, beatNumber: number): Song {
  * @description sets tempo for each beat in active meter
  */
 export function setTempo(song: Song, newTempo: number){
-    const updatedSong = {...song}
+    const updatedSong = _.clone(song)
 
     const meter = getActiveMeter(updatedSong)
     meter.initBpm = newTempo
@@ -169,7 +172,7 @@ export function setTempo(song: Song, newTempo: number){
  * @description gets tempo from active meter
  */
 export function getTempo(song: Song){
-    return getActiveMeter({...song}).initBpm
+    return getActiveMeter(song).initBpm
 }
 
 /**
@@ -179,7 +182,8 @@ export function getTempo(song: Song){
  * @description resets song
  */
 export function resetSong(song: Song) : Song{
-    const updatedSong = {...song}
+
+    const updatedSong = _.clone(song)
     
     updatedSong.song[getActiveMeterIndex(song)].beats[getActiveBeatIndex(song)].active = false
     updatedSong.song[getActiveMeterIndex(song)].active = false
@@ -202,7 +206,7 @@ export function resetSong(song: Song) : Song{
 //TODO: CHECK FOR REPEAT ATTRIBUTES ON SONG, METER
 export function incrementBeat(song: Song){
 
-    const updatedSong = {...song}
+    const updatedSong = _.clone(song)
 
     const activeMeter = getActiveMeter(song)
     const meterIndex = getActiveMeterIndex(song)
