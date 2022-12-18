@@ -58,7 +58,7 @@ export function getNumerator(song: Song) : number{
  * @param song 
  * @param numerator 
  * @param resetAccents 
- * @returns void
+ * @returns song
  * @description new instance of song with updated numerator to active meter
  */
 export function setNumerator(song : Song, numerator: number, resetAccents : boolean = true): Song {

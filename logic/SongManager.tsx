@@ -69,7 +69,6 @@ export function SongProvider({ children } : { children : any }){
             playSound()
 
             console.log(dt)
-            console.log(getActiveBeat(song).beatDuration-dt)
             expected += getActiveBeat(song).beatDuration
             timeOutId.current = setTimeout(()=>step(),getActiveBeat(song).beatDuration-dt)
         }
