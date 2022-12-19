@@ -214,13 +214,18 @@ export function incrementBeat(song: Song){
     const beatIndex = getActiveBeatIndex(song)
 
     updatedSong.song[meterIndex].beats[beatIndex].active = false 
+
     if(beatIndex < activeMeter.beats.length-1) 
         //we still have more beats in the active meter
         updatedSong.song[meterIndex].beats[beatIndex + 1].active = true
-    else{ 
-        //we have no more beats in the active meter, and must switch to the next meter
+    else{
+        
+        //we have no more beats in the active meter, and must switch to the next meter 
+        updatedSong.song[meterIndex].active = false
+        
         if(meterIndex < updatedSong.song.length-1){ 
             //there is another meter in the measure
+            
             updatedSong.song[meterIndex+1].active=true
             updatedSong.song[meterIndex+1].beats[0].active=true
         }

@@ -60,12 +60,13 @@ export function SongProvider({ children } : { children : any }){
         let expected = Date.now() + getActiveBeat(song).beatDuration
 
         playSound()
+        //setSong(incrementBeat(song))
         timeOutId.current = setTimeout(()=>step(), getActiveBeat(song).beatDuration)
 
         function step(){
             const dt = Date.now() - expected
 
-            incrementBeat(song)
+            //setSong(incrementBeat(song))
             playSound()
 
             console.log(dt)
