@@ -22,6 +22,21 @@ export function SongProvider({ children } : { children : any }){
     const [running, setRunning] = useState(false)
 
     //'ENGINE' OF THE METRONOME
+
+    //Chat GPT suggestion 👀
+    // const startTime = performance.now();
+
+    // function update() {
+    //   const elapsedTime = performance.now() - startTime;
+    
+    //   if (elapsedTime > 500) {
+    //     // perform action here
+    //   } else {
+    //     requestAnimationFrame(update);
+    //   }
+    // }
+
+    // requestAnimationFrame(update);
     
     const timeOutId = useRef(0 as any)
     const [sound, setSound] = useState(0 as any)
