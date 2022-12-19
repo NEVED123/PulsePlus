@@ -51,7 +51,15 @@ export function getActiveBeatIndex(song: Song) : number{
  * @returns numerator of active meter
  */
 export function getNumerator(song: Song) : number{
-    return getActiveMeter(song).beats.length
+
+    const num = getActiveMeter(song).beats.length
+    
+    if(num > 0){
+        return num
+    }
+
+    throw new Error('no beats found in active meter, numerator = 0')
+
 }
 
 /**
@@ -134,15 +142,20 @@ export function setDenominator(song: Song, denominator: number): Song {
 /**
  * 
  * @param song 
- * @param beatNumber 
+ * @param beatIndex 
  * @returns new instance of song with updated accent on beat in active meter 
  */
-export function setAccent(song: Song, beatNumber: number): Song {
+export function setAccent(song: Song, beatIndex: number): Song {
     const updatedSong = _.cloneDeep(song)
     const activeMeter = getActiveMeter(song)
-    const accent = activeMeter.beats[beatNumber].beatSound
-    updatedSong.song[getActiveMeterIndex(song)].beats[beatNumber].beatSound = accent < BeatSoundPresets['default'].length - 1 ? accent + 1 : 0
-
+    const accent = activeMeter.beats[beatIndex].beatSound
+    if(beatIndex<activeMeter.beats.length){
+        updatedSong.song[getActiveMeterIndex(song)].beats[beatIndex].beatSound = accent < BeatSoundPresets['default'].length - 1 ? accent + 1 : 0
+    }
+    else{
+        throw new Error('Given beat index does not exist in active meter')
+    }
+    
     return updatedSong
 }
 
@@ -156,11 +169,11 @@ export function setAccent(song: Song, beatNumber: number): Song {
 export function setTempo(song: Song, newTempo: number){
     const updatedSong = _.cloneDeep(song)
 
-    const meter = getActiveMeter(updatedSong)
-    meter.initBpm = newTempo
+    const activeMeter = updatedSong.song[getActiveMeterIndex(song)]
+    activeMeter.initBpm = newTempo
 
-    for(let i = 0; i<meter.beats.length;i++){
-        meter.beats[i].beatDuration = 60000/newTempo
+    for(let i = 0; i<activeMeter.beats.length;i++){
+        activeMeter.beats[i].beatDuration = 60000/newTempo
     }
 
     return updatedSong
@@ -173,7 +186,9 @@ export function setTempo(song: Song, newTempo: number){
  * @description gets tempo from active meter
  */
 export function getTempo(song: Song){
-    return getActiveMeter(song).initBpm
+    const duration = getActiveBeat(song).beatDuration
+
+    return 60000/duration
 }
 
 /**
@@ -219,7 +234,7 @@ export function incrementBeat(song: Song){
         //we still have more beats in the active meter
         updatedSong.song[meterIndex].beats[beatIndex + 1].active = true
     else{
-        
+
         //we have no more beats in the active meter, and must switch to the next meter 
         updatedSong.song[meterIndex].active = false
         
@@ -238,4 +253,5 @@ export function incrementBeat(song: Song){
 
     return updatedSong
 }
+
 
