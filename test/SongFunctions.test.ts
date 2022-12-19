@@ -1,320 +1,519 @@
-import { getActiveMeter, setNumerator } from "../logic/SongFunctions";
+import { getActiveMeter, incrementBeat, setNumerator } from "../logic/SongFunctions";
 import { Meter, Beat, Song, Subdivisions} from "../logic/structure"
 import {describe, expect, test} from "@jest/globals"
 import _ from "lodash"
 
-const numEquals32 : Song = {
-  song:[{
-    initBpm: 100,
-    denominator: 4,
-    repeat : 1,
-    active: true,
-    beats:[{
-        beatSound : 0,
-        subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
-        active : true
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    },
-    {
-      beatSound : 0,
-      subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
-      active : false
-    }
-    ]
-  }],
-  repeat: true,
-  name: "Default",
-  author: "",
-  date: ""
-}
 
-const numEquals1 : Song = {
-  song:[{
-    initBpm: 100,
-    denominator: 4,
-    repeat : 1,
-    active: true,
-    beats:[{
-        beatSound : 0,
-        subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
-        active : true
-    }
-    ]
-  }],
-  repeat: true,
-  name: "Default",
-  author: "",
-  date: ""
-}
-
-const multipleMeters : Song = {
-  song:[{
-    initBpm: 100,
-    denominator: 4,
-    repeat : 1,
-    active: true,
-    beats:[{
-        beatSound : 0,
-        subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
-        active : true
-        }
-      ]
-    },
-    {
-      initBpm: 100,
-      denominator: 4,
-      repeat : 1,
-      active: false,
-      beats:[{
-          beatSound : 0,
-          subDiv : Subdivisions.none,
-          beatDuration: 600, // 60/100 * 1000 
-          active : true
-        }
-      ]
-    },
-    {
-      initBpm: 100,
-      denominator: 4,
-      repeat : 1,
-      active: false,
-      beats:[{
-          beatSound : 0,
-          subDiv : Subdivisions.none,
-          beatDuration: 600, // 60/100 * 1000 
-          active : true
-        }
-      ]
-    }
-  ],
-  repeat: true,
-  name: "Default",
-  author: "",
-  date: ""
-}
 
 describe('getActiveMeter',()=>{
+
   test('getActiveMeter returns a deepclone of the active meter', ()=>{
-    expect(getActiveMeter(multipleMeters)).not.toBe(multipleMeters.song[0])
+
+    const recieved : Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: true,
+        beats:[{
+            beatSound : 0,
+            subDiv : Subdivisions.none,
+            beatDuration: 600, // 60/100 * 1000 
+            active : true
+            }
+          ]
+        },
+        {
+          initBpm: 100,
+          denominator: 4,
+          repeat : 1,
+          active: false,
+          beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : true
+            }
+          ]
+        },
+        {
+          initBpm: 100,
+          denominator: 4,
+          repeat : 1,
+          active: false,
+          beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : true
+            }
+          ]
+        }
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+
+    expect(getActiveMeter(recieved)).not.toBe(recieved.song[0])
+
   })
 
   test('returns active meter at index 0', ()=>{
-    expect(getActiveMeter(multipleMeters)).toEqual(multipleMeters.song[0])
+
+    const recieved : Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: true,
+        beats:[{
+            beatSound : 0,
+            subDiv : Subdivisions.none,
+            beatDuration: 600, // 60/100 * 1000 
+            active : true
+            }
+          ]
+        },
+        {
+          initBpm: 100,
+          denominator: 4,
+          repeat : 1,
+          active: false,
+          beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : true
+            }
+          ]
+        },
+        {
+          initBpm: 100,
+          denominator: 4,
+          repeat : 1,
+          active: false,
+          beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : true
+            }
+          ]
+        }
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+
+    const result : Meter = {
+      initBpm: 100,
+      denominator: 4,
+      repeat : 1,
+      active: true,
+      beats:[{
+          beatSound : 0,
+          subDiv : Subdivisions.none,
+          beatDuration: 600, // 60/100 * 1000 
+          active : true
+          }
+        ]
+      }
+
+    expect(getActiveMeter(recieved)).toEqual(result)
   })
 
   test('returns active meter at index i where 0<i<length', ()=>{
-    const multipleMetersIndexOneActive = _.cloneDeep(multipleMeters)
+
+    const recieved : Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: false,
+        beats:[{
+            beatSound : 0,
+            subDiv : Subdivisions.none,
+            beatDuration: 600, // 60/100 * 1000 
+            active : false
+            }
+          ]
+        },
+        {
+          initBpm: 100,
+          denominator: 4,
+          repeat : 1,
+          active: true,
+          beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : true
+            }
+          ]
+        },
+        {
+          initBpm: 100,
+          denominator: 4,
+          repeat : 1,
+          active: false,
+          beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        }
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
     
-    multipleMetersIndexOneActive.song[0].active = false
-    multipleMetersIndexOneActive.song[1].active = true
+    const result : Meter =  {
+      initBpm: 100,
+      denominator: 4,
+      repeat : 1,
+      active: true,
+      beats:[{
+          beatSound : 0,
+          subDiv : Subdivisions.none,
+          beatDuration: 600, // 60/100 * 1000 
+          active : true
+        }
+      ]
+    }
     
-    expect(getActiveMeter(multipleMetersIndexOneActive)).toEqual(multipleMetersIndexOneActive.song[1])
+    expect(getActiveMeter(recieved)).toEqual(result)
   })
 
   test('returns active meter at last index in song',()=>{
-    const multipleMetersLastActive = _.cloneDeep(multipleMeters)
+
+    const recieved : Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: false,
+        beats:[{
+            beatSound : 0,
+            subDiv : Subdivisions.none,
+            beatDuration: 600, // 60/100 * 1000 
+            active : false
+            }
+          ]
+        },
+        {
+          initBpm: 100,
+          denominator: 4,
+          repeat : 1,
+          active: false,
+          beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        },
+        {
+          initBpm: 100,
+          denominator: 4,
+          repeat : 1,
+          active: true,
+          beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : true
+            }
+          ]
+        }
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
     
-    multipleMetersLastActive.song[0].active = false
-    multipleMetersLastActive.song[2].active = true
+    const result : Meter =  {
+      initBpm: 100,
+      denominator: 4,
+      repeat : 1,
+      active: true,
+      beats:[{
+          beatSound : 0,
+          subDiv : Subdivisions.none,
+          beatDuration: 600, // 60/100 * 1000 
+          active : true
+        }
+      ]
+    }
     
-    expect(getActiveMeter(multipleMetersLastActive)).toEqual(multipleMetersLastActive.song[2])
+    expect(getActiveMeter(recieved)).toEqual(result)
   })
 
   test('throws error when song contains no active meter', ()=>{
-    const noActiveMeter = _.cloneDeep(multipleMeters)
 
-    noActiveMeter.song[0].active = false
+    const recieved : Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: false,
+        beats:[{
+            beatSound : 0,
+            subDiv : Subdivisions.none,
+            beatDuration: 600, // 60/100 * 1000 
+            active : false
+            }
+          ]
+        }
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
 
     expect(()=>{
-      getActiveMeter(noActiveMeter)
+      getActiveMeter(recieved)
     }).toThrow
   })
 })
 
 describe('setNumerator', ()=>{
+
+  const numEquals32 : Song = {
+    song:[{
+      initBpm: 100,
+      denominator: 4,
+      repeat : 1,
+      active: true,
+      beats:[{
+          beatSound : 0,
+          subDiv : Subdivisions.none,
+          beatDuration: 600, // 60/100 * 1000 
+          active : true
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      },
+      {
+        beatSound : 0,
+        subDiv : Subdivisions.none,
+        beatDuration: 600, // 60/100 * 1000 
+        active : false
+      }
+      ]
+    }],
+    repeat: true,
+    name: "Default",
+    author: "",
+    date: ""
+  }
+  
+  const numEquals1 : Song = {
+    song:[{
+      initBpm: 100,
+      denominator: 4,
+      repeat : 1,
+      active: true,
+      beats:[{
+          beatSound : 0,
+          subDiv : Subdivisions.none,
+          beatDuration: 600, // 60/100 * 1000 
+          active : true
+      }
+      ]
+    }],
+    repeat: true,
+    name: "Default",
+    author: "",
+    date: ""
+  }
 
   const num1FirstAccent1 = _.cloneDeep(numEquals1)
 
@@ -343,5 +542,268 @@ describe('setNumerator', ()=>{
   test('setNumerator from 32 to 1, resetAccents = false',()=>{
     expect(setNumerator(num32FirstAccent1, 1, false)).toEqual(num1FirstAccent1)
   })
+})
+
+describe('incrementBeat',()=>{
+
+  //increment within meter
+  test('increment within single meter', ()=>{
+
+    const recieved : Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : true //CHANGED
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false //CHANGED
+            }
+          ]
+        }
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+
+    const result : Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false //CHANGED
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : true //CHANGED
+            }
+          ]
+        },
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+
+    expect(incrementBeat(recieved)).toEqual(result)
+
+  })
+
+  //loop back to beginning of meter if repeat
+
+  //increment from one meter to the next if no repeat
+  test('increment to next meter', ()=>{
+
+    const recieved : Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false 
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : true
+            }
+          ]
+        },
+        {
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: false,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false //CHANGED
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false //CHANGED
+            }
+          ]
+        }
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+
+    const result : Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: false,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false 
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        },
+        {
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : true
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false 
+            }
+          ]
+        }
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+
+    expect(incrementBeat(recieved)).toEqual(result)
+    
+  })
+
+  //loop from end of last meter to beginning
+  test('loop to beginning', ()=>{
+
+    const recieved : Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: false,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false 
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        },
+        {
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false 
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : true
+            }
+          ]
+        }
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+
+    const result : Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : true
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        },
+        {
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: false,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false 
+            }
+          ]
+        }
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+
+    expect(incrementBeat(recieved)).toEqual(result)
+  }) 
 })
 
