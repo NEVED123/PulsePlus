@@ -17,62 +17,12 @@ import { Meter, Beat, Song, Subdivisions} from "../logic/structure"
 import {describe, expect, test} from "@jest/globals"
 import _ from "lodash"
 
-
+//NOTE: All Getters and setters return a modified shallow copy of the song object passed in.
+//I thought this was against the rules, but it seems to be the correct way and I don't understand/
+//why.For testing, we must make deep clones when reusing an object for a test so as to not
+//change the original object. 
 
 describe('getActiveMeter',()=>{
-
-  test('getActiveMeter returns a deepclone of the active meter', ()=>{
-
-    const recieved : Song = {
-      song:[{
-        initBpm: 100,
-        denominator: 4,
-        repeat : 1,
-        active: true,
-        beats:[{
-            beatSound : 0,
-            subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
-            active : true
-            }
-          ]
-        },
-        {
-          initBpm: 100,
-          denominator: 4,
-          repeat : 1,
-          active: false,
-          beats:[{
-              beatSound : 0,
-              subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
-              active : true
-            }
-          ]
-        },
-        {
-          initBpm: 100,
-          denominator: 4,
-          repeat : 1,
-          active: false,
-          beats:[{
-              beatSound : 0,
-              subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
-              active : true
-            }
-          ]
-        }
-      ],
-      repeat: true,
-      name: "Default",
-      author: "",
-      date: ""
-    }
-
-    expect(getActiveMeter(recieved)).not.toBe(recieved.song[0])
-
-  })
 
   test('returns active meter', ()=>{
 
@@ -644,31 +594,47 @@ describe('setNumerator', ()=>{
     date: ""
   }
 
-  const num1FirstAccent1 = _.cloneDeep(numEquals1)
 
-  num1FirstAccent1.song[0].beats[0].beatSound = 1
-
-  const num32FirstAccent1 = _.cloneDeep(numEquals32)
-
-  num32FirstAccent1.song[0].beats[0].beatSound = 1  
-
-  test('setNumerator returns a deepclone of song', ()=>{
-    expect(setNumerator(numEquals1, 1)).not.toBe(numEquals1)
-  })
 
   test('setNumerator from 1 to 32, resetAccents = true', ()=>{
-    expect(setNumerator(numEquals1, 32, true)).toEqual(numEquals32);
+
+    const numEquals32Clone = _.cloneDeep(numEquals32)
+    const numEquals1Clone = _.cloneDeep(numEquals1)
+
+    expect(setNumerator(numEquals1Clone, 32, true)).toEqual(numEquals32Clone);
   })
 
   test('setNumerator from 32 to 1, resetAccents = true', ()=>{
-    expect(setNumerator(numEquals32, 1, true)).toEqual(numEquals1);
+
+    const numEquals32Clone = _.cloneDeep(numEquals32)
+    const numEquals1Clone = _.cloneDeep(numEquals1)
+
+    expect(setNumerator(numEquals32Clone, 1, true)).toEqual(numEquals1Clone);
   })
 
   test('setNumerator from 1 to 32, resetAccents = false',()=>{
+
+    const num1FirstAccent1 = _.cloneDeep(numEquals1)
+
+    num1FirstAccent1.song[0].beats[0].beatSound = 1
+  
+    const num32FirstAccent1 = _.cloneDeep(numEquals32)
+  
+    num32FirstAccent1.song[0].beats[0].beatSound = 1  
+
     expect(setNumerator(num1FirstAccent1, 32, false)).toEqual(num32FirstAccent1)
   })
 
   test('setNumerator from 32 to 1, resetAccents = false',()=>{
+
+    const num1FirstAccent1 = _.cloneDeep(numEquals1)
+
+    num1FirstAccent1.song[0].beats[0].beatSound = 1
+  
+    const num32FirstAccent1 = _.cloneDeep(numEquals32)
+  
+    num32FirstAccent1.song[0].beats[0].beatSound = 1  
+
     expect(setNumerator(num32FirstAccent1, 1, false)).toEqual(num1FirstAccent1)
   })
 })
