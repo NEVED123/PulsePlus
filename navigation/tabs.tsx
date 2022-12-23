@@ -1,7 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
 import SettingsScreen from '../screens/SettingsScreen/SettingsScreen';
-import TunerScreen from '../screens/TunerScreen/TunerScreen';
 import SoundScreen from '../screens/SoundScreen/SoundScreen';
 import { View, Image, StyleSheet } from 'react-native'
 
@@ -34,20 +33,7 @@ export default function Tabs() {
             </View>
           )
         }}}/>
-      <Tab.Screen name="Tuner" component={TunerScreen}
-        options={{tabBarIcon: ( { focused })=>{
-          return(
-            <View style={styles.iconContainer}>
-              <Image
-              source={ focused ? require('../assets/tab-logos/BlueTuningForkLogo.png') : 
-                                 require('../assets/tab-logos/TuningForkLogo.png')}
-              resizeMode="contain"
-              style={styles.image}
-              />
-            </View>
-          )
-        }}}/>      
-      <Tab.Screen name='Sounds' component={SoundScreen}
+      <Tab.Screen name='Build Song' component={SoundScreen}
         options={{tabBarIcon: ({ focused })=>{
           return(
             <View style={styles.iconContainer}>
