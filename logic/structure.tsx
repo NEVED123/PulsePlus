@@ -61,16 +61,17 @@ export const Subdivisions = {
 }
 
 
-const BeatSounds = {
-    woodblock : "woodblock.mp3",
-    silence: "silence.mp3",
-    clave : "clave.mp3"
+export const BeatSounds = {
+    clave : require('../assets/sounds/clave.mp3'),
+    woodblock : require("../assets/sounds/woodblock.mp3"),
+    silence: require("../assets/sounds/silence.mp3")
+    
     //sound : "path to mp3 file"
     //etc.
 }
 
 export const BeatSoundPresets = {
-    "default" : [BeatSounds.woodblock, BeatSounds.clave, BeatSounds.silence]
+    "default" : [BeatSounds.clave, BeatSounds.woodblock, BeatSounds.silence]
     //More settings, the user could add their own
 }
 

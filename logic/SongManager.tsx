@@ -1,7 +1,7 @@
 import { createContext, useState, useRef, useEffect, useCallback, useLayoutEffect } from 'react'
-import { Song, Meter, Beat, defaultMetronomeSong } from './structure'
+import { Song, Meter, Beat, defaultMetronomeSong, BeatSounds, BeatSoundPresets } from './structure'
 import _ from 'lodash'
-import { Audio } from 'expo-av'
+import { Audio, AVPlaybackSource } from 'expo-av'
 import {getActiveMeter, 
     getActiveMeterIndex, 
     setDenominator, 
@@ -22,10 +22,10 @@ export function SongProvider({ children } : { children : any }){
     //Makes sounds work
     const [sound, setSound] = useState(0 as any)
 
-    async function playSound() {
+    async function playSound(accent : number) {
 
-        const { sound } = await Audio.Sound.createAsync(require('../assets/sounds/clave.mp3'));
-
+        const { sound } = await Audio.Sound.createAsync(BeatSoundPresets['default'][accent]) //preset to be determined by user settings
+        
         setSound(sound)
     
         await sound.playAsync();
@@ -62,9 +62,14 @@ export function SongProvider({ children } : { children : any }){
             return
         }
 
-        if(elapsed > getActiveBeat(song).beatDuration){
-            playSound()
+        const { beatDuration } = getActiveBeat(song)
+
+        if(elapsed > beatDuration){
             setSong(incrementBeat(song))
+
+            const { beatSound } = getActiveBeat(song)
+
+            playSound(beatSound)
             prevTRef.current = timestamp
         }
 
