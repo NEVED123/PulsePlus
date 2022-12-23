@@ -2,7 +2,7 @@ import { View, Pressable, StyleSheet, Dimensions } from 'react-native'
 import { rowSizes, METRONOME_BLOCK_GROUP_PADDING } from './MetronomeBlockGroupBehavior'
 import { useContext } from 'react'
 import { ThemeContext } from '../../../theme/ThemeManager'
-import { accentColors, borderWidths } from '../../../theme/Colors'
+import { accentColors, borderWidths, activeColors } from '../../../theme/Colors'
 import { Meter, Song } from '../../../logic/structure'
 import { SongContext } from '../../../logic/SongManager'
 
@@ -18,7 +18,7 @@ export function MetronomeBlock({ beatNumber }:{ beatNumber:number }){
     return(
         <Pressable 
             style={ ({pressed}) => [{
-                backgroundColor: active ? "#FFFFFF" : accentColors[theme as keyof typeof accentColors][accent]},
+                backgroundColor: active ? activeColors[theme as keyof typeof activeColors] : accentColors[theme as keyof typeof accentColors][accent]},
                 {
                     shadowRadius: pressed ? 20 : 4,
                     width: (Dimensions.get('window').width-METRONOME_BLOCK_GROUP_PADDING*2-topRowNumber * MARGIN*2)/topRowNumber,

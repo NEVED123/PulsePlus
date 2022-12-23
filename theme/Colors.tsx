@@ -47,3 +47,8 @@ export const textShadowColors = {
     light: "#DDD",
     dark: "#000"
 }
+
+export const activeColors = {
+    light: "black",
+    dark: "white"
+}
