@@ -8,8 +8,8 @@ import { SongContext } from '../../../logic/SongManager'
 export function StartButton(){ 
 
     const { theme } = useContext(ThemeContext)
-    const { toggle } = useContext(SongContext)
-    const [running, setRunning] = useState(false)
+    const { toggleRunning, running } = useContext(SongContext)
+
 
     return(
         <Pressable
@@ -19,8 +19,7 @@ export function StartButton(){
           ]}
             onPress={
                 ()=>{
-                    setRunning(running == true ? false : true)
-                    toggle()
+                    toggleRunning()
                 }
             }>
             <Text style={[{color: textTitleColors[theme as keyof typeof textTitleColors]},

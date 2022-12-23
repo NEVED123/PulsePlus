@@ -49,7 +49,7 @@ export function SongProvider({ children } : { children : any }){
     const requestRef = useRef(null as any)
     const prevTRef = useRef(performance.now())
 
-    function toggle(){
+    function toggleRunning(){
         setRunning(running == true ? false : true)
     }
 
@@ -93,7 +93,8 @@ export function SongProvider({ children } : { children : any }){
         setAccent: (beatNumber: number) => {setSong(setAccent(song, beatNumber))},
         tempo: getTempo(song),
         setTempo: (tempo: number)=>{setSong(setTempo(song, tempo))},
-        toggle: toggle,
+        running: running,
+        toggleRunning: toggleRunning,
         resetSong: () => {setSong(resetSong(song))},
         incrementBeat: ()=>{setSong(incrementBeat(song))}
     }
