@@ -1,6 +1,6 @@
 import SettingButtonToggleBase from "./SettingButtonToggleBase";
 import { useContext } from 'react'
-import { PreferencesContext } from "../../../theme/PreferencesManager";
+import { PreferencesContext } from "../../../logic/PreferencesManager";
 
 export default function VibrateOnDownbeat(){
 

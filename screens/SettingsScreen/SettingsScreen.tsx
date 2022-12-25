@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Pressable, SafeAreaView} from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
-import { PreferencesContext } from '../../theme/PreferencesManager'
+import { PreferencesContext } from '../../logic/PreferencesManager'
 import { useContext } from 'react'
 import ToggleThemeButton from './SettingsElements/ToggleThemeButton' 
 import BackgroundModeButton from './SettingsElements/BackgroundModeButton';

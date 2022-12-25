@@ -1,5 +1,5 @@
 import {StyleSheet, Pressable, Text} from 'react-native' 
-import { PreferencesContext } from '../../../theme/PreferencesManager'
+import { PreferencesContext } from '../../../logic/PreferencesManager'
 import { altButtonColors, textTitleColors } from '../../../theme/Colors'
 import { useContext } from 'react'
 

@@ -6,7 +6,7 @@ import { ClickSpace } from './HomeElements/ClickSpace';
 import { TimeSignature } from "./HomeElements/TimeSignature"
 import { TempoWheel } from "./HomeElements/TempoWheel"
 import { StartButton } from "./HomeElements/StartButton"
-import { PreferencesContext } from '../../theme/PreferencesManager'
+import { PreferencesContext } from '../../logic/PreferencesManager'
 import { backgroundColors } from '../../theme/Colors';
 import { defaultMetronomeSong } from '../../logic/structure';
 import { SongProvider } from '../../logic/SongManager';

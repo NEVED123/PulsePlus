@@ -1,6 +1,6 @@
 import { Pressable, Text, StyleSheet} from 'react-native'
 import { useContext, useState } from 'react'
-import { PreferencesContext } from '../../../theme/PreferencesManager'
+import { PreferencesContext } from '../../../logic/PreferencesManager'
 import { altButtonColors, textTitleColors } from '../../../theme/Colors'
 import { SongContext } from '../../../logic/SongManager'
 

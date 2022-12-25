@@ -1,7 +1,7 @@
 import { View, StyleSheet, Text } from 'react-native'
 import { useEffect, useState, useContext } from 'react'
 import DropDownPicker from 'react-native-dropdown-picker'
-import { PreferencesContext } from '../../../theme/PreferencesManager'
+import { PreferencesContext } from '../../../logic/PreferencesManager'
 import { buttonColors, borderColors, textTitleColors as timeSignatureColors, textShadowColors } from '../../../theme/Colors'
 import { Song, Beat } from '../../../logic/structure'
 import { SongContext } from '../../../logic/SongManager'
