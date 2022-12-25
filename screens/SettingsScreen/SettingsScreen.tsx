@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Pressable, SafeAreaView} from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
-import { ThemeContext } from '../../theme/ThemeManager'
+import { PreferencesContext } from '../../theme/PreferencesManager'
 import { useContext } from 'react'
 import ToggleThemeButton from './SettingsElements/ToggleThemeButton' 
 import BackgroundModeButton from './SettingsElements/BackgroundModeButton';
@@ -12,7 +12,7 @@ import { settingBackgroundColors, textTitleColors } from '../../theme/Colors';
 
 export default function Settings(){
 
-    const { theme } = useContext(ThemeContext)
+    const { theme } = useContext(PreferencesContext)
 
     return(
         <LinearGradient colors={settingBackgroundColors[theme as keyof typeof settingBackgroundColors]} style={styles.background}>

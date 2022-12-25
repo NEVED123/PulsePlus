@@ -1,13 +1,13 @@
 import { View, Text, StyleSheet, GestureResponderEvent, Pressable, Platform } from 'react-native'
 import { useState, useContext } from 'react'
-import { ThemeContext } from '../../../theme/ThemeManager'
+import { PreferencesContext } from '../../../theme/PreferencesManager'
 import { buttonColors, borderWidths, textTitleColors, textShadowColors, altButtonColors, textColors} from '../../../theme/Colors'
 import { SongContext } from '../../../logic/SongManager'
 
 //Here we pass in the tempo and setTempo hook, i don't think this is the 'correct' way to do it but it works :/
 export function TempoWheel(){ 
 
-    const { theme } = useContext(ThemeContext)
+    const { theme } = useContext(PreferencesContext)
     const { setTempo, tempo } = useContext(SongContext)
     const [theta, setTheta] = useState(0)
     const [internalTempo, setInternalTempo] = useState(tempo) //can be a decimal for fine tuning, end result is an integer

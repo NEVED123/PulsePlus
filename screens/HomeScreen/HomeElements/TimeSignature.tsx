@@ -1,14 +1,14 @@
 import { View, StyleSheet, Text } from 'react-native'
 import { useEffect, useState, useContext } from 'react'
 import DropDownPicker from 'react-native-dropdown-picker'
-import { ThemeContext } from '../../../theme/ThemeManager'
+import { PreferencesContext } from '../../../theme/PreferencesManager'
 import { buttonColors, borderColors, textTitleColors as timeSignatureColors, textShadowColors } from '../../../theme/Colors'
 import { Song, Beat } from '../../../logic/structure'
 import { SongContext } from '../../../logic/SongManager'
 
 export function TimeSignature(){
 
-    const { theme } = useContext(ThemeContext)
+    const { theme } = useContext(PreferencesContext)
     const { numerator, setNumerator, denominator, setDenominator} = useContext(SongContext)
     const [numOpen, setNumOpen] = useState(false)
     const [denOpen, setdenOpen] = useState(false)

@@ -1,7 +1,12 @@
-import SettingButtonBase from "./SettingButtonBase";
+import SettingButtonToggleBase from "./SettingButtonToggleBase";
+import { useContext } from 'react'
+import { PreferencesContext } from "../../../theme/PreferencesManager";
 
 export default function VibrateOnDownbeat(){
+
+    const { toggleVibrate } = useContext(PreferencesContext)
+    
     return(
-        <SettingButtonBase text='Vibrate On Downbeat' behavior={()=>{}}/>
+        <SettingButtonToggleBase text='Vibrate On Downbeat' onChange={toggleVibrate}/>
     )
 }

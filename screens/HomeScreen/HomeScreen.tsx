@@ -6,7 +6,7 @@ import { ClickSpace } from './HomeElements/ClickSpace';
 import { TimeSignature } from "./HomeElements/TimeSignature"
 import { TempoWheel } from "./HomeElements/TempoWheel"
 import { StartButton } from "./HomeElements/StartButton"
-import { ThemeContext } from '../../theme/ThemeManager'
+import { PreferencesContext } from '../../theme/PreferencesManager'
 import { backgroundColors } from '../../theme/Colors';
 import { defaultMetronomeSong } from '../../logic/structure';
 import { SongProvider } from '../../logic/SongManager';
@@ -19,7 +19,7 @@ export default function HomeScreen() {
     /*useEffect(){
         load default song
     }*/
-    const { theme } = useContext(ThemeContext)
+    const { theme } = useContext(PreferencesContext)
     const [running, setRunning] = useState(false)
     return (
         <SongProvider>

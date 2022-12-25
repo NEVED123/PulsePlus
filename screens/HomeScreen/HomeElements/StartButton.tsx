@@ -1,13 +1,13 @@
 import { Pressable, Text, StyleSheet} from 'react-native'
 import { useContext, useState } from 'react'
-import { ThemeContext } from '../../../theme/ThemeManager'
+import { PreferencesContext } from '../../../theme/PreferencesManager'
 import { altButtonColors, textTitleColors } from '../../../theme/Colors'
 import { SongContext } from '../../../logic/SongManager'
 
 
 export function StartButton(){ 
 
-    const { theme } = useContext(ThemeContext)
+    const { theme } = useContext(PreferencesContext)
     const { toggleRunning, running } = useContext(SongContext)
 
 

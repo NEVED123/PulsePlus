@@ -1,7 +1,12 @@
-import SettingButtonBase from "./SettingButtonBase";
+import SettingButtonToggleBase from "./SettingButtonToggleBase";
+import { useContext } from 'react'
+import { PreferencesContext } from "../../../theme/PreferencesManager";
 
 export default function BackgroundModeButton(){
+
+    const {toggleBackgroundMode} = useContext(PreferencesContext)
+
     return(
-        <SettingButtonBase text='Background Mode' behavior={()=>{}}/>
+        <SettingButtonToggleBase text={'Background Mode'} onChange={toggleBackgroundMode}/>
     )
 }

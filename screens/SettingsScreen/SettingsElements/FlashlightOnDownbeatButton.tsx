@@ -1,7 +1,12 @@
-import SettingButtonBase from "./SettingButtonBase";
+import SettingButtonToggleBase from "./SettingButtonToggleBase";
+import { useContext } from "react";
+import { PreferencesContext } from "../../../theme/PreferencesManager";
 
 export default function FlashlightOnDownBeatButton(){
+
+    const { toggleFlashlight } = useContext(PreferencesContext)
+
     return(
-        <SettingButtonBase text='Flashlight On Downbeat' behavior={()=>{}}/>
+        <SettingButtonToggleBase text='Flashlight On Downbeat' onChange={toggleFlashlight}/>
     )
 }

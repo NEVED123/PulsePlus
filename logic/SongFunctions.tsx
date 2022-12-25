@@ -1,4 +1,4 @@
-import { Song, Meter, Beat, Subdivisions, BeatSoundPresets } from './structure'
+import { Song, Meter, Beat, Subdivisions } from './structure'
 import _ from 'lodash'
 
 /**
@@ -145,12 +145,12 @@ export function setDenominator(song: Song, denominator: number): Song {
  * @param beatIndex 
  * @returns new instance of song with updated accent on beat in active meter 
  */
-export function setAccent(song: Song, beatIndex: number): Song {
+export function setAccent(song: Song, beatIndex: number, numberOfAccents: number = 3): Song {
     const updatedSong = _.clone(song)
     const activeMeter = getActiveMeter(song)
     const accent = activeMeter.beats[beatIndex].beatSound
     if(beatIndex<activeMeter.beats.length){
-        updatedSong.song[getActiveMeterIndex(song)].beats[beatIndex].beatSound = accent < BeatSoundPresets['default'].length - 1 ? accent + 1 : 0
+        updatedSong.song[getActiveMeterIndex(song)].beats[beatIndex].beatSound = accent < numberOfAccents - 1 ? accent + 1 : 0
     }
     else{
         throw new Error('Given beat index does not exist in active meter')

@@ -1,26 +1,29 @@
-import {StyleSheet, Pressable, Text} from 'react-native' 
+import {StyleSheet, Pressable, Text, Switch} from 'react-native' 
 import { PreferencesContext } from '../../../theme/PreferencesManager'
 import { altButtonColors, textTitleColors } from '../../../theme/Colors'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 
 //THIS IS ONLY TO BE USED AS A BASE FOR OTHER SETTING BUTTONS, OR AS A PLACEHOLDER
-export default function SettingButtonBase({ text, onPress } : { text : string, onPress: Function }){
+export default function SettingButtonToggleBase({ text, onChange } : { text : string, onChange : Function }){
+
+    const [isSwitchOn, setIsSwitchOn] = useState(false)
+
 
     const { theme } = useContext(PreferencesContext)
 
     return(
-        <Pressable style={({ pressed }) => [
-            {
-              backgroundColor: pressed
-                ? '#707070'
-                : altButtonColors[theme as keyof typeof altButtonColors]
-            },
+        <Pressable style={[
+            {backgroundColor : altButtonColors[theme as keyof typeof altButtonColors]},
             styles.settingButton
-          ]}
-          onPress={()=>onPress()}>
+          ]}>
             <Text style={[styles.settingText, {color:textTitleColors[theme as keyof typeof textTitleColors]}]}>
                 {text}
             </Text>
+            <Switch value={isSwitchOn} 
+                onValueChange={()=>{
+                    setIsSwitchOn(!isSwitchOn)
+                    onChange()}} 
+                style={styles.switch}/>
         </Pressable>
     )
 }
@@ -34,8 +37,13 @@ const styles = StyleSheet.create({
         height:50,
         borderTopColor:'#909090',
         borderTopWidth:1,
-        justifyContent:'center'
+        flexDirection: 'row',
+        justifyContent:'space-between',
+        alignItems: 'center'
         //figure out shadow in buttons, this is apparently a nightmare to do with the "overflow:'hidden'" style in parent container
+    },
+    switch:{
+        marginRight: 20
     }
 })
 
