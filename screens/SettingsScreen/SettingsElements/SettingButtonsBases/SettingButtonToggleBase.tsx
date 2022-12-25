@@ -1,6 +1,6 @@
 import {StyleSheet, Pressable, Text, Switch} from 'react-native' 
-import { PreferencesContext } from '../../../logic/PreferencesManager'
-import { altButtonColors, textTitleColors } from '../../../theme/Colors'
+import { PreferencesContext } from '../../../../logic/PreferencesManager'
+import { altButtonColors, textTitleColors } from '../../../../theme/Colors'
 import { useContext, useState } from 'react'
 
 //THIS IS ONLY TO BE USED AS A BASE FOR OTHER SETTING BUTTONS, OR AS A PLACEHOLDER

@@ -1,4 +1,4 @@
-import SettingButtonBase from "./SettingButtonBase";
+import SettingButtonBase from "./SettingButtonsBases/SettingButtonBase";
 
 export default function ChangeSoundSetButton(){
     return(

@@ -1,4 +1,4 @@
-import SettingButtonToggleBase from './SettingButtonToggleBase'
+import SettingButtonToggleBase from './SettingButtonsBases/SettingButtonToggleBase'
 import { PreferencesContext } from '../../../logic/PreferencesManager'
 import { useContext } from 'react'
 import { Switch } from 'react-native'

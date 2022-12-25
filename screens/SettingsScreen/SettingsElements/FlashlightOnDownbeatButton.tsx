@@ -1,4 +1,4 @@
-import SettingButtonToggleBase from "./SettingButtonToggleBase";
+import SettingButtonToggleBase from "./SettingButtonsBases/SettingButtonToggleBase";
 import { useContext } from "react";
 import { PreferencesContext } from "../../../logic/PreferencesManager";
 
