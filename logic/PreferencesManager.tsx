@@ -1,5 +1,6 @@
 import { createContext, useState } from 'react'
 import { Appearance } from 'react-native'
+import { BeatSoundPresets } from './structure'
 
 export const PreferencesContext = createContext(0 as any) //initial values make compiler happy
 
@@ -13,7 +14,7 @@ export function PreferencesProvider({ children } : { children : any }){
 
     const [vibrate, setVibrate] = useState(false)
 
-    const [soundSet, setSoundSet] = useState([])
+    const [soundSet, setSoundSet] = useState(BeatSoundPresets.default)
 
     const toggleTheme = () => {
         setTheme(theme === 'light' ? 'dark' : 'light')
@@ -43,7 +44,9 @@ export function PreferencesProvider({ children } : { children : any }){
         flashlight : flashlight,
         toggleFlashlight : toggleFlashlight,
         vibrate : vibrate,
-        toggleVibrate : toggleVibrate
+        toggleVibrate : toggleVibrate,
+        soundSet : soundSet,
+        setSoundSet : setSoundSet
     }
 
     return(

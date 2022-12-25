@@ -1,4 +1,4 @@
-import { createContext, useState, useRef, useEffect, useCallback, useLayoutEffect } from 'react'
+import { createContext, useState, useRef, useEffect, useContext, useLayoutEffect } from 'react'
 import { Song, Meter, Beat, defaultMetronomeSong, BeatSounds, BeatSoundPresets } from './structure'
 import _ from 'lodash'
 import { Audio, AVPlaybackSource } from 'expo-av'
@@ -14,6 +14,7 @@ import {getActiveMeter,
     getDenominator,
     resetSong,
     incrementBeat} from './SongFunctions'
+import { PreferencesContext } from './PreferencesManager'
 
 export const SongContext = createContext(0 as any) //initial values make compiler happy
 
@@ -21,10 +22,11 @@ export function SongProvider({ children } : { children : any }){
 
     //Makes sounds work
     const [sound, setSound] = useState(0 as any)
+    const {soundSet} = useContext(PreferencesContext)
 
     async function playSound(accent : number) {
 
-        const { sound } = await Audio.Sound.createAsync(BeatSoundPresets['default'][accent]) //preset to be determined by user settings
+        const { sound } = await Audio.Sound.createAsync(soundSet[accent]) //preset to be determined by user settings
         
         setSound(sound)
     
