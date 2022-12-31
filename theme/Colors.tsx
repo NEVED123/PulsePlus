@@ -8,6 +8,11 @@ export const altButtonColors = {
     dark: '#3f3f3f'
 }
 
+export const altButtonColorsPressed ={
+    light: '#707070',
+    dark: '#707070'
+}
+
 export const backgroundColors = {
     light: ['#F9F9F9', '#F9F9F9'],
     dark : ['#666666','#333333']

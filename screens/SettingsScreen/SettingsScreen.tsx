@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Pressable, SafeAreaView} from 'react-native'
+import { View, Text, StyleSheet, Pressable, SafeAreaView, ScrollView} from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
 import { PreferencesContext } from '../../logic/PreferencesManager'
 import { useContext } from 'react'
@@ -9,6 +9,7 @@ import VibrateOnDownbeat from './SettingsElements/VibrateOnDownbeatButton';
 import ChangeSoundSetButton from './SettingsElements/SoundSetButton';
 import RateUsOnAppStoreButton from './SettingsElements/RateUsOnAppStoreButton';
 import { settingBackgroundColors, textTitleColors } from '../../theme/Colors';
+import ChooseSoundMenu from './SettingsElements/ChooseSoundElements/ChooseSoundMenu';
 
 export default function Settings(){
 
@@ -28,7 +29,8 @@ export default function Settings(){
                     <ChangeSoundSetButton/>
                     <RateUsOnAppStoreButton/>
                 </View>
-            </SafeAreaView>
+                <ChooseSoundMenu />
+                </SafeAreaView>
         </LinearGradient> 
     )
 
@@ -42,10 +44,9 @@ const styles = StyleSheet.create({
         flex:1,
     },
     title:{
-        color:'black',
         fontSize:40,
         textAlign:'center',
-        margin:20
+        MarginBottom:20
     },
     settingsBox:{
         overflow:'hidden',
