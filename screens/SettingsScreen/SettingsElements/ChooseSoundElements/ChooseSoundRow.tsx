@@ -1,18 +1,19 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useRef } from 'react'
 import { BeatSounds } from '../../../../logic/structure'
 import { PreferencesContext } from '../../../../logic/PreferencesManager'
 import ChooseSoundChip from './ChooseSoundChip'
-import { View, Text, ScrollView, StyleSheet } from 'react-native'
+import { View, Text, ScrollView, StyleSheet, Dimensions } from 'react-native'
 import { textTitleColors } from '../../../../theme/Colors'
 import type { Sound } from '../../../../logic/structure'
 
-export default function ChooseSoundRow({index, initial = BeatSounds.clave}: { index : number, initial?: Sound }){
+export default function ChooseSoundRow({title, index, initial = BeatSounds.clave}: { title : string, index : number, initial?: Sound }){
 
     const { theme, setSoundSet } = useContext(PreferencesContext)
 
     const [chipSelected, setChipSelected] = useState(initial)
 
     const chipArray = Object.values(BeatSounds).map((sound)=>{
+
 
         return <ChooseSoundChip
          sound={sound}
@@ -26,11 +27,13 @@ export default function ChooseSoundRow({index, initial = BeatSounds.clave}: { in
     return(
         <View style={styles.container}>
             <Text style={[styles.title,{color:textTitleColors[theme as keyof typeof textTitleColors]}]}>
-                {`Sound ${index + 1}`}
+                {title}
             </Text>
-            <ScrollView horizontal={true}>
-                 {chipArray}
-            </ScrollView>
+                <ScrollView 
+                    horizontal={true} 
+                    showsHorizontalScrollIndicator={false}>
+                    {chipArray}
+                </ScrollView>
         </View>
     )
 
@@ -38,7 +41,8 @@ export default function ChooseSoundRow({index, initial = BeatSounds.clave}: { in
 
 const styles = StyleSheet.create({
     container:{
-        alignItems:'center'
+        alignItems:'center',
+        paddingHorizontal:20
     },
     title:{
         fontSize:25,

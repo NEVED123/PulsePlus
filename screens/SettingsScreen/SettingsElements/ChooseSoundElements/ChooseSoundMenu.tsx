@@ -25,10 +25,10 @@ export default function ChooseSoundMenu( {numberOfOptions = 3} : {numberOfOption
         }
 
         if(index < soundSet.length){
-            return <ChooseSoundRow index={index} initial={soundSet[index]}/>
+            return <ChooseSoundRow title={`Sound ${index + 1}`}index={index} initial={soundSet[index]}/>
         }
         else{
-            return <ChooseSoundRow index={index}/>
+            return <ChooseSoundRow title={`Sound ${index + 1}`} index={index}/>
         }   
 
     })

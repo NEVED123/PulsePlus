@@ -26,9 +26,11 @@ export default function Settings(){
                     <BackgroundModeButton/>
                     <FlashlightOnDownBeatButton/>
                     <VibrateOnDownbeat/>
-                    <ChangeSoundSetButton/>
                     <RateUsOnAppStoreButton/>
                 </View>
+                <Text style={[styles.title, {color : textTitleColors[theme as keyof typeof textTitleColors]}]}>
+                    Sounds
+                </Text>
                 <ChooseSoundMenu />
                 </SafeAreaView>
         </LinearGradient> 
