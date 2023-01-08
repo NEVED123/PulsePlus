@@ -4,9 +4,9 @@ import { PreferencesContext } from '../../../../logic/PreferencesManager'
 import ChooseSoundChip from './ChooseSoundChip'
 import { View, Text, ScrollView, StyleSheet, Dimensions } from 'react-native'
 import { textTitleColors } from '../../../../theme/Colors'
-import type { Sound } from '../../../../logic/structure'
+import type { ClickSound } from '../../../../logic/structure'
 
-export default function ChooseSoundRow({title, index, initial = BeatSounds.clave}: { title : string, index : number, initial?: Sound }){
+export default function ChooseSoundRow({title, index, initial = BeatSounds.clave}: { title : string, index : number, initial?: ClickSound }){
 
     const { theme, setSoundSet } = useContext(PreferencesContext)
 
@@ -16,8 +16,8 @@ export default function ChooseSoundRow({title, index, initial = BeatSounds.clave
 
 
         return <ChooseSoundChip
-         sound={sound}
-         currentSound={chipSelected} 
+         clickSound={sound}
+         currentClickSound={chipSelected} 
          onPress={()=>{
             setChipSelected(sound)
             setSoundSet(sound, index)

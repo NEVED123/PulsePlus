@@ -1,6 +1,6 @@
 import { createContext, useState } from 'react'
 import { Appearance } from 'react-native'
-import { BeatSoundPresets, Sound } from './structure'
+import { BeatSoundPresets, ClickSound } from './structure'
 import _ from 'lodash'
 
 export const PreferencesContext = createContext(0 as any) //initial values make compiler happy
@@ -33,7 +33,7 @@ export function PreferencesProvider({ children } : { children : any }){
         setVibrate(vibrate === true ? false : true)
     }
 
-    const changeSoundSet = (newSound : Sound, index : number) => {
+    const changeSoundSet = (newSound : ClickSound, index : number) => {
         if(index >= soundSet.length){
             console.warn('index out of bounds for soundSet array')
             return

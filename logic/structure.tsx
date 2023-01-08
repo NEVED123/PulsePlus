@@ -61,32 +61,32 @@ export const Subdivisions = {
 }
 
  
-export type Sound = {
+export type ClickSound = {
     name : string,
     file : any
 }
 
-const Clave : Sound = {
+const Clave : ClickSound = {
     name: 'clave',
     file : require('../assets/sounds/clave.mp3')
 }
 
-const Woodblock : Sound = {
+const Woodblock : ClickSound = {
     name : 'woodblock',
     file : require("../assets/sounds/woodblock.mp3")
 }
 
-const Silence : Sound = {
+const Silence : ClickSound = {
     name : 'silence',
     file : require("../assets/sounds/silence.mp3")
 }
 
-const Tom : Sound = {
+const Tom : ClickSound = {
     name : 'tom',
     file : require("../assets/sounds/tom.mp3")
 }
 
-const Snare : Sound = {
+const Snare : ClickSound = {
     name : 'snare',
     file : require("../assets/sounds/snare.mp3")
 }

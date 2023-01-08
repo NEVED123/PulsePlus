@@ -70,6 +70,7 @@ export function SongProvider({ children } : { children : any }){
             setSong(incrementBeat(song))
 
             const { beatSound } = getActiveBeat(song)
+            console.log(elapsed-beatDuration)
 
             playSound(beatSound)
             prevTRef.current = timestamp
