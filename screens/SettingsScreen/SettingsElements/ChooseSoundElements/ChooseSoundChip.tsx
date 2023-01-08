@@ -17,11 +17,9 @@ export default function ChooseSoundChip({clickSound, currentClickSound, onPress 
 
     async function playSound() {
 
-        const { sound } = await Audio.Sound.createAsync(clickSound.file) //preset to be determined by user settings
+        const { sound } = await Audio.Sound.createAsync(clickSound.file, {shouldPlay: true}) //preset to be determined by user settings
         
         setSound(sound)
-    
-        await sound.playAsync();
     }
     
     useEffect(() => {

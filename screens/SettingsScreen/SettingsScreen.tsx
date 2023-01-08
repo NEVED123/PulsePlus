@@ -6,7 +6,6 @@ import ToggleThemeButton from './SettingsElements/ToggleThemeButton'
 import BackgroundModeButton from './SettingsElements/BackgroundModeButton';
 import FlashlightOnDownBeatButton from './SettingsElements/FlashlightOnDownbeatButton';
 import VibrateOnDownbeat from './SettingsElements/VibrateOnDownbeatButton';
-import ChangeSoundSetButton from './SettingsElements/SoundSetButton';
 import RateUsOnAppStoreButton from './SettingsElements/RateUsOnAppStoreButton';
 import { settingBackgroundColors, textTitleColors } from '../../theme/Colors';
 import ChooseSoundMenu from './SettingsElements/ChooseSoundElements/ChooseSoundMenu';

@@ -26,11 +26,11 @@ export function SongProvider({ children } : { children : any }){
 
     async function playSound(accent : number) {
 
-        const { sound } = await Audio.Sound.createAsync(soundSet[accent].file) //preset to be determined by user settings
+        const { sound } = await Audio.Sound.createAsync(soundSet[accent].file, {shouldPlay: true}) //preset to be determined by user settings
         
         setSound(sound)
     
-        await sound.playAsync();
+        //await sound.playAsync();
     }
     
     useEffect(() => {
@@ -40,6 +40,7 @@ export function SongProvider({ children } : { children : any }){
         }
         : undefined;
     }, [sound]);  
+
 
     //'ENGINE' OF THE METRONOME
 
