@@ -34,7 +34,7 @@ export function BuildSongMetronomeBlock({ beatNumber }:{ beatNumber:number}){
                 {
                     backgroundColor: backgroundColor,
                     shadowRadius: pressed ? 20 : 4,
-                    width: (Dimensions.get('window').width-160)/topRowNumber,
+                    width: (Dimensions.get('window').width-175)/topRowNumber,
                     borderWidth: borderWidths[theme as keyof typeof borderWidths]}, 
                     styles.metronomeBlock]
                 }

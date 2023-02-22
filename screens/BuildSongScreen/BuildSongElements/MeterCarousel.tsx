@@ -9,7 +9,15 @@ export function MeterCarousel(){
 
     return(
         <View style={styles.container}>
-            <MeterDisplay/>
+            <View style={{flexDirection:'row', flex:1, alignItems:'center'}}>
+                <Text style={styles.toggleActiveMeter}>
+                    {'<'}
+                </Text>
+                <MeterDisplay/>
+                <Text style={styles.toggleActiveMeter}>
+                    {'>'}
+                </Text>
+            </View>
             <View style={styles.addOrRemoveMeter}>
                 <Pressable>
                     <Text style={styles.addOrRemoveButtonText}>
@@ -42,5 +50,11 @@ const styles = StyleSheet.create({
         color:"white",
         fontSize:30,
         paddingHorizontal:20
-    }
+    },
+    toggleActiveMeter:{
+        color:"white",
+        fontSize:20,
+        fontWeight:'bold',
+        paddingHorizontal:10
+    }   
 })
