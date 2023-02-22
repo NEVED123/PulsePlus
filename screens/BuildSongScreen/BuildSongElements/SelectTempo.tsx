@@ -7,8 +7,7 @@ import { PreferencesContext } from "../../../logic/PreferencesManager"
 
 export function SelectTempo(){
 
-    const [typing, setTyping] = useState(false)
-
+    
 
     const [open, setOpen] = useState(false)
     const [value, setValue] = useState(1)
@@ -23,6 +22,8 @@ export function SelectTempo(){
     )
 
     const { tempo, setTempo, getSong } = useContext(BuildSongContext)
+
+    const [tempoText, setTempoText] = useState(`${tempo}`)
 
     const { theme } = useContext(PreferencesContext)
 
@@ -59,19 +60,23 @@ export function SelectTempo(){
             </Text>
 
                     <TextInput 
+                            value={tempoText}
+                            onChangeText={(text)=>{
+                                if(!isNaN(Number(text))){
+                                    setTempoText(text)
+                                }
+                            }}
                             style={[{
                                 color : textTitleColors[theme as keyof typeof textTitleColors],
                                 textShadowColor : textShadowColors[theme as keyof typeof textShadowColors]
                                 }, 
                                 styles.equalsText]}
                             keyboardType="number-pad"
-                            onFocus={()=>setTyping(true)}
                             onEndEditing={(e)=>{
-                                setTyping(false)
-                                setTempo(Number(e.nativeEvent.text))
-                                console.log(getSong())
-                                }}>
-                            {tempo}
+                                //onChangeText ensures the number is valid
+                                const newTempo = Number(e.nativeEvent.text)
+                                setTempo(newTempo)
+                            }}>
                     </TextInput>
         </View>
     )

@@ -6,28 +6,34 @@ import { textTitleColors } from '../../../theme/Colors'
 
 export function SelectRepetitions(){
 
-    const { activeMeter } = useContext(BuildSongContext)
+    const { repetitions, setRepetitions } = useContext(BuildSongContext)
     const { theme } = useContext(PreferencesContext)
 
-    const [isTyping, setTyping] = useState(false)
-
+    const [repetitionsText, setRepetitionsText] = useState(`${repetitions}`)
 
     return(
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-            <View style={styles.container}>
-                <Text style={[{color:textTitleColors[theme as keyof typeof textTitleColors]}, styles.text]}>
-                    {'x '} 
-                </Text>
-                <TextInput 
-                    style={[{color:textTitleColors[theme as keyof typeof textTitleColors]}, styles.text]}
-                    keyboardType="number-pad"
-                    onFocus={()=>setTyping(true)}
-                    onEndEditing={()=>setTyping(false)}>
-                    {activeMeter.repeat}
-                </TextInput>
+        <View style={styles.container}>
+            <Text style={[{color:textTitleColors[theme as keyof typeof textTitleColors]}, styles.text]}>
+                {'x '} 
+            </Text>
+            <TextInput 
+                style={[{color:textTitleColors[theme as keyof typeof textTitleColors]}, styles.text]}
+                keyboardType="number-pad"
+                value={repetitionsText}
+                onChangeText={(text)=>{
+                    if(!isNaN(Number(text))){
+                        setRepetitionsText(text)
+                    }
+                }}
+                onEndEditing={(e)=>{
+                    //onChangeText ensures the number is valid
+                    const newRepetitions = Number(e.nativeEvent.text)
+                    setRepetitions(newRepetitions)
+                }}>
+                
+            </TextInput>
 
-            </View>
-        </TouchableWithoutFeedback>
+        </View>
     )
 } 
 

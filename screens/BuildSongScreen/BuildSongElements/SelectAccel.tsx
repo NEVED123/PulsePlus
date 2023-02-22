@@ -11,12 +11,11 @@ import DropDownPicker from "react-native-dropdown-picker"
 export function SelectAccel(){
     
     const { theme } = useContext(PreferencesContext)
-    const { tempo, setFinalTempo, finalTempo, getSong} = useContext(BuildSongContext)
+    const { tempo, setFinalTempo, finalTempo} = useContext(BuildSongContext)
 
     const [isSwitchOn, setIsSwitchOn] = useState(false)
     const [sliderValue, setSliderValue] = useState(0)
-    const [typing, setTyping] = useState(false)
-
+    const [finalTempoText, setFinalTempoText] = useState(`${finalTempo}`)
     const [open, setOpen] = useState(false)
     const [value, setValue] = useState(1)
     const [items, setItems] = useState(
@@ -78,20 +77,24 @@ export function SelectAccel(){
                             styles.equalsText]}>
                         =
                     </Text>
-                    <TextInput 
+                    <TextInput
+                            value={finalTempoText}
+                            onChangeText={(text)=>{
+                                if(!isNaN(Number(text))){
+                                    setFinalTempoText(text)
+                                }
+                            }}
                             style={[{
                                 color : textTitleColors[theme as keyof typeof textTitleColors],
                                 textShadowColor : textShadowColors[theme as keyof typeof textShadowColors]
                                 }, 
                                 styles.equalsText]}
                             keyboardType="number-pad"
-                            onFocus={()=>setTyping(true)}
                             onEndEditing={(e)=>{
-                                setTyping(false)
-                                setFinalTempo(Number(e.nativeEvent.text))
-                                console.log(getSong())
-                                }}>
-                            {`${finalTempo}`}
+                                //onChangeText ensures the number is valid
+                                const newTempo = Number(e.nativeEvent.text)
+                                setFinalTempo(newTempo)
+                            }}>
                     </TextInput>                    
                 </View>
                
