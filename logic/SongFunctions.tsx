@@ -294,6 +294,28 @@ export function incrementMeter(song: Song, wrapToBeginning? : boolean){
     }
 }
 
+export function decrementMeter(song: Song, wrapToEnd? : boolean){
+    const updatedSong = _.clone(song)
+
+    const activeMeterIndex = getActiveMeterIndex(updatedSong)
+    const songLength = updatedSong.song.length
+
+    if(activeMeterIndex == 0){
+        //the activeMeter is the first meter
+        if(wrapToEnd === true){
+            updatedSong.song[0].active = false
+            updatedSong.song[songLength-1].active = true
+        }
+        else{
+            return updatedSong
+        }
+    }
+    else{
+        updatedSong.song[activeMeterIndex].active = false
+        updatedSong.song[activeMeterIndex-1].active = true
+    }
+}
+
 export function setRepetitions(repeat: number, song:Song){
 
     const updatedSong = _.clone(song)
