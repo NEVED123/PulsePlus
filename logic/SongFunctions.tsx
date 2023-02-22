@@ -293,3 +293,16 @@ export function incrementMeter(song: Song, wrapToBeginning? : boolean){
         updatedSong.song[activeMeterIndex+1].active = true
     }
 }
+
+export function setRepetitions(repeat: number, song:Song){
+
+    const updatedSong = _.clone(song)
+
+    updatedSong.song[getActiveMeterIndex(updatedSong)].repeat = repeat
+
+    return updatedSong
+}
+
+export function getRepetitons(song:Song){
+    return song.song[getActiveMeterIndex(song)].repeat
+}   

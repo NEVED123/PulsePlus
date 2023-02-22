@@ -15,7 +15,10 @@ import {getActiveMeter,
     resetSong,
     incrementBeat,
     getFinalTempo,
-    setFinalTempo} from './SongFunctions'
+    setFinalTempo,
+    setRepetitions,
+    getRepetitons
+} from './SongFunctions'
 import { PreferencesContext } from './PreferencesManager'
 
 export const BuildSongContext = createContext(0 as any) //initial values make compiler happy
@@ -38,7 +41,9 @@ export function BuildSongProvider({ children } : { children : any }){
         resetSong: () => {setSong(resetSong(song))},
         incrementBeat: ()=>{setSong(incrementBeat(song))},
         finalTempo: getFinalTempo(song),
-        setFinalTempo: (finalTempo : number) => {setSong(setFinalTempo(finalTempo, song))}
+        setFinalTempo: (finalTempo : number) => {setSong(setFinalTempo(finalTempo, song))},
+        setRepetitions: (repeat: number) => {setSong(setRepetitions(repeat, song))},
+        repetitions: getRepetitons(song)
     }
     
     return(
