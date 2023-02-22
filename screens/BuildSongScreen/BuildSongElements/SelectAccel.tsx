@@ -100,13 +100,13 @@ export function SelectAccel(){
                
                 <Text style={[
                     {
-                        alignSelf:'flex-end' /**This will be a boolean, equals flex-start when final tempo < initial tempo */,
+                        alignSelf: (finalTempo < tempo) ? 'flex-start': 'flex-end' /**This will be a boolean, equals flex-start when final tempo < initial tempo */,
                         color: textTitleColors[theme as keyof typeof textTitleColors],
                         marginBottom:10
                     },
                     styles.accelOptionItems
                 ]}>
-                    {`${finalTempo}`}
+                    {(finalTempo < tempo) ? tempo : finalTempo}
                 </Text>
                 <Slider
                     containerStyle={styles.slider}
@@ -117,13 +117,13 @@ export function SelectAccel(){
                 />
                  <Text style={[
                     {
-                        alignSelf:'flex-start' /**This will be a boolean, equals flex-start when final tempo < initial tempo */,
+                        alignSelf:(finalTempo > tempo) ? 'flex-start': 'flex-end' /**This will be a boolean, equals flex-start when final tempo < initial tempo */,
                         color: textTitleColors[theme as keyof typeof textTitleColors],
                         marginTop:10
                     },
                     styles.accelOptionItems
                 ]}>
-                    {tempo}
+                    {(finalTempo > tempo) ? tempo : finalTempo}
                 </Text>           
             </View>}
         </View>
