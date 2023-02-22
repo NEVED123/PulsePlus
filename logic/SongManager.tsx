@@ -47,7 +47,7 @@ export function SongProvider({ children } : { children : any }){
     //This is the third attempt at making this work, and is by no means ideal. Other two attempts down below.
 
     const [running, setRunning] = useState(false)
-    const [song, setSong] = useState(defaultMetronomeSong)
+    const [song, setSong] = useState(_.cloneDeep(defaultMetronomeSong))
 
     const requestRef = useRef(null as any)
     const prevTRef = useRef(performance.now())

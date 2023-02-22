@@ -25,7 +25,7 @@ export const BuildSongContext = createContext(0 as any) //initial values make co
 
 export function BuildSongProvider({ children } : { children : any }){
 
-    const [song, setSong] = useState(defaultMetronomeSong)
+    const [song, setSong] = useState(_.cloneDeep(defaultMetronomeSong))
 
     const contextValues = {
         getSong: ()=>{return _.cloneDeep(song)},
