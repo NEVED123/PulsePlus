@@ -1,5 +1,5 @@
 import DropDownPicker from "react-native-dropdown-picker"
-import { Text, TextInput, View, StyleSheet } from 'react-native'
+import { Text, TextInput, View, StyleSheet, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import { useState, useContext } from 'react'
 import { BuildSongContext } from "../../../logic/BuildSongManager"
 import { buttonColors, borderColors, textShadowColors, textTitleColors} from "../../../theme/Colors"
@@ -57,21 +57,22 @@ export function SelectTempo(){
                     styles.equalsText]}>
                 =
             </Text>
-            <TextInput 
-                    style={[{
-                        color : textTitleColors[theme as keyof typeof textTitleColors],
-                        textShadowColor : textShadowColors[theme as keyof typeof textShadowColors]
-                        }, 
-                        styles.equalsText]}
-                    keyboardType="number-pad"
-                    onFocus={()=>setTyping(true)}
-                    onEndEditing={(e)=>{
-                        setTyping(false)
-                        setTempo(Number(e.nativeEvent.text))
-                        console.log(getSong())
-                        }}>
-                    {tempo}
-            </TextInput>
+
+                    <TextInput 
+                            style={[{
+                                color : textTitleColors[theme as keyof typeof textTitleColors],
+                                textShadowColor : textShadowColors[theme as keyof typeof textShadowColors]
+                                }, 
+                                styles.equalsText]}
+                            keyboardType="number-pad"
+                            onFocus={()=>setTyping(true)}
+                            onEndEditing={(e)=>{
+                                setTyping(false)
+                                setTempo(Number(e.nativeEvent.text))
+                                console.log(getSong())
+                                }}>
+                            {tempo}
+                    </TextInput>
         </View>
     )
 }

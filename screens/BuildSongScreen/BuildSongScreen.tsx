@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Pressable, SafeAreaView} from 'react-native'
+import { View, Text, StyleSheet, Pressable, SafeAreaView, Platform, KeyboardAvoidingView, TouchableWithoutFeedback, Keyboard} from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
 import MeterDisplay from './BuildSongElements/MeterDisplay';
 import { BuildSongContext, BuildSongProvider } from '../../logic/BuildSongManager';
@@ -20,16 +20,25 @@ export default function BuildSongScreen(){
 
     return(
         <BuildSongProvider>
-            <LinearGradient colors={backgroundColors[theme as keyof typeof backgroundColors]} style={{flex:1}}>
-                <SafeAreaView style={{flex:1}}>
-                    <MeterCarousel/>
-                    <BuildSongTimeSignature/>
-                    <SelectRepetitions/>
-                    <SelectTempo/>
-                    <SelectAccel/>
-                    <BuildSongButtonPanel/>
-                </SafeAreaView>
-            </LinearGradient>
+            <KeyboardAvoidingView
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                style={{flex:1}}
+            >
+                <TouchableWithoutFeedback
+                    onPress={Keyboard.dismiss}
+                >
+                    <LinearGradient colors={backgroundColors[theme as keyof typeof backgroundColors]} style={{flex:1}}>
+                        <SafeAreaView style={{flex:1}}>
+                            <MeterCarousel/>
+                            <BuildSongTimeSignature/>
+                            <SelectRepetitions/>
+                            <SelectTempo/>
+                            <SelectAccel/>
+                            <BuildSongButtonPanel/>
+                        </SafeAreaView>
+                    </LinearGradient>
+                </TouchableWithoutFeedback>
+            </KeyboardAvoidingView>
         </BuildSongProvider>
 
 
