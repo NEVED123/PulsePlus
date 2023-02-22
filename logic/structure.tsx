@@ -12,6 +12,7 @@ export type Meter = {
     repeat : number //for measures with the same traits
     active: boolean
     beats : Beat[]
+    sectionName? : String
 }
 
 export type Song = {
