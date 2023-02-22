@@ -303,16 +303,18 @@ export function setRepetitions(repeat: number, song:Song){
     return updatedSong
 }
 
-export function getRepetitons(song:Song){
+export function getRepetitons(song:Song) : number {
     return song.song[getActiveMeterIndex(song)].repeat
 }   
 
-export function setSectionName(sectionName: String, song:Song){
+export function setSectionName(sectionName: String, song:Song) : Song {
     const updatedSong = _.clone(song)
 
     updatedSong.song[getActiveMeterIndex(updatedSong)].sectionName = sectionName
+
+    return updatedSong
 }
 
-export function getSectionName(song: Song){
+export function getSectionName(song: Song) : String | undefined {
     return song.song[getActiveMeterIndex(song)].sectionName
 }

@@ -17,7 +17,9 @@ import {getActiveMeter,
     getFinalTempo,
     setFinalTempo,
     setRepetitions,
-    getRepetitons
+    getRepetitons,
+    setSectionName,
+    getSectionName
 } from './SongFunctions'
 import { PreferencesContext } from './PreferencesManager'
 
@@ -43,7 +45,9 @@ export function BuildSongProvider({ children } : { children : any }){
         finalTempo: getFinalTempo(song),
         setFinalTempo: (finalTempo : number) => {setSong(setFinalTempo(finalTempo, song))},
         setRepetitions: (repeat: number) => {setSong(setRepetitions(repeat, song))},
-        repetitions: getRepetitons(song)
+        repetitions: getRepetitons(song),
+        setSectionName: (sectionName: String) => {setSong(setSectionName(sectionName, song))},
+        sectionName: getSectionName(song)
     }
     
     return(

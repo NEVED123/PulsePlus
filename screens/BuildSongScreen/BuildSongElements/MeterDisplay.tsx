@@ -1,5 +1,5 @@
-import { View, StyleSheet, TextInput } from 'react-native'
-import { useContext } from 'react'
+import { View, StyleSheet, TextInput} from 'react-native'
+import { useContext, useState } from 'react'
 import { backgroundColors } from '../../../theme/Colors'
 import { PreferencesContext } from '../../../logic/PreferencesManager'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -12,11 +12,21 @@ import { BuildSongClickSpace } from './BuildSongClickSpace'
 //similar code to ClickSpace.tsx
 export default function MeterDisplay(){
 
-    const { setAccent, activeMeter } = useContext(BuildSongContext)
+    const { setSectionName, sectionName } = useContext(BuildSongContext)
+
+    const [sectionNameText, setSectionNameText] = useState(sectionName != undefined ? '' : sectionName)
 
     return(
             <View style={styles.meterDisplay}>
-                <TextInput 
+                <TextInput
+                    value={sectionNameText}
+                    onChangeText={text=>{
+                        setSectionNameText(text)
+                    }}
+                    onEndEditing={(e)=>{
+                        const newName = e.nativeEvent.text              
+                        setSectionName(newName)
+                    }}
                     style={[styles.sectionName]}
                     placeholder={'[SECTION NAME]'}
                     placeholderTextColor="white">
