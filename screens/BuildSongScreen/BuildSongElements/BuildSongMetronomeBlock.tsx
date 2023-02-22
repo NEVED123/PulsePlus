@@ -7,7 +7,7 @@ import { Meter, Song } from '../../../logic/structure'
 import { BuildSongContext } from '../../../logic/BuildSongManager'
 
 
-export function BuildSongMetronomeBlock({ beatNumber, width }:{ beatNumber:number, width? : number}){
+export function BuildSongMetronomeBlock({ beatNumber }:{ beatNumber:number}){
 
     const { theme } = useContext(PreferencesContext)
     const { setAccent, activeMeter } = useContext(BuildSongContext)
@@ -34,7 +34,7 @@ export function BuildSongMetronomeBlock({ beatNumber, width }:{ beatNumber:numbe
                 {
                     backgroundColor: backgroundColor,
                     shadowRadius: pressed ? 20 : 4,
-                    width: width != undefined ? width : (Dimensions.get('window').width-METRONOME_BLOCK_GROUP_PADDING*2-topRowNumber * MARGIN*2)/topRowNumber,
+                    width: (Dimensions.get('window').width-160)/topRowNumber,
                     borderWidth: borderWidths[theme as keyof typeof borderWidths]}, 
                     styles.metronomeBlock]
                 }

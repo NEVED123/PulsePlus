@@ -1,5 +1,5 @@
 import { Song, Meter, Beat, Subdivisions } from './structure'
-import _ from 'lodash'
+import _, { wrap } from 'lodash'
 
 /**
  * @returns copy of active meter
@@ -254,4 +254,42 @@ export function incrementBeat(song: Song){
     return updatedSong
 }
 
+export function getFinalTempo(song: Song){
+    const activeMeter =  getActiveMeter(song)
 
+    if(activeMeter.finalBpm == undefined)
+        return activeMeter.initBpm
+
+    return activeMeter.finalBpm
+}
+
+export function setFinalTempo(finalBpm : number, song: Song){
+    const updatedSong = _.clone(song)
+
+    updatedSong.song[getActiveMeterIndex(updatedSong)].finalBpm = finalBpm
+
+    return updatedSong
+}
+
+export function incrementMeter(song: Song, wrapToBeginning? : boolean){
+
+    const updatedSong = _.clone(song)
+
+    const activeMeterIndex = getActiveMeterIndex(updatedSong)
+    const songLength = updatedSong.song.length
+
+    if(activeMeterIndex == songLength - 1){
+        //the activeMeter is the last meter
+        if(wrapToBeginning === true){
+            updatedSong.song[activeMeterIndex].active = false
+            updatedSong.song[0].active = true
+        }
+        else{
+            return updatedSong
+        }
+    }
+    else{
+        updatedSong.song[activeMeterIndex].active = false
+        updatedSong.song[activeMeterIndex+1].active = true
+    }
+}

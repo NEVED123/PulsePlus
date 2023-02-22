@@ -9,6 +9,7 @@ export function SelectTempo(){
 
     const [typing, setTyping] = useState(false)
 
+
     const [open, setOpen] = useState(false)
     const [value, setValue] = useState(1)
     const [items, setItems] = useState(
@@ -21,7 +22,7 @@ export function SelectTempo(){
         {label: '64', value: 64}]
     )
 
-    const { activeMeter } = useContext(BuildSongContext)
+    const { tempo, setTempo, getSong } = useContext(BuildSongContext)
 
     const { theme } = useContext(PreferencesContext)
 
@@ -64,8 +65,12 @@ export function SelectTempo(){
                         styles.equalsText]}
                     keyboardType="number-pad"
                     onFocus={()=>setTyping(true)}
-                    onEndEditing={()=>setTyping(false)}>
-                    {activeMeter.repeat}
+                    onEndEditing={(e)=>{
+                        setTyping(false)
+                        setTempo(Number(e.nativeEvent.text))
+                        console.log(getSong())
+                        }}>
+                    {tempo}
             </TextInput>
         </View>
     )

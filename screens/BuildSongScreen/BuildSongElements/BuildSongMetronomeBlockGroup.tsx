@@ -24,7 +24,6 @@ export function BuildSongMetronomeBlockGroup(){
                     {row.map((beat,rowPosition) => 
                         <BuildSongMetronomeBlock 
                             key={rowPosition} 
-                            width={(Dimensions.get('window').width-100)/8}
                             beatNumber={indexHelper[rowNumber] + rowPosition} />)}
                 </View>     
             )}                  

@@ -13,7 +13,9 @@ import {getActiveMeter,
     getNumerator,
     getDenominator,
     resetSong,
-    incrementBeat} from './SongFunctions'
+    incrementBeat,
+    getFinalTempo,
+    setFinalTempo} from './SongFunctions'
 import { PreferencesContext } from './PreferencesManager'
 
 export const BuildSongContext = createContext(0 as any) //initial values make compiler happy
@@ -23,7 +25,7 @@ export function BuildSongProvider({ children } : { children : any }){
     const [song, setSong] = useState(defaultMetronomeSong)
 
     const contextValues = {
-        getSong: ()=>{_.cloneDeep(song)},
+        getSong: ()=>{return _.cloneDeep(song)},
         activeMeter: getActiveMeter(song),
         activeMeterIndex: getActiveMeterIndex(song),
         numerator: getNumerator(song),
@@ -34,7 +36,9 @@ export function BuildSongProvider({ children } : { children : any }){
         tempo: getTempo(song),
         setTempo: (tempo: number)=>{setSong(setTempo(song, tempo))},
         resetSong: () => {setSong(resetSong(song))},
-        incrementBeat: ()=>{setSong(incrementBeat(song))}
+        incrementBeat: ()=>{setSong(incrementBeat(song))},
+        finalTempo: getFinalTempo(song),
+        setFinalTempo: (finalTempo : number) => {setSong(setFinalTempo(finalTempo, song))}
     }
     
     return(
