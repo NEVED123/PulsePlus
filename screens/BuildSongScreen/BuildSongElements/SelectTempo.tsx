@@ -7,10 +7,9 @@ import { PreferencesContext } from "../../../logic/PreferencesManager"
 
 export function SelectTempo(){
 
-    
-
     const [open, setOpen] = useState(false)
-    const [value, setValue] = useState(1)
+    const [noteValue, setNoteValue] = useState(4)
+    const [prevNoteValue, setPrevNoteValue] = useState(noteValue)
     const [items, setItems] = useState(
         [{label: '1', value: 1},
         {label: '2', value: 2},
@@ -21,14 +20,15 @@ export function SelectTempo(){
         {label: '64', value: 64}]
     )
 
-    const { tempo, setTempo } = useContext(BuildSongContext)
+    const { tempo, setTempo, denominator, getSong } = useContext(BuildSongContext)
 
     const [tempoText, setTempoText] = useState(`${tempo}`)
 
     const { theme } = useContext(PreferencesContext)
 
     useEffect(()=>{
-        setTempoText(`${tempo}`)
+        setTempoText(`${tempo * noteValue / denominator}`)
+        console.log(getSong())
     }, [tempo])
 
 
@@ -46,14 +46,19 @@ export function SelectTempo(){
                 autoScroll={true}
                 dropDownDirection='TOP'
                 open={open}
-                value={value}
+                value={noteValue}
                 items={items}
                 setOpen={setOpen}
-                setValue={setValue}
+                setValue={setNoteValue}
                 setItems={setItems}
                 onSelectItem={(value)=>{
-                   //modify the tempo of song object to reflect new note value
-            }}
+                    //modify the tempo of song object to reflect new note value
+                    if(value.value != undefined){
+                        //translate current tempo to our new note value tempo
+                        setTempo(tempo * noteValue/value.value)
+                    }
+                    
+                }}
             />
             <Text style={[{
                     color : textTitleColors[theme as keyof typeof textTitleColors],
@@ -79,7 +84,8 @@ export function SelectTempo(){
                             onEndEditing={(e)=>{
                                 //onChangeText ensures the number is valid
                                 const newTempo = Number(e.nativeEvent.text)
-                                setTempo(newTempo)
+                                setTempo(newTempo * denominator/noteValue)
+                                console.log(getSong())
                             }}>
                     </TextInput>
         </View>
