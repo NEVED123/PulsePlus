@@ -1,5 +1,5 @@
 import { createContext, useState, useRef, useEffect, useContext, useLayoutEffect } from 'react'
-import { Song, Meter, Beat, defaultMetronomeSong, BeatSounds, Subdivisions } from './structure'
+import { Song, Meter, Beat, defaultMetronomeSong, Subdivisions } from './structure'
 import _ from 'lodash'
 import { Audio, AVPlaybackSource } from 'expo-av'
 import {getActiveMeter, 
@@ -17,7 +17,7 @@ import {getActiveMeter,
     getFinalTempo,
     setFinalTempo,
     setRepetitions,
-    getRepetitons,
+    getRepetitions,
     setSectionName,
     getSectionName,
     incrementMeter,
@@ -110,7 +110,7 @@ export function BuildSongProvider({ children } : { children : any }){
         finalTempo: getFinalTempo(song),
         setFinalTempo: (finalTempo : number) => {setSong(setFinalTempo(finalTempo, song))},
         setRepetitions: (repeat: number) => {setSong(setRepetitions(repeat, song))},
-        repetitions: getRepetitons(song),
+        repetitions: getRepetitions(song),
         setSectionName: (sectionName: String) => {setSong(setSectionName(sectionName, song))},
         sectionName: getSectionName(song),
         incrementMeter: (wrapToBeginning? : boolean)=>{setSong(incrementMeter(song, wrapToBeginning))},

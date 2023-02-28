@@ -329,7 +329,7 @@ export function setRepetitions(repeat: number, song:Song){
     return updatedSong
 }
 
-export function getRepetitons(song:Song) : number {
+export function getRepetitions(song:Song) : number {
     return song.song[getActiveMeterIndex(song)].repeat
 }   
 
