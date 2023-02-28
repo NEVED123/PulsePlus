@@ -292,6 +292,8 @@ export function incrementMeter(song: Song, wrapToBeginning? : boolean){
         updatedSong.song[activeMeterIndex].active = false
         updatedSong.song[activeMeterIndex+1].active = true
     }
+
+    return updatedSong
 }
 
 export function decrementMeter(song: Song, wrapToEnd? : boolean){
@@ -314,6 +316,8 @@ export function decrementMeter(song: Song, wrapToEnd? : boolean){
         updatedSong.song[activeMeterIndex].active = false
         updatedSong.song[activeMeterIndex-1].active = true
     }
+
+    return updatedSong
 }
 
 export function setRepetitions(repeat: number, song:Song){

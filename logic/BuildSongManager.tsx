@@ -1,5 +1,5 @@
 import { createContext, useState, useRef, useEffect, useContext, useLayoutEffect } from 'react'
-import { Song, Meter, Beat, defaultMetronomeSong, BeatSounds } from './structure'
+import { Song, Meter, Beat, defaultMetronomeSong, BeatSounds, Subdivisions } from './structure'
 import _ from 'lodash'
 import { Audio, AVPlaybackSource } from 'expo-av'
 import {getActiveMeter, 
@@ -19,15 +19,80 @@ import {getActiveMeter,
     setRepetitions,
     getRepetitons,
     setSectionName,
-    getSectionName
+    getSectionName,
+    incrementMeter,
+    decrementMeter
 } from './SongFunctions'
 import { PreferencesContext } from './PreferencesManager'
+
+const defaultBuildMetronomeSong : Song = {
+    song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: true,
+        beats:[{
+            beatSound : 0,
+            subDiv : Subdivisions.none,
+            beatDuration: 600, // 60/100 * 1000 
+            active : true
+        },
+        {
+            beatSound : 0,
+            subDiv : Subdivisions.none,
+            beatDuration: 600, // 60/100 * 1000 
+            active : false
+        },
+        {
+            beatSound : 0,
+            subDiv : Subdivisions.none,
+            beatDuration: 600, // 60/100 * 1000 
+            active : false
+        },
+        {
+            beatSound : 0,
+            subDiv : Subdivisions.none,
+            beatDuration: 600, // 60/100 * 1000 
+            active : false
+        }
+        ]
+    },
+    {
+        initBpm: 50,
+        denominator: 8,
+        repeat : 3,
+        active: false,
+        beats:[{
+            beatSound : 0,
+            subDiv : Subdivisions.none,
+            beatDuration: 600, // 60/100 * 1000 
+            active : true
+        },
+        {
+            beatSound : 0,
+            subDiv : Subdivisions.none,
+            beatDuration: 600, // 60/100 * 1000 
+            active : false
+        },
+        {
+            beatSound : 0,
+            subDiv : Subdivisions.none,
+            beatDuration: 600, // 60/100 * 1000 
+            active : false
+        },
+        ]
+    }],
+    repeat: true,
+    name: "Default",
+    author: "",
+    date: ""
+}
 
 export const BuildSongContext = createContext(0 as any) //initial values make compiler happy
 
 export function BuildSongProvider({ children } : { children : any }){
 
-    const [song, setSong] = useState(_.cloneDeep(defaultMetronomeSong))
+    const [song, setSong] = useState(_.cloneDeep(defaultBuildMetronomeSong))
 
     const contextValues = {
         getSong: ()=>{return _.cloneDeep(song)},
@@ -47,7 +112,9 @@ export function BuildSongProvider({ children } : { children : any }){
         setRepetitions: (repeat: number) => {setSong(setRepetitions(repeat, song))},
         repetitions: getRepetitons(song),
         setSectionName: (sectionName: String) => {setSong(setSectionName(sectionName, song))},
-        sectionName: getSectionName(song)
+        sectionName: getSectionName(song),
+        incrementMeter: (wrapToBeginning? : boolean)=>{setSong(incrementMeter(song, wrapToBeginning))},
+        decrementMeter: (wrapToEnd? : boolean) => {setSong(decrementMeter(song, wrapToEnd))}
     }
     
     return(

@@ -5,16 +5,22 @@ import MeterDisplay from './MeterDisplay'
 
 export function MeterCarousel(){
     
-    const { activeMeter } = useContext(BuildSongContext)
+    const { incrementMeter, decrementMeter, getSong } = useContext(BuildSongContext)
 
     return(
         <View style={styles.container}>
             <View style={{flexDirection:'row', flex:1, alignItems:'center'}}>
-                <Text style={styles.toggleActiveMeter}>
+                <Text 
+                    style={styles.toggleActiveMeter}
+                    onPress={()=>decrementMeter()}>
                     {'<'}
                 </Text>
                 <MeterDisplay/>
-                <Text style={styles.toggleActiveMeter}>
+                <Text 
+                    style={styles.toggleActiveMeter}
+                    onPress={()=>{
+                        incrementMeter()
+                        console.log(getSong())}}>
                     {'>'}
                 </Text>
             </View>
