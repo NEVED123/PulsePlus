@@ -1,5 +1,5 @@
 import { View, StyleSheet, TextInput} from 'react-native'
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { backgroundColors } from '../../../theme/Colors'
 import { PreferencesContext } from '../../../logic/PreferencesManager'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -8,13 +8,16 @@ import { ClickSpace } from '../../HomeScreen/HomeElements/ClickSpace'
 import { BuildSongContext } from '../../../logic/BuildSongManager'
 import { BuildSongClickSpace } from './BuildSongClickSpace'
 
-
-//similar code to ClickSpace.tsx
 export default function MeterDisplay(){
 
     const { setSectionName, sectionName } = useContext(BuildSongContext)
 
-    const [sectionNameText, setSectionNameText] = useState(sectionName != undefined ? '' : sectionName)
+    const [sectionNameText, setSectionNameText] = useState(sectionName)
+
+    //I have no idea why this is necessary but it fixes the name not updating
+    useEffect(()=>{
+        setSectionNameText(sectionName)
+    },[sectionName])
 
     return(
             <View style={styles.meterDisplay}>
