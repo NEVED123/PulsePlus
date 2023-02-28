@@ -11,7 +11,15 @@ import {
   setAccent,
   setTempo,
   getTempo,
-  resetSong
+  resetSong,
+  getFinalTempo,
+  setFinalTempo,
+  incrementMeter,
+  decrementMeter,
+  setRepetitions,
+  getRepetitions,
+  setSectionName,
+  getSectionName
 } from "../logic/SongFunctions";
 import { Meter, Beat, Song, Subdivisions} from "../logic/structure"
 import {describe, expect, test} from "@jest/globals"
@@ -26,7 +34,7 @@ describe('getActiveMeter',()=>{
 
   test('returns active meter', ()=>{
 
-    const recieved : Song = {
+    const received : Song = {
       song:[{
         initBpm: 100,
         denominator: 4,
@@ -87,13 +95,13 @@ describe('getActiveMeter',()=>{
         ]
       }
 
-    expect(getActiveMeter(recieved)).toEqual(result)
+    expect(getActiveMeter(received)).toEqual(result)
   })
 
  
   test('throws error when song contains no active meter', ()=>{
 
-    const recieved : Song = {
+    const received : Song = {
       song:[{
         initBpm: 100,
         denominator: 4,
@@ -115,14 +123,14 @@ describe('getActiveMeter',()=>{
     }
 
     expect(()=>{
-      getActiveMeter(recieved)
+      getActiveMeter(received)
     }).toThrow
   })
 })
 
 describe('getActiveMeterIndex',()=>{
   test('returns index of active meter',()=>{
-    const recieved : Song = {
+    const received : Song = {
       song:[{
         initBpm: 100,
         denominator: 4,
@@ -156,11 +164,11 @@ describe('getActiveMeterIndex',()=>{
       date: ""
     }
 
-    expect(getActiveMeterIndex(recieved)).toBe(0)
+    expect(getActiveMeterIndex(received)).toBe(0)
   })
 
   test('throws error when song contains no active meter',()=>{
-    const recieved : Song = {
+    const received : Song = {
       song:[{
         initBpm: 100,
         denominator: 4,
@@ -182,14 +190,14 @@ describe('getActiveMeterIndex',()=>{
     }
 
     expect(()=>{
-      getActiveMeterIndex(recieved)
+      getActiveMeterIndex(received)
     }).toThrow()
   })
 })
 
 describe('getActiveBeat', ()=>{
   test('returns the active beat',()=>{
-    const recieved : Song = {
+    const received : Song = {
       song:[{
         initBpm: 100,
         denominator: 4,
@@ -217,11 +225,11 @@ describe('getActiveBeat', ()=>{
       active : true
       }
 
-    expect(getActiveBeat(recieved)).toEqual(result)
+    expect(getActiveBeat(received)).toEqual(result)
   })
 
   test('throws error when song contains no active beat', ()=>{
-    const recieved : Song = {
+    const received : Song = {
       song:[{
         initBpm: 100,
         denominator: 4,
@@ -243,14 +251,14 @@ describe('getActiveBeat', ()=>{
     }
 
     expect(()=>{
-      getActiveBeat(recieved)
+      getActiveBeat(received)
     }).toThrow()
   })
 })
 
 describe('getActiveBeatIndex',()=>{
   test('returns active beat Index of active meter',()=>{
-    const recieved : Song = {
+    const received : Song = {
       song:[{
         initBpm: 100,
         denominator: 4,
@@ -271,11 +279,11 @@ describe('getActiveBeatIndex',()=>{
       date: ""
     }
 
-    expect(getActiveBeatIndex(recieved)).toBe(0)
+    expect(getActiveBeatIndex(received)).toBe(0)
   })
 
   test('throws error when song contains no active beat',()=>{
-    const recieved : Song = {
+    const received : Song = {
       song:[{
         initBpm: 100,
         denominator: 4,
@@ -297,7 +305,7 @@ describe('getActiveBeatIndex',()=>{
     }
 
     expect(()=>{
-      getActiveBeatIndex(recieved)
+      getActiveBeatIndex(received)
     }).toThrow()
   })
 
@@ -306,7 +314,7 @@ describe('getActiveBeatIndex',()=>{
 describe('getNumerator',()=>{
 
   test('gets numerator = 1 from active meter', ()=>{
-    const recieved : Song = {
+    const received : Song = {
       song:[{
         initBpm: 100,
         denominator: 4,
@@ -340,11 +348,11 @@ describe('getNumerator',()=>{
       date: ""
     }
   
-    expect(getNumerator(recieved)).toBe(1)
+    expect(getNumerator(received)).toBe(1)
   })
 
   test('throws error when numerator = 0', ()=>{
-    const recieved : Song = {
+    const received : Song = {
       song:[{
         initBpm: 100,
         denominator: 4,
@@ -360,7 +368,7 @@ describe('getNumerator',()=>{
     }
 
     expect(()=>{
-      getNumerator(recieved)
+      getNumerator(received)
     }).toThrow()
   })
 
@@ -641,7 +649,7 @@ describe('setNumerator', ()=>{
 
 describe('getDenominator',()=>{
   test('gets denominator from active meter', ()=>{
-    const recieved : Song = {
+    const received : Song = {
       song:[{
         initBpm: 100,
         denominator: 4,
@@ -675,13 +683,13 @@ describe('getDenominator',()=>{
       date: ""
     }
 
-    expect(getDenominator(recieved)).toBe(4)
+    expect(getDenominator(received)).toBe(4)
   })
 })
 
 describe('setDenominator', ()=>{
   test('sets denominator of active meter', ()=>{
-    const recieved : Song = {
+    const received : Song = {
       song:[{
         initBpm: 100,
         denominator: 4,
@@ -749,7 +757,7 @@ describe('setDenominator', ()=>{
       date: ""
     }
 
-    expect(setDenominator(recieved, 8)).toEqual(result)
+    expect(setDenominator(received, 8)).toEqual(result)
   })
 })
 
@@ -1136,7 +1144,7 @@ describe('incrementBeat',()=>{
   //increment within meter
   test('increment within single meter', ()=>{
 
-    const recieved : Song = {
+    const received : Song = {
       song:[{
         initBpm: 100,
         denominator: 4,
@@ -1190,7 +1198,7 @@ describe('incrementBeat',()=>{
       date: ""
     }
 
-    expect(incrementBeat(recieved)).toEqual(result)
+    expect(incrementBeat(received)).toEqual(result)
 
   })
 
@@ -1199,7 +1207,7 @@ describe('incrementBeat',()=>{
   //increment from one meter to the next if no repeat
   test('increment to next meter', ()=>{
 
-    const recieved : Song = {
+    const received : Song = {
       song:[{
         initBpm: 100,
         denominator: 4,
@@ -1291,14 +1299,14 @@ describe('incrementBeat',()=>{
       date: ""
     }
 
-    expect(incrementBeat(recieved)).toEqual(result)
+    expect(incrementBeat(received)).toEqual(result)
     
   })
 
   //loop from end of last meter to beginning
   test('loop to beginning', ()=>{
 
-    const recieved : Song = {
+    const received : Song = {
       song:[{
         initBpm: 100,
         denominator: 4,
@@ -1390,7 +1398,868 @@ describe('incrementBeat',()=>{
       date: ""
     }
 
-    expect(incrementBeat(recieved)).toEqual(result)
+    expect(incrementBeat(received)).toEqual(result)
   }) 
 })
+
+describe('getFinalTempo',()=>{
+  test('Final tempo defined', ()=>{
+    const received : Song = {
+      song:[{
+        initBpm: 100,
+        finalBpm: 200,
+        denominator: 4,
+        repeat : 1,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false 
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        },
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+    expect(getFinalTempo(received)).toBe(200)
+  })
+    
+    test('Final tempo undefined', ()=>{
+      const received : Song = {
+        song:[{
+          initBpm: 100,
+          denominator: 4,
+          repeat : 1,
+          active: true,
+          beats:[{
+                beatSound : 0,
+                subDiv : Subdivisions.none,
+                beatDuration: 600, // 60/100 * 1000 
+                active : false 
+              },
+              {
+                beatSound : 0,
+                subDiv : Subdivisions.none,
+                beatDuration: 600, // 60/100 * 1000 
+                active : false
+              }
+            ]
+          },
+        ],
+        repeat: true,
+        name: "Default",
+        author: "",
+        date: ""
+      }
+  
+      expect(getFinalTempo(received)).toEqual(100)
+  })
+})
+
+describe('setFinalTempo',()=>{
+  test('sets Final Tempo', ()=>{
+    const received : Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false 
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        },
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+
+    const expected : Song = {
+      song:[{
+        initBpm: 100,
+        finalBpm: 200,
+        denominator: 4,
+        repeat : 1,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false 
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        },
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+
+    expect(setFinalTempo(200, received)).toEqual(expected)
+  })
+})
+
+describe('incrementMeter',()=>{
+  test('loop to beginning',()=>{
+    const received : Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: false,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false 
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        },
+        {
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false 
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        }
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+
+    const expected : Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        },
+        {
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: false,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false 
+            }
+          ]
+        }
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+
+    expect(incrementMeter(received, true)).toEqual(expected)
+  })
+
+  test('activeMeter is last meter, but not looping',()=>{
+    const received : Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: false,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false 
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        },
+        {
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false 
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        }
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+
+    expect(incrementMeter(received)).toEqual(received);
+  })
+
+  test('activeMeter is not last meter',()=>{
+    const received : Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false 
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        },
+        {
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: false,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false 
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        }
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+
+    const expected : Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: false,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        },
+        {
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false 
+            }
+          ]
+        }
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+
+    expect(incrementMeter(received)).toEqual(expected)
+  })
+})
+
+describe('decrementMeter',()=>{
+  test('loop to end',()=>{
+    const received : Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false 
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        },
+        {
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: false,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false 
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        }
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+
+    const expected : Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: false,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        },
+        {
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false 
+            }
+          ]
+        }
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+
+    expect(decrementMeter(received, true)).toEqual(expected)
+  })
+
+  test('activeMeter is the first meter, but not looping',()=>{
+    const received : Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false 
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        },
+        {
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: false,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false 
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        }
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+
+    expect(decrementMeter(received)).toEqual(received);
+  })
+
+  test('activeMeter is not the first meter',()=>{
+    const received : Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: false,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false 
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        },
+        {
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false 
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        }
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+
+    const expected : Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        },
+        {
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: false,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false 
+            }
+          ]
+        }
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+
+    expect(decrementMeter(received)).toEqual(expected)
+  })
+})
+
+describe('setRepetitions',()=>{
+  test('sets reptition for active meter',()=>{
+    const received: Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        },
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+
+    const expected: Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 10,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        },
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+
+    expect(setRepetitions(10, received)).toEqual(expected)
+  })
+})
+
+describe('getRepetitions',()=>{
+  test('gets Repetitions of activeMeter',()=>{
+
+    const received: Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 10,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        },
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }   
+    
+    expect(getRepetitions(received)).toEqual(10)
+  })
+})
+
+describe('setSectionName',()=>{
+  test('sets name of active meter',()=>{
+    const received: Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 10,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        },
+        {
+          initBpm: 100,
+          denominator: 4,
+          repeat : 10,
+          active: false,
+          beats:[{
+                beatSound : 0,
+                subDiv : Subdivisions.none,
+                beatDuration: 600, // 60/100 * 1000 
+                active : false
+              },
+              {
+                beatSound : 0,
+                subDiv : Subdivisions.none,
+                beatDuration: 600, // 60/100 * 1000 
+                active : false
+              }
+            ]
+          }
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }  
+    
+    const expected: Song = {
+      song:[{
+        sectionName:'sectionName',
+        initBpm: 100,
+        denominator: 4,
+        repeat : 10,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        },
+        {
+          initBpm: 100,
+          denominator: 4,
+          repeat : 10,
+          active: false,
+          beats:[{
+                beatSound : 0,
+                subDiv : Subdivisions.none,
+                beatDuration: 600, // 60/100 * 1000 
+                active : false
+              },
+              {
+                beatSound : 0,
+                subDiv : Subdivisions.none,
+                beatDuration: 600, // 60/100 * 1000 
+                active : false
+              }
+            ]
+          }
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }  
+
+    expect(setSectionName('sectionName', received)).toEqual(expected)
+  })
+})
+
+describe('getSectionName',()=>{
+  test('gets section name from active meter',()=>{
+    const received: Song = {
+      song:[{
+        sectionName:'sectionName',
+        initBpm: 100,
+        denominator: 4,
+        repeat : 10,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        },
+        {
+          initBpm: 100,
+          denominator: 4,
+          repeat : 10,
+          active: false,
+          beats:[{
+                beatSound : 0,
+                subDiv : Subdivisions.none,
+                beatDuration: 600, // 60/100 * 1000 
+                active : false
+              },
+              {
+                beatSound : 0,
+                subDiv : Subdivisions.none,
+                beatDuration: 600, // 60/100 * 1000 
+                active : false
+              }
+            ]
+          }
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }  
+
+    expect(getSectionName(received)).toEqual('sectionName')
+  })
+})
+
+
 
