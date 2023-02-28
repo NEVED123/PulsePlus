@@ -1,5 +1,5 @@
 import { useState, useContext, useRef } from 'react'
-import { BeatSounds } from '../../../../logic/structure'
+import { BeatSounds } from '../../../../assets/sounds/sounds'
 import { PreferencesContext } from '../../../../logic/PreferencesManager'
 import ChooseSoundChip from './ChooseSoundChip'
 import { View, Text, ScrollView, StyleSheet, Dimensions } from 'react-native'
@@ -13,8 +13,6 @@ export default function ChooseSoundRow({title, index, initial = BeatSounds.clave
     const [chipSelected, setChipSelected] = useState(initial)
 
     const chipArray = Object.values(BeatSounds).map((sound)=>{
-
-
         return <ChooseSoundChip
          clickSound={sound}
          currentClickSound={chipSelected} 
