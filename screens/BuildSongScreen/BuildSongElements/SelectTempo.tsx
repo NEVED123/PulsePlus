@@ -7,9 +7,10 @@ import { PreferencesContext } from "../../../logic/PreferencesManager"
 
 export function SelectTempo(){
 
+    const { tempo, setTempo, denominator, getSong } = useContext(BuildSongContext)
+
     const [open, setOpen] = useState(false)
-    const [noteValue, setNoteValue] = useState(4)
-    const [prevNoteValue, setPrevNoteValue] = useState(noteValue)
+    const [noteValue, setNoteValue] = useState(denominator)
     const [items, setItems] = useState(
         [{label: '1', value: 1},
         {label: '2', value: 2},
@@ -20,7 +21,7 @@ export function SelectTempo(){
         {label: '64', value: 64}]
     )
 
-    const { tempo, setTempo, denominator, getSong } = useContext(BuildSongContext)
+    
 
     const [tempoText, setTempoText] = useState(`${tempo}`)
 
@@ -28,8 +29,9 @@ export function SelectTempo(){
 
     useEffect(()=>{
         setTempoText(`${tempo * noteValue / denominator}`)
+        setNoteValue(denominator)
         console.log(getSong())
-    }, [tempo])
+    }, [tempo, denominator])
 
 
     return(
