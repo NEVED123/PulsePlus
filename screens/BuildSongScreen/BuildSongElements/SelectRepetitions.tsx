@@ -1,6 +1,6 @@
 import { Text, TextInput, View, StyleSheet, Keyboard, TouchableWithoutFeedback } from 'react-native'
 import { BuildSongContext } from '../../../logic/BuildSongManager'
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { PreferencesContext } from '../../../logic/PreferencesManager'
 import { textTitleColors } from '../../../theme/Colors'
 
@@ -10,6 +10,10 @@ export function SelectRepetitions(){
     const { theme } = useContext(PreferencesContext)
 
     const [repetitionsText, setRepetitionsText] = useState(`${repetitions}`)
+
+    useEffect(()=>{
+        setRepetitionsText(`${repetitions}`)
+    }, [repetitions])
 
     return(
         <View style={styles.container}>
