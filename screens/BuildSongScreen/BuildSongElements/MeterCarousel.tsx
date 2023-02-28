@@ -12,7 +12,9 @@ export function MeterCarousel(){
             <View style={{flexDirection:'row', flex:1, alignItems:'center'}}>
                 <Text 
                     style={styles.toggleActiveMeter}
-                    onPress={()=>decrementMeter()}>
+                    onPress={()=>{
+                        decrementMeter()
+                        console.log(getSong())}}>
                     {'<'}
                 </Text>
                 <MeterDisplay/>

@@ -386,7 +386,7 @@ describe('setNumerator', ()=>{
           beatSound : 0,
           subDiv : Subdivisions.none,
           beatDuration: 600, // 60/100 * 1000 
-          active : true
+          active : false
       },
       {
         beatSound : 0,
@@ -592,7 +592,7 @@ describe('setNumerator', ()=>{
           beatSound : 0,
           subDiv : Subdivisions.none,
           beatDuration: 600, // 60/100 * 1000 
-          active : true
+          active : false
       }
       ]
     }],
@@ -961,7 +961,7 @@ describe('setTempo',()=>{
             beatSound : 0,
             subDiv : Subdivisions.none,
             beatDuration: 600, // 60/100 * 1000 
-            active : true
+            active : false
             }
           ]
         },
@@ -994,8 +994,8 @@ describe('setTempo',()=>{
         beats:[{
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 300,  
-            active : true
+            beatDuration: 600,  
+            active : false
             }
           ]
         },
@@ -1035,7 +1035,7 @@ describe('getTempo',()=>{
             beatSound : 0,
             subDiv : Subdivisions.none,
             beatDuration: 600, // 60/100 * 1000 
-            active : true
+            active : false
             }
           ]
         },

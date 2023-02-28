@@ -74,23 +74,23 @@ export function setNumerator(song : Song, numerator: number, resetAccents : bool
 
     const updatedSong = _.clone(song)
 
-    const activeMeter = getActiveMeter(song)
-    const { beatDuration } = activeMeter.beats[0]
+    const activeMeterIndex = getActiveMeterIndex(updatedSong)
+
 
     if(resetAccents){
         const newMeter : Beat[] = new Array(numerator)
         for(let i = 0;i<numerator;i++){ //your java is showing
             newMeter[i] = ({beatSound: 0, 
                 subDiv: Subdivisions.none, 
-                beatDuration: beatDuration, 
+                beatDuration: 600, //attribute to be removed
                 active: false})
         }
 
-        activeMeter.beats = newMeter
+        updatedSong.song[activeMeterIndex].beats = newMeter
     }
     else{
 
-        const originalNumerator = activeMeter.beats.length
+        const originalNumerator = updatedSong.song[activeMeterIndex].beats.length
 
         const beatsToAdd = numerator - originalNumerator
 
@@ -99,23 +99,21 @@ export function setNumerator(song : Song, numerator: number, resetAccents : bool
             for(let i = 0; i<beatsToAdd; i++){ //your java is showing
                 addedBeats[i] = {beatSound: 0, 
                     subDiv: Subdivisions.none, 
-                    beatDuration: beatDuration, 
+                    beatDuration: 600, 
                     active: false}
             }
             
-            activeMeter.beats = activeMeter.beats.concat(addedBeats)
+            //activeMeter.beats = activeMeter.beats.concat(addedBeats)
+
+            updatedSong.song[activeMeterIndex].beats = updatedSong.song[activeMeterIndex].beats.concat(addedBeats)
         }
         else{
             const beatsToRemove = Math.abs(beatsToAdd)
             for(let i = 0;i<beatsToRemove;i++){
-                activeMeter.beats.pop()
+                updatedSong.song[activeMeterIndex].beats.pop()
             }
         }
     }
-
-    updatedSong.song[getActiveMeterIndex(song)] = activeMeter
-    updatedSong.song[0].active = true
-    updatedSong.song[0].beats[0].active = true
 
     return updatedSong
 }
@@ -169,12 +167,7 @@ export function setAccent(song: Song, beatIndex: number, numberOfAccents: number
 export function setTempo(song: Song, newTempo: number){
     const updatedSong = _.clone(song)
 
-    const activeMeter = updatedSong.song[getActiveMeterIndex(song)]
-    activeMeter.initBpm = newTempo
-
-    for(let i = 0; i<activeMeter.beats.length;i++){
-        activeMeter.beats[i].beatDuration = 60000/newTempo
-    }
+    updatedSong.song[getActiveMeterIndex(updatedSong)].initBpm = newTempo
 
     return updatedSong
 }
@@ -186,9 +179,9 @@ export function setTempo(song: Song, newTempo: number){
  * @description gets tempo from active meter
  */
 export function getTempo(song: Song){
-    const duration = getActiveBeat(song).beatDuration
+    const updatedSong = _.clone(song)
 
-    return 60000/duration
+    return updatedSong.song[getActiveMeterIndex(updatedSong)].initBpm
 }
 
 /**

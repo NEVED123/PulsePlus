@@ -1,6 +1,6 @@
 import DropDownPicker from "react-native-dropdown-picker"
 import { Text, TextInput, View, StyleSheet, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard } from 'react-native'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { BuildSongContext } from "../../../logic/BuildSongManager"
 import { buttonColors, borderColors, textShadowColors, textTitleColors} from "../../../theme/Colors"
 import { PreferencesContext } from "../../../logic/PreferencesManager"
@@ -21,11 +21,15 @@ export function SelectTempo(){
         {label: '64', value: 64}]
     )
 
-    const { tempo, setTempo, getSong } = useContext(BuildSongContext)
+    const { tempo, setTempo } = useContext(BuildSongContext)
 
     const [tempoText, setTempoText] = useState(`${tempo}`)
 
     const { theme } = useContext(PreferencesContext)
+
+    useEffect(()=>{
+        setTempoText(`${tempo}`)
+    }, [tempo])
 
 
     return(

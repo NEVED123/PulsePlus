@@ -25,6 +25,11 @@ export function BuildSongTimeSignature(){
         {label: '64', value: 64}
     ])
 
+    useEffect(()=>{
+        setNumValue(numerator)
+        setDenValue(denominator)
+    }, [numerator, denominator])
+
     return(
         <View style={[styles.timeSignature]}>
             <DropDownPicker
