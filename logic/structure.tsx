@@ -61,51 +61,9 @@ export const Subdivisions = {
     nine: [1,1,1,1,1,1,1,1,1]
 }
 
- 
 export type ClickSound = {
     name : string,
     file : any
-}
-
-const Clave : ClickSound = {
-    name: 'clave',
-    file : require('../assets/sounds/clave.mp3')
-}
-
-const Woodblock : ClickSound = {
-    name : 'woodblock',
-    file : require("../assets/sounds/woodblock.mp3")
-}
-
-const Silence : ClickSound = {
-    name : 'silence',
-    file : require("../assets/sounds/silence.mp3")
-}
-
-const Tom : ClickSound = {
-    name : 'tom',
-    file : require("../assets/sounds/tom.mp3")
-}
-
-const Snare : ClickSound = {
-    name : 'snare',
-    file : require("../assets/sounds/snare.mp3")
-}
-
-//This could maybe be an array??? it feels weird doing that though but literally every time I use this
-//I turn it into an array
-export const BeatSounds = {
-    clave : Clave,
-    woodblock : Woodblock,
-    tom : Tom,
-    snare : Snare,
-    silence : Silence
-}
-
-
-export const BeatSoundPresets = {
-    "default" : [Clave, Woodblock, Silence]
-    //More settings, the user could add their own
 }
 
 export const defaultMetronomeSong : Song = {

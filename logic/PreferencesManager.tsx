@@ -1,6 +1,7 @@
 import { createContext, useState } from 'react'
 import { Appearance } from 'react-native'
-import { BeatSoundPresets, ClickSound } from './structure'
+import { ClickSound } from './structure'
+import { BeatSoundPresets } from '../assets/sounds/sounds'
 import _ from 'lodash'
 
 export const PreferencesContext = createContext(0 as any) //initial values make compiler happy

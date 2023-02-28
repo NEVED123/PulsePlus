@@ -1,7 +1,7 @@
 import { View, StyleSheet, Dimensions, Text, ScrollView } from 'react-native'
 import { PreferencesContext } from '../../../../logic/PreferencesManager'
 import { useState, useContext, useEffect } from 'react'
-import { BeatSounds } from '../../../../logic/structure'
+import { BeatSounds } from '../../../../assets/sounds/sounds'
 import ChooseSoundRow from './ChooseSoundRow'
 
 export default function ChooseSoundMenu( {numberOfOptions = 3} : {numberOfOptions? : number }){

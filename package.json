@@ -11,7 +11,8 @@
     "test": "jest"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "modulePathIgnorePatterns": ["<rootDir>/assets/"]
   },
   "dependencies": {
     "@miblanchard/react-native-slider": "^2.2.0",
