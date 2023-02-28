@@ -1,7 +1,7 @@
 import { LineChart } from "react-native-chart-kit"
 import { View, Text, Dimensions, StyleSheet, TextInput  } from 'react-native'
 import { Switch } from "react-native-paper"
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { PreferencesContext } from "../../../logic/PreferencesManager"
 import { textTitleColors, buttonColors, borderColors, textColors, textShadowColors } from "../../../theme/Colors"
 import { Slider } from "@miblanchard/react-native-slider"
@@ -28,6 +28,10 @@ export function SelectAccel(){
         {label: '64', value: 64}]
     )
     
+    useEffect(()=>{
+        setFinalTempoText(`${finalTempo}`)
+    }, [finalTempo])
+
     return(
         <View>
 
@@ -137,7 +141,8 @@ const styles = StyleSheet.create({
         marginVertical:10
     },
     accelOptionItems:{
-        marginHorizontal:10
+        marginHorizontal:10,
+        alignItems: 'center'
     },
     accelOptionText:{
         fontSize:30
