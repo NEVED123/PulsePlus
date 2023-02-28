@@ -2259,6 +2259,56 @@ describe('getSectionName',()=>{
 
     expect(getSectionName(received)).toEqual('sectionName')
   })
+
+  test('gets undefined section name from active meter',()=>{
+    const received: Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 10,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        },
+        {
+          initBpm: 100,
+          denominator: 4,
+          repeat : 10,
+          active: false,
+          beats:[{
+                beatSound : 0,
+                subDiv : Subdivisions.none,
+                beatDuration: 600, // 60/100 * 1000 
+                active : false
+              },
+              {
+                beatSound : 0,
+                subDiv : Subdivisions.none,
+                beatDuration: 600, // 60/100 * 1000 
+                active : false
+              }
+            ]
+          }
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }  
+
+    expect(getSectionName(received)).toEqual('')
+  })
 })
 
 

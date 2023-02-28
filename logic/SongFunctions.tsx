@@ -341,6 +341,8 @@ export function setSectionName(sectionName: String, song:Song) : Song {
     return updatedSong
 }
 
-export function getSectionName(song: Song) : String | undefined {
-    return song.song[getActiveMeterIndex(song)].sectionName
+export function getSectionName(song: Song) : String {
+    const name = song.song[getActiveMeterIndex(song)].sectionName
+
+    return (name === undefined) ? '' : name
 }
