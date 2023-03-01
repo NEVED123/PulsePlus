@@ -21,7 +21,8 @@ import {
   setSectionName,
   getSectionName,
   addMeter,
-  removeMeter
+  removeMeter,
+  getSongLength
 } from "../logic/SongFunctions";
 import { Meter, Beat, Song, Subdivisions} from "../logic/structure"
 import {describe, expect, test} from "@jest/globals"
@@ -2654,5 +2655,103 @@ describe('removeMeter',()=>{
     }  
   
     expect(removeMeter(received)).toEqual(expected)
+   })
+})
+
+describe('getSongLength',()=>{
+  test('song is 1 meter long',()=>{
+    const received: Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 10,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+          ]
+        },
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }  
+  
+    expect(getSongLength(received)).toEqual(1)
+   })
+
+   test('song is more than 1 meter long',()=>{
+    const received: Song = {
+      song:[{
+        sectionName: 'sectionName',
+        initBpm: 100,
+        finalBpm:200,
+        denominator: 4,
+        repeat : 10,
+        active: false,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        },
+        {
+          initBpm: 200,
+          denominator: 4,
+          repeat : 10,
+          active: true,
+          beats:[{
+                beatSound : 0,
+                subDiv : Subdivisions.none,
+                beatDuration: 600, // 60/100 * 1000 
+                active : false
+              },
+              {
+                beatSound : 0,
+                subDiv : Subdivisions.none,
+                beatDuration: 600, // 60/100 * 1000 
+                active : false
+              }
+            ]
+          },
+        {
+          initBpm: 100,
+          denominator: 4,
+          repeat : 10,
+          active: false,
+          beats:[{
+                beatSound : 0,
+                subDiv : Subdivisions.none,
+                beatDuration: 600, // 60/100 * 1000 
+                active : false
+              },
+              {
+                beatSound : 0,
+                subDiv : Subdivisions.none,
+                beatDuration: 600, // 60/100 * 1000 
+                active : false
+              }
+            ]
+          }
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }  
+
+    expect(getSongLength(received)).toEqual(3)
    })
 })

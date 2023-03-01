@@ -383,3 +383,9 @@ export function removeMeter(song: Song) : Song {
 
     return updatedSong
 }
+
+export function getSongLength(song: Song) : number {
+    const updatedSong = _.clone(song)
+
+    return updatedSong.song.length
+}
