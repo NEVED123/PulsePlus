@@ -76,7 +76,6 @@ export function setNumerator(song : Song, numerator: number, resetAccents : bool
 
     const activeMeterIndex = getActiveMeterIndex(updatedSong)
 
-
     if(resetAccents){
         const newMeter : Beat[] = new Array(numerator)
         for(let i = 0;i<numerator;i++){ //your java is showing
@@ -338,4 +337,49 @@ export function getSectionName(song: Song) : String {
     const name = song.song[getActiveMeterIndex(song)].sectionName
 
     return (name === undefined) ? '' : name
+}
+
+export function addMeter(song: Song) : Song {
+    let updatedSong = _.clone(song)
+
+    const activeMeterIndex = getActiveMeterIndex(updatedSong)
+    const newMeter = _.cloneDeep(getActiveMeter(updatedSong))
+    const songLength = updatedSong.song.length
+
+    newMeter.active = false
+    newMeter.sectionName = undefined
+
+    if(newMeter.finalBpm != undefined){
+        newMeter.initBpm = newMeter.finalBpm
+        newMeter.finalBpm = undefined
+    }
+
+    if(activeMeterIndex == songLength-1){
+        //we are adding to the end of the array
+        updatedSong.song = updatedSong.song.concat(newMeter)
+    }
+    else{
+        updatedSong.song.splice(activeMeterIndex+1,0,newMeter)
+    }
+
+    updatedSong = incrementMeter(updatedSong)
+
+    return updatedSong
+}
+
+export function removeMeter(song: Song) : Song {
+    let updatedSong = _.clone(song)
+
+    //if song only has one meter, return
+    if(updatedSong.song.length == 1){
+        return updatedSong
+    }
+
+    updatedSong = decrementMeter(updatedSong)
+
+    const activeMeterIndex = getActiveMeterIndex(updatedSong)
+
+    updatedSong.song.splice(activeMeterIndex+1, 1)
+
+    return updatedSong
 }
