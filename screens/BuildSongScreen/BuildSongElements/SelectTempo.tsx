@@ -21,16 +21,12 @@ export function SelectTempo(){
         {label: '64', value: 64}]
     )
 
-    
-
     const [tempoText, setTempoText] = useState(`${tempo}`)
 
     const { theme } = useContext(PreferencesContext)
 
     useEffect(()=>{
-        setTempoText(`${tempo * noteValue / denominator}`)
-        setNoteValue(denominator)
-        console.log(getSong())
+        setTempoText(`${tempo * noteValue/denominator}`)
     }, [tempo, denominator])
 
 
@@ -87,7 +83,6 @@ export function SelectTempo(){
                                 //onChangeText ensures the number is valid
                                 const newTempo = Number(e.nativeEvent.text)
                                 setTempo(newTempo * denominator/noteValue)
-                                console.log(getSong())
                             }}>
                     </TextInput>
         </View>
