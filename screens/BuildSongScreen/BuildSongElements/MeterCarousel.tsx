@@ -5,7 +5,7 @@ import MeterDisplay from './MeterDisplay'
 
 export function MeterCarousel(){
     
-    const { incrementMeter, decrementMeter, getSong } = useContext(BuildSongContext)
+    const { incrementMeter, decrementMeter, getSong, addMeter, removeMeter } = useContext(BuildSongContext)
 
     return(
         <View style={styles.container}>
@@ -28,13 +28,20 @@ export function MeterCarousel(){
             </View>
             <View style={styles.addOrRemoveMeter}>
                 <Pressable>
-                    <Text style={styles.addOrRemoveButtonText}>
-                        +
+                    <Text 
+                        style={styles.addOrRemoveButtonText}
+                        onPress={()=>{
+                            removeMeter()
+                            console.log(getSong())}}>
+                        -
                     </Text>
                 </Pressable>
                 <Pressable>
-                    <Text style={styles.addOrRemoveButtonText}>
-                        -
+                    <Text 
+                        style={styles.addOrRemoveButtonText}
+                        onPress={()=>{
+                            addMeter()}}>
+                        +
                     </Text>
                 </Pressable>
             </View>  

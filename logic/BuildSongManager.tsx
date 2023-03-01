@@ -21,7 +21,9 @@ import {getActiveMeter,
     setSectionName,
     getSectionName,
     incrementMeter,
-    decrementMeter
+    decrementMeter,
+    addMeter,
+    removeMeter
 } from './SongFunctions'
 import { PreferencesContext } from './PreferencesManager'
 
@@ -57,31 +59,7 @@ const defaultBuildMetronomeSong : Song = {
         }
         ]
     },
-    {
-        initBpm: 50,
-        denominator: 8,
-        repeat : 3,
-        active: false,
-        beats:[{
-            beatSound : 0,
-            subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
-            active : true
-        },
-        {
-            beatSound : 0,
-            subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
-            active : false
-        },
-        {
-            beatSound : 0,
-            subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
-            active : false
-        },
-        ]
-    }],
+    ],
     repeat: true,
     name: "Default",
     author: "",
@@ -114,7 +92,9 @@ export function BuildSongProvider({ children } : { children : any }){
         setSectionName: (sectionName: String) => {setSong(setSectionName(sectionName, song))},
         sectionName: getSectionName(song),
         incrementMeter: (wrapToBeginning? : boolean)=>{setSong(incrementMeter(song, wrapToBeginning))},
-        decrementMeter: (wrapToEnd? : boolean) => {setSong(decrementMeter(song, wrapToEnd))}
+        decrementMeter: (wrapToEnd? : boolean) => {setSong(decrementMeter(song, wrapToEnd))},
+        addMeter : () => {setSong(addMeter(song))},
+        removeMeter : ()=>{setSong(removeMeter(song))}
     }
     
     return(
