@@ -260,6 +260,10 @@ export function setFinalTempo(finalBpm : number, song: Song){
 
     updatedSong.song[getActiveMeterIndex(updatedSong)].finalBpm = finalBpm
 
+    if(updatedSong.song[getActiveMeterIndex(updatedSong)].accel == undefined){
+        updatedSong.song[getActiveMeterIndex(updatedSong)].accel = 0;
+    }
+
     return updatedSong
 }
 
@@ -388,4 +392,27 @@ export function getSongLength(song: Song) : number {
     const updatedSong = _.clone(song)
 
     return updatedSong.song.length
+}
+
+export function getAccel(song: Song) : number | undefined {
+    const updatedSong = _.clone(song)
+
+    return getActiveMeter(updatedSong).accel
+}
+
+export function setAccel(accel : number | undefined, song: Song) : Song {
+    const activeMeter = getActiveMeter(song)
+    const updatedSong = _.clone(song)
+
+    if(activeMeter.finalBpm != undefined){
+        updatedSong.song[getActiveMeterIndex(updatedSong)].accel = accel
+        if(accel == undefined){
+            updatedSong.song[getActiveMeterIndex(updatedSong)].finalBpm = undefined
+        }
+    }else if(accel != 0){
+        throw new Error('cannot set accelerando coefficient != 0 with no finalBpm defined')
+    }
+
+    return updatedSong
+    
 }

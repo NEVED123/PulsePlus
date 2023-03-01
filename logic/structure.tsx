@@ -8,6 +8,7 @@ export type Beat = {
 export type Meter = {
     initBpm : number
     finalBpm? : number //for accel/decel
+    accel? : number
     denominator : number
     repeat : number //for measures with the same traits
     active: boolean

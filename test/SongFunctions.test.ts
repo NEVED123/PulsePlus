@@ -22,7 +22,9 @@ import {
   getSectionName,
   addMeter,
   removeMeter,
-  getSongLength
+  getSongLength,
+  setAccel,
+  getAccel
 } from "../logic/SongFunctions";
 import { Meter, Beat, Song, Subdivisions} from "../logic/structure"
 import {describe, expect, test} from "@jest/globals"
@@ -1502,6 +1504,69 @@ describe('setFinalTempo',()=>{
       song:[{
         initBpm: 100,
         finalBpm: 200,
+        accel: 0,
+        denominator: 4,
+        repeat : 1,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false 
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        },
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+
+    expect(setFinalTempo(200, received)).toEqual(expected)
+  })
+
+  test('sets Final Tempo, setAccel is defined', ()=>{
+    const received : Song = {
+      song:[{
+        initBpm: 100,
+        finalBpm: 150,
+        accel: 5,
+        denominator: 4,
+        repeat : 1,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false 
+            },
+            {
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            }
+          ]
+        },
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+
+    const expected : Song = {
+      song:[{
+        initBpm: 100,
+        finalBpm: 200,
+        accel: 5,
         denominator: 4,
         repeat : 1,
         active: true,
@@ -2754,4 +2819,212 @@ describe('getSongLength',()=>{
 
     expect(getSongLength(received)).toEqual(3)
    })
+})
+
+describe('getAccel',()=>{
+  test('accel is defined',()=>{
+    const received: Song = {
+      song:[{
+        initBpm: 100,
+        finalBpm: 200,
+        accel: 5,
+        denominator: 4,
+        repeat : 10,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+          ]
+        },
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }  
+
+    expect(getAccel(received)).toEqual(5)
+  })
+
+  test('accel is undefined',()=>{
+    const received: Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 10,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+          ]
+        },
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }  
+
+    expect(getAccel(received)).toBeUndefined()
+  })
+
+})
+
+describe('setAccel',()=>{
+  test('finalBpm is defined',()=>{
+    const received: Song = {
+      song:[{
+        initBpm: 100,
+        finalBpm: 200,
+        denominator: 4,
+        repeat : 10,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+          ]
+        },
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+
+    const expected: Song = {
+      song:[{
+        initBpm: 100,
+        finalBpm: 200,
+        accel: 5,
+        denominator: 4,
+        repeat : 10,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+          ]
+        },
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }  
+
+    expect(setAccel(5, received)).toEqual(expected)
+
+  })
+
+  test('setAccel to undefined',()=>{
+    const received: Song = {
+      song:[{
+        initBpm: 100,
+        finalBpm: 200,
+        accel: 5,
+        denominator: 4,
+        repeat : 10,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+          ]
+        },
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+
+    const expected: Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 10,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+          ]
+        },
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+    
+    expect(setAccel(undefined, received)).toEqual(expected)
+  })
+
+  test('finalBpm is undefined, setAccel param == 0',()=>{
+
+    const received: Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 10,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+          ]
+        },
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+
+    expect(setAccel(0, received)).toEqual(received)
+  })
+
+  test('finalBpm is undefined, setAccel param != 0',()=>{
+    const received: Song = {
+      song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 10,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+          ]
+        },
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }
+
+    expect(()=>{
+      setAccel(5, received)
+    }).toThrow()
+  })
 })
