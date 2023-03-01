@@ -23,7 +23,8 @@ import {getActiveMeter,
     incrementMeter,
     decrementMeter,
     addMeter,
-    removeMeter
+    removeMeter,
+    getSongLength
 } from './SongFunctions'
 import { PreferencesContext } from './PreferencesManager'
 
@@ -94,7 +95,8 @@ export function BuildSongProvider({ children } : { children : any }){
         incrementMeter: (wrapToBeginning? : boolean)=>{setSong(incrementMeter(song, wrapToBeginning))},
         decrementMeter: (wrapToEnd? : boolean) => {setSong(decrementMeter(song, wrapToEnd))},
         addMeter : () => {setSong(addMeter(song))},
-        removeMeter : ()=>{setSong(removeMeter(song))}
+        removeMeter : ()=>{setSong(removeMeter(song))},
+        length : getSongLength(song)
     }
     
     return(

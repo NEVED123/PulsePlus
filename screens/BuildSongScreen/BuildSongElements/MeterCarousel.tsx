@@ -5,10 +5,21 @@ import MeterDisplay from './MeterDisplay'
 
 export function MeterCarousel(){
     
-    const { incrementMeter, decrementMeter, getSong, addMeter, removeMeter } = useContext(BuildSongContext)
+    const { incrementMeter, 
+        decrementMeter, 
+        getSong, 
+        addMeter, 
+        removeMeter, 
+        length, 
+        activeMeterIndex} = useContext(BuildSongContext)
 
     return(
         <View style={styles.container}>
+            <View style={styles.TopOrBottom}>
+                <Text style={styles.TopText}>
+                    {`${activeMeterIndex+1} / ${length}`}
+                </Text>
+            </View>
             <View style={{flexDirection:'row', flex:1, alignItems:'center'}}>
                 <Text 
                     style={styles.toggleActiveMeter}
@@ -26,21 +37,18 @@ export function MeterCarousel(){
                     {'>'}
                 </Text>
             </View>
-            <View style={styles.addOrRemoveMeter}>
+            <View style={styles.TopOrBottom}>
                 <Pressable>
                     <Text 
-                        style={styles.addOrRemoveButtonText}
-                        onPress={()=>{
-                            removeMeter()
-                            console.log(getSong())}}>
+                        style={styles.BottomText}
+                        onPress={()=>{removeMeter()}}>
                         -
                     </Text>
                 </Pressable>
                 <Pressable>
                     <Text 
-                        style={styles.addOrRemoveButtonText}
-                        onPress={()=>{
-                            addMeter()}}>
+                        style={styles.BottomText}
+                        onPress={()=>{addMeter()}}>
                         +
                     </Text>
                 </Pressable>
@@ -56,20 +64,25 @@ const styles = StyleSheet.create({
         borderRadius:20,
         backgroundColor:"#909090"
     },
-    addOrRemoveMeter:{
+    TopOrBottom:{
         flexDirection:'row',
         justifyContent:'center',
         alignItems:'center'
     },
-    addOrRemoveButtonText:{
+    BottomText:{
         color:"white",
         fontSize:30,
         paddingHorizontal:20
+    },
+    TopText:{
+        color:"white",
+        fontSize:25,
+        paddingVertical:5
     },
     toggleActiveMeter:{
         color:"white",
         fontSize:20,
         fontWeight:'bold',
         paddingHorizontal:10
-    }   
+    },   
 })
