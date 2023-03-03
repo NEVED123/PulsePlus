@@ -11,13 +11,13 @@ import DropDownPicker from "react-native-dropdown-picker"
 export function SelectAccel(){
     
     const { theme } = useContext(PreferencesContext)
-    const { tempo, setFinalTempo, finalTempo} = useContext(BuildSongContext)
+    const { tempo, setFinalTempo, finalTempo, getSong, activeMeter, denominator } = useContext(BuildSongContext)
 
-    const [isSwitchOn, setIsSwitchOn] = useState(false)
+    const [isSwitchOn, setIsSwitchOn] = useState(finalTempo != undefined)
     const [sliderValue, setSliderValue] = useState(0)
     const [finalTempoText, setFinalTempoText] = useState(`${finalTempo}`)
     const [open, setOpen] = useState(false)
-    const [value, setValue] = useState(1)
+    const [noteValue, setNoteValue] = useState(denominator)
     const [items, setItems] = useState(
         [{label: '1', value: 1},
         {label: '2', value: 2},
@@ -29,12 +29,12 @@ export function SelectAccel(){
     )
     
     useEffect(()=>{
-        setFinalTempoText(`${finalTempo}`)
-    }, [finalTempo])
+        setIsSwitchOn(finalTempo != undefined)
+        setFinalTempoText(`${tempo * noteValue/denominator}`)
+    }, [activeMeter])
 
     return(
         <View>
-
             <View style={styles.accelOption}>
                 <Text style={[
                     styles.accelOptionItems, 
@@ -45,8 +45,13 @@ export function SelectAccel(){
                 <Switch 
                     style={styles.accelOptionItems}
                     value={isSwitchOn} 
-                    onValueChange={()=>{
-                    setIsSwitchOn(!isSwitchOn)}} 
+                    onValueChange={(on)=>{
+                        const finalTempo = on ? tempo : undefined
+                        const accel = on ? 0 : undefined
+                        setIsSwitchOn(!isSwitchOn)
+                        setFinalTempo(finalTempo, accel)
+                        console.log(getSong())
+                    }} 
                 />
 
             </View>
@@ -65,14 +70,18 @@ export function SelectAccel(){
                         autoScroll={true}
                         dropDownDirection='TOP'
                         open={open}
-                        value={value}
+                        value={noteValue}
                         items={items}
                         setOpen={setOpen}
-                        setValue={setValue}
+                        setValue={setNoteValue}
                         setItems={setItems}
                         onSelectItem={(value)=>{
-                        //modify the tempo of song object to reflect new note value
-                            }}
+                            if(value.value != undefined){
+                                //translate current tempo to our new note value tempo
+                                setFinalTempo(finalTempo * noteValue/value.value)
+                                console.log(getSong())
+                            }
+                        }}
                     />
                     <Text style={[{
                             color : textTitleColors[theme as keyof typeof textTitleColors],
@@ -97,7 +106,8 @@ export function SelectAccel(){
                             onEndEditing={(e)=>{
                                 //onChangeText ensures the number is valid
                                 const newTempo = Number(e.nativeEvent.text)
-                                setFinalTempo(newTempo)
+                                setFinalTempo(newTempo * denominator/noteValue)
+                                console.log(getSong())
                             }}>
                     </TextInput>                    
                 </View>
