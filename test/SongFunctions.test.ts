@@ -1466,7 +1466,7 @@ describe('getFinalTempo',()=>{
         date: ""
       }
   
-      expect(getFinalTempo(received)).toEqual(100)
+      expect(getFinalTempo(received)).toEqual(undefined)
   })
 })
 

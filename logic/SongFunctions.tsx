@@ -249,9 +249,6 @@ export function incrementBeat(song: Song){
 export function getFinalTempo(song: Song){
     const activeMeter =  getActiveMeter(song)
 
-    if(activeMeter.finalBpm == undefined)
-        return activeMeter.initBpm
-
     return activeMeter.finalBpm
 }
 
@@ -262,17 +259,17 @@ export function setFinalTempo(finalBpm : number | undefined, accel : number | un
     updatedSong.song[activeMeterIndex].finalBpm = finalBpm
 
     if(accel != undefined){
-        updatedSong.song[activeMeterIndex].accel = (finalBpm != undefined) ? accel : undefined
-    }
-    else{
         if(finalBpm != undefined){
-            updatedSong.song[activeMeterIndex].accel = 0
+            updatedSong.song[activeMeterIndex].accel = accel
+            
         }
         else{
             updatedSong.song[activeMeterIndex].accel = undefined
             console.warn('Cannot set accel coefficient with undefined final BPM.')
-        }    
-        
+        }
+    }
+    else{
+        updatedSong.song[activeMeterIndex].accel = (finalBpm != undefined) ? 0 : undefined
     }
     
     return updatedSong

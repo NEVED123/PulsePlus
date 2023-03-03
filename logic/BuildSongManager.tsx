@@ -25,8 +25,7 @@ import {getActiveMeter,
     addMeter,
     removeMeter,
     getSongLength,
-    getAccel,
-    setAccel
+    getAccel
 } from './SongFunctions'
 import { PreferencesContext } from './PreferencesManager'
 
