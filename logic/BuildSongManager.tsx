@@ -24,7 +24,9 @@ import {getActiveMeter,
     decrementMeter,
     addMeter,
     removeMeter,
-    getSongLength
+    getSongLength,
+    getAccel,
+    setAccel
 } from './SongFunctions'
 import { PreferencesContext } from './PreferencesManager'
 
@@ -87,7 +89,7 @@ export function BuildSongProvider({ children } : { children : any }){
         resetSong: () => {setSong(resetSong(song))},
         incrementBeat: ()=>{setSong(incrementBeat(song))},
         finalTempo: getFinalTempo(song),
-        setFinalTempo: (finalTempo : number) => {setSong(setFinalTempo(finalTempo, song))},
+        setFinalTempo: (finalTempo : number | undefined, accel : number | undefined) => {setSong(setFinalTempo(finalTempo, accel, song))},
         setRepetitions: (repeat: number) => {setSong(setRepetitions(repeat, song))},
         repetitions: getRepetitions(song),
         setSectionName: (sectionName: String) => {setSong(setSectionName(sectionName, song))},
@@ -96,7 +98,8 @@ export function BuildSongProvider({ children } : { children : any }){
         decrementMeter: (wrapToEnd? : boolean) => {setSong(decrementMeter(song, wrapToEnd))},
         addMeter : () => {setSong(addMeter(song))},
         removeMeter : ()=>{setSong(removeMeter(song))},
-        length : getSongLength(song)
+        length : getSongLength(song),
+        accel : getAccel(song),
     }
     
     return(
