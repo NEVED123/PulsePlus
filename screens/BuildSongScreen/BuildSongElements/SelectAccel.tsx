@@ -11,10 +11,10 @@ import DropDownPicker from "react-native-dropdown-picker"
 export function SelectAccel(){
     
     const { theme } = useContext(PreferencesContext)
-    const { tempo, setFinalTempo, finalTempo, getSong, activeMeter, denominator } = useContext(BuildSongContext)
+    const { tempo, setFinalTempo, finalTempo, getSong, accel, activeMeter, denominator } = useContext(BuildSongContext)
 
     const [isSwitchOn, setIsSwitchOn] = useState(finalTempo != undefined)
-    const [sliderValue, setSliderValue] = useState(0)
+    const [sliderValue, setSliderValue] = useState(accel != undefined ? accel : 0)
     const [finalTempoText, setFinalTempoText] = useState(`${finalTempo}`)
     const [open, setOpen] = useState(false)
     const [noteValue, setNoteValue] = useState(denominator)
@@ -31,7 +31,8 @@ export function SelectAccel(){
     useEffect(()=>{
         setIsSwitchOn(finalTempo != undefined)
         setFinalTempoText(`${tempo * noteValue/denominator}`)
-    }, [activeMeter])
+        setSliderValue(accel != undefined ? accel : 0)
+    }, [activeMeter, accel])
 
     return(
         <View>
@@ -111,7 +112,6 @@ export function SelectAccel(){
                             }}>
                     </TextInput>                    
                 </View>
-               
                 <Text style={[
                     {
                         alignSelf: (finalTempo < tempo) ? 'flex-start': 'flex-end' /**This will be a boolean, equals flex-start when final tempo < initial tempo */,
@@ -125,9 +125,16 @@ export function SelectAccel(){
                 <Slider
                     containerStyle={styles.slider}
                     value={sliderValue}
-                    onValueChange={value =>setSliderValue(value as number)}
-                    minimumValue={-10}
-                    maximumValue={10}
+                    onValueChange={(value) =>{
+                        const initValue = typeof value == 'number' ? value : value[0]
+                        const accel = Math.abs(initValue) < 0.03 ? 0 : initValue
+                        setSliderValue(accel)
+                        setFinalTempo(finalTempo, accel)
+                        console.log(getSong())
+                    }}
+                    minimumValue={-1}
+                    maximumValue={1}
+                    step={.01}
                 />
                  <Text style={[
                     {
