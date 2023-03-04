@@ -354,10 +354,12 @@ export function setSectionName(sectionName: String, song:Song) : Song {
     return updatedSong
 }
 
-export function getSectionName(song: Song) : String {
-    const name = song.song[getActiveMeterIndex(song)].sectionName
+export function getSectionName(song: Song) : String | undefined {
+    const updatedSong = _.clone(song)
 
-    return (name === undefined) ? '' : name
+    return updatedSong.song[getActiveMeterIndex(song)].sectionName
+
+
 }
 
 export function addMeter(song: Song) : Song {

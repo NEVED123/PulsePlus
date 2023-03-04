@@ -104,3 +104,83 @@ export const defaultMetronomeSong : Song = {
     author: "",
     date: ""
 }
+
+export const multiMeterTestMetronomeSong : Song = {
+    song:[{
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: true,
+        beats:[{
+            beatSound : 0,
+            subDiv : Subdivisions.none,
+            beatDuration: 600, // 60/100 * 1000 
+            active : true
+        },
+        {
+            beatSound : 0,
+            subDiv : Subdivisions.none,
+            beatDuration: 600, // 60/100 * 1000 
+            active : false
+        },
+        {
+            beatSound : 0,
+            subDiv : Subdivisions.none,
+            beatDuration: 600, // 60/100 * 1000 
+            active : false
+        },
+        {
+            beatSound : 0,
+            subDiv : Subdivisions.none,
+            beatDuration: 600, // 60/100 * 1000 
+            active : false
+        }
+        ]
+    },
+    {
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: true,
+        beats:[{
+            beatSound : 0,
+            subDiv : Subdivisions.none,
+            beatDuration: 600, // 60/100 * 1000 
+            active : true
+        },
+        {
+            beatSound : 0,
+            subDiv : Subdivisions.none,
+            beatDuration: 600, // 60/100 * 1000 
+            active : true
+        },
+        {
+            beatSound : 0,
+            subDiv : Subdivisions.none,
+            beatDuration: 600, // 60/100 * 1000 
+            active : true
+        }]
+    },
+    {
+        initBpm: 100,
+        denominator: 4,
+        repeat : 1,
+        active: true,
+        beats:[{
+            beatSound : 0,
+            subDiv : Subdivisions.none,
+            beatDuration: 600, // 60/100 * 1000 
+            active : true
+        },
+        {
+            beatSound : 0,
+            subDiv : Subdivisions.none,
+            beatDuration: 600, // 60/100 * 1000 
+            active : true
+        }]
+    }],
+    repeat: true,
+    name: "Default",
+    author: "",
+    date: ""
+}

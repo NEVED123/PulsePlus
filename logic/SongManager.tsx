@@ -1,5 +1,5 @@
 import { createContext, useState, useRef, useEffect, useContext, useLayoutEffect } from 'react'
-import { Song, Meter, Beat, defaultMetronomeSong } from './structure'
+import { Song, Meter, Beat, defaultMetronomeSong, multiMeterTestMetronomeSong } from './structure'
 import _ from 'lodash'
 import { Audio, AVPlaybackSource } from 'expo-av'
 import * as f from './SongFunctions'
@@ -36,7 +36,7 @@ export function SongProvider({ children } : { children : any }){
     //This is the third attempt at making this work, and is by no means ideal. Other two attempts down below.
 
     const [running, setRunning] = useState(false)
-    const [song, setSong] = useState(_.cloneDeep(defaultMetronomeSong))
+    const [song, setSong] = useState(_.cloneDeep(multiMeterTestMetronomeSong))
 
     const requestRef = useRef(null as any)
     const prevTRef = useRef(performance.now())
@@ -91,7 +91,8 @@ export function SongProvider({ children } : { children : any }){
         resetSong: () => {setSong(f.resetSong(song))},
         incrementBeat: ()=>{setSong(f.incrementBeat(song))},
         setActiveMeterIndex: (index : number) => {setSong(f.setActiveMeterIndex(index, song))},
-        length: f.getSongLength(song)
+        length: f.getSongLength(song),
+        sectionName : f.getSectionName(song)
     }
     
     return(
