@@ -2,18 +2,7 @@ import { createContext, useState, useRef, useEffect, useContext, useLayoutEffect
 import { Song, Meter, Beat, defaultMetronomeSong } from './structure'
 import _ from 'lodash'
 import { Audio, AVPlaybackSource } from 'expo-av'
-import {getActiveMeter, 
-    getActiveMeterIndex, 
-    setDenominator, 
-    getActiveBeat,
-    setAccent, 
-    setNumerator, 
-    setTempo, 
-    getTempo, 
-    getNumerator,
-    getDenominator,
-    resetSong,
-    incrementBeat} from './SongFunctions'
+import * as f from './SongFunctions'
 import { PreferencesContext } from './PreferencesManager'
 
 export const SongContext = createContext(0 as any) //initial values make compiler happy
@@ -61,16 +50,16 @@ export function SongProvider({ children } : { children : any }){
         const elapsed = timestamp - prevTRef.current
 
         if(!running){
-            setSong(resetSong(song))
+            setSong(f.resetSong(song))
             return
         }
 
-        const { beatDuration } = getActiveBeat(song)
+        const { beatDuration } = f.getActiveBeat(song)
 
         if(elapsed > beatDuration){
-            setSong(incrementBeat(song))
+            setSong(f.incrementBeat(song))
 
-            const { beatSound } = getActiveBeat(song)
+            const { beatSound } = f.getActiveBeat(song)
             console.log(elapsed-beatDuration)
 
             playSound(beatSound)
@@ -88,19 +77,21 @@ export function SongProvider({ children } : { children : any }){
 
     const contextValues = {
         getSong: ()=>{_.cloneDeep(song)},
-        activeMeter: getActiveMeter(song),
-        activeMeterIndex: getActiveMeterIndex(song),
-        numerator: getNumerator(song),
-        setNumerator: (numerator: number) => {setSong(setNumerator(song, numerator))},
-        denominator: getDenominator(song),
-        setDenominator: (denominator: number) => {setSong(setDenominator(song, denominator))},
-        setAccent: (beatNumber: number) => {setSong(setAccent(song, beatNumber))},
-        tempo: getTempo(song),
-        setTempo: (tempo: number)=>{setSong(setTempo(song, tempo))},
+        activeMeter: f.getActiveMeter(song),
+        activeMeterIndex: f.getActiveMeterIndex(song),
+        numerator: f.getNumerator(song),
+        setNumerator: (numerator: number) => {setSong(f.setNumerator(song, numerator))},
+        denominator: f.getDenominator(song),
+        setDenominator: (denominator: number) => {setSong(f.setDenominator(song, denominator))},
+        setAccent: (beatNumber: number) => {setSong(f.setAccent(song, beatNumber))},
+        tempo: f.getTempo(song),
+        setTempo: (tempo: number)=>{setSong(f.setTempo(song, tempo))},
         running: running,
         toggleRunning: toggleRunning,
-        resetSong: () => {setSong(resetSong(song))},
-        incrementBeat: ()=>{setSong(incrementBeat(song))}
+        resetSong: () => {setSong(f.resetSong(song))},
+        incrementBeat: ()=>{setSong(f.incrementBeat(song))},
+        setActiveMeterIndex: (index : number) => {setSong(f.setActiveMeterIndex(index, song))},
+        length: f.getSongLength(song)
     }
     
     return(

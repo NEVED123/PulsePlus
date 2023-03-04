@@ -24,6 +24,15 @@ export function getActiveMeterIndex(song: Song) : number {
     throw new Error('No active meter in song')
 }
 
+export function setActiveMeterIndex(index : number, song: Song) : Song {
+    const updatedSong = _.clone(song)
+
+    updatedSong.song[getActiveMeterIndex(updatedSong)].active = false
+    updatedSong.song[index].active = true
+
+    return updatedSong
+}
+
 export function getActiveBeat(song: Song) : Beat {
 
     const activeMeter = getActiveMeter(song)

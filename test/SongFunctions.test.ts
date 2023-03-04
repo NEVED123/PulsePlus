@@ -1,30 +1,4 @@
-import { 
-  getActiveMeter, 
-  getActiveMeterIndex, 
-  getActiveBeat,
-  getActiveBeatIndex,
-  incrementBeat, 
-  setNumerator, 
-  getNumerator,
-  getDenominator,
-  setDenominator,
-  setAccent,
-  setTempo,
-  getTempo,
-  resetSong,
-  getFinalTempo,
-  setFinalTempo,
-  incrementMeter,
-  decrementMeter,
-  setRepetitions,
-  getRepetitions,
-  setSectionName,
-  getSectionName,
-  addMeter,
-  removeMeter,
-  getSongLength,
-  getAccel
-} from "../logic/SongFunctions";
+import * as f from "../logic/SongFunctions";
 import { Meter, Beat, Song, Subdivisions} from "../logic/structure"
 import {describe, expect, test} from "@jest/globals"
 import _ from "lodash"
@@ -99,7 +73,7 @@ describe('getActiveMeter',()=>{
         ]
       }
 
-    expect(getActiveMeter(received)).toEqual(result)
+    expect(f.getActiveMeter(received)).toEqual(result)
   })
 
  
@@ -127,7 +101,7 @@ describe('getActiveMeter',()=>{
     }
 
     expect(()=>{
-      getActiveMeter(received)
+      f.getActiveMeter(received)
     }).toThrow
   })
 })
@@ -168,7 +142,7 @@ describe('getActiveMeterIndex',()=>{
       date: ""
     }
 
-    expect(getActiveMeterIndex(received)).toBe(0)
+    expect(f.getActiveMeterIndex(received)).toBe(0)
   })
 
   test('throws error when song contains no active meter',()=>{
@@ -194,7 +168,7 @@ describe('getActiveMeterIndex',()=>{
     }
 
     expect(()=>{
-      getActiveMeterIndex(received)
+      f.getActiveMeterIndex(received)
     }).toThrow()
   })
 })
@@ -229,7 +203,7 @@ describe('getActiveBeat', ()=>{
       active : true
       }
 
-    expect(getActiveBeat(received)).toEqual(result)
+    expect(f.getActiveBeat(received)).toEqual(result)
   })
 
   test('throws error when song contains no active beat', ()=>{
@@ -255,7 +229,7 @@ describe('getActiveBeat', ()=>{
     }
 
     expect(()=>{
-      getActiveBeat(received)
+      f.getActiveBeat(received)
     }).toThrow()
   })
 })
@@ -283,7 +257,7 @@ describe('getActiveBeatIndex',()=>{
       date: ""
     }
 
-    expect(getActiveBeatIndex(received)).toBe(0)
+    expect(f.getActiveBeatIndex(received)).toBe(0)
   })
 
   test('throws error when song contains no active beat',()=>{
@@ -309,7 +283,7 @@ describe('getActiveBeatIndex',()=>{
     }
 
     expect(()=>{
-      getActiveBeatIndex(received)
+      f.getActiveBeatIndex(received)
     }).toThrow()
   })
 
@@ -352,7 +326,7 @@ describe('getNumerator',()=>{
       date: ""
     }
   
-    expect(getNumerator(received)).toBe(1)
+    expect(f.getNumerator(received)).toBe(1)
   })
 
   test('throws error when numerator = 0', ()=>{
@@ -372,7 +346,7 @@ describe('getNumerator',()=>{
     }
 
     expect(()=>{
-      getNumerator(received)
+      f.getNumerator(received)
     }).toThrow()
   })
 
@@ -613,7 +587,7 @@ describe('setNumerator', ()=>{
     const numEquals32Clone = _.cloneDeep(numEquals32)
     const numEquals1Clone = _.cloneDeep(numEquals1)
 
-    expect(setNumerator(numEquals1Clone, 32, true)).toEqual(numEquals32Clone);
+    expect(f.setNumerator(numEquals1Clone, 32, true)).toEqual(numEquals32Clone);
   })
 
   test('setNumerator from 32 to 1, resetAccents = true', ()=>{
@@ -621,7 +595,7 @@ describe('setNumerator', ()=>{
     const numEquals32Clone = _.cloneDeep(numEquals32)
     const numEquals1Clone = _.cloneDeep(numEquals1)
 
-    expect(setNumerator(numEquals32Clone, 1, true)).toEqual(numEquals1Clone);
+    expect(f.setNumerator(numEquals32Clone, 1, true)).toEqual(numEquals1Clone);
   })
 
   test('setNumerator from 1 to 32, resetAccents = false',()=>{
@@ -634,7 +608,7 @@ describe('setNumerator', ()=>{
   
     num32FirstAccent1.song[0].beats[0].beatSound = 1  
 
-    expect(setNumerator(num1FirstAccent1, 32, false)).toEqual(num32FirstAccent1)
+    expect(f.setNumerator(num1FirstAccent1, 32, false)).toEqual(num32FirstAccent1)
   })
 
   test('setNumerator from 32 to 1, resetAccents = false',()=>{
@@ -647,7 +621,7 @@ describe('setNumerator', ()=>{
   
     num32FirstAccent1.song[0].beats[0].beatSound = 1  
 
-    expect(setNumerator(num32FirstAccent1, 1, false)).toEqual(num1FirstAccent1)
+    expect(f.setNumerator(num32FirstAccent1, 1, false)).toEqual(num1FirstAccent1)
   })
 })
 
@@ -687,7 +661,7 @@ describe('getDenominator',()=>{
       date: ""
     }
 
-    expect(getDenominator(received)).toBe(4)
+    expect(f.getDenominator(received)).toBe(4)
   })
 })
 
@@ -761,7 +735,7 @@ describe('setDenominator', ()=>{
       date: ""
     }
 
-    expect(setDenominator(received, 8)).toEqual(result)
+    expect(f.setDenominator(received, 8)).toEqual(result)
   })
 })
 
@@ -836,7 +810,7 @@ describe('setAccent', ()=>{
       date: ""
     }
   
-    expect(setAccent(received, 0)).toEqual(result)
+    expect(f.setAccent(received, 0)).toEqual(result)
   })
 
   test('loops accent number back to 0',()=>{
@@ -908,7 +882,7 @@ describe('setAccent', ()=>{
       date: ""
     }
   
-    expect(setAccent(received, 0)).toEqual(result)
+    expect(f.setAccent(received, 0)).toEqual(result)
   })
 
   test('throws error if given beat index does not exist in active meter',()=>{
@@ -947,7 +921,7 @@ describe('setAccent', ()=>{
     }
   
     expect(()=>{
-      setAccent(received, 1)
+      f.setAccent(received, 1)
     }).toThrow()
   })
 
@@ -1023,7 +997,7 @@ describe('setTempo',()=>{
       date: ""
     }
 
-    expect(setTempo(received, 200)).toEqual(result)
+    expect(f.setTempo(received, 200)).toEqual(result)
   })
 })
 
@@ -1063,7 +1037,7 @@ describe('getTempo',()=>{
       date: ""
     }
 
-    expect(getTempo(received)).toBe(100)
+    expect(f.getTempo(received)).toBe(100)
   })
 })
 
@@ -1137,7 +1111,7 @@ describe('resetSong',()=>{
       date: ""
     }
 
-    expect(resetSong(received)).toEqual(result)
+    expect(f.resetSong(received)).toEqual(result)
   })
 
 })
@@ -1202,7 +1176,7 @@ describe('incrementBeat',()=>{
       date: ""
     }
 
-    expect(incrementBeat(received)).toEqual(result)
+    expect(f.incrementBeat(received)).toEqual(result)
 
   })
 
@@ -1303,7 +1277,7 @@ describe('incrementBeat',()=>{
       date: ""
     }
 
-    expect(incrementBeat(received)).toEqual(result)
+    expect(f.incrementBeat(received)).toEqual(result)
     
   })
 
@@ -1402,7 +1376,7 @@ describe('incrementBeat',()=>{
       date: ""
     }
 
-    expect(incrementBeat(received)).toEqual(result)
+    expect(f.incrementBeat(received)).toEqual(result)
   }) 
 })
 
@@ -1435,7 +1409,7 @@ describe('getFinalTempo',()=>{
       author: "",
       date: ""
     }
-    expect(getFinalTempo(received)).toBe(200)
+    expect(f.getFinalTempo(received)).toBe(200)
   })
     
     test('Final tempo undefined', ()=>{
@@ -1466,7 +1440,7 @@ describe('getFinalTempo',()=>{
         date: ""
       }
   
-      expect(getFinalTempo(received)).toEqual(undefined)
+      expect(f.getFinalTempo(received)).toEqual(undefined)
   })
 })
 
@@ -1528,7 +1502,7 @@ describe('setFinalTempo',()=>{
         date: ""
       }
 
-      expect(setFinalTempo(200, 5, received)).toEqual(expected)
+      expect(f.setFinalTempo(200, 5, received)).toEqual(expected)
   })
     
 
@@ -1588,7 +1562,7 @@ describe('setFinalTempo',()=>{
       author: "",
       date: ""
     }
-    expect(setFinalTempo(200, undefined, received)).toEqual(expected)
+    expect(f.setFinalTempo(200, undefined, received)).toEqual(expected)
   })
 
   test('new finalBpm undefined, new accel defined',()=>{
@@ -1649,7 +1623,7 @@ describe('setFinalTempo',()=>{
       date: ""
     }
     
-    expect(setFinalTempo(undefined, 5, received)).toEqual(expected)
+    expect(f.setFinalTempo(undefined, 5, received)).toEqual(expected)
   })
 
   test('both FinalBpm and accel undefined',()=>{
@@ -1708,7 +1682,7 @@ describe('setFinalTempo',()=>{
       author: "",
       date: ""
     }
-    expect(setFinalTempo(undefined, undefined, received)).toEqual(expected)
+    expect(f.setFinalTempo(undefined, undefined, received)).toEqual(expected)
   })
 })
 
@@ -1806,7 +1780,7 @@ describe('incrementMeter',()=>{
       date: ""
     }
 
-    expect(incrementMeter(received, true)).toEqual(expected)
+    expect(f.incrementMeter(received, true)).toEqual(expected)
   })
 
   test('activeMeter is last meter, but not looping',()=>{
@@ -1856,7 +1830,7 @@ describe('incrementMeter',()=>{
       date: ""
     }
 
-    expect(incrementMeter(received)).toEqual(received);
+    expect(f.incrementMeter(received)).toEqual(received);
   })
 
   test('activeMeter is not last meter',()=>{
@@ -1952,7 +1926,7 @@ describe('incrementMeter',()=>{
       date: ""
     }
 
-    expect(incrementMeter(received)).toEqual(expected)
+    expect(f.incrementMeter(received)).toEqual(expected)
   })
 })
 
@@ -2050,7 +2024,7 @@ describe('decrementMeter',()=>{
       date: ""
     }
 
-    expect(decrementMeter(received, true)).toEqual(expected)
+    expect(f.decrementMeter(received, true)).toEqual(expected)
   })
 
   test('activeMeter is the first meter, but not looping',()=>{
@@ -2100,7 +2074,7 @@ describe('decrementMeter',()=>{
       date: ""
     }
 
-    expect(decrementMeter(received)).toEqual(received);
+    expect(f.decrementMeter(received)).toEqual(received);
   })
 
   test('activeMeter is not the first meter',()=>{
@@ -2196,7 +2170,7 @@ describe('decrementMeter',()=>{
       date: ""
     }
 
-    expect(decrementMeter(received)).toEqual(expected)
+    expect(f.decrementMeter(received)).toEqual(expected)
   })
 })
 
@@ -2256,7 +2230,7 @@ describe('setRepetitions',()=>{
       date: ""
     }
 
-    expect(setRepetitions(10, received)).toEqual(expected)
+    expect(f.setRepetitions(10, received)).toEqual(expected)
   })
 })
 
@@ -2290,7 +2264,7 @@ describe('getRepetitions',()=>{
       date: ""
     }   
     
-    expect(getRepetitions(received)).toEqual(10)
+    expect(f.getRepetitions(received)).toEqual(10)
   })
 })
 
@@ -2389,7 +2363,7 @@ describe('setSectionName',()=>{
       date: ""
     }  
 
-    expect(setSectionName('sectionName', received)).toEqual(expected)
+    expect(f.setSectionName('sectionName', received)).toEqual(expected)
   })
 })
 
@@ -2442,7 +2416,7 @@ describe('getSectionName',()=>{
       date: ""
     }  
 
-    expect(getSectionName(received)).toEqual('sectionName')
+    expect(f.getSectionName(received)).toEqual('sectionName')
   })
 })
 
@@ -2562,7 +2536,7 @@ describe('addMeter',()=>{
         date: ""
       }  
 
-      expect(addMeter(received)).toEqual(expected)
+      expect(f.addMeter(received)).toEqual(expected)
     })
 
    test('active meter has final bpm',()=>{
@@ -2682,7 +2656,7 @@ describe('addMeter',()=>{
       date: ""
     }  
 
-    expect(addMeter(received)).toEqual(expected)
+    expect(f.addMeter(received)).toEqual(expected)
   })
    
 })
@@ -2716,7 +2690,7 @@ describe('removeMeter',()=>{
       date: ""
     }  
   
-    expect(removeMeter(received)).toEqual(received)
+    expect(f.removeMeter(received)).toEqual(received)
    })
 
    test('song is longer than one meter',()=>{
@@ -2836,7 +2810,7 @@ describe('removeMeter',()=>{
       date: ""
     }  
   
-    expect(removeMeter(received)).toEqual(expected)
+    expect(f.removeMeter(received)).toEqual(expected)
    })
 })
 
@@ -2863,7 +2837,7 @@ describe('getSongLength',()=>{
       date: ""
     }  
   
-    expect(getSongLength(received)).toEqual(1)
+    expect(f.getSongLength(received)).toEqual(1)
    })
 
    test('song is more than 1 meter long',()=>{
@@ -2934,7 +2908,7 @@ describe('getSongLength',()=>{
       date: ""
     }  
 
-    expect(getSongLength(received)).toEqual(3)
+    expect(f.getSongLength(received)).toEqual(3)
    })
 })
 
@@ -2963,8 +2937,109 @@ describe('getAccel',()=>{
       date: ""
     }  
 
-    expect(getAccel(received)).toEqual(5)
+    expect(f.getAccel(received)).toEqual(5)
   })
 
 })
 
+describe('setActiveMeter',()=>{
+  test('sets active meter', ()=>{
+    const received: Song = {
+      song:[{
+        sectionName:'sectionName',
+        initBpm: 100,
+        denominator: 4,
+        repeat : 10,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+          ]
+        },
+        {
+          initBpm: 100,
+          denominator: 4,
+          repeat : 10,
+          active: false,
+          beats:[{
+                beatSound : 0,
+                subDiv : Subdivisions.none,
+                beatDuration: 600, // 60/100 * 1000 
+                active : false
+              },
+            ]
+          },
+          {
+            initBpm: 100,
+            denominator: 4,
+            repeat : 10,
+            active: false,
+            beats:[{
+                  beatSound : 0,
+                  subDiv : Subdivisions.none,
+                  beatDuration: 600, // 60/100 * 1000 
+                  active : false
+                },
+              ]
+            }
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }  
+
+    const expected: Song = {
+      song:[{
+        sectionName:'sectionName',
+        initBpm: 100,
+        denominator: 4,
+        repeat : 10,
+        active: false,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+          ]
+        },
+        {
+          initBpm: 100,
+          denominator: 4,
+          repeat : 10,
+          active: false,
+          beats:[{
+                beatSound : 0,
+                subDiv : Subdivisions.none,
+                beatDuration: 600, // 60/100 * 1000 
+                active : false
+              },
+            ]
+          },
+          {
+            initBpm: 100,
+            denominator: 4,
+            repeat : 10,
+            active: true,
+            beats:[{
+                  beatSound : 0,
+                  subDiv : Subdivisions.none,
+                  beatDuration: 600, // 60/100 * 1000 
+                  active : false
+                },
+              ]
+            }
+      ],
+      repeat: true,
+      name: "Default",
+      author: "",
+      date: ""
+    }  
+
+    expect(f.setActiveMeterIndex(2, received)).toEqual(expected)
+  })
+})
