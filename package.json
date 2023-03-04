@@ -19,7 +19,8 @@
   "dependencies": {
     "@miblanchard/react-native-slider": "^2.2.0",
     "@react-navigation/bottom-tabs": "^6.3.2",
-    "@react-navigation/native": "^6.0.11",
+    "@react-navigation/native": "^6.1.6",
+    "@react-navigation/native-stack": "^6.9.12",
     "@types/jest": "^29.2.4",
     "@types/lodash": "^4.14.191",
     "expo": "^48.0.0",

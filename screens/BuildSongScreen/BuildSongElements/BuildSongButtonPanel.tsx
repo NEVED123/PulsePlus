@@ -1,11 +1,19 @@
 import { BuildSongButton } from "./BuildSongButton";
 import { View } from 'react-native'
 import { StyleSheet } from 'react-native'
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import Nav from '../../../navigation/NavType'
+import SongSummary from "../SongSummary";
 
 export function BuildSongButtonPanel(){
+
+    const { navigate } = useNavigation<Nav>()
+
     return(
         <View style={styles.container}>
-            <BuildSongButton text={'Summary'} onPress={()=>{}}/>
+            <BuildSongButton 
+                text={'Summary'} onPress={()=>{navigate('SongSummary')}}/>
             <BuildSongButton text={'Create'} onPress={()=>{}}/>
             <BuildSongButton text={'Load'} onPress={()=>{}}/>
         </View>

@@ -1,8 +1,9 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen/HomeScreen';
 import SettingsScreen from '../screens/SettingsScreen/SettingsScreen';
-import BuildSongScreen from '../screens/BuildSongScreen/BuildSongScreen';
+import BuildSongScreen from '../screens/BuildSongScreen/BuildSongMenu';
 import { View, Image, StyleSheet } from 'react-native'
+import BuildSongScreenNavigation from './BuildSongScreenNavigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -33,7 +34,7 @@ export default function Tabs() {
             </View>
           )
         }}}/>
-      <Tab.Screen name='Build Song' component={BuildSongScreen}
+      <Tab.Screen name='Build Song' component={BuildSongScreenNavigation}
         options={{tabBarIcon: ({ focused })=>{
           return(
             <View style={styles.iconContainer}>

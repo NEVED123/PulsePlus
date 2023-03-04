@@ -12,7 +12,7 @@ export function BuildSongButton({ text, onPress} : { text: String, onPress : Fun
                 styles.button,
                 {backgroundColor: buttonColors[theme as keyof typeof buttonColors]}
             ]}
-            onPress={onPress()}
+            onPress={()=>{onPress()}}
         >
             <Text style={styles.text}>
                 {text}
@@ -23,7 +23,7 @@ export function BuildSongButton({ text, onPress} : { text: String, onPress : Fun
 
 const styles = StyleSheet.create({
     button:{
-        height:30,
+        height:40,
         width: 100,
         justifyContent:'center',
         alignItems:'center',
