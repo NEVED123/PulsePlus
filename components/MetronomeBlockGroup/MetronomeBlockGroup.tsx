@@ -1,19 +1,19 @@
 import { View, StyleSheet } from 'react-native'
 import { MetronomeBlock } from './MetronomeBlock'
-import { useContext, useState } from 'react'
+import { useContext,Context } from 'react'
 import { Platform } from 'react-native'
 import { rowDistributionArray, indexAtBeginningOfEachRow,
     METRONOME_BLOCK_GROUP_PADDING } from './MetronomeBlockGroupBehavior'
 import { Song, Meter } from '../../logic/structure'
 import { SongContext } from '../../logic/SongManager'
 
-export function MetronomeBlockGroup(){
+export function MetronomeBlockGroup({context, width} : {context: Context<any>, width? : number}){
     //The 'key' gives each metronome block a seperate ID based on its position in the array, for now its only purpose
     //is to get a warning to shut up but it will probably become useful
-    const { activeMeter } = useContext(SongContext)
+    const { activeMeter } = useContext(context)
     const rows = rowDistributionArray(activeMeter)
     const indexHelper = indexAtBeginningOfEachRow(activeMeter)
-    
+
     return(  
         <View 
             style={{flex:1}}>
@@ -23,8 +23,11 @@ export function MetronomeBlockGroup(){
                     key={rowNumber}>
                     {row.map((beat,rowPosition) => 
                         <MetronomeBlock 
+                            context={context}
                             key={rowPosition} 
-                            beatNumber={indexHelper[rowNumber] + rowPosition} />)}
+                            beatNumber={indexHelper[rowNumber] + rowPosition} 
+                            width={width}
+                        />)}
                 </View>     
             )}                  
         </View>  

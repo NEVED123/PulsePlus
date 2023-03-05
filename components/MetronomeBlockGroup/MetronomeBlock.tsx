@@ -1,16 +1,15 @@
 import { View, Pressable, StyleSheet, Dimensions } from 'react-native'
 import { rowSizes, METRONOME_BLOCK_GROUP_PADDING } from './MetronomeBlockGroupBehavior'
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useState, useEffect, Context } from 'react'
 import { PreferencesContext } from '../../logic/PreferencesManager'
 import { accentColors, borderWidths, activeColors } from '../../theme/Colors'
 import { Meter, Song } from '../../logic/structure'
-import { SongContext } from '../../logic/SongManager'
 
 
-export function MetronomeBlock({ beatNumber, width }:{ beatNumber:number, width? : number}){
+export function MetronomeBlock({ beatNumber, context, width }:{ beatNumber:number, context: Context<any>, width? : number}){
 
     const { theme } = useContext(PreferencesContext)
-    const { setAccent, activeMeter } = useContext(SongContext)
+    const { setAccent, activeMeter } = useContext(context)
     const beat = activeMeter.beats[beatNumber]
     const accent = beat.beatSound
     const active = beat.active

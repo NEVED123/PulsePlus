@@ -2,7 +2,7 @@ import { View, Text, SafeAreaView, Pressable, TouchableOpacity, StyleSheet, Plat
 import { StatusBar } from 'expo-status-bar';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useContext, useState } from 'react';
-import { ClickSpace } from './HomeElements/ClickSpace';
+import { ClickSpace } from '../../components/ClickSpace/ClickSpace';
 import { TimeSignature } from "./HomeElements/TimeSignature"
 import { TempoWheel } from "./HomeElements/TempoWheel"
 import { StartButton } from "./HomeElements/StartButton"

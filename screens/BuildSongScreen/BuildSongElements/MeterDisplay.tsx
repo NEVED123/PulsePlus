@@ -4,13 +4,16 @@ import { backgroundColors } from '../../../theme/Colors'
 import { PreferencesContext } from '../../../logic/PreferencesManager'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Meter } from '../../../logic/structure'
-import { ClickSpace } from '../../HomeScreen/HomeElements/ClickSpace'
+import { ClickSpace } from '../../../components/ClickSpace/ClickSpace'
 import { BuildSongContext } from '../../../logic/BuildSongManager'
-import { BuildSongClickSpace } from './BuildSongClickSpace'
+import { Dimensions } from 'react-native'
+import { rowSizes } from '../../../components/MetronomeBlockGroup/MetronomeBlockGroupBehavior'
 
 export default function MeterDisplay(){
 
-    const { setSectionName, sectionName } = useContext(BuildSongContext)
+    const { setSectionName, sectionName, activeMeter } = useContext(BuildSongContext)
+
+    const topRowNumber = rowSizes(activeMeter)[0]
 
     const [sectionNameText, setSectionNameText] = useState(sectionName)
 
@@ -34,7 +37,10 @@ export default function MeterDisplay(){
                     placeholder={'[SECTION NAME]'}
                     placeholderTextColor="white">
                 </TextInput>
-                <BuildSongClickSpace/>
+                <ClickSpace
+                    context={BuildSongContext}
+                    width={(Dimensions.get('window').width-120-topRowNumber * 6)/topRowNumber}
+                />
             </View>
     )
 }

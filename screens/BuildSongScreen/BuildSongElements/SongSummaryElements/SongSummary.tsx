@@ -42,8 +42,7 @@ export default function SongSummary({navigation} : {navigation : any}){
                     Summary
                 </Text>
                 <SongSummaryItem meter={testMeter} index={0}/>
-            </SafeAreaView>
-            
+            </SafeAreaView>        
         </LinearGradient> 
     )
 }
