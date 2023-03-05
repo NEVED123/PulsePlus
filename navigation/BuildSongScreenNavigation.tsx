@@ -1,5 +1,5 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import SongSummary from '../screens/BuildSongScreen/SongSummary';
+import SongSummary from '../screens/BuildSongScreen/BuildSongElements/SongSummaryElements/SongSummary';
 import BuildSongMenu from '../screens/BuildSongScreen/BuildSongMenu';
 
 const Stack = createNativeStackNavigator()
@@ -15,6 +15,7 @@ export default function BuildSongScreen(){
             <Stack.Screen 
                 name="SongSummary" 
                 component={SongSummary}
+                options={{ headerShown: false}}
             />
         </Stack.Navigator>
       )

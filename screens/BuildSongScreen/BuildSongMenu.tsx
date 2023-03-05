@@ -13,7 +13,7 @@ import { SelectAccel } from './BuildSongElements/SelectAccel';
 import { BuildSongButtonPanel } from './BuildSongElements/BuildSongButtonPanel';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import SongSummary from './SongSummary'
+import SongSummary from './BuildSongElements/SongSummaryElements/SongSummary'
 
 export default function BuildSongMenu({navigation} : {navigation : any}){
 

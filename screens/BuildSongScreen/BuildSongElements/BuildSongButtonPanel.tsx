@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native'
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import Nav from '../../../navigation/NavType'
-import SongSummary from "../SongSummary";
+import SongSummary from "./SongSummaryElements/SongSummary";
 
 export function BuildSongButtonPanel(){
 
