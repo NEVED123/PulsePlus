@@ -1,5 +1,5 @@
 import { View, StyleSheet } from 'react-native'
-import { MetronomeBlockGroup } from './MetronomeBlockGroup'
+import { MetronomeBlockGroup } from '../../../components/MetronomeBlockGroup.tsx/MetronomeBlockGroup'
 import { Song } from '../../../logic/structure'
 import { useContext } from 'react'
 

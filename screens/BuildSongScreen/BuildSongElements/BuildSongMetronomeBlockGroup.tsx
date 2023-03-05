@@ -3,7 +3,7 @@ import { BuildSongMetronomeBlock } from './BuildSongMetronomeBlock'
 import { useContext, useState } from 'react'
 import { Platform } from 'react-native'
 import { rowDistributionArray, indexAtBeginningOfEachRow,
-    METRONOME_BLOCK_GROUP_PADDING } from './../../HomeScreen/HomeElements/MetronomeBlockGroupBehavior'
+    METRONOME_BLOCK_GROUP_PADDING } from '../../../components/MetronomeBlockGroup.tsx/MetronomeBlockGroupBehavior'
 import { Song, Meter } from '../../../logic/structure'
 import { BuildSongContext } from '../../../logic/BuildSongManager'
 

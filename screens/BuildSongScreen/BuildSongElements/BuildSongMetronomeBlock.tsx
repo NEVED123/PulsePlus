@@ -1,5 +1,5 @@
 import { View, Pressable, StyleSheet, Dimensions } from 'react-native'
-import { rowSizes, METRONOME_BLOCK_GROUP_PADDING } from '../../HomeScreen/HomeElements/MetronomeBlockGroupBehavior'
+import { rowSizes, METRONOME_BLOCK_GROUP_PADDING } from '../../../components/MetronomeBlockGroup.tsx/MetronomeBlockGroupBehavior'
 import { useContext, useState, useEffect } from 'react'
 import { PreferencesContext } from '../../../logic/PreferencesManager'
 import { accentColors, borderWidths, activeColors } from '../../../theme/Colors'

@@ -4,8 +4,8 @@ import { useContext, useState } from 'react'
 import { Platform } from 'react-native'
 import { rowDistributionArray, indexAtBeginningOfEachRow,
     METRONOME_BLOCK_GROUP_PADDING } from './MetronomeBlockGroupBehavior'
-import { Song, Meter } from '../../../logic/structure'
-import { SongContext } from '../../../logic/SongManager'
+import { Song, Meter } from '../../logic/structure'
+import { SongContext } from '../../logic/SongManager'
 
 export function MetronomeBlockGroup(){
     //The 'key' gives each metronome block a seperate ID based on its position in the array, for now its only purpose

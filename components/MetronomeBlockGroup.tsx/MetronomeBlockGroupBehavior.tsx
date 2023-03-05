@@ -1,4 +1,4 @@
-import { Beat, Meter } from '../../../logic/structure'
+import { Beat, Meter } from '../../logic/structure'
 
 function numberOfRows(beats: number): number{
     //there's probably a simpler way to do this works

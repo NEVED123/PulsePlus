@@ -9,7 +9,7 @@ import { StartButton } from "./HomeElements/StartButton"
 import { PreferencesContext } from '../../logic/PreferencesManager'
 import { backgroundColors } from '../../theme/Colors';
 import { defaultMetronomeSong } from '../../logic/structure';
-import { SongProvider } from '../../logic/SongManager';
+import { SongProvider, SongContext } from '../../logic/SongManager';
 import { SongProgress } from './HomeElements/SongProgress';
 
 /**
@@ -21,12 +21,15 @@ export default function HomeScreen() {
         load default song
     }*/
     const { theme } = useContext(PreferencesContext)
+
     return (
         <SongProvider>
             <LinearGradient colors={backgroundColors[theme as keyof typeof backgroundColors]} style={{flex:1}}>
                 <SafeAreaView style={{flex:1}}>
                     <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'}/>
-                    <ClickSpace/>
+                    <ClickSpace
+                        context={SongContext}
+                    />
                     <SongProgress/>
                     <TimeSignature/> 
                     <TempoWheel/>
