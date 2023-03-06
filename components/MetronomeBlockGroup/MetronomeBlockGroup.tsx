@@ -7,12 +7,11 @@ import { rowDistributionArray, indexAtBeginningOfEachRow,
 import { Song, Meter } from '../../logic/structure'
 import { SongContext } from '../../logic/SongManager'
 
-export function MetronomeBlockGroup({context, width} : {context: Context<any>, width? : number}){
+export function MetronomeBlockGroup({meter, width, context} : {meter: Meter, width? : number, context? : Context<any>}){
     //The 'key' gives each metronome block a seperate ID based on its position in the array, for now its only purpose
     //is to get a warning to shut up but it will probably become useful
-    const { activeMeter } = useContext(context)
-    const rows = rowDistributionArray(activeMeter)
-    const indexHelper = indexAtBeginningOfEachRow(activeMeter)
+    const rows = rowDistributionArray(meter)
+    const indexHelper = indexAtBeginningOfEachRow(meter)
 
     return(  
         <View 
@@ -23,6 +22,7 @@ export function MetronomeBlockGroup({context, width} : {context: Context<any>, w
                     key={rowNumber}>
                     {row.map((beat,rowPosition) => 
                         <MetronomeBlock 
+                            meter = {meter}
                             context={context}
                             key={rowPosition} 
                             beatNumber={indexHelper[rowNumber] + rowPosition} 
