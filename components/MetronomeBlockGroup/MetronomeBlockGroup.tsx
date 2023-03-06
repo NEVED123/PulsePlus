@@ -7,7 +7,7 @@ import { rowDistributionArray, indexAtBeginningOfEachRow,
 import { Song, Meter } from '../../logic/structure'
 import { SongContext } from '../../logic/SongManager'
 
-export function MetronomeBlockGroup({meter, onPress, width} : {meter: Meter, onPress? : Function, width? : number}){
+export function MetronomeBlockGroup({meter, onPress, width} : {meter: Meter, onPress? : (beatIndex : number) => {}, width? : number}){
     //The 'key' gives each metronome block a seperate ID based on its position in the array, for now its only purpose
     //is to get a warning to shut up but it will probably become useful
     const rows = rowDistributionArray(meter)

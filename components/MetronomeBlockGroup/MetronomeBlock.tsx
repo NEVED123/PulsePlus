@@ -6,7 +6,7 @@ import { accentColors, borderWidths, activeColors } from '../../theme/Colors'
 import { Meter, Song } from '../../logic/structure'
 
 
-export function MetronomeBlock({ beatNumber, meter, width, onPress }:{ beatNumber:number, meter: Meter, width? : number, onPress? : Function}){
+export function MetronomeBlock({ beatNumber, meter, width, onPress }:{ beatNumber:number, meter: Meter, width? : number, onPress? : (beatIndex : number)=>void}){
 
     const { theme } = useContext(PreferencesContext)
 
