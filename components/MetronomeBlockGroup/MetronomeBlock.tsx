@@ -6,14 +6,14 @@ import { accentColors, borderWidths, activeColors } from '../../theme/Colors'
 import { Meter, Song } from '../../logic/structure'
 
 
-export function MetronomeBlock({ beatNumber, context, width }:{ beatNumber:number, context: Context<any>, width? : number}){
+export function MetronomeBlock({ beatNumber, meter, width, onPress }:{ beatNumber:number, meter: Meter, width? : number, onPress? : Function}){
 
     const { theme } = useContext(PreferencesContext)
-    const { setAccent, activeMeter } = useContext(context)
-    const beat = activeMeter.beats[beatNumber]
+
+    const beat = meter.beats[beatNumber]
     const accent = beat.beatSound
     const active = beat.active
-    const topRowNumber = rowSizes(activeMeter)[0] //used to calculate width of blocks
+    const topRowNumber = rowSizes(meter)[0] //used to calculate width of blocks
 
     const [backgroundColor, setBackgroundColor] = useState(accentColors[theme as keyof typeof accentColors][accent])
 
@@ -37,7 +37,10 @@ export function MetronomeBlock({ beatNumber, context, width }:{ beatNumber:numbe
                     borderWidth: borderWidths[theme as keyof typeof borderWidths]}, 
                     styles.metronomeBlock]
                 }
-            onPress={()=>{setAccent(beatNumber)}}>
+            onPress={()=>{
+                if(onPress != undefined) 
+                    onPress(beatNumber)
+            }}>
         </Pressable> 
     )
 }
