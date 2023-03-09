@@ -1,4 +1,4 @@
-import { Text, SafeAreaView, StyleSheet} from 'react-native'
+import { Text, SafeAreaView, StyleSheet, ScrollView} from 'react-native'
 import { backgroundColors } from '../../../../theme/Colors'
 import { textTitleColors } from '../../../../theme/Colors'
 import { useContext } from 'react'
@@ -6,42 +6,31 @@ import { LinearGradient } from 'expo-linear-gradient'
 import { PreferencesContext } from '../../../../logic/PreferencesManager'
 import { BuildSongButton } from '../BuildSongButton'
 import SongSummaryItem from './SongSummaryItem'
-import { Meter, Beat } from '../../../../logic/structure'
-
-const testMeter : Meter = {
-    initBpm: 100,
-    denominator: 4,
-    sectionName: 'Chorus',
-    repeat: 5,
-    active: false,
-    beats:[
-        {
-            beatDuration:600,
-            beatSound:0,
-            subDiv: [1],
-            active: false
-        },
-        {
-            beatDuration:600,
-            beatSound:0,
-            subDiv: [1],
-            active: false
-        }
-    ]
-}
+import { Meter, Beat, Song } from '../../../../logic/structure'
+import { BuildSongContext } from '../../../../logic/BuildSongManager'
 
 export default function SongSummary({navigation} : {navigation : any}){
 
     const { theme } = useContext( PreferencesContext)
-    
+
+    const { getSong } = useContext(BuildSongContext)
+
+    const song : Song = getSong()
+
+    const summaryItemArray = song.song.map((meter, index)=>{
+        return <SongSummaryItem meter={meter} index={index}/>
+    })
+
     return(
         <LinearGradient colors={backgroundColors[theme as keyof typeof backgroundColors]} style={styles.background}>
             <SafeAreaView style={styles.container}>
-                <BuildSongButton text={'< Back'} onPress={()=>{navigation.navigate('BuildSongMenu')}}/>
-                <Text style={[styles.title, {color : textTitleColors[theme as keyof typeof textTitleColors]}]}>
-                    Summary
-                </Text>
-                <SongSummaryItem meter={testMeter} index={0}/>
+                    <BuildSongButton text={'< Back'} onPress={()=>{navigation.navigate('BuildSongMenu')}}/>
+                    <Text style={[styles.title, {color : textTitleColors[theme as keyof typeof textTitleColors]}]}>
+                        Summary
+                    </Text>
+                    <ScrollView>
+                        {summaryItemArray}
+                    </ScrollView>
             </SafeAreaView>        
         </LinearGradient> 
     )
@@ -58,7 +47,7 @@ const styles = StyleSheet.create({
     title:{
         fontSize:40,
         textAlign:'center',
-        MarginBottom:20
+        marginBottom:20
     },
     settingsBox:{
         overflow:'hidden',

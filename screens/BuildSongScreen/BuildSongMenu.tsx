@@ -20,25 +20,23 @@ export default function BuildSongMenu({navigation} : {navigation : any}){
     const { theme } = useContext(PreferencesContext)
 
     return(
-        <BuildSongProvider>
-                <KeyboardAvoidingView
-                    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-                    style={{flex:1}}
-                >
-                    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                        <LinearGradient colors={backgroundColors[theme as keyof typeof backgroundColors]} style={{flex:1}}>
-                            <SafeAreaView style={{flex:1}}>
-                                <MeterCarousel/>
-                                <BuildSongTimeSignature/>
-                                <SelectRepetitions/>
-                                <SelectTempo/>
-                                <SelectAccel/>
-                                <BuildSongButtonPanel/>
-                            </SafeAreaView>
-                        </LinearGradient>
-                    </TouchableWithoutFeedback>
-                </KeyboardAvoidingView>
-        </BuildSongProvider>
+        <KeyboardAvoidingView
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+            style={{flex:1}}
+        >
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <LinearGradient colors={backgroundColors[theme as keyof typeof backgroundColors]} style={{flex:1}}>
+                    <SafeAreaView style={{flex:1}}>
+                        <MeterCarousel/>
+                        <BuildSongTimeSignature/>
+                        <SelectRepetitions/>
+                        <SelectTempo/>
+                        <SelectAccel/>
+                        <BuildSongButtonPanel/>
+                    </SafeAreaView>
+                </LinearGradient>
+            </TouchableWithoutFeedback>
+        </KeyboardAvoidingView>
     )
 
 }
