@@ -99,6 +99,7 @@ export function BuildSongProvider({ children } : { children : any }){
         removeMeter : ()=>{setSong(removeMeter(song))},
         length : getSongLength(song),
         accel : getAccel(song),
+        loadSong: (song: Song) => {setSong(_.cloneDeep(song))}
     }
     
     return(

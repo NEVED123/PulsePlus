@@ -4,6 +4,8 @@ import _ from 'lodash'
 import { Audio, AVPlaybackSource } from 'expo-av'
 import * as f from './SongFunctions'
 import { PreferencesContext } from './PreferencesManager'
+import { BuildSongContext } from './BuildSongManager'
+
 
 export const SongContext = createContext(0 as any) //initial values make compiler happy
 
@@ -92,7 +94,8 @@ export function SongProvider({ children } : { children : any }){
         incrementBeat: ()=>{setSong(f.incrementBeat(song))},
         setActiveMeterIndex: (index : number) => {setSong(f.setActiveMeterIndex(index, song))},
         length: f.getSongLength(song),
-        sectionName : f.getSectionName(song)
+        sectionName : f.getSectionName(song),
+        loadSong: (song: Song) => {setSong(_.cloneDeep(song))}
     }
     
     return(
