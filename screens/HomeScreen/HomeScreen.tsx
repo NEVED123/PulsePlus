@@ -23,20 +23,18 @@ export default function HomeScreen() {
     const { theme } = useContext(PreferencesContext)
 
     return (
-        <SongProvider>
-            <LinearGradient colors={backgroundColors[theme as keyof typeof backgroundColors]} style={{flex:1}}>
-                <SafeAreaView style={{flex:1}}>
-                    <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'}/>
-                    <ClickSpace
-                        context={SongContext}
-                    />
-                    <SongProgress/>
-                    <TimeSignature/> 
-                    <TempoWheel/>
-                    <StartButton/>
-                </SafeAreaView>
-            </LinearGradient>
-        </SongProvider>
+        <LinearGradient colors={backgroundColors[theme as keyof typeof backgroundColors]} style={{flex:1}}>
+            <SafeAreaView style={{flex:1}}>
+                <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'}/>
+                <ClickSpace
+                    context={SongContext}
+                />
+                <SongProgress/>
+                <TimeSignature/> 
+                <TempoWheel/>
+                <StartButton/>
+            </SafeAreaView>
+        </LinearGradient>
     );
 }
 

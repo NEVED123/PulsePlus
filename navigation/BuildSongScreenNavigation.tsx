@@ -7,20 +7,17 @@ const Stack = createNativeStackNavigator()
 
 export default function BuildSongScreen(){
     return (
-        <BuildSongProvider>
-            <Stack.Navigator initialRouteName={"BuildSongMenu"}>
-                <Stack.Screen 
-                    name="BuildSongMenu" 
-                    component={BuildSongMenu}
-                    options={{ headerShown: false}}
-                />
-                <Stack.Screen 
-                    name="SongSummary" 
-                    component={SongSummary}
-                    options={{ headerShown: false}}
-                />
-            </Stack.Navigator>
-        </BuildSongProvider>
-
+        <Stack.Navigator initialRouteName={"BuildSongMenu"}>
+            <Stack.Screen 
+                name="BuildSongMenu" 
+                component={BuildSongMenu}
+                options={{ headerShown: false}}
+            />
+            <Stack.Screen 
+                name="SongSummary" 
+                component={SongSummary}
+                options={{ headerShown: false}}
+            />
+        </Stack.Navigator>
       )
 }
