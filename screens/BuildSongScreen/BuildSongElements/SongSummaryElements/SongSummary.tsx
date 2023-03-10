@@ -13,9 +13,7 @@ export default function SongSummary({navigation} : {navigation : any}){
 
     const { theme } = useContext( PreferencesContext)
 
-    const { getSong } = useContext(BuildSongContext)
-
-    const song : Song = getSong()
+    const { song } : { song: Song }= useContext(BuildSongContext)
 
     const summaryItemArray = song.song.map((meter, index)=>{
         return <SongSummaryItem meter={meter} index={index}/>

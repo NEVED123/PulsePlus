@@ -1,13 +1,13 @@
 import { createContext, useState, useRef, useEffect, useContext, useLayoutEffect } from 'react'
-import { Song, Meter, Beat, defaultMetronomeSong, multiMeterTestMetronomeSong } from './structure'
+import { Song, Meter, Beat, defaultMetronomeSong, multiMeterTestMetronomeSong, SongManagerFunctions } from './structure'
 import _ from 'lodash'
 import { Audio, AVPlaybackSource } from 'expo-av'
 import * as f from './SongFunctions'
 import { PreferencesContext } from './PreferencesManager'
 import { BuildSongContext } from './BuildSongManager'
 
-
-export const SongContext = createContext(0 as any) //initial values make compiler happy
+let contextValues = {} as SongManagerFunctions
+export const SongContext = createContext(contextValues) //initial values make compiler happy
 
 export function SongProvider({ children } : { children : any }){
 
@@ -77,10 +77,11 @@ export function SongProvider({ children } : { children : any }){
         return () => cancelAnimationFrame(requestRef.current)
     },[running])
 
-    const contextValues = {
-        getSong: ()=>{_.cloneDeep(song)},
+    contextValues = {
+        song: _.cloneDeep(song),
         activeMeter: f.getActiveMeter(song),
         activeMeterIndex: f.getActiveMeterIndex(song),
+        setActiveMeterIndex: (index: number) => f.setActiveMeterIndex(index, song),
         numerator: f.getNumerator(song),
         setNumerator: (numerator: number) => {setSong(f.setNumerator(song, numerator))},
         denominator: f.getDenominator(song),
@@ -88,14 +89,23 @@ export function SongProvider({ children } : { children : any }){
         setAccent: (beatNumber: number) => {setSong(f.setAccent(song, beatNumber))},
         tempo: f.getTempo(song),
         setTempo: (tempo: number)=>{setSong(f.setTempo(song, tempo))},
-        running: running,
-        toggleRunning: toggleRunning,
         resetSong: () => {setSong(f.resetSong(song))},
         incrementBeat: ()=>{setSong(f.incrementBeat(song))},
-        setActiveMeterIndex: (index : number) => {setSong(f.setActiveMeterIndex(index, song))},
-        length: f.getSongLength(song),
-        sectionName : f.getSectionName(song),
-        loadSong: (song: Song) => {setSong(_.cloneDeep(song))}
+        finalTempo: f.getFinalTempo(song),
+        setFinalTempo: (finalTempo : number | undefined, accel : number | undefined) => {setSong(f.setFinalTempo(finalTempo, accel, song))},
+        setRepetitions: (repeat: number) => {setSong(f.setRepetitions(repeat, song))},
+        repetitions: f.getRepetitions(song),
+        setSectionName: (sectionName: String) => {setSong(f.setSectionName(sectionName, song))},
+        sectionName: f.getSectionName(song),
+        incrementMeter: (wrapToBeginning? : boolean)=>{setSong(f.incrementMeter(song, wrapToBeginning))},
+        decrementMeter: (wrapToEnd? : boolean) => {setSong(f.decrementMeter(song, wrapToEnd))},
+        addMeter : () => {setSong(f.addMeter(song))},
+        removeMeter : ()=>{setSong(f.removeMeter(song))},
+        length : f.getSongLength(song),
+        accel : f.getAccel(song),
+        loadSong: (song: Song) => {setSong(_.cloneDeep(song))},
+        running: running,
+        toggleRunning: toggleRunning,
     }
     
     return(

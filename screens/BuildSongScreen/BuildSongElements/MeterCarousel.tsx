@@ -7,7 +7,7 @@ export function MeterCarousel(){
     
     const { incrementMeter, 
         decrementMeter, 
-        getSong, 
+        song, 
         addMeter, 
         removeMeter, 
         length, 
@@ -25,7 +25,7 @@ export function MeterCarousel(){
                     style={styles.toggleActiveMeter}
                     onPress={()=>{
                         decrementMeter()
-                        console.log(getSong())}}>
+                        console.log(song)}}>
                     {'<'}
                 </Text>
                 <MeterDisplay/>
@@ -33,7 +33,7 @@ export function MeterCarousel(){
                     style={styles.toggleActiveMeter}
                     onPress={()=>{
                         incrementMeter()
-                        console.log(getSong())}}>
+                        console.log(song)}}>
                     {'>'}
                 </Text>
             </View>

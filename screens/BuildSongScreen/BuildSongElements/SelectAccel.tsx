@@ -11,7 +11,7 @@ import DropDownPicker from "react-native-dropdown-picker"
 export function SelectAccel(){
     
     const { theme } = useContext(PreferencesContext)
-    const { tempo, setFinalTempo, finalTempo, getSong, accel, activeMeter, denominator } = useContext(BuildSongContext)
+    const { tempo, setFinalTempo, finalTempo, song, accel, activeMeter, denominator } = useContext(BuildSongContext)
 
     const [isSwitchOn, setIsSwitchOn] = useState(finalTempo != undefined)
     const [sliderValue, setSliderValue] = useState(accel != undefined ? accel : 0)
@@ -51,7 +51,7 @@ export function SelectAccel(){
                         const accel = on ? 0 : undefined
                         setIsSwitchOn(!isSwitchOn)
                         setFinalTempo(finalTempo, accel)
-                        console.log(getSong())
+                        console.log(song)
                     }} 
                 />
 
@@ -77,10 +77,10 @@ export function SelectAccel(){
                         setValue={setNoteValue}
                         setItems={setItems}
                         onSelectItem={(value)=>{
-                            if(value.value != undefined){
+                            if(value.value != undefined && finalTempo != undefined){
                                 //translate current tempo to our new note value tempo
-                                setFinalTempo(finalTempo * noteValue/value.value)
-                                console.log(getSong())
+                                setFinalTempo(finalTempo * noteValue/value.value, undefined)
+                                console.log(song)
                             }
                         }}
                     />
@@ -107,20 +107,20 @@ export function SelectAccel(){
                             onEndEditing={(e)=>{
                                 //onChangeText ensures the number is valid
                                 const newTempo = Number(e.nativeEvent.text)
-                                setFinalTempo(newTempo * denominator/noteValue)
-                                console.log(getSong())
+                                setFinalTempo(newTempo * denominator/noteValue, undefined)
+                                console.log(song)
                             }}>
                     </TextInput>                    
                 </View>
                 <Text style={[
                     {
-                        alignSelf: (finalTempo < tempo) ? 'flex-start': 'flex-end' /**This will be a boolean, equals flex-start when final tempo < initial tempo */,
+                        alignSelf: finalTempo != undefined ? ((finalTempo < tempo) ? 'flex-start': 'flex-end') : 'flex-start' /**This will be a boolean, equals flex-start when final tempo < initial tempo */,
                         color: textTitleColors[theme as keyof typeof textTitleColors],
                         marginBottom:10
                     },
                     styles.accelOptionItems
                 ]}>
-                    {(finalTempo < tempo) ? tempo : finalTempo}
+                    {finalTempo != undefined ? ((finalTempo < tempo) ? tempo : finalTempo) : tempo}
                 </Text>
                 <Slider
                     containerStyle={styles.slider}
@@ -130,7 +130,7 @@ export function SelectAccel(){
                         const accel = Math.abs(initValue) < 0.03 ? 0 : initValue
                         setSliderValue(accel)
                         setFinalTempo(finalTempo, accel)
-                        console.log(getSong())
+                        console.log(song)
                     }}
                     minimumValue={-1}
                     maximumValue={1}
@@ -138,13 +138,13 @@ export function SelectAccel(){
                 />
                  <Text style={[
                     {
-                        alignSelf:(finalTempo > tempo) ? 'flex-start': 'flex-end' /**This will be a boolean, equals flex-start when final tempo < initial tempo */,
+                        alignSelf: finalTempo != undefined ? ((finalTempo > tempo) ? 'flex-start': 'flex-end') : 'flex-start' /**This will be a boolean, equals flex-start when final tempo < initial tempo */,
                         color: textTitleColors[theme as keyof typeof textTitleColors],
                         marginTop:10
                     },
                     styles.accelOptionItems
                 ]}>
-                    {(finalTempo > tempo) ? tempo : finalTempo}
+                    {finalTempo != undefined ? ((finalTempo > tempo) ? tempo : finalTempo) : tempo}
                 </Text>           
             </View>}
         </View>
