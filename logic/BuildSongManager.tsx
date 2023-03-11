@@ -41,7 +41,6 @@ const defaultBuildMetronomeSong : Song = {
     repeat: true,
     name: "Default",
     author: "",
-    date: ""
 }
 
 let contextValues = {} as SongManagerFunctions
@@ -56,6 +55,7 @@ export function BuildSongProvider({ children } : { children : any }){
         song: _.cloneDeep(song),
         activeMeter: f.getActiveMeter(song),
         activeMeterIndex: f.getActiveMeterIndex(song),
+        setActiveMeterIndex: (index: number) => f.setActiveMeterIndex(index, song),
         numerator: f.getNumerator(song),
         setNumerator: (numerator: number) => {setSong(f.setNumerator(song, numerator))},
         denominator: f.getDenominator(song),
@@ -69,8 +69,12 @@ export function BuildSongProvider({ children } : { children : any }){
         setFinalTempo: (finalTempo : number | undefined, accel : number | undefined) => {setSong(f.setFinalTempo(finalTempo, accel, song))},
         setRepetitions: (repeat: number) => {setSong(f.setRepetitions(repeat, song))},
         repetitions: f.getRepetitions(song),
-        setSectionName: (sectionName: String) => {setSong(f.setSectionName(sectionName, song))},
+        setSectionName: (sectionName: string) => {setSong(f.setSectionName(sectionName, song))},
         sectionName: f.getSectionName(song),
+        songName : f.getSongName(song),
+        setSongName : (name : string | undefined) => {setSong(f.setSongName(name, song))},
+        author : f.getAuthor(song),
+        setAuthor : (author: string | undefined) => {setSong(f.setAuthor(author, song))},
         incrementMeter: (wrapToBeginning? : boolean)=>{setSong(f.incrementMeter(song, wrapToBeginning))},
         decrementMeter: (wrapToEnd? : boolean) => {setSong(f.decrementMeter(song, wrapToEnd))},
         addMeter : () => {setSong(f.addMeter(song))},

@@ -13,15 +13,52 @@ export type Meter = {
     repeat : number //for measures with the same traits
     active: boolean
     beats : Beat[]
-    sectionName? : String
+    sectionName? : string
 }
 
 export type Song = {
     song : Meter[]
     repeat : boolean 
-    name : string
-    author : string
-    date : string
+    name? : string
+    author? : string
+    date? : number
+}
+
+export interface SongManagerFunctions {
+    song: Song,
+    activeMeter: Meter,
+    activeMeterIndex: number,
+    setActiveMeterIndex : (index: number) => void
+    numerator: number,
+    setNumerator: (numerator: number) => void,
+    denominator: number,
+    setDenominator: (denominator: number) => void,
+    setAccent: (beatNumber: number) => void,
+    tempo : number
+    setTempo: (tempo: number)=> void,
+    finalTempo: number | undefined,
+    setFinalTempo: (finalTempo : number | undefined, accel : number | undefined) => void,
+    repetitions: number,
+    accel : number | undefined,
+    setRepetitions: (repeat: number) => void,
+    setSectionName: (sectionName: string) => void,
+    sectionName: string | undefined,
+    songName : string | undefined,
+    setSongName : (name : string | undefined) => void,
+    date? : number | undefined,
+    setDate? : (name : number | undefined) => void,
+    author? : string | undefined,  
+    setAuthor? : (author : string | undefined) => void,  
+    length : number,
+    incrementBeat: ()=> void,
+    incrementMeter: (wrapToBeginning? : boolean)=> void,
+    decrementMeter: (wrapToEnd? : boolean) => void,
+    resetSong: () => void,
+    addMeter : () => void,
+    removeMeter : ()=> void,
+    loadSong: (song: Song) => void,
+    running? : boolean,
+    toggleRunning? : () => void,
 }
 
 
@@ -102,7 +139,6 @@ export const defaultMetronomeSong : Song = {
     repeat: true,
     name: "Default",
     author: "",
-    date: ""
 }
 
 export const multiMeterTestMetronomeSong : Song = {
@@ -181,6 +217,5 @@ export const multiMeterTestMetronomeSong : Song = {
     }],
     repeat: true,
     name: "Default",
-    author: "",
-    date: ""
+    author: ""
 }

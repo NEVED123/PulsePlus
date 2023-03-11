@@ -346,7 +346,7 @@ export function getRepetitions(song:Song) : number {
     return song.song[getActiveMeterIndex(song)].repeat
 }   
 
-export function setSectionName(sectionName: String, song:Song) : Song {
+export function setSectionName(sectionName: string, song:Song) : Song {
     const updatedSong = _.clone(song)
 
     updatedSong.song[getActiveMeterIndex(updatedSong)].sectionName = sectionName
@@ -354,12 +354,10 @@ export function setSectionName(sectionName: String, song:Song) : Song {
     return updatedSong
 }
 
-export function getSectionName(song: Song) : String | undefined {
+export function getSectionName(song: Song) : string | undefined {
     const updatedSong = _.clone(song)
 
     return updatedSong.song[getActiveMeterIndex(song)].sectionName
-
-
 }
 
 export function addMeter(song: Song) : Song {
@@ -419,3 +417,38 @@ export function getAccel(song: Song) : number | undefined {
     return getActiveMeter(updatedSong).accel
 }
 
+export function getSongName(song: Song) : string | undefined{
+    return _.clone(song).name
+}
+
+export function setSongName(name: string | undefined, song: Song) : Song {
+    const updatedSong = _.clone(song)
+
+    updatedSong.name = name
+
+    return updatedSong
+}
+
+export function getAuthor(song: Song) : string | undefined {
+    return _.clone(song).author
+}
+
+export function setAuthor(author : string | undefined, song: Song) : Song {
+    const updatedSong = _.clone(song)
+
+    updatedSong.author = author
+
+    return updatedSong
+}
+
+export function getDate(song: Song) : number | undefined {
+    return _.clone(song).date
+}
+
+export function setDate(date : number | undefined, song: Song) : Song {
+    const updatedSong = _.clone(song)
+
+    updatedSong.date = date
+
+    return updatedSong
+}

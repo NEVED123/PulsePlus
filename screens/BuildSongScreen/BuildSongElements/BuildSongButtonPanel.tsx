@@ -14,7 +14,7 @@ export function BuildSongButtonPanel(){
         <View style={styles.container}>
             <BuildSongButton 
                 text={'Summary'} onPress={()=>{navigate('SongSummary')}}/>
-            <BuildSongButton text={'Create'} onPress={()=>{}}/>
+            <BuildSongButton text={'Save'} onPress={()=>{}}/>
             <BuildSongButton text={'Load'} onPress={()=>{}}/>
         </View>
     )

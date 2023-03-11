@@ -32,7 +32,6 @@ export function SongProvider({ children } : { children : any }){
         : undefined;
     }, [sound]);  
 
-
     //'ENGINE' OF THE METRONOME
 
     //This is the third attempt at making this work, and is by no means ideal. Other two attempts down below.
@@ -95,8 +94,10 @@ export function SongProvider({ children } : { children : any }){
         setFinalTempo: (finalTempo : number | undefined, accel : number | undefined) => {setSong(f.setFinalTempo(finalTempo, accel, song))},
         setRepetitions: (repeat: number) => {setSong(f.setRepetitions(repeat, song))},
         repetitions: f.getRepetitions(song),
-        setSectionName: (sectionName: String) => {setSong(f.setSectionName(sectionName, song))},
+        setSectionName: (sectionName: string) => {setSong(f.setSectionName(sectionName, song))},
         sectionName: f.getSectionName(song),
+        songName: f.getSongName(song),
+        setSongName : (name : string | undefined) => {setSong(f.setSongName(name, song))},
         incrementMeter: (wrapToBeginning? : boolean)=>{setSong(f.incrementMeter(song, wrapToBeginning))},
         decrementMeter: (wrapToEnd? : boolean) => {setSong(f.decrementMeter(song, wrapToEnd))},
         addMeter : () => {setSong(f.addMeter(song))},

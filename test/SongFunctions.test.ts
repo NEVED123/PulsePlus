@@ -56,7 +56,6 @@ describe('getActiveMeter',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
     }
 
     const result : Meter = {
@@ -97,7 +96,7 @@ describe('getActiveMeter',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     expect(()=>{
@@ -139,7 +138,7 @@ describe('getActiveMeterIndex',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     expect(f.getActiveMeterIndex(received)).toBe(0)
@@ -164,7 +163,7 @@ describe('getActiveMeterIndex',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     expect(()=>{
@@ -193,7 +192,7 @@ describe('getActiveBeat', ()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     const result : Beat = {
@@ -225,7 +224,7 @@ describe('getActiveBeat', ()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     expect(()=>{
@@ -254,7 +253,7 @@ describe('getActiveBeatIndex',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     expect(f.getActiveBeatIndex(received)).toBe(0)
@@ -279,7 +278,7 @@ describe('getActiveBeatIndex',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     expect(()=>{
@@ -323,7 +322,7 @@ describe('getNumerator',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
   
     expect(f.getNumerator(received)).toBe(1)
@@ -342,7 +341,7 @@ describe('getNumerator',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     expect(()=>{
@@ -557,7 +556,7 @@ describe('setNumerator', ()=>{
     repeat: true,
     name: "Default",
     author: "",
-    date: ""
+    
   }
   
   const numEquals1 : Song = {
@@ -577,7 +576,7 @@ describe('setNumerator', ()=>{
     repeat: true,
     name: "Default",
     author: "",
-    date: ""
+    
   }
 
 
@@ -658,7 +657,7 @@ describe('getDenominator',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     expect(f.getDenominator(received)).toBe(4)
@@ -698,7 +697,7 @@ describe('setDenominator', ()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     const result : Song = {
@@ -732,7 +731,7 @@ describe('setDenominator', ()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     expect(f.setDenominator(received, 8)).toEqual(result)
@@ -773,7 +772,7 @@ describe('setAccent', ()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
   
     const result : Song = {
@@ -807,7 +806,7 @@ describe('setAccent', ()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
   
     expect(f.setAccent(received, 0)).toEqual(result)
@@ -845,7 +844,7 @@ describe('setAccent', ()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
   
     const result : Song = {
@@ -879,7 +878,7 @@ describe('setAccent', ()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
   
     expect(f.setAccent(received, 0)).toEqual(result)
@@ -917,7 +916,7 @@ describe('setAccent', ()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
   
     expect(()=>{
@@ -960,7 +959,7 @@ describe('setTempo',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
   
     const result : Song = {
@@ -994,7 +993,7 @@ describe('setTempo',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     expect(f.setTempo(received, 200)).toEqual(result)
@@ -1034,7 +1033,7 @@ describe('getTempo',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     expect(f.getTempo(received)).toBe(100)
@@ -1074,7 +1073,7 @@ describe('resetSong',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     const result : Song = {
@@ -1108,7 +1107,7 @@ describe('resetSong',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     expect(f.resetSong(received)).toEqual(result)
@@ -1146,7 +1145,7 @@ describe('incrementBeat',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     const result : Song = {
@@ -1173,7 +1172,7 @@ describe('incrementBeat',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     expect(f.incrementBeat(received)).toEqual(result)
@@ -1228,7 +1227,7 @@ describe('incrementBeat',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     const result : Song = {
@@ -1274,7 +1273,7 @@ describe('incrementBeat',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     expect(f.incrementBeat(received)).toEqual(result)
@@ -1327,7 +1326,7 @@ describe('incrementBeat',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     const result : Song = {
@@ -1373,7 +1372,7 @@ describe('incrementBeat',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     expect(f.incrementBeat(received)).toEqual(result)
@@ -1407,7 +1406,7 @@ describe('getFinalTempo',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
     expect(f.getFinalTempo(received)).toBe(200)
   })
@@ -1437,7 +1436,7 @@ describe('getFinalTempo',()=>{
         repeat: true,
         name: "Default",
         author: "",
-        date: ""
+        
       }
   
       expect(f.getFinalTempo(received)).toEqual(undefined)
@@ -1470,7 +1469,7 @@ describe('setFinalTempo',()=>{
         repeat: true,
         name: "Default",
         author: "",
-        date: ""
+        
       }
 
       const expected : Song = {
@@ -1499,7 +1498,7 @@ describe('setFinalTempo',()=>{
         repeat: true,
         name: "Default",
         author: "",
-        date: ""
+        
       }
 
       expect(f.setFinalTempo(200, 5, received)).toEqual(expected)
@@ -1531,7 +1530,7 @@ describe('setFinalTempo',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     const expected : Song = {
@@ -1560,7 +1559,7 @@ describe('setFinalTempo',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
     expect(f.setFinalTempo(200, undefined, received)).toEqual(expected)
   })
@@ -1593,7 +1592,7 @@ describe('setFinalTempo',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     const expected : Song = {
@@ -1620,7 +1619,7 @@ describe('setFinalTempo',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
     
     expect(f.setFinalTempo(undefined, 5, received)).toEqual(expected)
@@ -1653,7 +1652,7 @@ describe('setFinalTempo',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     const expected : Song = {
@@ -1680,7 +1679,7 @@ describe('setFinalTempo',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
     expect(f.setFinalTempo(undefined, undefined, received)).toEqual(expected)
   })
@@ -1731,7 +1730,7 @@ describe('incrementMeter',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     const expected : Song = {
@@ -1777,7 +1776,7 @@ describe('incrementMeter',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     expect(f.incrementMeter(received, true)).toEqual(expected)
@@ -1827,7 +1826,7 @@ describe('incrementMeter',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     expect(f.incrementMeter(received)).toEqual(received);
@@ -1877,7 +1876,7 @@ describe('incrementMeter',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     const expected : Song = {
@@ -1923,7 +1922,7 @@ describe('incrementMeter',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     expect(f.incrementMeter(received)).toEqual(expected)
@@ -1975,7 +1974,7 @@ describe('decrementMeter',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     const expected : Song = {
@@ -2021,7 +2020,7 @@ describe('decrementMeter',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     expect(f.decrementMeter(received, true)).toEqual(expected)
@@ -2071,7 +2070,7 @@ describe('decrementMeter',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     expect(f.decrementMeter(received)).toEqual(received);
@@ -2121,7 +2120,7 @@ describe('decrementMeter',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     const expected : Song = {
@@ -2167,7 +2166,7 @@ describe('decrementMeter',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     expect(f.decrementMeter(received)).toEqual(expected)
@@ -2200,7 +2199,7 @@ describe('setRepetitions',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     const expected: Song = {
@@ -2227,7 +2226,7 @@ describe('setRepetitions',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }
 
     expect(f.setRepetitions(10, received)).toEqual(expected)
@@ -2261,7 +2260,7 @@ describe('getRepetitions',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }   
     
     expect(f.getRepetitions(received)).toEqual(10)
@@ -2313,7 +2312,7 @@ describe('setSectionName',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }  
     
     const expected: Song = {
@@ -2360,7 +2359,7 @@ describe('setSectionName',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }  
 
     expect(f.setSectionName('sectionName', received)).toEqual(expected)
@@ -2413,7 +2412,7 @@ describe('getSectionName',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }  
 
     expect(f.getSectionName(received)).toEqual('sectionName')
@@ -2467,7 +2466,7 @@ describe('addMeter',()=>{
         repeat: true,
         name: "Default",
         author: "",
-        date: ""
+        
       }  
       
       const expected: Song = {
@@ -2533,7 +2532,7 @@ describe('addMeter',()=>{
         repeat: true,
         name: "Default",
         author: "",
-        date: ""
+        
       }  
 
       expect(f.addMeter(received)).toEqual(expected)
@@ -2586,7 +2585,7 @@ describe('addMeter',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }  
   
     const expected: Song = {
@@ -2653,7 +2652,7 @@ describe('addMeter',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }  
 
     expect(f.addMeter(received)).toEqual(expected)
@@ -2687,7 +2686,7 @@ describe('removeMeter',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }  
   
     expect(f.removeMeter(received)).toEqual(received)
@@ -2759,7 +2758,7 @@ describe('removeMeter',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }  
 
     const expected: Song = {
@@ -2807,7 +2806,7 @@ describe('removeMeter',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }  
   
     expect(f.removeMeter(received)).toEqual(expected)
@@ -2834,7 +2833,7 @@ describe('getSongLength',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }  
   
     expect(f.getSongLength(received)).toEqual(1)
@@ -2905,7 +2904,7 @@ describe('getSongLength',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }  
 
     expect(f.getSongLength(received)).toEqual(3)
@@ -2934,7 +2933,7 @@ describe('getAccel',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }  
 
     expect(f.getAccel(received)).toEqual(5)
@@ -2989,7 +2988,7 @@ describe('setActiveMeter',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }  
 
     const expected: Song = {
@@ -3037,9 +3036,234 @@ describe('setActiveMeter',()=>{
       repeat: true,
       name: "Default",
       author: "",
-      date: ""
+      
     }  
 
     expect(f.setActiveMeterIndex(2, received)).toEqual(expected)
+  })
+})
+
+describe('getSongName',()=>{
+  test('retreives song name',()=>{
+    const received: Song = {
+      song:[{
+        initBpm: 100,
+        finalBpm: 200,
+        accel: 5,
+        denominator: 4,
+        repeat : 10,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+          ]
+        },
+      ],
+      repeat: true,
+      name: 'mySong'
+    }  
+
+    expect(f.getSongName(received)).toEqual('mySong')
+    
+  })
+})
+
+describe('setSongName', ()=>{
+  test('sets song name', ()=>{
+    const received: Song = {
+      song:[{
+        initBpm: 100,
+        finalBpm: 200,
+        accel: 5,
+        denominator: 4,
+        repeat : 10,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+          ]
+        },
+      ],
+      repeat: true,
+    }  
+
+    const expected: Song = {
+      song:[{
+        initBpm: 100,
+        finalBpm: 200,
+        accel: 5,
+        denominator: 4,
+        repeat : 10,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+          ]
+        },
+      ],
+      repeat: true,
+      name: 'mySong'
+    }  
+
+    expect(f.setSongName('mySong', received)).toEqual(expected)
+  })
+})
+
+describe('getDate',()=>{
+  test('retreives song date',()=>{
+    const received: Song = {
+      song:[{
+        initBpm: 100,
+        finalBpm: 200,
+        accel: 5,
+        denominator: 4,
+        repeat : 10,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+          ]
+        },
+      ],
+      repeat: true,
+      date : 0
+    }  
+
+    expect(f.getDate(received)).toEqual(0)
+    
+  })
+})
+
+describe('setDate', ()=>{
+  test('sets Date', ()=>{
+    const received: Song = {
+      song:[{
+        initBpm: 100,
+        finalBpm: 200,
+        accel: 5,
+        denominator: 4,
+        repeat : 10,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+          ]
+        },
+      ],
+      repeat: true,
+    }  
+
+    const expected: Song = {
+      song:[{
+        initBpm: 100,
+        finalBpm: 200,
+        accel: 5,
+        denominator: 4,
+        repeat : 10,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+          ]
+        },
+      ],
+      repeat: true,
+      date: 100000000
+    }  
+
+    expect(f.setDate(100000000, received)).toEqual(expected)
+  })
+})
+
+describe('getAuthor',()=>{
+  test('retreives song author',()=>{
+    const received: Song = {
+      song:[{
+        initBpm: 100,
+        finalBpm: 200,
+        accel: 5,
+        denominator: 4,
+        repeat : 10,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+          ]
+        },
+      ],
+      repeat: true,
+      author: 'author'
+    }  
+
+    expect(f.getAuthor(received)).toEqual('author')
+    
+  })
+})
+
+describe('setAuthor', ()=>{
+  test('sets song name', ()=>{
+    const received: Song = {
+      song:[{
+        initBpm: 100,
+        finalBpm: 200,
+        accel: 5,
+        denominator: 4,
+        repeat : 10,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+          ]
+        },
+      ],
+      repeat: true,
+    }  
+
+    const expected: Song = {
+      song:[{
+        initBpm: 100,
+        finalBpm: 200,
+        accel: 5,
+        denominator: 4,
+        repeat : 10,
+        active: true,
+        beats:[{
+              beatSound : 0,
+              subDiv : Subdivisions.none,
+              beatDuration: 600, // 60/100 * 1000 
+              active : false
+            },
+          ]
+        },
+      ],
+      repeat: true,
+      author : 'author'
+    }  
+
+    expect(f.setAuthor('author', received)).toEqual(expected)
   })
 })
