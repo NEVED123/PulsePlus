@@ -1,5 +1,6 @@
 import { Song, Meter, Beat, Subdivisions } from './structure'
 import _, { wrap } from 'lodash'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 /**
  * @returns copy of active meter
@@ -451,4 +452,32 @@ export function setDate(date : number | undefined, song: Song) : Song {
     updatedSong.date = date
 
     return updatedSong
+}
+
+export async function saveSong(song : Song) : Promise<any> {
+
+    const name = song.name
+
+    if(name != undefined){
+        try {
+            const jsonValue = JSON.stringify(song)
+            await AsyncStorage.setItem(name, jsonValue)
+        } catch (e) {
+            console.warn('song failed to save')
+        }
+    }
+
+}
+
+export async function loadSong(name: string) : Promise<any>{
+
+    try {
+
+        const jsonValue = await AsyncStorage.getItem(name)
+        return jsonValue != null ? JSON.parse(jsonValue) : null;
+
+    } catch(e) {
+        //error code
+    }
+
 }

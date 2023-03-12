@@ -6,37 +6,57 @@ import { MeterCarousel } from './BuildSongElements/MeterCarousel'
 import { BuildSongTimeSignature } from './BuildSongElements/BuildSongTimeSignature';
 import { backgroundColors } from '../../theme/Colors';
 import { PreferencesContext } from '../../logic/PreferencesManager';
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { SelectRepetitions } from './BuildSongElements/SelectRepetitions';
 import { SelectTempo } from './BuildSongElements/SelectTempo';
 import { SelectAccel } from './BuildSongElements/SelectAccel';
-import { BuildSongButtonPanel } from './BuildSongElements/BuildSongButtonPanel';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { BuildSongButton } from './BuildSongElements/BuildSongButton';
+import SaveSongDialog from './BuildSongElements/SaveSongDialog' 
 import SongSummary from './BuildSongElements/SongSummaryElements/SongSummary'
+import { Portal } from "react-native-paper";
 
 export default function BuildSongMenu({navigation} : {navigation : any}){
 
     const { theme } = useContext(PreferencesContext)
 
+    const [dialogVisible, setDialogVisible] = useState(false)
+
     return(
-        <KeyboardAvoidingView
+        <Portal.Host>
+            <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             style={{flex:1}}
-        >
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                <LinearGradient colors={backgroundColors[theme as keyof typeof backgroundColors]} style={{flex:1}}>
-                    <SafeAreaView style={{flex:1}}>
-                        <MeterCarousel/>
-                        <BuildSongTimeSignature/>
-                        <SelectRepetitions/>
-                        <SelectTempo/>
-                        <SelectAccel/>
-                        <BuildSongButtonPanel/>
-                    </SafeAreaView>
-                </LinearGradient>
-            </TouchableWithoutFeedback>
-        </KeyboardAvoidingView>
+            >
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                    <LinearGradient colors={backgroundColors[theme as keyof typeof backgroundColors]} style={{flex:1}}>
+                        <SafeAreaView style={{flex:1}}>
+                            <SaveSongDialog visible={dialogVisible} setVisible={setDialogVisible}/>
+                            <MeterCarousel/>
+                            <BuildSongTimeSignature/>
+                            <SelectRepetitions/>
+                            <SelectTempo/>
+                            <SelectAccel/>
+                            <View style={styles.buildSongButtonPanel}>
+                                <BuildSongButton 
+                                    text={'Summary'} onPress={()=>{navigation.navigate('SongSummary')}}/>
+                                <BuildSongButton text={'Save'} onPress={()=>{setDialogVisible(!dialogVisible)}}/>
+                                <BuildSongButton text={'Load'} onPress={()=>{}}/>
+                            </View>
+                        </SafeAreaView>
+                    </LinearGradient>
+                </TouchableWithoutFeedback>
+            </KeyboardAvoidingView>
+        </Portal.Host>
+        
     )
 
 }
+
+const styles = StyleSheet.create({
+    buildSongButtonPanel:{
+        flexDirection:'row',
+        justifyContent:'center',
+        alignItems:'center',
+        marginVertical:10
+    }
+})
