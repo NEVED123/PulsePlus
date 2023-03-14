@@ -1,12 +1,12 @@
 import { createContext, useState, useRef, useEffect, useContext, useLayoutEffect } from 'react'
-import { Song, Meter, Beat, defaultMetronomeSong, multiMeterTestMetronomeSong, SongManagerFunctions } from './structure'
+import { Song, Meter, Beat, defaultMetronomeSong, multiMeterTestMetronomeSong, RunnableSongFunctions } from './structure'
 import _ from 'lodash'
 import { Audio, AVPlaybackSource } from 'expo-av'
 import * as f from './SongFunctions'
 import { PreferencesContext } from './PreferencesManager'
 import { BuildSongContext } from './BuildSongManager'
 
-let contextValues = {} as SongManagerFunctions
+let contextValues = {} as RunnableSongFunctions
 export const SongContext = createContext(contextValues) //initial values make compiler happy
 
 export function SongProvider({ children } : { children : any }){
@@ -91,17 +91,11 @@ export function SongProvider({ children } : { children : any }){
         resetSong: () => {setSong(f.resetSong(song))},
         incrementBeat: ()=>{setSong(f.incrementBeat(song))},
         finalTempo: f.getFinalTempo(song),
-        setFinalTempo: (finalTempo : number | undefined, accel : number | undefined) => {setSong(f.setFinalTempo(finalTempo, accel, song))},
-        setRepetitions: (repeat: number) => {setSong(f.setRepetitions(repeat, song))},
         repetitions: f.getRepetitions(song),
-        setSectionName: (sectionName: string) => {setSong(f.setSectionName(sectionName, song))},
-        sectionName: f.getSectionName(song),
         songName: f.getSongName(song),
         setSongName : (name : string | undefined) => {setSong(f.setSongName(name, song))},
         incrementMeter: (wrapToBeginning? : boolean)=>{setSong(f.incrementMeter(song, wrapToBeginning))},
         decrementMeter: (wrapToEnd? : boolean) => {setSong(f.decrementMeter(song, wrapToEnd))},
-        addMeter : () => {setSong(f.addMeter(song))},
-        removeMeter : ()=>{setSong(f.removeMeter(song))},
         length : f.getSongLength(song),
         accel : f.getAccel(song),
         loadSong: (song: Song) => {setSong(_.cloneDeep(song))},

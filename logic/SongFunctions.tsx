@@ -454,22 +454,29 @@ export function setDate(date : number | undefined, song: Song) : Song {
     return updatedSong
 }
 
-export async function saveSong(song : Song) : Promise<any> {
+export async function saveSong(song : Song){
 
-    const name = song.name
+    let name = song.name
 
-    if(name != undefined){
-        try {
-            const jsonValue = JSON.stringify(song)
-            await AsyncStorage.setItem(name, jsonValue)
-        } catch (e) {
-            console.warn('song failed to save')
-        }
+    if(name == undefined){
+        return undefined
+    }
+
+    const duplicateSong = await loadSong(name)
+    if(duplicateSong != undefined){
+        return undefined
+    }
+
+    try{
+        const jsonValue = JSON.stringify(song)
+        await AsyncStorage.setItem(name, jsonValue)
+    } catch(e){
+        //error
     }
 
 }
 
-export async function loadSong(name: string) : Promise<any>{
+export async function loadSong(name: string) : Promise<Song | undefined>{
 
     try {
 

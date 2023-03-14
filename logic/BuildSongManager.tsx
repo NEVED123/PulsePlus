@@ -1,5 +1,5 @@
 import { createContext, useState, useRef, useEffect, useContext, useLayoutEffect } from 'react'
-import { Song, Meter, Beat, defaultMetronomeSong, Subdivisions, SongManagerFunctions } from './structure'
+import { Song, Meter, Beat, defaultMetronomeSong, Subdivisions, BuildSongFunctions } from './structure'
 import _ from 'lodash'
 import { Audio, AVPlaybackSource } from 'expo-av'
 import * as f from './SongFunctions'
@@ -43,7 +43,7 @@ const defaultBuildMetronomeSong : Song = {
     author: "",
 }
 
-let contextValues = {} as SongManagerFunctions
+let contextValues = {} as BuildSongFunctions
 
 export const BuildSongContext = createContext(contextValues) //initial values make compiler happy
 
@@ -63,7 +63,6 @@ export function BuildSongProvider({ children } : { children : any }){
         setAccent: (beatNumber: number) => {setSong(f.setAccent(song, beatNumber))},
         tempo: f.getTempo(song),
         setTempo: (tempo: number)=>{setSong(f.setTempo(song, tempo))},
-        resetSong: () => {setSong(f.resetSong(song))},
         incrementBeat: ()=>{setSong(f.incrementBeat(song))},
         finalTempo: f.getFinalTempo(song),
         setFinalTempo: (finalTempo : number | undefined, accel : number | undefined) => {setSong(f.setFinalTempo(finalTempo, accel, song))},

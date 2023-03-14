@@ -24,7 +24,7 @@ export type Song = {
     date? : number
 }
 
-export interface SongManagerFunctions {
+export interface SongFunctions {
     song: Song,
     activeMeter: Meter,
     activeMeterIndex: number,
@@ -37,28 +37,34 @@ export interface SongManagerFunctions {
     tempo : number
     setTempo: (tempo: number)=> void,
     finalTempo: number | undefined,
-    setFinalTempo: (finalTempo : number | undefined, accel : number | undefined) => void,
     repetitions: number,
     accel : number | undefined,
-    setRepetitions: (repeat: number) => void,
-    setSectionName: (sectionName: string) => void,
-    sectionName: string | undefined,
     songName : string | undefined,
     setSongName : (name : string | undefined) => void,
-    date? : number | undefined,
-    setDate? : (name : number | undefined) => void,
-    author? : string | undefined,  
-    setAuthor? : (author : string | undefined) => void,  
     length : number,
     incrementBeat: ()=> void,
     incrementMeter: (wrapToBeginning? : boolean)=> void,
     decrementMeter: (wrapToEnd? : boolean) => void,
-    resetSong: () => void,
+    loadSong: (song: Song) => void,
+}
+
+export interface BuildSongFunctions extends SongFunctions{
+    date : number | undefined,
+    setDate : (name : number | undefined) => void,
+    author : string | undefined,  
+    setAuthor : (author : string | undefined) => void,  
+    setSectionName: (sectionName: string) => void,
+    sectionName: string | undefined,
+    setRepetitions: (repeat: number) => void,
+    setFinalTempo: (finalTempo : number | undefined, accel : number | undefined) => void,
     addMeter : () => void,
     removeMeter : ()=> void,
-    loadSong: (song: Song) => void,
+}
+
+export interface RunnableSongFunctions extends SongFunctions{
     running? : boolean,
     toggleRunning? : () => void,
+    resetSong: () => void,
 }
 
 
