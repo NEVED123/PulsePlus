@@ -51,7 +51,6 @@ export function SelectAccel(){
                         const accel = on ? 0 : undefined
                         setIsSwitchOn(!isSwitchOn)
                         setFinalTempo(finalTempo, accel)
-                        console.log(song)
                     }} 
                 />
 
@@ -80,7 +79,6 @@ export function SelectAccel(){
                             if(value.value != undefined && finalTempo != undefined){
                                 //translate current tempo to our new note value tempo
                                 setFinalTempo(finalTempo * noteValue/value.value, undefined)
-                                console.log(song)
                             }
                         }}
                     />
@@ -108,7 +106,7 @@ export function SelectAccel(){
                                 //onChangeText ensures the number is valid
                                 const newTempo = Number(e.nativeEvent.text)
                                 setFinalTempo(newTempo * denominator/noteValue, undefined)
-                                console.log(song)
+                                
                             }}>
                     </TextInput>                    
                 </View>
@@ -130,7 +128,7 @@ export function SelectAccel(){
                         const accel = Math.abs(initValue) < 0.03 ? 0 : initValue
                         setSliderValue(accel)
                         setFinalTempo(finalTempo, accel)
-                        console.log(song)
+                        
                     }}
                     minimumValue={-1}
                     maximumValue={1}

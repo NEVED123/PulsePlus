@@ -24,16 +24,14 @@ export function MeterCarousel(){
                 <Text 
                     style={styles.toggleActiveMeter}
                     onPress={()=>{
-                        decrementMeter()
-                        console.log(song)}}>
+                        decrementMeter()}}>
                     {'<'}
                 </Text>
                 <MeterDisplay/>
                 <Text 
                     style={styles.toggleActiveMeter}
                     onPress={()=>{
-                        incrementMeter()
-                        console.log(song)}}>
+                        incrementMeter()}}>
                     {'>'}
                 </Text>
             </View>

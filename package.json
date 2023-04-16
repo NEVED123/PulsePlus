@@ -13,7 +13,8 @@
   "jest": {
     "preset": "react-native",
     "modulePathIgnorePatterns": [
-      "<rootDir>/assets/"
+      "<rootDir>/assets/",
+      "<rootDir>/backend"
     ]
   },
   "dependencies": {

@@ -1,6 +1,6 @@
 import { Song, Meter, Beat, Subdivisions } from './structure'
 import _, { wrap } from 'lodash'
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import { Metadata } from './structure'
 
 /**
  * @returns copy of active meter
@@ -419,72 +419,32 @@ export function getAccel(song: Song) : number | undefined {
 }
 
 export function getSongName(song: Song) : string | undefined{
-    return _.clone(song).name
+    return _.clone(song).metadata?.name
 }
 
-export function setSongName(name: string | undefined, song: Song) : Song {
-    const updatedSong = _.clone(song)
 
-    updatedSong.name = name
-
-    return updatedSong
-}
 
 export function getAuthor(song: Song) : string | undefined {
-    return _.clone(song).author
+    return _.clone(song).metadata?.author
 }
 
-export function setAuthor(author : string | undefined, song: Song) : Song {
+
+export function getDate(song: Song) : string | undefined {
+    return _.clone(song).metadata?.date
+}
+
+export function setMetadata(metadata: Metadata | undefined, song: Song) : Song {
     const updatedSong = _.clone(song)
 
-    updatedSong.author = author
+    updatedSong.metadata = metadata
 
     return updatedSong
 }
 
-export function getDate(song: Song) : number | undefined {
-    return _.clone(song).date
+export function getMetadata(song: Song) : Metadata | undefined {
+    return _.clone(song).metadata
 }
 
-export function setDate(date : number | undefined, song: Song) : Song {
-    const updatedSong = _.clone(song)
 
-    updatedSong.date = date
 
-    return updatedSong
-}
 
-export async function saveSong(song : Song){
-
-    let name = song.name
-
-    if(name == undefined){
-        return undefined
-    }
-
-    const duplicateSong = await loadSong(name)
-    if(duplicateSong != undefined){
-        return undefined
-    }
-
-    try{
-        const jsonValue = JSON.stringify(song)
-        await AsyncStorage.setItem(name, jsonValue)
-    } catch(e){
-        //error
-    }
-
-}
-
-export async function loadSong(name: string) : Promise<Song | undefined>{
-
-    try {
-
-        const jsonValue = await AsyncStorage.getItem(name)
-        return jsonValue != null ? JSON.parse(jsonValue) : null;
-
-    } catch(e) {
-        //error code
-    }
-
-}

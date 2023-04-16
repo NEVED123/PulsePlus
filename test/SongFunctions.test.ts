@@ -54,8 +54,8 @@ describe('getActiveMeter',()=>{
         }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
     }
 
     const result : Meter = {
@@ -94,8 +94,7 @@ describe('getActiveMeter',()=>{
         }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
       
     }
 
@@ -136,8 +135,8 @@ describe('getActiveMeterIndex',()=>{
         }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -161,8 +160,8 @@ describe('getActiveMeterIndex',()=>{
         }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -190,8 +189,8 @@ describe('getActiveBeat', ()=>{
         }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -222,8 +221,8 @@ describe('getActiveBeat', ()=>{
         }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -251,8 +250,8 @@ describe('getActiveBeatIndex',()=>{
         }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -276,8 +275,8 @@ describe('getActiveBeatIndex',()=>{
         }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -320,8 +319,8 @@ describe('getNumerator',()=>{
           }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
   
@@ -339,8 +338,8 @@ describe('getNumerator',()=>{
         }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -554,8 +553,8 @@ describe('setNumerator', ()=>{
       ]
     }],
     repeat: true,
-    name: "Default",
-    author: "",
+    
+    
     
   }
   
@@ -574,8 +573,8 @@ describe('setNumerator', ()=>{
       ]
     }],
     repeat: true,
-    name: "Default",
-    author: "",
+    
+    
     
   }
 
@@ -655,8 +654,8 @@ describe('getDenominator',()=>{
           }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -695,8 +694,8 @@ describe('setDenominator', ()=>{
           }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -729,8 +728,8 @@ describe('setDenominator', ()=>{
           }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -770,8 +769,8 @@ describe('setAccent', ()=>{
           }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
   
@@ -804,8 +803,8 @@ describe('setAccent', ()=>{
           }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
   
@@ -842,8 +841,8 @@ describe('setAccent', ()=>{
           }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
   
@@ -876,8 +875,8 @@ describe('setAccent', ()=>{
           }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
   
@@ -913,10 +912,7 @@ describe('setAccent', ()=>{
             ]
           }
       ],
-      repeat: true,
-      name: "Default",
-      author: "",
-      
+      repeat: true
     }
   
     expect(()=>{
@@ -957,8 +953,8 @@ describe('setTempo',()=>{
           }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
   
@@ -991,8 +987,8 @@ describe('setTempo',()=>{
           }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -1031,8 +1027,8 @@ describe('getTempo',()=>{
           }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -1071,8 +1067,8 @@ describe('resetSong',()=>{
           }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -1105,8 +1101,8 @@ describe('resetSong',()=>{
           }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -1143,8 +1139,8 @@ describe('incrementBeat',()=>{
         }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -1170,8 +1166,8 @@ describe('incrementBeat',()=>{
         },
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -1225,8 +1221,8 @@ describe('incrementBeat',()=>{
         }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -1271,8 +1267,8 @@ describe('incrementBeat',()=>{
         }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -1324,8 +1320,8 @@ describe('incrementBeat',()=>{
         }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -1370,8 +1366,8 @@ describe('incrementBeat',()=>{
         }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -1404,8 +1400,8 @@ describe('getFinalTempo',()=>{
         },
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
     expect(f.getFinalTempo(received)).toBe(200)
@@ -1434,8 +1430,8 @@ describe('getFinalTempo',()=>{
           },
         ],
         repeat: true,
-        name: "Default",
-        author: "",
+        
+        
         
       }
   
@@ -1467,8 +1463,8 @@ describe('setFinalTempo',()=>{
           },
         ],
         repeat: true,
-        name: "Default",
-        author: "",
+        
+        
         
       }
 
@@ -1496,8 +1492,8 @@ describe('setFinalTempo',()=>{
           },
         ],
         repeat: true,
-        name: "Default",
-        author: "",
+        
+        
         
       }
 
@@ -1528,8 +1524,8 @@ describe('setFinalTempo',()=>{
         },
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -1557,8 +1553,8 @@ describe('setFinalTempo',()=>{
         },
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
     expect(f.setFinalTempo(200, undefined, received)).toEqual(expected)
@@ -1590,8 +1586,8 @@ describe('setFinalTempo',()=>{
         },
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -1617,8 +1613,8 @@ describe('setFinalTempo',()=>{
         },
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
     
@@ -1650,8 +1646,8 @@ describe('setFinalTempo',()=>{
         },
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -1677,8 +1673,8 @@ describe('setFinalTempo',()=>{
         },
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
     expect(f.setFinalTempo(undefined, undefined, received)).toEqual(expected)
@@ -1728,8 +1724,8 @@ describe('incrementMeter',()=>{
         }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -1774,8 +1770,8 @@ describe('incrementMeter',()=>{
         }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -1824,8 +1820,8 @@ describe('incrementMeter',()=>{
         }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -1874,8 +1870,8 @@ describe('incrementMeter',()=>{
         }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -1920,8 +1916,8 @@ describe('incrementMeter',()=>{
         }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -1972,8 +1968,8 @@ describe('decrementMeter',()=>{
         }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -2018,8 +2014,8 @@ describe('decrementMeter',()=>{
         }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -2068,8 +2064,8 @@ describe('decrementMeter',()=>{
         }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -2118,8 +2114,8 @@ describe('decrementMeter',()=>{
         }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -2164,8 +2160,8 @@ describe('decrementMeter',()=>{
         }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -2197,8 +2193,8 @@ describe('setRepetitions',()=>{
         },
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -2224,8 +2220,8 @@ describe('setRepetitions',()=>{
         },
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }
 
@@ -2258,8 +2254,8 @@ describe('getRepetitions',()=>{
         },
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }   
     
@@ -2310,8 +2306,8 @@ describe('setSectionName',()=>{
           }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }  
     
@@ -2357,8 +2353,8 @@ describe('setSectionName',()=>{
           }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }  
 
@@ -2410,8 +2406,8 @@ describe('getSectionName',()=>{
           }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }  
 
@@ -2464,8 +2460,8 @@ describe('addMeter',()=>{
             }
         ],
         repeat: true,
-        name: "Default",
-        author: "",
+        
+        
         
       }  
       
@@ -2530,8 +2526,8 @@ describe('addMeter',()=>{
             }
         ],
         repeat: true,
-        name: "Default",
-        author: "",
+        
+        
         
       }  
 
@@ -2583,8 +2579,8 @@ describe('addMeter',()=>{
           }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }  
   
@@ -2650,8 +2646,8 @@ describe('addMeter',()=>{
           }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }  
 
@@ -2684,8 +2680,8 @@ describe('removeMeter',()=>{
         },
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }  
   
@@ -2756,8 +2752,8 @@ describe('removeMeter',()=>{
           }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }  
 
@@ -2804,8 +2800,8 @@ describe('removeMeter',()=>{
           }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }  
   
@@ -2831,8 +2827,8 @@ describe('getSongLength',()=>{
         },
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }  
   
@@ -2902,8 +2898,8 @@ describe('getSongLength',()=>{
           }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }  
 
@@ -2931,8 +2927,8 @@ describe('getAccel',()=>{
         },
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }  
 
@@ -2986,8 +2982,8 @@ describe('setActiveMeter',()=>{
             }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }  
 
@@ -3034,8 +3030,8 @@ describe('setActiveMeter',()=>{
             }
       ],
       repeat: true,
-      name: "Default",
-      author: "",
+      
+      
       
     }  
 
@@ -3043,80 +3039,6 @@ describe('setActiveMeter',()=>{
   })
 })
 
-describe('getSongName',()=>{
-  test('retreives song name',()=>{
-    const received: Song = {
-      song:[{
-        initBpm: 100,
-        finalBpm: 200,
-        accel: 5,
-        denominator: 4,
-        repeat : 10,
-        active: true,
-        beats:[{
-              beatSound : 0,
-              subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
-              active : false
-            },
-          ]
-        },
-      ],
-      repeat: true,
-      name: 'mySong'
-    }  
-
-    expect(f.getSongName(received)).toEqual('mySong')
-    
-  })
-})
-
-describe('setSongName', ()=>{
-  test('sets song name', ()=>{
-    const received: Song = {
-      song:[{
-        initBpm: 100,
-        finalBpm: 200,
-        accel: 5,
-        denominator: 4,
-        repeat : 10,
-        active: true,
-        beats:[{
-              beatSound : 0,
-              subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
-              active : false
-            },
-          ]
-        },
-      ],
-      repeat: true,
-    }  
-
-    const expected: Song = {
-      song:[{
-        initBpm: 100,
-        finalBpm: 200,
-        accel: 5,
-        denominator: 4,
-        repeat : 10,
-        active: true,
-        beats:[{
-              beatSound : 0,
-              subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
-              active : false
-            },
-          ]
-        },
-      ],
-      repeat: true,
-      name: 'mySong'
-    }  
-
-    expect(f.setSongName('mySong', received)).toEqual(expected)
-  })
-})
 
 describe('getDate',()=>{
   test('retreives song date',()=>{
@@ -3138,60 +3060,19 @@ describe('getDate',()=>{
         },
       ],
       repeat: true,
-      date : 0
+      metadata: {
+        name: "Default",
+        date: "3/27/2023",
+        author: "Deven"
+      }
     }  
 
-    expect(f.getDate(received)).toEqual(0)
+    expect(f.getDate(received)).toEqual("3/27/2023")
     
   })
 })
 
-describe('setDate', ()=>{
-  test('sets Date', ()=>{
-    const received: Song = {
-      song:[{
-        initBpm: 100,
-        finalBpm: 200,
-        accel: 5,
-        denominator: 4,
-        repeat : 10,
-        active: true,
-        beats:[{
-              beatSound : 0,
-              subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
-              active : false
-            },
-          ]
-        },
-      ],
-      repeat: true,
-    }  
 
-    const expected: Song = {
-      song:[{
-        initBpm: 100,
-        finalBpm: 200,
-        accel: 5,
-        denominator: 4,
-        repeat : 10,
-        active: true,
-        beats:[{
-              beatSound : 0,
-              subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
-              active : false
-            },
-          ]
-        },
-      ],
-      repeat: true,
-      date: 100000000
-    }  
-
-    expect(f.setDate(100000000, received)).toEqual(expected)
-  })
-})
 
 describe('getAuthor',()=>{
   test('retreives song author',()=>{
@@ -3213,57 +3094,15 @@ describe('getAuthor',()=>{
         },
       ],
       repeat: true,
-      author: 'author'
+      metadata: {
+        name: "Default",
+        date: "3/27/2023",
+        author: "Deven"
+      }
     }  
 
-    expect(f.getAuthor(received)).toEqual('author')
+    expect(f.getAuthor(received)).toEqual('Deven')
     
   })
 })
 
-describe('setAuthor', ()=>{
-  test('sets song name', ()=>{
-    const received: Song = {
-      song:[{
-        initBpm: 100,
-        finalBpm: 200,
-        accel: 5,
-        denominator: 4,
-        repeat : 10,
-        active: true,
-        beats:[{
-              beatSound : 0,
-              subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
-              active : false
-            },
-          ]
-        },
-      ],
-      repeat: true,
-    }  
-
-    const expected: Song = {
-      song:[{
-        initBpm: 100,
-        finalBpm: 200,
-        accel: 5,
-        denominator: 4,
-        repeat : 10,
-        active: true,
-        beats:[{
-              beatSound : 0,
-              subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
-              active : false
-            },
-          ]
-        },
-      ],
-      repeat: true,
-      author : 'author'
-    }  
-
-    expect(f.setAuthor('author', received)).toEqual(expected)
-  })
-})

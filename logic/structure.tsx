@@ -16,12 +16,16 @@ export type Meter = {
     sectionName? : string
 }
 
+export type Metadata = {
+    name : string
+    author : string
+    date : string
+}
+
 export type Song = {
     song : Meter[]
     repeat : boolean 
-    name? : string
-    author? : string
-    date? : number
+    metadata? : Metadata
 }
 
 export interface SongFunctions {
@@ -40,19 +44,19 @@ export interface SongFunctions {
     repetitions: number,
     accel : number | undefined,
     songName : string | undefined,
-    setSongName : (name : string | undefined) => void,
     length : number,
     incrementBeat: ()=> void,
     incrementMeter: (wrapToBeginning? : boolean)=> void,
     decrementMeter: (wrapToEnd? : boolean) => void,
-    loadSong: (song: Song) => void,
+    setSong: (song: Song) => void,
 }
 
 export interface BuildSongFunctions extends SongFunctions{
-    date : number | undefined,
-    setDate : (name : number | undefined) => void,
-    author : string | undefined,  
-    setAuthor : (author : string | undefined) => void,  
+    date : string | undefined,
+    author : string | undefined,
+    songName : string | undefined 
+    metadata: Metadata | undefined,
+    setMetadata: (metadata : Metadata) => void,
     setSectionName: (sectionName: string) => void,
     sectionName: string | undefined,
     setRepetitions: (repeat: number) => void,
@@ -62,8 +66,8 @@ export interface BuildSongFunctions extends SongFunctions{
 }
 
 export interface RunnableSongFunctions extends SongFunctions{
-    running? : boolean,
-    toggleRunning? : () => void,
+    running : boolean,
+    toggleRunning : () => void,
     resetSong: () => void,
 }
 
@@ -142,9 +146,7 @@ export const defaultMetronomeSong : Song = {
         }
         ]
     }],
-    repeat: true,
-    name: "Default",
-    author: "",
+    repeat: true
 }
 
 export const multiMeterTestMetronomeSong : Song = {
@@ -222,6 +224,4 @@ export const multiMeterTestMetronomeSong : Song = {
         }]
     }],
     repeat: true,
-    name: "Default",
-    author: ""
 }

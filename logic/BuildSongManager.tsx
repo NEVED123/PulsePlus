@@ -1,47 +1,9 @@
 import { createContext, useState, useRef, useEffect, useContext, useLayoutEffect } from 'react'
-import { Song, Meter, Beat, defaultMetronomeSong, Subdivisions, BuildSongFunctions } from './structure'
+import { Song, Meter, Beat, defaultMetronomeSong, Subdivisions, BuildSongFunctions, Metadata } from './structure'
 import _ from 'lodash'
 import { Audio, AVPlaybackSource } from 'expo-av'
 import * as f from './SongFunctions'
 import { PreferencesContext } from './PreferencesManager'
-
-const defaultBuildMetronomeSong : Song = {
-    song:[{
-        initBpm: 100,
-        denominator: 4,
-        repeat : 1,
-        active: true,
-        beats:[{
-            beatSound : 0,
-            subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
-            active : true
-        },
-        {
-            beatSound : 0,
-            subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
-            active : false
-        },
-        {
-            beatSound : 0,
-            subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
-            active : false
-        },
-        {
-            beatSound : 0,
-            subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
-            active : false
-        }
-        ]
-    },
-    ],
-    repeat: true,
-    name: "Default",
-    author: "",
-}
 
 let contextValues = {} as BuildSongFunctions
 
@@ -49,7 +11,7 @@ export const BuildSongContext = createContext(contextValues) //initial values ma
 
 export function BuildSongProvider({ children } : { children : any }){
 
-    const [song, setSong] = useState(_.cloneDeep(defaultBuildMetronomeSong))
+    const [song, setSong] = useState(_.cloneDeep(defaultMetronomeSong))
 
     contextValues = {
         song: _.cloneDeep(song),
@@ -71,16 +33,17 @@ export function BuildSongProvider({ children } : { children : any }){
         setSectionName: (sectionName: string) => {setSong(f.setSectionName(sectionName, song))},
         sectionName: f.getSectionName(song),
         songName : f.getSongName(song),
-        setSongName : (name : string | undefined) => {setSong(f.setSongName(name, song))},
         author : f.getAuthor(song),
-        setAuthor : (author: string | undefined) => {setSong(f.setAuthor(author, song))},
+        date : f.getDate(song),
+        metadata: f.getMetadata(song),
+        setMetadata : (metadata : Metadata) => {setSong(f.setMetadata(metadata, song))},
         incrementMeter: (wrapToBeginning? : boolean)=>{setSong(f.incrementMeter(song, wrapToBeginning))},
         decrementMeter: (wrapToEnd? : boolean) => {setSong(f.decrementMeter(song, wrapToEnd))},
         addMeter : () => {setSong(f.addMeter(song))},
         removeMeter : ()=>{setSong(f.removeMeter(song))},
         length : f.getSongLength(song),
         accel : f.getAccel(song),
-        loadSong: (song: Song) => {setSong(_.cloneDeep(song))}
+        setSong: (song: Song) => {setSong(_.cloneDeep(song))}
     }
     
     return(

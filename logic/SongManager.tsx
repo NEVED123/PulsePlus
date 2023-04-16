@@ -1,5 +1,5 @@
 import { createContext, useState, useRef, useEffect, useContext, useLayoutEffect } from 'react'
-import { Song, Meter, Beat, defaultMetronomeSong, multiMeterTestMetronomeSong, RunnableSongFunctions } from './structure'
+import { Song, Meter, Beat, defaultMetronomeSong, RunnableSongFunctions } from './structure'
 import _ from 'lodash'
 import { Audio, AVPlaybackSource } from 'expo-av'
 import * as f from './SongFunctions'
@@ -37,7 +37,7 @@ export function SongProvider({ children } : { children : any }){
     //This is the third attempt at making this work, and is by no means ideal. Other two attempts down below.
 
     const [running, setRunning] = useState(false)
-    const [song, setSong] = useState(_.cloneDeep(multiMeterTestMetronomeSong))
+    const [song, setSong] = useState(_.cloneDeep(defaultMetronomeSong))
 
     const requestRef = useRef(null as any)
     const prevTRef = useRef(performance.now())
@@ -93,12 +93,11 @@ export function SongProvider({ children } : { children : any }){
         finalTempo: f.getFinalTempo(song),
         repetitions: f.getRepetitions(song),
         songName: f.getSongName(song),
-        setSongName : (name : string | undefined) => {setSong(f.setSongName(name, song))},
         incrementMeter: (wrapToBeginning? : boolean)=>{setSong(f.incrementMeter(song, wrapToBeginning))},
         decrementMeter: (wrapToEnd? : boolean) => {setSong(f.decrementMeter(song, wrapToEnd))},
         length : f.getSongLength(song),
         accel : f.getAccel(song),
-        loadSong: (song: Song) => {setSong(_.cloneDeep(song))},
+        setSong: (song: Song) => {setSong(_.cloneDeep(song))},
         running: running,
         toggleRunning: toggleRunning,
     }

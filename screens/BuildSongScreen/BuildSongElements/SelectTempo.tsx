@@ -7,7 +7,7 @@ import { PreferencesContext } from "../../../logic/PreferencesManager"
 
 export function SelectTempo(){
 
-    const { tempo, setTempo, denominator, getSong } = useContext(BuildSongContext)
+    const { tempo, setTempo, denominator } = useContext(BuildSongContext)
 
     const [open, setOpen] = useState(false)
     const [noteValue, setNoteValue] = useState(denominator)

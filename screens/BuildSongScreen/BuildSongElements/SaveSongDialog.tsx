@@ -1,16 +1,20 @@
 import { Dialog, Text, Portal, Provider } from "react-native-paper";
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import { View, StyleSheet, Dimensions, TextInput, Pressable } from 'react-native'
 import { BuildSongContext } from "../../../logic/BuildSongManager";
 import { PreferencesContext } from "../../../logic/PreferencesManager";
 import { textTitleColors } from "../../../theme/Colors";
+import * as f from '../../../backend/storage'
 
 export default function SaveSongDialong({ visible, setVisible } : { visible : boolean, setVisible : Function}){
 
     const { theme } = useContext(PreferencesContext)
-    const { setAuthor, setSongName, setDate, song } = useContext(BuildSongContext)
+    const {song, setMetadata} = useContext(BuildSongContext)
     const [songNameText, setSongNameText] = useState('')
     const [composerText, setComposerText] = useState('')
+
+    const [warningVisible, setWarningVisible] = useState(false)
+    const [warning, setWarning] = useState('')
 
     return(
         <Portal>
@@ -42,26 +46,42 @@ export default function SaveSongDialong({ visible, setVisible } : { visible : bo
                         setComposerText(text)
                     }}
                 />
+                {warningVisible && <Text>
+                    {warning}
+                </Text>}
                 <View style={styles.buttonContainer}>
                     <Pressable        
-                        onPress={()=>{        
-                        setSongName(songNameText)
-                        setAuthor(composerText)
-                        setDate(Date.now())
-                        //saveSong(song)
-                        setVisible(false)      
+                        onPress={()=>{     
+                            setMetadata({
+                                name : songNameText,
+                                author : composerText,
+                                date : new Date(Date.now()).toLocaleDateString('en-US', {
+                                    day: '2-digit',
+                                    month: '2-digit',
+                                    year: 'numeric',
+                                  })
+                            })
+                            f.saveSong(song)
+                            setVisible(false) 
+
                     }}>
                         <Text style={styles.buttonText}>
                             Save
                         </Text>
                     </Pressable>
-                    <Pressable onPress={()=>{
-                        setSongName(songNameText)
-                        setAuthor(composerText)
-                        setDate(Date.now())
-                        //saveSong(song)
-                        setVisible(false)
-                        //go to home
+                    <Pressable onPress={async ()=>{
+                        setMetadata({
+                            name : songNameText,
+                            author : composerText,
+                            date : new Date(Date.now()).toLocaleDateString('en-US', {
+                                day: '2-digit',
+                                month: '2-digit',
+                                year: 'numeric',
+                            })
+                        })
+                        f.saveSong(song)
+                        setVisible(false) 
+                        
                     }}>
                         <Text
                             style={styles.buttonText}
@@ -86,6 +106,8 @@ export default function SaveSongDialong({ visible, setVisible } : { visible : bo
         </Portal>
     )
 }
+
+
 
 const styles = StyleSheet.create({
     dialog:{
