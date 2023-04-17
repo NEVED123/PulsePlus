@@ -21,7 +21,7 @@ describe('getActiveMeter',()=>{
         beats:[{
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
+              
             active : true
             }
           ]
@@ -34,7 +34,7 @@ describe('getActiveMeter',()=>{
           beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : true
             }
           ]
@@ -47,7 +47,7 @@ describe('getActiveMeter',()=>{
           beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : true
             }
           ]
@@ -66,7 +66,7 @@ describe('getActiveMeter',()=>{
       beats:[{
           beatSound : 0,
           subDiv : Subdivisions.none,
-          beatDuration: 600, // 60/100 * 1000 
+            
           active : true
           }
         ]
@@ -87,7 +87,7 @@ describe('getActiveMeter',()=>{
         beats:[{
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
+              
             active : false
             }
           ]
@@ -115,7 +115,7 @@ describe('getActiveMeterIndex',()=>{
         beats:[{
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
+              
             active : true
             }
           ]
@@ -128,7 +128,7 @@ describe('getActiveMeterIndex',()=>{
           beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : true
             }
           ]
@@ -153,7 +153,7 @@ describe('getActiveMeterIndex',()=>{
         beats:[{
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
+              
             active : false
             }
           ]
@@ -182,7 +182,7 @@ describe('getActiveBeat', ()=>{
         beats:[{
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
+              
             active : true
             }
           ]
@@ -197,7 +197,7 @@ describe('getActiveBeat', ()=>{
     const result : Beat = {
       beatSound : 0,
       subDiv : Subdivisions.none,
-      beatDuration: 600, // 60/100 * 1000 
+        
       active : true
       }
 
@@ -214,7 +214,7 @@ describe('getActiveBeat', ()=>{
         beats:[{
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
+              
             active : false
             }
           ]
@@ -243,7 +243,7 @@ describe('getActiveBeatIndex',()=>{
         beats:[{
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
+              
             active : true
             }
           ]
@@ -268,7 +268,7 @@ describe('getActiveBeatIndex',()=>{
         beats:[{
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
+              
             active : false
             }
           ]
@@ -299,7 +299,7 @@ describe('getNumerator',()=>{
         beats:[{
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
+              
             active : true
             }
           ]
@@ -312,7 +312,7 @@ describe('getNumerator',()=>{
           beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
               }
             ]
@@ -361,193 +361,193 @@ describe('setNumerator', ()=>{
       beats:[{
           beatSound : 0,
           subDiv : Subdivisions.none,
-          beatDuration: 600, // 60/100 * 1000 
+            
           active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       },
       {
         beatSound : 0,
         subDiv : Subdivisions.none,
-        beatDuration: 600, // 60/100 * 1000 
+          
         active : false
       }
       ]
@@ -567,7 +567,7 @@ describe('setNumerator', ()=>{
       beats:[{
           beatSound : 0,
           subDiv : Subdivisions.none,
-          beatDuration: 600, // 60/100 * 1000 
+            
           active : false
       }
       ]
@@ -634,7 +634,7 @@ describe('getDenominator',()=>{
         beats:[{
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
+              
             active : true
             }
           ]
@@ -647,7 +647,7 @@ describe('getDenominator',()=>{
           beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
               }
             ]
@@ -674,7 +674,7 @@ describe('setDenominator', ()=>{
         beats:[{
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
+              
             active : true
             }
           ]
@@ -687,7 +687,7 @@ describe('setDenominator', ()=>{
           beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
               }
             ]
@@ -708,7 +708,7 @@ describe('setDenominator', ()=>{
         beats:[{
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
+              
             active : true
             }
           ]
@@ -721,7 +721,7 @@ describe('setDenominator', ()=>{
           beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
               }
             ]
@@ -749,7 +749,7 @@ describe('setAccent', ()=>{
         beats:[{
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
+              
             active : true
             }
           ]
@@ -762,7 +762,7 @@ describe('setAccent', ()=>{
           beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
               }
             ]
@@ -783,7 +783,7 @@ describe('setAccent', ()=>{
         beats:[{
             beatSound : 1,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
+              
             active : true
             }
           ]
@@ -796,7 +796,7 @@ describe('setAccent', ()=>{
           beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
               }
             ]
@@ -821,7 +821,7 @@ describe('setAccent', ()=>{
         beats:[{
             beatSound : 2,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
+              
             active : true
             }
           ]
@@ -834,7 +834,7 @@ describe('setAccent', ()=>{
           beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
               }
             ]
@@ -855,7 +855,7 @@ describe('setAccent', ()=>{
         beats:[{
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
+              
             active : true
             }
           ]
@@ -868,7 +868,7 @@ describe('setAccent', ()=>{
           beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
               }
             ]
@@ -893,7 +893,7 @@ describe('setAccent', ()=>{
         beats:[{
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
+              
             active : true
             }
           ]
@@ -906,7 +906,7 @@ describe('setAccent', ()=>{
           beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
               }
             ]
@@ -933,7 +933,7 @@ describe('setTempo',()=>{
         beats:[{
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
+              
             active : false
             }
           ]
@@ -946,7 +946,7 @@ describe('setTempo',()=>{
           beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
               }
             ]
@@ -967,7 +967,7 @@ describe('setTempo',()=>{
         beats:[{
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600,  
+              
             active : false
             }
           ]
@@ -980,7 +980,7 @@ describe('setTempo',()=>{
           beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, 
+               
               active : false
               }
             ]
@@ -1007,7 +1007,7 @@ describe('getTempo',()=>{
         beats:[{
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
+              
             active : false
             }
           ]
@@ -1019,8 +1019,7 @@ describe('getTempo',()=>{
           active: false,
           beats:[{
               beatSound : 0,
-              subDiv : Subdivisions.none,
-              beatDuration: 300, // 60/100 * 1000 
+              subDiv : Subdivisions.none, 
               active : false
               }
             ]
@@ -1047,7 +1046,7 @@ describe('resetSong',()=>{
         beats:[{
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
+              
             active : false
             }
           ]
@@ -1060,7 +1059,7 @@ describe('resetSong',()=>{
           beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : true
               }
             ]
@@ -1081,7 +1080,7 @@ describe('resetSong',()=>{
         beats:[{
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
+              
             active : true
             }
           ]
@@ -1094,7 +1093,7 @@ describe('resetSong',()=>{
           beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
               }
             ]
@@ -1126,13 +1125,13 @@ describe('incrementBeat',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : true //CHANGED
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false //CHANGED
             }
           ]
@@ -1153,13 +1152,13 @@ describe('incrementBeat',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false //CHANGED
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : true //CHANGED
             }
           ]
@@ -1189,13 +1188,13 @@ describe('incrementBeat',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false 
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : true
             }
           ]
@@ -1208,13 +1207,13 @@ describe('incrementBeat',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false //CHANGED
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false //CHANGED
             }
           ]
@@ -1235,13 +1234,13 @@ describe('incrementBeat',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false 
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -1254,13 +1253,13 @@ describe('incrementBeat',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : true
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false 
             }
           ]
@@ -1288,13 +1287,13 @@ describe('incrementBeat',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false 
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -1307,13 +1306,13 @@ describe('incrementBeat',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false 
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : true
             }
           ]
@@ -1334,13 +1333,13 @@ describe('incrementBeat',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : true
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -1353,13 +1352,13 @@ describe('incrementBeat',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false 
             }
           ]
@@ -1387,13 +1386,13 @@ describe('getFinalTempo',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false 
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -1417,13 +1416,13 @@ describe('getFinalTempo',()=>{
           beats:[{
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false 
               },
               {
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               }
             ]
@@ -1450,13 +1449,13 @@ describe('setFinalTempo',()=>{
           beats:[{
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false 
               },
               {
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               }
             ]
@@ -1479,13 +1478,13 @@ describe('setFinalTempo',()=>{
           beats:[{
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false 
               },
               {
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               }
             ]
@@ -1511,13 +1510,13 @@ describe('setFinalTempo',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false 
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -1540,13 +1539,13 @@ describe('setFinalTempo',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false 
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -1573,13 +1572,13 @@ describe('setFinalTempo',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false 
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -1600,13 +1599,13 @@ describe('setFinalTempo',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false 
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -1633,13 +1632,13 @@ describe('setFinalTempo',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false 
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -1660,13 +1659,13 @@ describe('setFinalTempo',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false 
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -1692,13 +1691,13 @@ describe('incrementMeter',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false 
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -1711,13 +1710,13 @@ describe('incrementMeter',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false 
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -1738,13 +1737,13 @@ describe('incrementMeter',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -1757,13 +1756,13 @@ describe('incrementMeter',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false 
             }
           ]
@@ -1788,13 +1787,13 @@ describe('incrementMeter',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false 
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -1807,13 +1806,13 @@ describe('incrementMeter',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false 
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -1838,13 +1837,13 @@ describe('incrementMeter',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false 
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -1857,13 +1856,13 @@ describe('incrementMeter',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false 
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -1884,13 +1883,13 @@ describe('incrementMeter',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -1903,13 +1902,13 @@ describe('incrementMeter',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false 
             }
           ]
@@ -1936,13 +1935,13 @@ describe('decrementMeter',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false 
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -1955,13 +1954,13 @@ describe('decrementMeter',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false 
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -1982,13 +1981,13 @@ describe('decrementMeter',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -2001,13 +2000,13 @@ describe('decrementMeter',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false 
             }
           ]
@@ -2032,13 +2031,13 @@ describe('decrementMeter',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false 
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -2051,13 +2050,13 @@ describe('decrementMeter',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false 
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -2082,13 +2081,13 @@ describe('decrementMeter',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false 
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -2101,13 +2100,13 @@ describe('decrementMeter',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false 
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -2128,13 +2127,13 @@ describe('decrementMeter',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -2147,13 +2146,13 @@ describe('decrementMeter',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false 
             }
           ]
@@ -2180,13 +2179,13 @@ describe('setRepetitions',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -2207,13 +2206,13 @@ describe('setRepetitions',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -2241,13 +2240,13 @@ describe('getRepetitions',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -2274,13 +2273,13 @@ describe('setSectionName',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -2293,13 +2292,13 @@ describe('setSectionName',()=>{
           beats:[{
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               },
               {
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               }
             ]
@@ -2321,13 +2320,13 @@ describe('setSectionName',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -2340,13 +2339,13 @@ describe('setSectionName',()=>{
           beats:[{
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               },
               {
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               }
             ]
@@ -2374,13 +2373,13 @@ describe('getSectionName',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -2393,13 +2392,13 @@ describe('getSectionName',()=>{
           beats:[{
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               },
               {
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               }
             ]
@@ -2428,13 +2427,13 @@ describe('addMeter',()=>{
           beats:[{
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               },
               {
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               }
             ]
@@ -2447,13 +2446,13 @@ describe('addMeter',()=>{
             beats:[{
                   beatSound : 0,
                   subDiv : Subdivisions.none,
-                  beatDuration: 600, // 60/100 * 1000 
+                    
                   active : false
                 },
                 {
                   beatSound : 0,
                   subDiv : Subdivisions.none,
-                  beatDuration: 600, // 60/100 * 1000 
+                    
                   active : false
                 }
               ]
@@ -2475,13 +2474,13 @@ describe('addMeter',()=>{
           beats:[{
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               },
               {
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               }
             ]
@@ -2494,13 +2493,13 @@ describe('addMeter',()=>{
             beats:[{
                   beatSound : 0,
                   subDiv : Subdivisions.none,
-                  beatDuration: 600, // 60/100 * 1000 
+                    
                   active : false
                 },
                 {
                   beatSound : 0,
                   subDiv : Subdivisions.none,
-                  beatDuration: 600, // 60/100 * 1000 
+                    
                   active : false
                 }
               ]
@@ -2513,13 +2512,13 @@ describe('addMeter',()=>{
             beats:[{
                   beatSound : 0,
                   subDiv : Subdivisions.none,
-                  beatDuration: 600, // 60/100 * 1000 
+                    
                   active : false
                 },
                 {
                   beatSound : 0,
                   subDiv : Subdivisions.none,
-                  beatDuration: 600, // 60/100 * 1000 
+                    
                   active : false
                 }
               ]
@@ -2547,13 +2546,13 @@ describe('addMeter',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -2566,13 +2565,13 @@ describe('addMeter',()=>{
           beats:[{
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               },
               {
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               }
             ]
@@ -2595,13 +2594,13 @@ describe('addMeter',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -2614,13 +2613,13 @@ describe('addMeter',()=>{
           beats:[{
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               },
               {
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               }
             ]
@@ -2633,13 +2632,13 @@ describe('addMeter',()=>{
           beats:[{
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               },
               {
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               }
             ]
@@ -2667,13 +2666,13 @@ describe('removeMeter',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -2701,13 +2700,13 @@ describe('removeMeter',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -2720,13 +2719,13 @@ describe('removeMeter',()=>{
           beats:[{
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               },
               {
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               }
             ]
@@ -2739,13 +2738,13 @@ describe('removeMeter',()=>{
           beats:[{
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               },
               {
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               }
             ]
@@ -2768,13 +2767,13 @@ describe('removeMeter',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -2787,13 +2786,13 @@ describe('removeMeter',()=>{
           beats:[{
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               },
               {
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               }
             ]
@@ -2820,7 +2819,7 @@ describe('getSongLength',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             },
           ]
@@ -2847,13 +2846,13 @@ describe('getSongLength',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             },
             {
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             }
           ]
@@ -2866,13 +2865,13 @@ describe('getSongLength',()=>{
           beats:[{
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               },
               {
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               }
             ]
@@ -2885,13 +2884,13 @@ describe('getSongLength',()=>{
           beats:[{
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               },
               {
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               }
             ]
@@ -2920,7 +2919,7 @@ describe('getAccel',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             },
           ]
@@ -2949,7 +2948,7 @@ describe('setActiveMeter',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             },
           ]
@@ -2962,7 +2961,7 @@ describe('setActiveMeter',()=>{
           beats:[{
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               },
             ]
@@ -2975,7 +2974,7 @@ describe('setActiveMeter',()=>{
             beats:[{
                   beatSound : 0,
                   subDiv : Subdivisions.none,
-                  beatDuration: 600, // 60/100 * 1000 
+                    
                   active : false
                 },
               ]
@@ -2997,7 +2996,7 @@ describe('setActiveMeter',()=>{
         beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+                
               active : false
             },
           ]
@@ -3010,7 +3009,7 @@ describe('setActiveMeter',()=>{
           beats:[{
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                beatDuration: 600, // 60/100 * 1000 
+                  
                 active : false
               },
             ]
@@ -3022,8 +3021,7 @@ describe('setActiveMeter',()=>{
             active: true,
             beats:[{
                   beatSound : 0,
-                  subDiv : Subdivisions.none,
-                  beatDuration: 600, // 60/100 * 1000 
+                  subDiv : Subdivisions.none,          
                   active : false
                 },
               ]
@@ -3052,8 +3050,7 @@ describe('getDate',()=>{
         active: true,
         beats:[{
               beatSound : 0,
-              subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+              subDiv : Subdivisions.none,                
               active : false
             },
           ]
@@ -3086,8 +3083,7 @@ describe('getAuthor',()=>{
         active: true,
         beats:[{
               beatSound : 0,
-              subDiv : Subdivisions.none,
-              beatDuration: 600, // 60/100 * 1000 
+              subDiv : Subdivisions.none,   
               active : false
             },
           ]

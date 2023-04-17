@@ -91,7 +91,6 @@ export function setNumerator(song : Song, numerator: number, resetAccents : bool
         for(let i = 0;i<numerator;i++){ //your java is showing
             newMeter[i] = ({beatSound: 0, 
                 subDiv: Subdivisions.none, 
-                beatDuration: 600, //attribute to be removed
                 active: false})
         }
 
@@ -108,7 +107,6 @@ export function setNumerator(song : Song, numerator: number, resetAccents : bool
             for(let i = 0; i<beatsToAdd; i++){ //your java is showing
                 addedBeats[i] = {beatSound: 0, 
                     subDiv: Subdivisions.none, 
-                    beatDuration: 600, 
                     active: false}
             }
             

@@ -1,7 +1,6 @@
 export type Beat = {
     beatSound : number, //refers to the index of the preset the user is using
     subDiv : number[] //from subdivisions constant
-    beatDuration : number //milliseconds
     active : boolean //property to determine whether this beat is currently alive for UI purposes, may not be necessary
 }
 
@@ -123,25 +122,21 @@ export const defaultMetronomeSong : Song = {
         beats:[{
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
             active : true
         },
         {
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
             active : false
         },
         {
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
             active : false
         },
         {
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
             active : false
         }
         ]
@@ -158,25 +153,21 @@ export const multiMeterTestMetronomeSong : Song = {
         beats:[{
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
             active : true
         },
         {
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
             active : false
         },
         {
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
             active : false
         },
         {
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
             active : false
         }
         ]
@@ -189,19 +180,16 @@ export const multiMeterTestMetronomeSong : Song = {
         beats:[{
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
             active : true
         },
         {
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
             active : true
         },
         {
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
             active : true
         }]
     },
@@ -213,13 +201,11 @@ export const multiMeterTestMetronomeSong : Song = {
         beats:[{
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
             active : true
         },
         {
             beatSound : 0,
             subDiv : Subdivisions.none,
-            beatDuration: 600, // 60/100 * 1000 
             active : true
         }]
     }],

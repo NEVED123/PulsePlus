@@ -46,35 +46,36 @@ export function SongProvider({ children } : { children : any }){
         setRunning(running == true ? false : true)
     }
 
-    function step(timestamp: number) : void {
+    //TODO - REDEFINE
+    // function step(timestamp: number) : void {
 
-        const elapsed = timestamp - prevTRef.current
+    //     const elapsed = timestamp - prevTRef.current
 
-        if(!running){
-            setSong(f.resetSong(song))
-            return
-        }
+    //     if(!running){
+    //         setSong(f.resetSong(song))
+    //         return
+    //     }
 
-        const { beatDuration } = f.getActiveBeat(song)
+    //     const { beatDuration } = f.getActiveBeat(song)
 
-        if(elapsed > beatDuration){
-            setSong(f.incrementBeat(song))
+    //     if(elapsed > beatDuration){
+    //         setSong(f.incrementBeat(song))
 
-            const { beatSound } = f.getActiveBeat(song)
-            console.log(elapsed-beatDuration)
+    //         const { beatSound } = f.getActiveBeat(song)
+    //         console.log(elapsed-beatDuration)
 
-            playSound(beatSound)
-            prevTRef.current = timestamp
-        }
+    //         playSound(beatSound)
+    //         prevTRef.current = timestamp
+    //     }
 
-        requestRef.current = requestAnimationFrame(step);
+    //     requestRef.current = requestAnimationFrame(step);
 
-    }
+    // }
 
-    useEffect(()=>{ 
-        requestRef.current = requestAnimationFrame(step)
-        return () => cancelAnimationFrame(requestRef.current)
-    },[running])
+    // useEffect(()=>{ 
+    //     requestRef.current = requestAnimationFrame(step)
+    //     return () => cancelAnimationFrame(requestRef.current)
+    // },[running])
 
     contextValues = {
         song: _.cloneDeep(song),
