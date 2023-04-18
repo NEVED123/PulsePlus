@@ -262,4 +262,52 @@ describe('incrementBeat',()=>{
   
       expect(incrementBeat(received)).toEqual(result)
     }) 
+
+    test('song has no active beat', ()=>{
+      const received : Song = {
+        song:[{
+          initBpm: 100,
+          denominator: 4,
+          repeat : 1,
+          active: true,
+          beats:[{
+                beatSound : 0,
+                subDiv : Subdivisions.none,   
+                active : false
+              },
+              {
+                beatSound : 0,
+                subDiv : Subdivisions.none,
+                active : false
+              }
+            ]
+          }
+        ],
+        repeat: true,
+      }
+
+      const expected : Song = {
+        song:[{
+          initBpm: 100,
+          denominator: 4,
+          repeat : 1,
+          active: true,
+          beats:[{
+                beatSound : 0,
+                subDiv : Subdivisions.none,   
+                active : true
+              },
+              {
+                beatSound : 0,
+                subDiv : Subdivisions.none,
+                active : false
+              }
+            ]
+          }
+        ],
+        repeat: true,
+      }
+
+      expect(incrementBeat(received)).toEqual(expected)
+    })
   })

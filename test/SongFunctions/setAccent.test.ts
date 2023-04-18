@@ -33,9 +33,6 @@ describe('setAccent', ()=>{
             }
         ],
         repeat: true,
-        
-        
-        
       }
     
       const result : Song = {
@@ -67,9 +64,6 @@ describe('setAccent', ()=>{
             }
         ],
         repeat: true,
-        
-        
-        
       }
     
       expect(setAccent(received, 0)).toEqual(result)

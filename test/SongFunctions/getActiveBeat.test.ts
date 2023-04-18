@@ -34,7 +34,7 @@ describe('getActiveBeat', ()=>{
       expect(getActiveBeat(received)).toEqual(result)
     })
   
-    test('throws error when song contains no active beat', ()=>{
+    test('returns undefined when there is no active beat', ()=>{
       const received : Song = {
         song:[{
           initBpm: 100,
@@ -44,20 +44,14 @@ describe('getActiveBeat', ()=>{
           beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-                
               active : false
               }
             ]
           }
         ],
-        repeat: true,
-        
-        
-        
+        repeat: true,      
       }
   
-      expect(()=>{
-        getActiveBeat(received)
-      }).toThrow()
+      expect(getActiveBeat(received)).toBeUndefined()
     })
   })

@@ -34,27 +34,19 @@ export function setActiveMeterIndex(index : number, song: Song) : Song {
     return updatedSong
 }
 
-export function getActiveBeat(song: Song) : Beat {
+export function getActiveBeat(song: Song) : Beat | undefined {
 
     const activeMeter = getActiveMeter(song)
     const beat = activeMeter.beats.find(beat => beat.active == true)
 
-    if(beat != undefined){
-        return beat
-    }
-
-    throw new Error('No active beat in song')
+    return beat
 }
 
 export function getActiveBeatIndex(song: Song) : number{
     const activeMeter = getActiveMeter(song)
     const beatIndex = activeMeter.beats.findIndex(beat => beat.active == true)
 
-    if(beatIndex != -1){
-        return beatIndex
-    }
-
-    throw new Error('No active beat in song')
+    return beatIndex
 }
 
 /**
@@ -227,6 +219,13 @@ export function incrementBeat(song: Song){
     const activeMeter = getActiveMeter(song)
     const meterIndex = getActiveMeterIndex(song)
     const beatIndex = getActiveBeatIndex(song)
+
+    //sets first beat to active if there is no active beat in song
+
+    if(beatIndex == -1){
+        updatedSong.song[meterIndex].beats[0].active = true
+        return _.clone(updatedSong)
+    }
 
     updatedSong.song[meterIndex].beats[beatIndex].active = false 
 
@@ -443,6 +442,21 @@ export function getMetadata(song: Song) : Metadata | undefined {
     return _.clone(song).metadata
 }
 
+export function getNextBeat(song: Song) : Beat {
+    const incrementedSong = incrementBeat(song)
 
+    const activeBeat = getActiveBeat(incrementedSong)
+
+    //next beat should never be active by definition
+
+    if(activeBeat == undefined){
+        const updatedSong = _.clone(song)
+        return _.clone(updatedSong.song[getActiveMeterIndex(updatedSong)].beats[0])
+    }
+    else{
+        activeBeat.active = false
+        return activeBeat
+    }
+}
 
 

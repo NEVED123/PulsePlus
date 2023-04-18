@@ -27,7 +27,7 @@ describe('getActiveBeatIndex',()=>{
       expect(getActiveBeatIndex(received)).toBe(0)
     })
   
-    test('throws error when song contains no active beat',()=>{
+    test('returns -1 if there is no active beat',()=>{
       const received : Song = {
         song:[{
           initBpm: 100,
@@ -37,7 +37,6 @@ describe('getActiveBeatIndex',()=>{
           beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-                
               active : false
               }
             ]
@@ -49,9 +48,7 @@ describe('getActiveBeatIndex',()=>{
         
       }
   
-      expect(()=>{
-        getActiveBeatIndex(received)
-      }).toThrow()
+      expect(getActiveBeatIndex(received)).toBe(-1)
     })
   
   })
