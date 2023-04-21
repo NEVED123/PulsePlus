@@ -197,7 +197,6 @@ export function resetSong(song: Song) : Song{
     updatedSong.song[getActiveMeterIndex(song)].active = false
 
     updatedSong.song[0].active = true
-    updatedSong.song[0].beats[0].active = true
 
     return updatedSong
 }

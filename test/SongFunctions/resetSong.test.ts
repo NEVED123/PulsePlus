@@ -12,7 +12,6 @@ describe('resetSong',()=>{
           beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-                
               active : false
               }
             ]
@@ -24,17 +23,13 @@ describe('resetSong',()=>{
             active: true,
             beats:[{
                 beatSound : 0,
-                subDiv : Subdivisions.none,
-                  
+                subDiv : Subdivisions.none,                  
                 active : true
                 }
               ]
             }
         ],
         repeat: true,
-        
-        
-        
       }
   
       const result : Song = {
@@ -46,8 +41,7 @@ describe('resetSong',()=>{
           beats:[{
               beatSound : 0,
               subDiv : Subdivisions.none,
-                
-              active : true
+              active : false
               }
             ]
           },
@@ -58,17 +52,13 @@ describe('resetSong',()=>{
             active: false,
             beats:[{
                 beatSound : 0,
-                subDiv : Subdivisions.none,
-                  
+                subDiv : Subdivisions.none,            
                 active : false
                 }
               ]
             }
         ],
         repeat: true,
-        
-        
-        
       }
   
       expect(resetSong(received)).toEqual(result)
