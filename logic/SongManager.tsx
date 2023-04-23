@@ -1,10 +1,12 @@
 import { createContext, useState, useRef, useEffect, useContext, useLayoutEffect } from 'react'
 import { Song, Meter, Beat, defaultMetronomeSong, RunnableSongFunctions } from './structure'
-import _ from 'lodash'
-import { Audio, AVPlaybackSource } from 'expo-av'
+import { beatDuration } from './beatDuration'
+import _, { first } from 'lodash'
+import { Audio, AVPlaybackStatus, AVPlaybackStatusSuccess} from 'expo-av'
 import * as f from './SongFunctions'
 import { PreferencesContext } from './PreferencesManager'
 import { BuildSongContext } from './BuildSongManager'
+import useStateWithCallback from 'use-state-with-callback'
 
 let contextValues = {} as RunnableSongFunctions
 export const SongContext = createContext(contextValues) //initial values make compiler happy
@@ -12,70 +14,105 @@ export const SongContext = createContext(contextValues) //initial values make co
 export function SongProvider({ children } : { children : any }){
 
     //Makes sounds work
-    const [sound, setSound] = useState(0 as any)
+    const soundRef = useRef({} as Audio.Sound)
     const {soundSet} = useContext(PreferencesContext)
 
-    async function playSound(accent : number) {
-
-        const { sound } = await Audio.Sound.createAsync(soundSet[accent].file, {shouldPlay: true}) //preset to be determined by user settings
-        
-        setSound(sound)
-    
-        //await sound.playAsync();
+    async function loadSound(accent : number) {
+        const { sound } = await Audio.Sound.createAsync(soundSet[accent].file, {
+            progressUpdateIntervalMillis: 1,
+            positionMillis: 0,
+            shouldPlay: false,
+            rate: 1.0,
+            shouldCorrectPitch: true,
+            volume: 1.0,
+            isMuted: false,
+            isLooping: false,
+            seekMillisToleranceAfter: 0,
+            seekMillisToleranceBefore: 0,
+            },
+            deltaStatusUpdate
+          ) //play with the Initial AVPlayBackStatus
+        soundRef.current = sound
     }
-    
-    useEffect(() => {
-    return sound
-        ? () => {
-            sound.unloadAsync();
-        }
-        : undefined;
-    }, [sound]);  
+
+    const statusUpdateTimeRef = useRef(performance.now())
+
+    function deltaStatusUpdate(){
+        //to calculate delay caused by changing status of playback
+        statusUpdateTimeRef.current = performance.now()-statusUpdateTimeRef.current
+    }
 
     //'ENGINE' OF THE METRONOME
 
     //This is the third attempt at making this work, and is by no means ideal. Other two attempts down below.
 
-    const [running, setRunning] = useState(false)
     const [song, setSong] = useState(_.cloneDeep(defaultMetronomeSong))
-
-    const requestRef = useRef(null as any)
+    const running = useRef(false)
     const prevTRef = useRef(performance.now())
+    const x = useRef(0)
+    const prevActiveMeterIndex = useRef(0)
+    const d = useRef(0)
 
+    useEffect(()=>{
+        if(!running.current){
+            const firstBeatSound = f.getActiveMeter(song).beats[0].beatSound
+            loadSound(firstBeatSound)
+        }
+    },[]) //sound of first beat in meter
+    
     function toggleRunning(){
-        setRunning(running == true ? false : true)
+        if(running.current){
+            f.resetSong(song)
+            running.current = false
+        }
+        else{
+            running.current = true
+            requestAnimationFrame(step)
+        }
     }
 
-    //TODO - REDEFINE
-    // function step(timestamp: number) : void {
+    async function step(timestamp : number){
 
-    //     const elapsed = timestamp - prevTRef.current
+        if(!running.current){
+            //reset song
+            return
+        }
 
-    //     if(!running){
-    //         setSong(f.resetSong(song))
-    //         return
-    //     }
+        if(timestamp - prevTRef.current > d.current){
 
-    //     const { beatDuration } = f.getActiveBeat(song)
+            setSong(f.incrementBeat(song))
 
-    //     if(elapsed > beatDuration){
-    //         setSong(f.incrementBeat(song))
+            prevTRef.current = timestamp
+            
+            soundRef.current.playFromPositionAsync(0, {toleranceMillisBefore:0, toleranceMillisAfter: 0}).catch(
+                (reason: any)=>{console.log(reason)}
+            )
+    
+            //to deal with accel over a repeated meter
+            // if(f.getActiveMeterIndex(song) != prevActiveMeterIndex.current){
+            //     x.current = 0
+            // }
+            // else{
+            //     x.current++;
+            // }
+            
+            if(f.getNextBeat(song).beatSound != f.getActiveBeat(song)?.beatSound){
+                statusUpdateTimeRef.current = performance.now()
+                loadSound(f.getNextBeat(song).beatSound)
+            }else{
+                soundRef.current.setPositionAsync(0).catch(
+                    (reason: any)=>console.log(reason)
+                )
+                statusUpdateTimeRef.current = 0
+            }
+        
+            d.current = beatDuration(f.getActiveMeter(song).initBpm) - statusUpdateTimeRef.current
+            //statusUpdateTimeRef.current = 0
+        }
 
-    //         const { beatSound } = f.getActiveBeat(song)
-    //         console.log(elapsed-beatDuration)
-
-    //         playSound(beatSound)
-    //         prevTRef.current = timestamp
-    //     }
-
-    //     requestRef.current = requestAnimationFrame(step);
-
-    // }
-
-    // useEffect(()=>{ 
-    //     requestRef.current = requestAnimationFrame(step)
-    //     return () => cancelAnimationFrame(requestRef.current)
-    // },[running])
+        requestAnimationFrame(step)
+        
+    } 
 
     contextValues = {
         song: _.cloneDeep(song),
@@ -99,7 +136,7 @@ export function SongProvider({ children } : { children : any }){
         length : f.getSongLength(song),
         accel : f.getAccel(song),
         setSong: (song: Song) => {setSong(_.cloneDeep(song))},
-        running: running,
+        running: running.current,
         toggleRunning: toggleRunning,
     }
     

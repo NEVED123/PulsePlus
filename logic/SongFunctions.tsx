@@ -39,7 +39,7 @@ export function getActiveBeat(song: Song) : Beat | undefined {
     const activeMeter = getActiveMeter(song)
     const beat = activeMeter.beats.find(beat => beat.active == true)
 
-    return beat
+    return _.clone(beat)
 }
 
 export function getActiveBeatIndex(song: Song) : number{
@@ -442,8 +442,9 @@ export function getMetadata(song: Song) : Metadata | undefined {
 }
 
 export function getNextBeat(song: Song) : Beat {
-    const incrementedSong = incrementBeat(song)
 
+    const updatedSong = _.cloneDeep(song)
+    const incrementedSong = incrementBeat(updatedSong)
     const activeBeat = getActiveBeat(incrementedSong)
 
     //next beat should never be active by definition
@@ -454,7 +455,7 @@ export function getNextBeat(song: Song) : Beat {
     }
     else{
         activeBeat.active = false
-        return activeBeat
+        return _.clone(activeBeat)
     }
 }
 

@@ -1,5 +1,5 @@
 import { Pressable, Text, StyleSheet} from 'react-native'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState} from 'react'
 import { PreferencesContext } from '../../../logic/PreferencesManager'
 import { altButtonColors, textTitleColors } from '../../../theme/Colors'
 import { SongContext } from '../../../logic/SongManager'
@@ -8,18 +8,22 @@ import { SongContext } from '../../../logic/SongManager'
 export function StartButton(){ 
 
     const { theme } = useContext(PreferencesContext)
-    const { toggleRunning, running } = useContext(SongContext)
+    const { toggleRunning  } = useContext(SongContext)
+    const [running, setRunning] = useState(false)
+
+
 
 
     return(
         <Pressable
             style={({ pressed }) => [
-            {backgroundColor: running || pressed? '#707070': altButtonColors[theme as keyof typeof altButtonColors]},
+            {backgroundColor: running || pressed ? '#707070': altButtonColors[theme as keyof typeof altButtonColors]},
             styles.startButton
           ]}
             onPress={
                 ()=>{
                     toggleRunning()
+                    setRunning(!running)
                 }
             }>
             <Text style={[{color: textTitleColors[theme as keyof typeof textTitleColors]},

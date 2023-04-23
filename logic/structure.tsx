@@ -122,7 +122,7 @@ export const defaultMetronomeSong : Song = {
         beats:[{
             beatSound : 0,
             subDiv : Subdivisions.none,
-            active : true
+            active : false
         },
         {
             beatSound : 0,

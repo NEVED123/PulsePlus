@@ -13,23 +13,19 @@ describe('getFinalTempo',()=>{
           beats:[{
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                  
                 active : false 
               },
               {
                 beatSound : 0,
                 subDiv : Subdivisions.none,
-                  
                 active : false
               }
             ]
           },
         ],
-        repeat: true,
-        
-        
-        
+        repeat: true, 
       }
+      
       expect(getFinalTempo(received)).toBe(200)
     })
       
