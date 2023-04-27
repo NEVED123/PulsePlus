@@ -1,5 +1,5 @@
 import { createContext, useState, useRef, useEffect, useContext, useLayoutEffect } from 'react'
-import { Song, Meter, Beat, defaultMetronomeSong, RunnableSongFunctions } from './structure'
+import { Song, Meter, Beat, defaultMetronomeSong, RunnableSongFunctions, multiMeterTestMetronomeSong } from './structure'
 import { beatDuration } from './beatDuration'
 import _, { first } from 'lodash'
 import { Audio, AVPlaybackStatus, AVPlaybackStatusSuccess} from 'expo-av'
@@ -46,7 +46,7 @@ export function SongProvider({ children } : { children : any }){
 
     //This is the third attempt at making this work, and is by no means ideal. Other two attempts down below.
 
-    const [song, setSong] = useState(_.cloneDeep(defaultMetronomeSong))
+    const [song, setSong] = useState(_.cloneDeep(multiMeterTestMetronomeSong))
     const running = useRef(false)
     const prevTRef = useRef(performance.now())
     const x = useRef(0)
@@ -87,14 +87,18 @@ export function SongProvider({ children } : { children : any }){
             soundRef.current.playFromPositionAsync(0, {toleranceMillisBefore:0, toleranceMillisAfter: 0}).catch(
                 (reason: any)=>{console.log(reason)}
             )
-    
-            //to deal with accel over a repeated meter
-            // if(f.getActiveMeterIndex(song) != prevActiveMeterIndex.current){
-            //     x.current = 0
-            // }
-            // else{
-            //     x.current++;
-            // }
+            
+            if(f.getSongLength(song) > 1){
+                if(f.getActiveMeterIndex(song) != prevActiveMeterIndex.current){
+                    prevActiveMeterIndex.current = f.getActiveMeterIndex(song)
+                    x.current = 0
+                }
+                else{
+                    x.current++;
+                }
+            }
+
+            console.log(x)
             
             if(f.getNextBeat(song).beatSound != f.getActiveBeat(song)?.beatSound){
                 statusUpdateTimeRef.current = performance.now()
@@ -106,7 +110,7 @@ export function SongProvider({ children } : { children : any }){
                 statusUpdateTimeRef.current = 0
             }
         
-            d.current = beatDuration(f.getActiveMeter(song).initBpm) - statusUpdateTimeRef.current
+            d.current = beatDuration(f.getTempo(song), f.getFinalTempo(song), x.current, f.getRepetitions(song)*f.getNumerator(song)) - statusUpdateTimeRef.current
             //statusUpdateTimeRef.current = 0
         }
 
