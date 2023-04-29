@@ -22,9 +22,6 @@ export default function Settings(){
                 </Text>
                 <View style={styles.settingsBox}>
                     <ToggleThemeButton/>
-                    <BackgroundModeButton/>
-                    <FlashlightOnDownBeatButton/>
-                    <VibrateOnDownbeat/>
                     <RateUsOnAppStoreButton/>
                 </View>
                 <Text style={[styles.title, {color : textTitleColors[theme as keyof typeof textTitleColors]}]}>
