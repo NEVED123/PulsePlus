@@ -29,7 +29,10 @@ class MetronomeEngine {
     if (message is SendPort) {
       _sendPort = message;
       _isolateReady.complete();
-    } else if (message is EngineMessage) {
+      return;
+    }
+
+    if (message is EngineMessage) {
       switch (message.type) {
         case EngineMessageType.pulse:
           _handlePulseMessage(_onTick);
@@ -43,45 +46,67 @@ class MetronomeEngine {
             EngineMessage(
               type: EngineMessageType.error,
               body: {
-                message: "Got non-message object from receive port $message",
+                "message":
+                    "Got unimplemented message type from receive port $message",
               },
             ),
           );
       }
-    } else {
-      throw Exception("Got non-message object from receive port $message");
+      return;
     }
+
+    _handleErrorMessage(
+      _onError,
+      EngineMessage(
+        type: EngineMessageType.error,
+        body: {"message": "Got non-message object from send port $message"},
+      ),
+    );
   }
 
-  // TODO: CHECK IF THIS DOESN'T NEED TO BE STATIC
   static void _startRemoteIsolate(SendPort port) {
     final receivePort = ReceivePort();
     port.send(receivePort.sendPort);
 
     receivePort.listen((dynamic message) async {
-      if (message is EngineMessage) {
-        switch (message.type) {
-          case EngineMessageType.stop:
-            _handleStopMessage();
-            break;
-          case EngineMessageType.play:
-            _handlePlayMessage(port, message);
-            break;
-          default:
-            port.send(
-              EngineMessage(
-                type: EngineMessageType.error,
-                body: {
-                  message: "Got unimplemented message type ${message.type}",
-                },
-              ),
-            );
+      try {
+        if (message is EngineMessage) {
+          switch (message.type) {
+            case EngineMessageType.stop:
+              _handleStopMessage();
+              break;
+            case EngineMessageType.play:
+              _handlePlayMessage(port, message);
+              break;
+            default:
+              port.send(
+                EngineMessage(
+                  type: EngineMessageType.error,
+                  body: {
+                    "message":
+                        "Got unimplemented message from send port $message",
+                  },
+                ),
+              );
+          }
+        } else {
+          port.send(
+            EngineMessage(
+              type: EngineMessageType.error,
+              body: {
+                "message": "Got non-message object from send port $message",
+              },
+            ),
+          );
         }
-      } else {
+      } catch (e) {
         port.send(
           EngineMessage(
             type: EngineMessageType.error,
-            body: {message: "Got non-message object from send port $message"},
+            body: {
+              "message":
+                  "Got exception while handling message from send port ${e.toString()}",
+            },
           ),
         );
       }
