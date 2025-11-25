@@ -8,4 +8,4 @@ class EngineMessage {
   String toString() => 'EngineMessage(type: $type, body: $body)';
 }
 
-enum EngineMessageType { play, stop, error, pulse }
+enum EngineMessageType { play, stop, error, pulse, started, stopped }

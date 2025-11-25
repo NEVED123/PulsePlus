@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pulseplus/metronome/metronome_orchestrator.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -11,12 +12,32 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _counter = 0;
-  bool running = false;
+  late final MetronomeOrchestrator _orchestrator;
 
-  void _incrementCounter() {
+  @override
+  void initState() {
+    super.initState();
+    _orchestrator = MetronomeOrchestrator(_onTick, _onError);
+  }
+
+  Future<void> _toggleMetronome() async {
+    debugPrint(_orchestrator.isPlaying().toString());
+    if (!_orchestrator.isPlaying()) {
+      await _orchestrator.play(120);
+    } else {
+      await _orchestrator.stop();
+    }
+    setState(() {});
+  }
+
+  void _onTick() {
     setState(() {
       _counter++;
     });
+  }
+
+  void _onError(String? error) {
+    debugPrint(error);
   }
 
   @override
@@ -39,9 +60,8 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: running ? 'Stop' : 'Start',
-        child: const Icon(Icons.add),
+        onPressed: _toggleMetronome,
+        child: Text(_orchestrator.isPlaying() ? 'Stop' : 'Start'),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:isolate';
-
 import 'package:pulseplus/metronome/engine_message.dart';
 
 class MetronomeEngine {
@@ -9,6 +8,7 @@ class MetronomeEngine {
   static Timer? _timerref;
   late Function _onTick;
   Function(String)? _onError;
+  bool _isPlaying = false;
 
   MetronomeEngine(Function onTick, Function(String)? onError) {
     _onTick = onTick;
@@ -39,6 +39,12 @@ class MetronomeEngine {
           break;
         case EngineMessageType.error:
           _handleErrorMessage(_onError, message);
+          break;
+        case EngineMessageType.started:
+          _handleStartedMessage();
+          break;
+        case EngineMessageType.stopped:
+          _handleStoppedMessage();
           break;
         default:
           _handleErrorMessage(
@@ -73,11 +79,12 @@ class MetronomeEngine {
         if (message is EngineMessage) {
           switch (message.type) {
             case EngineMessageType.stop:
-              _handleStopMessage();
+              _handleStopMessage(port);
               break;
             case EngineMessageType.play:
               _handlePlayMessage(port, message);
               break;
+            case EngineMessageType.started:
             default:
               port.send(
                 EngineMessage(
@@ -113,10 +120,12 @@ class MetronomeEngine {
     });
   }
 
-  static void _handleStopMessage() {
+  static void _handleStopMessage(SendPort port) {
     if (_timerref != null) {
       _timerref!.cancel();
     }
+
+    port.send(EngineMessage(type: EngineMessageType.stopped));
   }
 
   static void _handlePlayMessage(SendPort port, EngineMessage message) {
@@ -125,22 +134,33 @@ class MetronomeEngine {
     if (_timerref != null) {
       _timerref!.cancel();
     }
+
+    // The first pulse is delayed by the duration of the timer, so we send one immediately
+    port.send(EngineMessage(type: EngineMessageType.pulse));
+
     _timerref = Timer.periodic(Duration(microseconds: _bpmToMicros(bpm)), (_) {
       port.send(EngineMessage(type: EngineMessageType.pulse));
     });
+
+    port.send(EngineMessage(type: EngineMessageType.started));
   }
 
-  static void _handlePulseMessage(Function onTick) {
+  static _handlePulseMessage(Function onTick) {
     onTick();
   }
 
-  static void _handleErrorMessage(
-    Function(String)? onError,
-    EngineMessage message,
-  ) {
+  static _handleErrorMessage(Function(String)? onError, EngineMessage message) {
     if (onError != null) {
       onError(message.body["message"]);
     }
+  }
+
+  void _handleStartedMessage() {
+    _isPlaying = true;
+  }
+
+  void _handleStoppedMessage() {
+    _isPlaying = false;
   }
 
   Future<void> sendMessage(EngineMessage message) async {
@@ -150,6 +170,10 @@ class MetronomeEngine {
 
   bool isReady() {
     return _isolateReady.isCompleted;
+  }
+
+  bool isPlaying() {
+    return _isPlaying;
   }
 
   static int _bpmToMicros(int bpm) {
