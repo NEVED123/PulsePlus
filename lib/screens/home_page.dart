@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pulseplus/audio/sound_engine.dart';
 import 'package:pulseplus/metronome/metronome_orchestrator.dart';
 import 'dart:async';
 import 'package:flutter/services.dart';
@@ -15,29 +16,22 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _counter = 0;
   late final MetronomeOrchestrator _orchestrator;
-  static const platform = MethodChannel('samples.flutter.dev/battery');
+  late final SoundEngine _soundEngine;
+  Function? _soundCallback;
 
-  String _batteryLevel = 'Unknown battery level.';
-
-  Future<void> _getBatteryLevel() async {
-    String batteryLevel;
-    try {
-      final result = await platform.invokeMethod<int>('getBatteryLevel');
-      batteryLevel = 'Battery level at $result % .';
-    } on PlatformException catch (e) {
-      batteryLevel = "Failed to get battery level: '${e.message}'.";
+  Future<void> _playSound() async {
+    if (_soundCallback == null) {
+      _soundEngine = SoundEngine();
+      _soundCallback = await _soundEngine.init();
     }
 
-    setState(() {
-      _batteryLevel = batteryLevel;
-    });
+    _soundCallback!();
   }
 
   @override
   void initState() {
     super.initState();
     _orchestrator = MetronomeOrchestrator(_onTick, _onError);
-    _getBatteryLevel();
   }
 
   Future<void> _toggleMetronome() async {
@@ -76,7 +70,11 @@ class _HomePageState extends State<HomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-            Text("Battery level: $_batteryLevel"),
+            //Text("Exception: $_exceptionMessage"),
+            FloatingActionButton(
+              onPressed: _playSound,
+              child: Text('I play sound'),
+            ),
           ],
         ),
       ),
