@@ -11,16 +11,12 @@ class MetronomeOrchestrator {
 
   Future<void> play(bpm) async {
     await _validateEngineReadiness();
-
-    await _engine.sendMessage(
-      EngineMessage(type: EngineMessageType.play, body: {"bpm": bpm}),
-    );
+    await _engine.play(bpm);
   }
 
   Future<void> stop() async {
     await _validateEngineReadiness();
-
-    await _engine.sendMessage(EngineMessage(type: EngineMessageType.stop));
+    await _engine.stop();
   }
 
   bool isPlaying() {

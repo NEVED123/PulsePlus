@@ -5,6 +5,7 @@ import 'package:pulseplus/metronome/engine_message.dart';
 class MetronomeEngine {
   late SendPort _sendPort;
   final Completer<void> _isolateReady = Completer.sync();
+  late Completer<void> _stateChangeCompleter;
   static Timer? _timerref;
   late Function _onTick;
   Function(String)? _onError;
@@ -15,6 +16,10 @@ class MetronomeEngine {
     _onError = onError;
   }
 
+  // ============================================================================
+  // MAIN ISOLATE FUNCTIONS
+  // ============================================================================
+
   Future<void> init() async {
     ReceivePort receivePort = ReceivePort();
     receivePort.listen(_handleResponsesFromIsolate);
@@ -23,6 +28,37 @@ class MetronomeEngine {
 
   Future<void> close() {
     Isolate.exit(_sendPort);
+  }
+
+  bool isReady() {
+    return _isolateReady.isCompleted;
+  }
+
+  bool isPlaying() {
+    return _isPlaying;
+  }
+
+  Future<void> sendMessage(EngineMessage message) async {
+    await _isolateReady.future;
+    _sendPort.send(message);
+  }
+
+  Future<void> play(int bpm) {
+    _stateChangeCompleter = Completer();
+
+    sendMessage(
+      EngineMessage(type: EngineMessageType.play, body: {"bpm": bpm}),
+    );
+
+    return _stateChangeCompleter.future;
+  }
+
+  Future<void> stop() {
+    _stateChangeCompleter = Completer();
+
+    sendMessage(EngineMessage(type: EngineMessageType.stop));
+
+    return _stateChangeCompleter.future;
   }
 
   void _handleResponsesFromIsolate(dynamic message) {
@@ -69,6 +105,30 @@ class MetronomeEngine {
       ),
     );
   }
+
+  void _handleStartedMessage() {
+    _isPlaying = true;
+    _stateChangeCompleter.complete();
+  }
+
+  void _handleStoppedMessage() {
+    _isPlaying = false;
+    _stateChangeCompleter.complete();
+  }
+
+  static _handlePulseMessage(Function onTick) {
+    onTick();
+  }
+
+  static _handleErrorMessage(Function(String)? onError, EngineMessage message) {
+    if (onError != null) {
+      onError(message.body["message"]);
+    }
+  }
+
+  // ============================================================================
+  // REMOTE ISOLATE FUNCTIONS
+  // ============================================================================
 
   static void _startRemoteIsolate(SendPort port) {
     final receivePort = ReceivePort();
@@ -143,37 +203,6 @@ class MetronomeEngine {
     });
 
     port.send(EngineMessage(type: EngineMessageType.started));
-  }
-
-  static _handlePulseMessage(Function onTick) {
-    onTick();
-  }
-
-  static _handleErrorMessage(Function(String)? onError, EngineMessage message) {
-    if (onError != null) {
-      onError(message.body["message"]);
-    }
-  }
-
-  void _handleStartedMessage() {
-    _isPlaying = true;
-  }
-
-  void _handleStoppedMessage() {
-    _isPlaying = false;
-  }
-
-  Future<void> sendMessage(EngineMessage message) async {
-    await _isolateReady.future;
-    _sendPort.send(message);
-  }
-
-  bool isReady() {
-    return _isolateReady.isCompleted;
-  }
-
-  bool isPlaying() {
-    return _isPlaying;
   }
 
   static int _bpmToMicros(int bpm) {

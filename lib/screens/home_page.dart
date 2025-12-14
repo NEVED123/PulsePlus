@@ -35,16 +35,17 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _toggleMetronome() async {
-    debugPrint(_orchestrator.isPlaying().toString());
     if (!_orchestrator.isPlaying()) {
       await _orchestrator.play(120);
     } else {
       await _orchestrator.stop();
     }
+    debugPrint(_orchestrator.isPlaying().toString());
     setState(() {});
   }
 
   void _onTick() {
+    _playSound();
     setState(() {
       _counter++;
     });
