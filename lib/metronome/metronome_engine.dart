@@ -43,7 +43,7 @@ class MetronomeEngine {
     _sendPort.send(message);
   }
 
-  Future<void> play(int bpm) {
+  Future<void> play(double bpm) {
     _stateChangeCompleter = Completer();
 
     sendMessage(
@@ -189,7 +189,7 @@ class MetronomeEngine {
   }
 
   static void _handlePlayMessage(SendPort port, EngineMessage message) {
-    int bpm = message.body["bpm"];
+    double bpm = message.body["bpm"];
 
     if (_timerref != null) {
       _timerref!.cancel();
@@ -205,7 +205,7 @@ class MetronomeEngine {
     port.send(EngineMessage(type: EngineMessageType.started));
   }
 
-  static int _bpmToMicros(int bpm) {
+  static int _bpmToMicros(double bpm) {
     // [(x beats / 1 minute) * (1 minute / 60 seconds) * (1 second / 1000000 micros)]^-1
     return 60000000 ~/ bpm;
   }

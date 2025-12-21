@@ -14,7 +14,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _counter = 0;
   late final MetronomeOrchestrator _orchestrator;
   late final SoundEngine _soundEngine;
   Function? _soundCallback;
@@ -31,24 +30,20 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _orchestrator = MetronomeOrchestrator(_onTick, _onError);
+    _orchestrator = MetronomeOrchestrator(_onTick, _onError, 120, 4);
   }
 
   Future<void> _toggleMetronome() async {
     if (!_orchestrator.isPlaying()) {
-      await _orchestrator.play(120);
+      await _orchestrator.play();
     } else {
       await _orchestrator.stop();
     }
-    debugPrint(_orchestrator.isPlaying().toString());
     setState(() {});
   }
 
   void _onTick() {
     _playSound();
-    setState(() {
-      _counter++;
-    });
   }
 
   void _onError(String? error) {
@@ -57,34 +52,48 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+    return Container(
+      decoration: BoxDecoration(color: Theme.of(context).canvasColor),
+      child: SafeArea(
+        child: Scaffold(
+          body: Center(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.surfaceContainerHighest,
+                borderRadius: BorderRadius.circular(25),
+              ),
+              constraints: BoxConstraints.expand(),
+              margin: EdgeInsets.all(25),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    _orchestrator.numBeats.toString(),
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                  ),
+                  Text(
+                    _orchestrator.bpm.toString(),
+                    style: TextStyle(
+                      color: Theme.of(context).colorScheme.onSurface,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: _toggleMetronome,
+                    enableFeedback: false,
+                    icon: Icon(
+                      _orchestrator.isPlaying()
+                          ? Icons.play_arrow
+                          : Icons.pause,
+                    ),
+                  ),
+                ],
+              ),
             ),
-            //Text("Exception: $_exceptionMessage"),
-            FloatingActionButton(
-              onPressed: _playSound,
-              enableFeedback: false,
-              child: Text('I play sound'),
-            ),
-          ],
+          ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _toggleMetronome,
-        enableFeedback: false,
-        child: Text(_orchestrator.isPlaying() ? 'Stop' : 'Start'),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
