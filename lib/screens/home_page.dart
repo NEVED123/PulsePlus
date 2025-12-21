@@ -74,6 +74,7 @@ class _HomePageState extends State<HomePage> {
             //Text("Exception: $_exceptionMessage"),
             FloatingActionButton(
               onPressed: _playSound,
+              enableFeedback: false,
               child: Text('I play sound'),
             ),
           ],
@@ -81,6 +82,7 @@ class _HomePageState extends State<HomePage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _toggleMetronome,
+        enableFeedback: false,
         child: Text(_orchestrator.isPlaying() ? 'Stop' : 'Start'),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
