@@ -3,6 +3,7 @@ import 'package:pulseplus/audio/sound_engine.dart';
 import 'package:pulseplus/metronome/metronome_orchestrator.dart';
 import 'dart:async';
 import 'package:flutter/services.dart';
+import 'package:pulseplus/widgets/MetronomeBeats.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
@@ -44,6 +45,7 @@ class _HomePageState extends State<HomePage> {
 
   void _onTick() {
     _playSound();
+    setState(() {});
   }
 
   void _onError(String? error) {
@@ -64,14 +66,35 @@ class _HomePageState extends State<HomePage> {
               ),
               constraints: BoxConstraints.expand(),
               margin: EdgeInsets.all(25),
+              padding: EdgeInsets.all(25),
               child: Column(
+                spacing: 10,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text(
-                    _orchestrator.numBeats.toString(),
-                    style: TextStyle(
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.remove),
+                        enableFeedback: false,
+                        onPressed: () => setState(() {
+                          _orchestrator.numBeats = _orchestrator.numBeats - 1;
+                        }),
+                      ),
+                      Text(
+                        _orchestrator.numBeats.toString(),
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.add),
+                        enableFeedback: false,
+                        onPressed: () => setState(() {
+                          _orchestrator.numBeats = _orchestrator.numBeats + 1;
+                        }),
+                      ),
+                    ],
                   ),
                   Text(
                     _orchestrator.bpm.toString(),
@@ -79,13 +102,17 @@ class _HomePageState extends State<HomePage> {
                       color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
+                  MetronomeBeats(
+                    numBeats: _orchestrator.numBeats,
+                    currBeat: _orchestrator.currBeat,
+                  ),
                   IconButton(
                     onPressed: _toggleMetronome,
                     enableFeedback: false,
                     icon: Icon(
                       _orchestrator.isPlaying()
-                          ? Icons.play_arrow
-                          : Icons.pause,
+                          ? Icons.pause
+                          : Icons.play_arrow,
                     ),
                   ),
                 ],

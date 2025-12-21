@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:isolate';
 import 'package:pulseplus/metronome/engine_message.dart';
 
+// Maintains metronome "Primitives", and the isolate for executing the primitives.
 class MetronomeEngine {
   late SendPort _sendPort;
   final Completer<void> _isolateReady = Completer.sync();

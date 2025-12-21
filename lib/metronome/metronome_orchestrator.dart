@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:pulseplus/metronome/engine_message.dart';
 import 'package:pulseplus/metronome/metronome_engine.dart';
 
+// Maintains higher level metronome concepts, such as meter, subdivisions, tempo changes, etc.
 class MetronomeOrchestrator {
   late MetronomeEngine _engine;
   late double _bpm;
   late int _numBeats;
+
+  late int _currBeat = -1;
 
   MetronomeOrchestrator(
     Function onTick,
@@ -13,9 +16,21 @@ class MetronomeOrchestrator {
     double initBpm,
     int initNumBeats,
   ) {
-    _engine = MetronomeEngine(onTick, onError);
+    _engine = MetronomeEngine(
+      _createOrchestratorOnTickCallback(onTick),
+      onError,
+    );
     _bpm = initBpm;
     _numBeats = initNumBeats;
+  }
+
+  Function _createOrchestratorOnTickCallback(Function userOnTick) {
+    return () {
+      // We need to track how many beats have elapsed - once we hit numBeats % beatsElapsed == 0, we are at the starting beat.
+      // This means that if we want to switch to a different sound on the downbeat, we need to do so after the last beat (numBeats % (beatsElapsed + 1) == 0)
+      _currBeat = (_currBeat + 1) % _numBeats;
+      userOnTick();
+    };
   }
 
   Future<void> play() async {
@@ -26,6 +41,7 @@ class MetronomeOrchestrator {
   Future<void> stop() async {
     await _validateEngineReadiness();
     await _engine.stop();
+    _currBeat = -1;
   }
 
   bool isPlaying() {
@@ -40,6 +56,7 @@ class MetronomeOrchestrator {
 
   double get bpm => _bpm;
   int get numBeats => _numBeats;
+  int get currBeat => _currBeat;
 
   set bpm(double bpm) {
     if (bpm > 10) {
@@ -50,10 +67,10 @@ class MetronomeOrchestrator {
   }
 
   set numBeats(int numBeats) {
-    if (numBeats > 0 && numBeats < 16) {
+    if (numBeats > 0 && numBeats <= 16) {
       _numBeats = numBeats;
     } else {
-      debugPrint("Invalid param for bpm: $bpm");
+      debugPrint("Invalid param for num beats: $numBeats");
     }
   }
 }
