@@ -18,14 +18,38 @@ import UIKit
         [weak self] (call: FlutterMethodCall, result: FlutterResult) -> Void in
         // This method is invoked on the UI thread.
         if call.method == "init" {
+            
+            guard let args = call.arguments as? [String: Any],
+                  let fileName = args["fileName"] as? String else {
+                result(FlutterError(code: "INVALID_ARGUMENT",
+                    message: "Expected map with 'fileName' (String)",
+                    details: nil))
+                return
+            }
+            
             do {
-                try self?.soundEngine = SoundEngine()
+                try self?.soundEngine = SoundEngine(fileName: fileName)
             } catch let error {
                 result(FlutterError(code: "\(error)",
                                     message: "\(error)",
                                     details: nil))
+                return
             }
                 
+            result(true)
+            return
+        }
+        
+        if call.method == "changeSound" {
+            guard let args = call.arguments as? [String: Any],
+                  let fileName = args["fileName"] as? String else {
+                result(FlutterError(code: "INVALID_ARGUMENT",
+                    message: "Expected map with 'fileName' (String)",
+                    details: nil))
+                return
+            }
+            
+            self?.soundEngine?.changeSound(fileName: fileName)
             result(true)
             return
         }

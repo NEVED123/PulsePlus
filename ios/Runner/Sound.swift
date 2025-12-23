@@ -14,27 +14,39 @@ class SoundEngine {
     private var playerNode: AVAudioPlayerNode
     private var audioFile: AVAudioFile?
     
-    init() throws {
+    private var audioFileMap: [String: AVAudioFile]
+    private var currentAudioFile: AVAudioFile?
+    
+    init(fileName: String) throws {
         do {
-            playerNode = AVAudioPlayerNode()
-            audioEngine = AVAudioEngine()
             
-            guard let audioFileURL = Bundle.main.url(forResource: "Clave808", withExtension: "wav") else {
+            guard let clave808 = Bundle.main.url(forResource: "clave808", withExtension: "wav") else {
                 throw SoundError.audioFileNotFound
             }
             
-            audioFile = try AVAudioFile(forReading: audioFileURL)
-
-            // Attach the player node to the audio engine.
+            let clave808AUdioFile = try AVAudioFile(forReading: clave808)
+            
+            guard let jam_block_hi = Bundle.main.url(forResource: "jam_block_hi", withExtension: "wav") else {
+                throw SoundError.audioFileNotFound
+            }
+            
+            let jam_block_hi_AudioFIle = try AVAudioFile(forReading: jam_block_hi)
+            
+            audioFileMap = [
+                "clave808": clave808AUdioFile,
+                "jam_block_hi": jam_block_hi_AudioFIle
+            ]
+            
+            currentAudioFile = audioFileMap[fileName]
+            
+            playerNode = AVAudioPlayerNode()
+            audioEngine = AVAudioEngine()
+    
             audioEngine.attach(playerNode)
-
-            // Connect the player node to the output node.
             audioEngine.connect(playerNode,
                                 to: audioEngine.outputNode,
-                                format: audioFile!.processingFormat)
+                                format: currentAudioFile!.processingFormat)
             
-
-        
             print("Audio Engine setup completed!")
         } catch let error {
             print("initSound threw error: \(error)")
@@ -42,9 +54,13 @@ class SoundEngine {
         }
     }
     
+    func changeSound(fileName: String) {
+        currentAudioFile = audioFileMap[fileName]
+    }
+    
     func playSound() throws {
         do {
-            playerNode.scheduleFile(audioFile!,
+            playerNode.scheduleFile(currentAudioFile!,
                                     at: nil,
                                     completionCallbackType: .dataPlayedBack)
           try audioEngine.start()

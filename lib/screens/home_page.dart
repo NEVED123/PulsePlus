@@ -16,17 +16,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late final MetronomeOrchestrator _orchestrator;
-  late final SoundEngine _soundEngine;
-  Function? _soundCallback;
-
-  Future<void> _playSound() async {
-    if (_soundCallback == null) {
-      _soundEngine = SoundEngine();
-      _soundCallback = await _soundEngine.init();
-    }
-
-    _soundCallback!();
-  }
+  String fileName = "clave808";
 
   @override
   void initState() {
@@ -44,7 +34,6 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _onTick() {
-    _playSound();
     setState(() {});
   }
 
@@ -74,6 +63,16 @@ class _HomePageState extends State<HomePage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      IconButton(
+                        icon: Icon(Icons.music_note),
+                        enableFeedback: false,
+                        onPressed: () => setState(() {
+                          _orchestrator.changeSound(fileName);
+                          fileName = fileName == "clave808"
+                              ? "jam_block_hi"
+                              : "clave808";
+                        }),
+                      ),
                       IconButton(
                         icon: Icon(Icons.remove),
                         enableFeedback: false,
