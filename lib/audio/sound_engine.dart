@@ -8,15 +8,16 @@ class SoundEngine {
     return _isReady;
   }
 
-  Future<Function> init([String fileName = "jam_block_hi"]) async {
+  Future<void> init([String fileName = "jam_block_hi"]) async {
     await platform.invokeMethod<bool>('init', {"fileName": fileName});
     _isReady = true;
-    return () {
-      platform.invokeMethod('play');
-    };
   }
 
   Future<void> changeSound(String fileName) async {
     await platform.invokeMethod<bool>('changeSound', {"fileName": fileName});
+  }
+
+  Future<void> play() async {
+    await platform.invokeMethod('play');
   }
 }

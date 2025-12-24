@@ -7,9 +7,8 @@ import 'package:pulseplus/metronome/metronome_engine.dart';
 // As well as the sound that the metronome generates.
 // This may become the source of truth for metronome state in the future.
 class MetronomeOrchestrator {
-  late final MetronomeEngine _engine;
+  late final MetronomeEngine _metronomeEngine;
   late final SoundEngine _soundEngine;
-  late Function _soundCallback;
   late double _bpm;
   late int _numBeats;
   late int _currBeat = -1;
@@ -20,7 +19,7 @@ class MetronomeOrchestrator {
     double initBpm,
     int initNumBeats,
   ) {
-    _engine = MetronomeEngine(
+    _metronomeEngine = MetronomeEngine(
       _createOrchestratorOnTickCallback(onTick),
       onError,
     );
@@ -33,7 +32,7 @@ class MetronomeOrchestrator {
     return () {
       // We need to track how many beats have elapsed - once we hit numBeats % beatsElapsed == 0, we are at the starting beat.
       // This means that if we want to switch to a different sound on the downbeat, we need to do so after the last beat (numBeats % (beatsElapsed + 1) == 0)
-      _soundCallback();
+      _soundEngine.play();
       _currBeat = (_currBeat + 1) % _numBeats;
       userOnTick();
     };
@@ -41,12 +40,12 @@ class MetronomeOrchestrator {
 
   Future<void> play() async {
     await _validateEngineReadiness();
-    await _engine.play(_bpm);
+    await _metronomeEngine.play(_bpm);
   }
 
   Future<void> stop() async {
     await _validateEngineReadiness();
-    await _engine.stop();
+    await _metronomeEngine.stop();
     _currBeat = -1;
   }
 
@@ -56,16 +55,16 @@ class MetronomeOrchestrator {
   }
 
   bool isPlaying() {
-    return _engine.isPlaying();
+    return _metronomeEngine.isPlaying();
   }
 
   Future<void> _validateEngineReadiness() async {
-    if (!_engine.isReady()) {
-      await _engine.init();
+    if (!_metronomeEngine.isReady()) {
+      await _metronomeEngine.init();
     }
 
     if (!_soundEngine.isReady()) {
-      _soundCallback = await _soundEngine.init();
+      await _soundEngine.init();
     }
   }
 

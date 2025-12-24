@@ -9,7 +9,7 @@ import android.media.MediaPlayer
 class MainActivity: FlutterActivity() {
     private val CHANNEL = "us.pulsepl/engine"
 
-    private var mediaPlayer: MediaPlayer? = null
+    private var soundEngine: SoundEngine? = null
 
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
@@ -18,19 +18,32 @@ class MainActivity: FlutterActivity() {
             // This method is invoked on the main thread.
                 call, result ->
             if (call.method == "init") {
-                mediaPlayer = MediaPlayer.create(this, R.raw.clave808)
-                return@setMethodCallHandler result.success(true)
+                val fileName = call.argument<String>("fileName")
+                soundEngine = SoundEngine(context, fileName!!)
+                result.success(true)
+                return@setMethodCallHandler
             }
             if (call.method == "play") {
-                if (mediaPlayer == null) {
+                if (soundEngine == null) {
                     result.error("Not Initiated", "Not Initiated", null)
+                    return@setMethodCallHandler
                 }
                 try {
-                    mediaPlayer!!.start()
+                    soundEngine!!.playSound()
+                    result.success(true)
+                    return@setMethodCallHandler
                 } catch (e: Error) {
                     result.error(e.message ?: "No Message" , e.message, null)
+                    return@setMethodCallHandler
                 }
-            } else {
+            }
+            if (call.method == "changeSound") {
+                val fileName = call.argument<String>("fileName")
+                soundEngine!!.changeSound(fileName!!)
+                result.success(true)
+                return@setMethodCallHandler
+            }
+            else {
                 result.notImplemented()
             }
         }
