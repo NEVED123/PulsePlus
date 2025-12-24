@@ -8,7 +8,7 @@ class SoundEngine {
     return _isReady;
   }
 
-  Future<void> init([String fileName = "jam_block_hi"]) async {
+  Future<void> init([String fileName = "clave808"]) async {
     await platform.invokeMethod<bool>('init', {"fileName": fileName});
     _isReady = true;
   }

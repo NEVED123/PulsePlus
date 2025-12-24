@@ -64,16 +64,6 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       IconButton(
-                        icon: Icon(Icons.music_note),
-                        enableFeedback: false,
-                        onPressed: () => setState(() {
-                          _orchestrator.changeSound(fileName);
-                          fileName = fileName == "clave808"
-                              ? "jam_block_hi"
-                              : "clave808";
-                        }),
-                      ),
-                      IconButton(
                         icon: Icon(Icons.remove),
                         enableFeedback: false,
                         onPressed: () => setState(() {

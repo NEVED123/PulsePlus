@@ -31,10 +31,20 @@ class MetronomeOrchestrator {
   Function _createOrchestratorOnTickCallback(Function userOnTick) {
     return () {
       // We need to track how many beats have elapsed - once we hit numBeats % beatsElapsed == 0, we are at the starting beat.
-      // This means that if we want to switch to a different sound on the downbeat, we need to do so after the last beat (numBeats % (beatsElapsed + 1) == 0)
-      _soundEngine.play();
+      // This means that if we want to switch to a different sound on the downbeat, we need to do so after the last beat currBeat = numBeats - 1
       _currBeat = (_currBeat + 1) % _numBeats;
+      _soundEngine.play();
       userOnTick();
+
+      // Last beat of the meter
+      if (_currBeat == _numBeats - 1) {
+        _soundEngine.changeSound("clave808");
+      }
+
+      // Downbeat
+      if (_currBeat == 0) {
+        _soundEngine.changeSound("jam_block_hi");
+      }
     };
   }
 
