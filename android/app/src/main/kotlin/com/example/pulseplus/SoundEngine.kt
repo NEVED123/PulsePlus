@@ -5,21 +5,20 @@ import android.media.MediaPlayer
 
 class SoundEngine(private val context: Context, fileName: String) {
 
-    private var mediaPlayer: MediaPlayer
-    private val audioFileMap: Map<String, Int> = mapOf(
-        "clave808" to R.raw.clave808,
-        "jam_block_hi" to R.raw.jam_block_hi
-    )
+    private val audioFileMap = mutableMapOf<String, MediaPlayer>()
+    private var currAudioFile: String
 
     init {
-        mediaPlayer = MediaPlayer.create(context, audioFileMap[fileName]!!)
+        audioFileMap["clave808"] = MediaPlayer.create(context, R.raw.clave808)
+        audioFileMap["jam_block_hi"] = MediaPlayer.create(context, R.raw.jam_block_hi)
+        currAudioFile = fileName
     }
 
     fun changeSound(fileName: String) {
-        mediaPlayer = MediaPlayer.create(context, audioFileMap[fileName]!!)
+        currAudioFile = fileName
     }
 
     fun playSound() {
-        mediaPlayer.start()
+        audioFileMap[currAudioFile]!!.start()
     }
 }
