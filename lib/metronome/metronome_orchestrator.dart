@@ -92,6 +92,7 @@ class MetronomeOrchestrator {
 
   set numBeats(int numBeats) {
     if (numBeats > 0 && numBeats <= 16) {
+      _currBeat = _currBeat - (_numBeats - numBeats);
       _numBeats = numBeats;
     } else {
       debugPrint("Invalid param for num beats: $numBeats");
