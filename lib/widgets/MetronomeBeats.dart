@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:pulseplus/audio/sound_files.dart';
+import 'package:pulseplus/metronome/beat.dart';
+import 'package:pulseplus/metronome/metronome_orchestrator.dart';
 
 class MetronomeBeats extends StatefulWidget {
-  final int numBeats;
+  final List<Beat> beats;
   final int currBeat;
+  final MetronomeOrchestrator orchestrator;
 
   const MetronomeBeats({
     super.key,
-    required this.numBeats,
+    required this.beats,
     required this.currBeat,
+    required this.orchestrator,
   });
 
   @override
@@ -28,21 +33,37 @@ class MetronomeBeatsState extends State<MetronomeBeats> {
   }
 
   List<Widget> _buildMetronomeBeats() {
-    List<Widget> beats = [];
-    for (int i = 0; i < widget.numBeats; i++) {
-      beats.add(
+    List<Widget> beatWidgets = [];
+    for (int i = 0; i < widget.beats.length; i++) {
+      beatWidgets.add(
         Expanded(
-          child: Container(
-            decoration: BoxDecoration(
-              color: i == widget.currBeat
-                  ? Theme.of(context).colorScheme.primary
-                  : Theme.of(context).colorScheme.secondary,
+          child: GestureDetector(
+            key: Key(i.toString()),
+            onTap: () {
+              setState(() {
+                widget.orchestrator.toggleBeat(i);
+              });
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                color: i == widget.currBeat
+                    ? Theme.of(context).colorScheme.primary
+                    : _getBeatColor(widget.beats[i]),
+              ),
             ),
           ),
         ),
       );
     }
 
-    return beats;
+    return beatWidgets;
+  }
+
+  Color _getBeatColor(Beat beat) {
+    if (beat.subDivisions[0] == SoundFile.jamBlockHi) {
+      return Theme.of(context).colorScheme.secondary;
+    } else {
+      return Theme.of(context).colorScheme.tertiary;
+    }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pulseplus/metronome/metronome_orchestrator.dart';
 import 'package:pulseplus/screens/home_page.dart';
 
 void main() {

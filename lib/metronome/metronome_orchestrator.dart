@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pulseplus/audio/sound_engine.dart';
-import 'package:pulseplus/metronome/engine_message.dart';
+import 'package:pulseplus/audio/sound_files.dart';
+import 'package:pulseplus/metronome/beat.dart';
 import 'package:pulseplus/metronome/metronome_engine.dart';
 
 // Maintains higher level metronome concepts, such as meter, subdivisions, tempo changes, etc.,
@@ -10,8 +11,8 @@ class MetronomeOrchestrator {
   late final MetronomeEngine _metronomeEngine;
   late final SoundEngine _soundEngine;
   late double _bpm;
-  late int _numBeats;
   late int _currBeat = -1;
+  late List<Beat> _beats;
 
   MetronomeOrchestrator(
     Function onTick,
@@ -25,26 +26,25 @@ class MetronomeOrchestrator {
     );
     _soundEngine = SoundEngine();
     _bpm = initBpm;
-    _numBeats = initNumBeats;
+    _beats = [
+      Beat(subDivisions: [SoundFile.clave808]),
+    ];
+
+    for (int i = 0; i < initNumBeats - 1; i++) {
+      _beats.add(Beat());
+    }
   }
 
   Function _createOrchestratorOnTickCallback(Function userOnTick) {
     return () {
       // We need to track how many beats have elapsed - once we hit numBeats % beatsElapsed == 0, we are at the starting beat.
       // This means that if we want to switch to a different sound on the downbeat, we need to do so after the last beat currBeat = numBeats - 1
-      _currBeat = (_currBeat + 1) % _numBeats;
+      _currBeat = (_currBeat + 1) % numBeats;
       _soundEngine.play();
       userOnTick();
 
-      // Last beat of the meter
-      if (_currBeat == _numBeats - 1) {
-        _soundEngine.changeSound("clave808");
-      }
-
-      // Downbeat
-      if (_currBeat == 0) {
-        _soundEngine.changeSound("jam_block_hi");
-      }
+      String nextSound = _beats[(_currBeat + 1) % numBeats].subDivisions[0];
+      _soundEngine.changeSound(nextSound);
     };
   }
 
@@ -78,9 +78,11 @@ class MetronomeOrchestrator {
     }
   }
 
-  double get bpm => _bpm;
-  int get numBeats => _numBeats;
+  List<Beat> get beats => _beats;
+
   int get currBeat => _currBeat;
+
+  double get bpm => _bpm;
 
   set bpm(double bpm) {
     if (bpm > 10) {
@@ -90,12 +92,50 @@ class MetronomeOrchestrator {
     }
   }
 
+  int get numBeats => _beats.length;
+
   set numBeats(int numBeats) {
     if (numBeats > 0 && numBeats <= 16) {
-      _currBeat = _currBeat - (_numBeats - numBeats);
-      _numBeats = numBeats;
+      // _currBeat = _currBeat - (_numBeats - numBeats);
+      int numBeatsToAdd = numBeats - _beats.length;
+
+      for (int i = 0; i < numBeatsToAdd; i++) {
+        _beats.add(Beat());
+      }
+
+      if (numBeatsToAdd < 0) {
+        _beats = _beats.sublist(0, _beats.length + numBeatsToAdd);
+
+        // If we are currently playing beats, we need to adjust this value to prevent premature wrapping to or past the beginning of the meter.
+        // This will only happen if we remove beats
+        if (_currBeat >= _beats.length) {
+          _currBeat = _beats.length - 1;
+        }
+      }
+
+      if (_currBeat != -1) {
+        String nextSound = _beats[(_currBeat + 1) % numBeats].subDivisions[0];
+        _soundEngine.changeSound(nextSound);
+      }
     } else {
       debugPrint("Invalid param for num beats: $numBeats");
+    }
+  }
+
+  void toggleBeat(int index) {
+    if (index >= numBeats) {
+      debugPrint("Attempted to access index greater than numBeats");
+      return;
+    }
+
+    _beats[index].subDivisions[0] =
+        _beats[index].subDivisions[0] == SoundFile.jamBlockHi
+        ? SoundFile.clave808
+        : SoundFile.jamBlockHi;
+
+    if (_currBeat == index - 1) {
+      String nextSound = _beats[index].subDivisions[0];
+      _soundEngine.changeSound(nextSound);
     }
   }
 }

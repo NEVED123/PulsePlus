@@ -24,18 +24,18 @@ import UIKit
                 result(FlutterError(code: "INVALID_ARGUMENT",
                     message: "Expected map with 'fileName' (String)",
                     details: nil))
+                return
             }
             guard let args = call.arguments as? [String: Any],
-                  let filename = args["filename"] as? String,
-                  let audioData = args["audioData"] as? FlutterStandardTypedData else {
+                  let filename = args["fileName"] as? String else {
                 result(FlutterError(code: "INVALID_ARGUMENT",
-                                    message: "Expected map with 'filename' (String) and 'audioData' (Uint8List)",
+                                    message: "Expected map with 'filename' (String)",
                                     details: nil))
                 return
             }
             
             do {
-                try self?.soundEngine = SoundEngine(audioData: audioData.data, filename: filename)
+                try self?.soundEngine = SoundEngine(fileName: filename)
             } catch let error {
                 result(FlutterError(code: "\(error)",
                                     message: "\(error)",

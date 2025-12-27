@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _orchestrator = MetronomeOrchestrator(_onTick, _onError, 120, 4);
+    _orchestrator = MetronomeOrchestrator(_onTick, _onError, 60, 4);
   }
 
   Future<void> _toggleMetronome() async {
@@ -92,8 +92,9 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   MetronomeBeats(
-                    numBeats: _orchestrator.numBeats,
+                    beats: _orchestrator.beats,
                     currBeat: _orchestrator.currBeat,
+                    orchestrator: _orchestrator,
                   ),
                   IconButton(
                     onPressed: _toggleMetronome,
