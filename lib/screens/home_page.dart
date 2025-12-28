@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:pulseplus/audio/sound_engine.dart';
 import 'package:pulseplus/metronome/metronome_orchestrator.dart';
 import 'dart:async';
-import 'package:flutter/services.dart';
 import 'package:pulseplus/widgets/MetronomeBeats.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,12 +15,21 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late final MetronomeOrchestrator _orchestrator;
-  String fileName = "clave808";
+  late TextEditingController _bpmTextController;
 
   @override
   void initState() {
     super.initState();
-    _orchestrator = MetronomeOrchestrator(_onTick, _onError, 60, 4);
+    _orchestrator = MetronomeOrchestrator(_onTick, _onError, 120, 4);
+    _bpmTextController = TextEditingController(
+      text: _orchestrator.bpm.toString(),
+    );
+  }
+
+  @override
+  void dispose() {
+    _bpmTextController.dispose();
+    super.dispose();
   }
 
   Future<void> _toggleMetronome() async {
@@ -85,11 +93,27 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ],
                   ),
-                  Text(
-                    _orchestrator.bpm.toString(),
+                  TextField(
+                    onSubmitted: (String newBpm) {
+                      try {
+                        _orchestrator.bpm = double.parse(newBpm);
+                      } on FormatException {
+                        debugPrint(
+                          "new bpm must be a valid number, recieved $newBpm",
+                        );
+                        _bpmTextController.text = _orchestrator.bpm.toString();
+                      } catch (e) {
+                        debugPrint(
+                          "Got exception while changing bpm: ${e.toString()}",
+                        );
+                      }
+                    },
                     style: TextStyle(
                       color: Theme.of(context).colorScheme.onSurface,
                     ),
+                    keyboardType: TextInputType.number,
+                    textAlign: TextAlign.center,
+                    controller: _bpmTextController,
                   ),
                   MetronomeBeats(
                     beats: _orchestrator.beats,

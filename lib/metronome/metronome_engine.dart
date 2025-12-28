@@ -193,11 +193,13 @@ class MetronomeEngine {
     double bpm = message.body["bpm"];
 
     if (_timerref != null) {
+      if (!_timerref!.isActive) {
+        // The first pulse is delayed by the duration of the timer, so we send one immediately.
+        // However, if we are currently in an active play session, this would create a new pulse out of sync with the old and new tempi.
+        port.send(EngineMessage(type: EngineMessageType.pulse));
+      }
       _timerref!.cancel();
     }
-
-    // The first pulse is delayed by the duration of the timer, so we send one immediately
-    port.send(EngineMessage(type: EngineMessageType.pulse));
 
     _timerref = Timer.periodic(Duration(microseconds: _bpmToMicros(bpm)), (_) {
       port.send(EngineMessage(type: EngineMessageType.pulse));

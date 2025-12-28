@@ -86,7 +86,13 @@ class MetronomeOrchestrator {
 
   set bpm(double bpm) {
     if (bpm > 10) {
-      bpm = _bpm;
+      _bpm = bpm;
+
+      if (isPlaying()) {
+        _metronomeEngine.play(_bpm);
+      }
+
+      debugPrint("new bpm $_bpm");
     } else {
       debugPrint("Invalid param for bpm: $bpm");
     }
