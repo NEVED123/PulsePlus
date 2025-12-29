@@ -71,6 +71,12 @@ class _HomePageState extends State<HomePage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Text(
+                        "Beats:",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                      ),
                       IconButton(
                         icon: Icon(Icons.remove),
                         enableFeedback: false,
@@ -89,6 +95,39 @@ class _HomePageState extends State<HomePage> {
                         enableFeedback: false,
                         onPressed: () => setState(() {
                           _orchestrator.numBeats = _orchestrator.numBeats + 1;
+                        }),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Subdivisions:",
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.remove),
+                        enableFeedback: false,
+                        onPressed: () => setState(() {
+                          _orchestrator.numSubdivisions =
+                              _orchestrator.numSubdivisions - 1;
+                        }),
+                      ),
+                      Text(
+                        _orchestrator.numSubdivisions.toString(),
+                        style: TextStyle(
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.add),
+                        enableFeedback: false,
+                        onPressed: () => setState(() {
+                          _orchestrator.numSubdivisions =
+                              _orchestrator.numSubdivisions + 1;
                         }),
                       ),
                     ],
@@ -115,11 +154,7 @@ class _HomePageState extends State<HomePage> {
                     textAlign: TextAlign.center,
                     controller: _bpmTextController,
                   ),
-                  MetronomeBeats(
-                    beats: _orchestrator.beats,
-                    currBeat: _orchestrator.currBeat,
-                    orchestrator: _orchestrator,
-                  ),
+                  MetronomeBeats(orchestrator: _orchestrator),
                   IconButton(
                     onPressed: _toggleMetronome,
                     enableFeedback: false,

@@ -1,19 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:pulseplus/audio/sound_files.dart';
-import 'package:pulseplus/metronome/beat.dart';
 import 'package:pulseplus/metronome/metronome_orchestrator.dart';
 
 class MetronomeBeats extends StatefulWidget {
-  final List<Beat> beats;
-  final int currBeat;
   final MetronomeOrchestrator orchestrator;
 
-  const MetronomeBeats({
-    super.key,
-    required this.beats,
-    required this.currBeat,
-    required this.orchestrator,
-  });
+  const MetronomeBeats({super.key, required this.orchestrator});
 
   @override
   State<MetronomeBeats> createState() => MetronomeBeatsState();
@@ -34,24 +26,10 @@ class MetronomeBeatsState extends State<MetronomeBeats> {
 
   List<Widget> _buildMetronomeBeats() {
     List<Widget> beatWidgets = [];
-    for (int i = 0; i < widget.beats.length; i++) {
+    for (int i = 0; i < widget.orchestrator.numBeats; i++) {
       beatWidgets.add(
         Expanded(
-          child: GestureDetector(
-            key: Key(i.toString()),
-            onTap: () {
-              setState(() {
-                widget.orchestrator.toggleBeat(i);
-              });
-            },
-            child: Container(
-              decoration: BoxDecoration(
-                color: i == widget.currBeat
-                    ? Theme.of(context).colorScheme.primary
-                    : _getBeatColor(widget.beats[i]),
-              ),
-            ),
-          ),
+          child: Column(spacing: 5, children: _buildSubdivisionBeats(i)),
         ),
       );
     }
@@ -59,11 +37,47 @@ class MetronomeBeatsState extends State<MetronomeBeats> {
     return beatWidgets;
   }
 
-  Color _getBeatColor(Beat beat) {
-    if (beat.subDivisions[0] == SoundFile.jamBlockHi) {
-      return Theme.of(context).colorScheme.secondary;
-    } else {
-      return Theme.of(context).colorScheme.tertiary;
+  List<Widget> _buildSubdivisionBeats(int beatIndex) {
+    List<Widget> beatSubdivisions = [];
+    for (int i = 0; i < widget.orchestrator.numSubdivisions; i++) {
+      beatSubdivisions.add(
+        Expanded(
+          child: GestureDetector(
+            key: Key(i.toString()),
+            onTap: () {
+              setState(() {
+                widget.orchestrator.toggleBeat(beatIndex, i);
+              });
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                color:
+                    beatIndex == widget.orchestrator.currBeat &&
+                        i == widget.orchestrator.currSubdivision
+                    ? Theme.of(context).colorScheme.primary
+                    : _getBeatColor(
+                        widget.orchestrator.beats[beatIndex].subDivisions[i],
+                      ),
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
+    return beatSubdivisions;
+  }
+
+  Color _getBeatColor(int soundId) {
+    switch (soundId) {
+      case 0:
+        return Theme.of(context).colorScheme.secondary;
+      case 1:
+        return Theme.of(context).colorScheme.tertiary;
+      case 2:
+        return Theme.of(context).colorScheme.primary.withAlpha(128);
+      default:
+        return Color.fromARGB(11, 255, 0, 242);
     }
   }
 }

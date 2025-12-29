@@ -6,5 +6,6 @@ class SoundFile {
   static final List<String> allSounds = List.unmodifiable([
     clave808,
     jamBlockHi,
+    silence,
   ]);
 }
