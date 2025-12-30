@@ -1,24 +1,50 @@
 package com.example.pulseplus
 
 import android.content.Context
-import android.media.MediaPlayer
+import android.media.AudioAttributes
+import android.media.AudioFormat
+import android.media.AudioManager
+import android.media.AudioTrack
+import android.media.SoundPool
+import android.util.Log
+import java.io.InputStream
+import java.nio.ByteBuffer
+
 
 class SoundEngine(private val context: Context, fileName: String) {
 
-    private val audioFileMap = mutableMapOf<String, MediaPlayer>()
-    private var currAudioFile: String
+    private val audioRawMap: Map<String, Int> = mapOf(
+        "clave808" to R.raw.clave808,
+        "jam_block_hi" to R.raw.jam_block_hi)
+
+    private val soundPoolIdMap = mutableMapOf<String, Int>()
+    private var currAudioFile: Int
+    private var soundPool: SoundPool = SoundPool.Builder()
+        .setAudioAttributes(AudioAttributes.Builder()
+            .setUsage(AudioAttributes.USAGE_MEDIA)
+            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+            .build())
+        .setMaxStreams(100)
+        .build()
 
     init {
-        audioFileMap["clave808"] = MediaPlayer.create(context, R.raw.clave808)
-        audioFileMap["jam_block_hi"] = MediaPlayer.create(context, R.raw.jam_block_hi)
-        currAudioFile = fileName
+
+        soundPool.setOnLoadCompleteListener { soundPool, sampleId, status ->
+            Log.i("My SoundPool", "Finished loading with status $status")
+        }
+
+        for ((key, value) in audioRawMap) {
+            soundPoolIdMap[key] = soundPool.load(context, value, 1)
+        }
+
+        currAudioFile = soundPoolIdMap[fileName]!!
     }
 
     fun changeSound(fileName: String) {
-        currAudioFile = fileName
+        currAudioFile = soundPoolIdMap[fileName]!!
     }
 
     fun playSound() {
-        audioFileMap[currAudioFile]!!.start()
+        soundPool.play(currAudioFile, 1F, 1F, 1, 0, 1F)
     }
 }

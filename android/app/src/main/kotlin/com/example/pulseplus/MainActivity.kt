@@ -19,7 +19,7 @@ class MainActivity: FlutterActivity() {
                 call, result ->
             if (call.method == "init") {
                 val fileName = call.argument<String>("fileName")
-                soundEngine = SoundEngine(context, fileName!!)
+                soundEngine = SoundEngine(this, fileName!!)
                 result.success(true)
                 return@setMethodCallHandler
             }

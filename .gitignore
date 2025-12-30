@@ -45,3 +45,9 @@ app.*.map.json
 /android/app/release
 
 *test.dart
+
+android/._gradle
+android/._gradlew
+android/._gradlew.bat
+android/gradle/._wrapper
+android/gradle/wrapper/._gradle-wrapper.jar
