@@ -162,6 +162,7 @@ class MetronomeOrchestrator {
 
       if (_currSubdivision != -1) {
         _setNextSound();
+        _metronomeEngine.play(_bpm * newNumSubdivisions);
       }
     } else {
       debugPrint("Invalid param for num subdivisions: $newNumSubdivisions");

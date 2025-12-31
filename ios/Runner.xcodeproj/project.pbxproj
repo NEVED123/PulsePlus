@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		0501932C2EE50B1B0066175E /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0501932B2EE50B1B0066175E /* Sound.swift */; };
 		0501932E2EE50B3B0066175E /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0501932D2EE50B3B0066175E /* Errors.swift */; };
-		05614F1A2EFA0CF2001FB30E /* clave808.wav in Resources */ = {isa = PBXBuildFile; fileRef = 05614F192EFA0CF2001FB30E /* clave808.wav */; };
 		05614F1C2EFA10EE001FB30E /* jam_block_hi.wav in Resources */ = {isa = PBXBuildFile; fileRef = 05614F1B2EFA10EE001FB30E /* jam_block_hi.wav */; };
+		05E87C2E2F03598900F7C096 /* clave808.wav in Resources */ = {isa = PBXBuildFile; fileRef = 05E87C2D2F03598900F7C096 /* clave808.wav */; };
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		331C808B294A63AB00263BE5 /* RunnerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 331C807B294A618700263BE5 /* RunnerTests.swift */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
@@ -46,8 +46,8 @@
 /* Begin PBXFileReference section */
 		0501932B2EE50B1B0066175E /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		0501932D2EE50B3B0066175E /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
-		05614F192EFA0CF2001FB30E /* clave808.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = clave808.wav; sourceTree = "<group>"; };
 		05614F1B2EFA10EE001FB30E /* jam_block_hi.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jam_block_hi.wav; sourceTree = "<group>"; };
+		05E87C2D2F03598900F7C096 /* clave808.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = clave808.wav; sourceTree = "<group>"; };
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
 		331C807B294A618700263BE5 /* RunnerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunnerTests.swift; sourceTree = "<group>"; };
@@ -80,7 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				05614F1B2EFA10EE001FB30E /* jam_block_hi.wav */,
-				05614F192EFA0CF2001FB30E /* clave808.wav */,
+				05E87C2D2F03598900F7C096 /* clave808.wav */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -233,9 +233,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
+				05E87C2E2F03598900F7C096 /* clave808.wav in Resources */,
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
-				05614F1A2EFA0CF2001FB30E /* clave808.wav in Resources */,
 				05614F1C2EFA10EE001FB30E /* jam_block_hi.wav in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
 			);

@@ -10,42 +10,45 @@ import AVFoundation
 
 class SoundEngine {
     
-    private var audioEngine : AVAudioEngine
-    private var playerNode: AVAudioPlayerNode
-    private var audioFile: AVAudioFile?
-    
-    private var audioFileMap: [String: AVAudioFile]
-    private var currentAudioFile: AVAudioFile?
+    private var engine = AVAudioEngine()
+    private var players: [String: AVAudioPlayerNode] = [:]
+    private var buffers: [String: AVAudioPCMBuffer] = [:]
+
+    private var currentAudioFile: String
     
     init(fileName: String) throws {
         do {
+            let session = AVAudioSession.sharedInstance()
+            try session.setCategory(.playback, options: [.mixWithOthers])
+            try session.setPreferredIOBufferDuration(0.0029)
+            try session.setPreferredSampleRate(44100)
+            try session.setActive(true)
             
-            guard let clave808 = Bundle.main.url(forResource: "clave808", withExtension: "wav") else {
-                throw SoundError.audioFileNotFound
+            for name in ["clave808", "jam_block_hi"] {
+                let url = Bundle.main.url(forResource: name, withExtension: "wav")!
+                let file = try AVAudioFile(forReading: url)
+
+                let buffer = AVAudioPCMBuffer(
+                    pcmFormat: file.processingFormat,
+                    frameCapacity: AVAudioFrameCount(file.length)
+                )!
+                try file.read(into: buffer)
+
+                let player = AVAudioPlayerNode()
+                engine.attach(player)
+                engine.connect(player, to: engine.mainMixerNode, format: buffer.format)
+
+                buffers[name] = buffer
+                players[name] = player
             }
-            
-            let clave808AUdioFile = try AVAudioFile(forReading: clave808)
-            
-            guard let jam_block_hi = Bundle.main.url(forResource: "jam_block_hi", withExtension: "wav") else {
-                throw SoundError.audioFileNotFound
+
+            try engine.start()
+
+            for player in players.values {
+                player.play()
             }
-            
-            let jam_block_hi_AudioFIle = try AVAudioFile(forReading: jam_block_hi)
-            
-            audioFileMap = [
-                "clave808": clave808AUdioFile,
-                "jam_block_hi": jam_block_hi_AudioFIle
-            ]
-            
-            currentAudioFile = audioFileMap[fileName]
-            
-            playerNode = AVAudioPlayerNode()
-            audioEngine = AVAudioEngine()
-    
-            audioEngine.attach(playerNode)
-            audioEngine.connect(playerNode,
-                                to: audioEngine.outputNode,
-                                format: currentAudioFile!.processingFormat)
+
+            currentAudioFile = fileName
             
             print("Audio Engine setup completed!")
         } catch let error {
@@ -55,19 +58,13 @@ class SoundEngine {
     }
     
     func changeSound(fileName: String) {
-        currentAudioFile = audioFileMap[fileName]
+        currentAudioFile = fileName
     }
     
     func playSound() throws {
-        do {
-            playerNode.scheduleFile(currentAudioFile!,
-                                    at: nil,
-                                    completionCallbackType: .dataPlayedBack)
-          try audioEngine.start()
-          playerNode.play()
-        } catch let error {
-            print("playSound threw error: \(error)")
-            throw SoundError.playFailed
-        }
+        guard let buffer = buffers[currentAudioFile],
+              let player = players[currentAudioFile] else { return }
+
+        player.scheduleBuffer(buffer, at: nil, options: .interrupts)
     }
 }
