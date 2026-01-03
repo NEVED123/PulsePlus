@@ -41,7 +41,7 @@ class SoundEngine {
                 buffers[name] = buffer
                 players[name] = player
             }
-
+            
             try engine.start()
 
             for player in players.values {
@@ -49,8 +49,6 @@ class SoundEngine {
             }
 
             currentAudioFile = fileName
-            
-            print("Audio Engine setup completed!")
         } catch let error {
             print("initSound threw error: \(error)")
             throw SoundError.initFailed

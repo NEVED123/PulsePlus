@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pulseplus/audio/pitch_engine.dart';
 import 'package:pulseplus/audio/sound_engine.dart';
 import 'package:pulseplus/metronome/metronome_orchestrator.dart';
 import 'dart:async';
@@ -15,6 +16,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   late final MetronomeOrchestrator _orchestrator;
+  late final PitchEngine _pitchEngine;
   late TextEditingController _bpmTextController;
 
   @override
@@ -24,6 +26,7 @@ class _HomePageState extends State<HomePage> {
     _bpmTextController = TextEditingController(
       text: _orchestrator.bpm.toString(),
     );
+    _pitchEngine = PitchEngine();
   }
 
   @override
@@ -71,6 +74,10 @@ class _HomePageState extends State<HomePage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      TextButton(
+                        onPressed: () => _pitchEngine.init(),
+                        child: Text("Init Pitch"),
+                      ),
                       Text(
                         "Beats:",
                         style: TextStyle(

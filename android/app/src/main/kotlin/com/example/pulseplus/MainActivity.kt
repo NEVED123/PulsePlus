@@ -7,14 +7,16 @@ import io.flutter.plugin.common.MethodChannel
 import android.media.MediaPlayer
 
 class MainActivity: FlutterActivity() {
-    private val CHANNEL = "us.pulsepl/engine"
+    private val SOUND_CHANNEL = "us.pulsepl/engine"
+    private val PITCH_CANNEL = "us.pulsepl/pitch"
 
     private var soundEngine: SoundEngine? = null
+    private var pitchEngine: PitchEngine? = null
 
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
 
-        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler {
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, SOUND_CHANNEL).setMethodCallHandler {
             // This method is invoked on the main thread.
                 call, result ->
             if (call.method == "init") {
@@ -40,6 +42,19 @@ class MainActivity: FlutterActivity() {
             if (call.method == "changeSound") {
                 val fileName = call.argument<String>("fileName")
                 soundEngine!!.changeSound(fileName!!)
+                result.success(true)
+                return@setMethodCallHandler
+            }
+            else {
+                result.notImplemented()
+            }
+        }
+
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, PITCH_CANNEL).setMethodCallHandler {
+            // This method is invoked on the main thread.
+                call, result ->
+            if (call.method == "init") {
+                pitchEngine = PitchEngine()
                 result.success(true)
                 return@setMethodCallHandler
             }

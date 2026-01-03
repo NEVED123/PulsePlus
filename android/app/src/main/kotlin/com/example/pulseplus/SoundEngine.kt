@@ -2,14 +2,8 @@ package com.example.pulseplus
 
 import android.content.Context
 import android.media.AudioAttributes
-import android.media.AudioFormat
-import android.media.AudioManager
-import android.media.AudioTrack
 import android.media.SoundPool
 import android.util.Log
-import java.io.InputStream
-import java.nio.ByteBuffer
-
 
 class SoundEngine(private val context: Context, fileName: String) {
 
@@ -28,11 +22,6 @@ class SoundEngine(private val context: Context, fileName: String) {
         .build()
 
     init {
-
-        soundPool.setOnLoadCompleteListener { soundPool, sampleId, status ->
-            Log.i("My SoundPool", "Finished loading with status $status")
-        }
-
         for ((key, value) in audioRawMap) {
             soundPoolIdMap[key] = soundPool.load(context, value, 1)
         }
