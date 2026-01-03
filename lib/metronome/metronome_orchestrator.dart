@@ -16,6 +16,7 @@ class MetronomeOrchestrator {
   late List<Beat> _beats;
 
   MetronomeOrchestrator(
+    SoundEngine soundEngine,
     Function onTick,
     Function(String)? onError,
     double initBpm,
@@ -25,7 +26,7 @@ class MetronomeOrchestrator {
       _createOrchestratorOnTickCallback(onTick),
       onError,
     );
-    _soundEngine = SoundEngine();
+    _soundEngine = soundEngine;
     _bpm = initBpm;
 
     _beats = [
