@@ -16,6 +16,23 @@ class SoundEngine {
 
     private var currentAudioFile: String
     
+    private var audioFiles: [String] = [
+        "clave808",
+        "jam_block_hi",
+        "epiano_wurli_c3",
+        "epiano_wurli_db3",
+        "epiano_wurli_d3",
+        "epiano_wurli_eb3",
+        "epiano_wurli_e3",
+        "epiano_wurli_f3",
+        "epiano_wurli_gb3",
+        "epiano_wurli_g3",
+        "epiano_wurli_ab3",
+        "epiano_wurli_a3",
+        "epiano_wurli_bb3",
+        "epiano_wurli_b3",
+    ]
+    
     init(fileName: String) throws {
         do {
             let session = AVAudioSession.sharedInstance()
@@ -24,7 +41,7 @@ class SoundEngine {
             try session.setPreferredSampleRate(44100)
             try session.setActive(true)
             
-            for name in ["clave808", "jam_block_hi"] {
+            for name in audioFiles {
                 let url = Bundle.main.url(forResource: name, withExtension: "wav")!
                 let file = try AVAudioFile(forReading: url)
 

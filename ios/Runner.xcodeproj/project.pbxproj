@@ -9,6 +9,18 @@
 /* Begin PBXBuildFile section */
 		0501932C2EE50B1B0066175E /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0501932B2EE50B1B0066175E /* Sound.swift */; };
 		0501932E2EE50B3B0066175E /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0501932D2EE50B3B0066175E /* Errors.swift */; };
+		05511F6A2F0B3CAA00BCC137 /* epiano_wurli_c3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 05511F622F0B3CAA00BCC137 /* epiano_wurli_c3.wav */; };
+		05511F6B2F0B3CAA00BCC137 /* epiano_wurli_eb3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 05511F662F0B3CAA00BCC137 /* epiano_wurli_eb3.wav */; };
+		05511F6C2F0B3CAA00BCC137 /* epiano_wurli_ab3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 05511F5F2F0B3CAA00BCC137 /* epiano_wurli_ab3.wav */; };
+		05511F6D2F0B3CAA00BCC137 /* epiano_wurli_d3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 05511F632F0B3CAA00BCC137 /* epiano_wurli_d3.wav */; };
+		05511F6E2F0B3CAA00BCC137 /* epiano_wurli_a3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 05511F5E2F0B3CAA00BCC137 /* epiano_wurli_a3.wav */; };
+		05511F6F2F0B3CAA00BCC137 /* epiano_wurli_bb3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 05511F612F0B3CAA00BCC137 /* epiano_wurli_bb3.wav */; };
+		05511F702F0B3CAA00BCC137 /* epiano_wurli_b3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 05511F602F0B3CAA00BCC137 /* epiano_wurli_b3.wav */; };
+		05511F712F0B3CAA00BCC137 /* epiano_wurli_e3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 05511F652F0B3CAA00BCC137 /* epiano_wurli_e3.wav */; };
+		05511F722F0B3CAA00BCC137 /* epiano_wurli_db3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 05511F642F0B3CAA00BCC137 /* epiano_wurli_db3.wav */; };
+		05511F732F0B3CAA00BCC137 /* epiano_wurli_gb3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 05511F692F0B3CAA00BCC137 /* epiano_wurli_gb3.wav */; };
+		05511F742F0B3CAA00BCC137 /* epiano_wurli_f3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 05511F672F0B3CAA00BCC137 /* epiano_wurli_f3.wav */; };
+		05511F752F0B3CAA00BCC137 /* epiano_wurli_g3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 05511F682F0B3CAA00BCC137 /* epiano_wurli_g3.wav */; };
 		05614F1C2EFA10EE001FB30E /* jam_block_hi.wav in Resources */ = {isa = PBXBuildFile; fileRef = 05614F1B2EFA10EE001FB30E /* jam_block_hi.wav */; };
 		059218CD2F070D1100F4CBE8 /* PitchEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 059218CC2F070D1100F4CBE8 /* PitchEngine.swift */; };
 		05E87C2E2F03598900F7C096 /* clave808.wav in Resources */ = {isa = PBXBuildFile; fileRef = 05E87C2D2F03598900F7C096 /* clave808.wav */; };
@@ -47,6 +59,18 @@
 /* Begin PBXFileReference section */
 		0501932B2EE50B1B0066175E /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
 		0501932D2EE50B3B0066175E /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		05511F5E2F0B3CAA00BCC137 /* epiano_wurli_a3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = epiano_wurli_a3.wav; sourceTree = "<group>"; };
+		05511F5F2F0B3CAA00BCC137 /* epiano_wurli_ab3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = epiano_wurli_ab3.wav; sourceTree = "<group>"; };
+		05511F602F0B3CAA00BCC137 /* epiano_wurli_b3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = epiano_wurli_b3.wav; sourceTree = "<group>"; };
+		05511F612F0B3CAA00BCC137 /* epiano_wurli_bb3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = epiano_wurli_bb3.wav; sourceTree = "<group>"; };
+		05511F622F0B3CAA00BCC137 /* epiano_wurli_c3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = epiano_wurli_c3.wav; sourceTree = "<group>"; };
+		05511F632F0B3CAA00BCC137 /* epiano_wurli_d3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = epiano_wurli_d3.wav; sourceTree = "<group>"; };
+		05511F642F0B3CAA00BCC137 /* epiano_wurli_db3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = epiano_wurli_db3.wav; sourceTree = "<group>"; };
+		05511F652F0B3CAA00BCC137 /* epiano_wurli_e3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = epiano_wurli_e3.wav; sourceTree = "<group>"; };
+		05511F662F0B3CAA00BCC137 /* epiano_wurli_eb3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = epiano_wurli_eb3.wav; sourceTree = "<group>"; };
+		05511F672F0B3CAA00BCC137 /* epiano_wurli_f3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = epiano_wurli_f3.wav; sourceTree = "<group>"; };
+		05511F682F0B3CAA00BCC137 /* epiano_wurli_g3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = epiano_wurli_g3.wav; sourceTree = "<group>"; };
+		05511F692F0B3CAA00BCC137 /* epiano_wurli_gb3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = epiano_wurli_gb3.wav; sourceTree = "<group>"; };
 		05614F1B2EFA10EE001FB30E /* jam_block_hi.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jam_block_hi.wav; sourceTree = "<group>"; };
 		059218CC2F070D1100F4CBE8 /* PitchEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PitchEngine.swift; sourceTree = "<group>"; };
 		05E87C2D2F03598900F7C096 /* clave808.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = clave808.wav; sourceTree = "<group>"; };
@@ -83,6 +107,18 @@
 			children = (
 				05614F1B2EFA10EE001FB30E /* jam_block_hi.wav */,
 				05E87C2D2F03598900F7C096 /* clave808.wav */,
+				05511F5E2F0B3CAA00BCC137 /* epiano_wurli_a3.wav */,
+				05511F5F2F0B3CAA00BCC137 /* epiano_wurli_ab3.wav */,
+				05511F602F0B3CAA00BCC137 /* epiano_wurli_b3.wav */,
+				05511F612F0B3CAA00BCC137 /* epiano_wurli_bb3.wav */,
+				05511F622F0B3CAA00BCC137 /* epiano_wurli_c3.wav */,
+				05511F632F0B3CAA00BCC137 /* epiano_wurli_d3.wav */,
+				05511F642F0B3CAA00BCC137 /* epiano_wurli_db3.wav */,
+				05511F652F0B3CAA00BCC137 /* epiano_wurli_e3.wav */,
+				05511F662F0B3CAA00BCC137 /* epiano_wurli_eb3.wav */,
+				05511F672F0B3CAA00BCC137 /* epiano_wurli_f3.wav */,
+				05511F682F0B3CAA00BCC137 /* epiano_wurli_g3.wav */,
+				05511F692F0B3CAA00BCC137 /* epiano_wurli_gb3.wav */,
 			);
 			path = Audio;
 			sourceTree = "<group>";
@@ -240,6 +276,18 @@
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
 				05614F1C2EFA10EE001FB30E /* jam_block_hi.wav in Resources */,
+				05511F6A2F0B3CAA00BCC137 /* epiano_wurli_c3.wav in Resources */,
+				05511F6B2F0B3CAA00BCC137 /* epiano_wurli_eb3.wav in Resources */,
+				05511F6C2F0B3CAA00BCC137 /* epiano_wurli_ab3.wav in Resources */,
+				05511F6D2F0B3CAA00BCC137 /* epiano_wurli_d3.wav in Resources */,
+				05511F6E2F0B3CAA00BCC137 /* epiano_wurli_a3.wav in Resources */,
+				05511F6F2F0B3CAA00BCC137 /* epiano_wurli_bb3.wav in Resources */,
+				05511F702F0B3CAA00BCC137 /* epiano_wurli_b3.wav in Resources */,
+				05511F712F0B3CAA00BCC137 /* epiano_wurli_e3.wav in Resources */,
+				05511F722F0B3CAA00BCC137 /* epiano_wurli_db3.wav in Resources */,
+				05511F732F0B3CAA00BCC137 /* epiano_wurli_gb3.wav in Resources */,
+				05511F742F0B3CAA00BCC137 /* epiano_wurli_f3.wav in Resources */,
+				05511F752F0B3CAA00BCC137 /* epiano_wurli_g3.wav in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -16,14 +16,12 @@ class SoundEngine {
     currentSound = fileName;
   }
 
-  Future<void> changeSound(int soundId) async {
-    currentSound = SoundFile.allSounds[soundId];
+  Future<void> changeSound(String soundId) async {
+    currentSound = soundId;
 
     if (currentSound == SoundFile.silence) return;
 
-    await platform.invokeMethod<bool>('changeSound', {
-      "fileName": SoundFile.allSounds[soundId],
-    });
+    await platform.invokeMethod<bool>('changeSound', {"fileName": soundId});
   }
 
   Future<void> play() async {

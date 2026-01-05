@@ -15,6 +15,12 @@ class MetronomeOrchestrator {
   int _currSubdivision = -1;
   late List<Beat> _beats;
 
+  final List<String> allMetronomeSounds = List.unmodifiable([
+    SoundFile.clave808,
+    SoundFile.jamBlockHi,
+    SoundFile.silence,
+  ]);
+
   MetronomeOrchestrator(
     SoundEngine soundEngine,
     Function onTick,
@@ -183,7 +189,7 @@ class MetronomeOrchestrator {
 
     int currBeatId = _beats[beatIndex].subDivisions[subDivisionIndex];
     _beats[beatIndex].subDivisions[subDivisionIndex] =
-        (currBeatId + 1) % SoundFile.allSounds.length;
+        (currBeatId + 1) % allMetronomeSounds.length;
 
     _setNextSound();
   }
@@ -200,6 +206,6 @@ class MetronomeOrchestrator {
           : _beats[_currBeat].subDivisions[nextSubdivision];
     }
 
-    await _soundEngine.changeSound(nextSound);
+    await _soundEngine.changeSound(allMetronomeSounds[nextSound]);
   }
 }

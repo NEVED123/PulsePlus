@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pulseplus/audio/sound_engine.dart';
+import 'package:pulseplus/audio/sound_files.dart';
 
 class Sound extends StatefulWidget {
   const Sound({super.key, required this.soundEngine});
@@ -17,7 +18,9 @@ class _SoundState extends State<Sound> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         TextButton(
-          onPressed: () => debugPrint("Init Sound Not Implemented Yet"),
+          onPressed: () => {
+            if (!widget.soundEngine.isReady()) {widget.soundEngine.init()},
+          },
           child: Text("Init Sound"),
         ),
         _buildKeyboard(),
@@ -59,9 +62,10 @@ class _SoundState extends State<Sound> {
                     color: Color.fromARGB(255, 255, 255, 255),
                     constraints: BoxConstraints.tightFor(width: whiteKeyWidth),
                     child: GestureDetector(
-                      onTap: () => debugPrint(
-                        ["C", "D", "E", "F", "G", "A", "B"][i].toString(),
-                      ),
+                      onTapDown: (_) {
+                        int pitchIndex = [0, 2, 4, 5, 7, 9, 11][i];
+                        _playPianoPitch(pitchIndex);
+                      },
                     ),
                   ),
                 ),
@@ -85,16 +89,13 @@ class _SoundState extends State<Sound> {
                           width: blackKeyWidth,
                         ),
                         child: GestureDetector(
-                          onTap: () => debugPrint(
-                            [
-                              "C#/Db",
-                              "D#/Eb",
-                              null,
-                              "F#/Gb",
-                              "G#/Ab",
-                              "A#/Bb",
-                            ][i].toString(),
-                          ),
+                          onTapDown: (_) {
+                            int? pitchIndex = [1, 3, null, 6, 8, 10][i];
+
+                            if (pitchIndex != null) {
+                              _playPianoPitch(pitchIndex);
+                            }
+                          },
                         ),
                       ),
                     ),
@@ -106,5 +107,26 @@ class _SoundState extends State<Sound> {
         },
       ),
     );
+  }
+
+  void _playPianoPitch(int pitchIndex) {
+    final List<String> epianoWurli3 = [
+      SoundFile.epianoWurliC3,
+      SoundFile.epianoWurliDb3,
+      SoundFile.epianoWurliD3,
+      SoundFile.epianoWurliEb3,
+      SoundFile.epianoWurliE3,
+      SoundFile.epianoWurliF3,
+      SoundFile.epianoWurliGb3,
+      SoundFile.epianoWurliG3,
+      SoundFile.epianoWurliAb3,
+      SoundFile.epianoWurliA3,
+      SoundFile.epianoWurliBb3,
+      SoundFile.epianoWurliB3,
+    ];
+
+    debugPrint(pitchIndex.toString());
+    widget.soundEngine.changeSound(epianoWurli3[pitchIndex]);
+    widget.soundEngine.play();
   }
 }
