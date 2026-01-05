@@ -9,7 +9,20 @@ class SoundEngine(private val context: Context, fileName: String) {
 
     private val audioRawMap: Map<String, Int> = mapOf(
         "clave808" to R.raw.clave808,
-        "jam_block_hi" to R.raw.jam_block_hi)
+        "jam_block_hi" to R.raw.jam_block_hi,
+        "epiano_wurli_c3"  to R.raw.epiano_wurli_c3,
+        "epiano_wurli_db3" to R.raw.epiano_wurli_db3,
+        "epiano_wurli_d3"  to R.raw.epiano_wurli_d3,
+        "epiano_wurli_eb3" to R.raw.epiano_wurli_eb3,
+        "epiano_wurli_e3"  to R.raw.epiano_wurli_e3,
+        "epiano_wurli_f3"  to R.raw.epiano_wurli_f3,
+        "epiano_wurli_gb3" to R.raw.epiano_wurli_gb3,
+        "epiano_wurli_g3"  to R.raw.epiano_wurli_g3,
+        "epiano_wurli_ab3" to R.raw.epiano_wurli_ab3,
+        "epiano_wurli_a3"  to R.raw.epiano_wurli_a3,
+        "epiano_wurli_bb3" to R.raw.epiano_wurli_bb3,
+        "epiano_wurli_b3"  to R.raw.epiano_wurli_b3,
+    )
 
     private val soundPoolIdMap = mutableMapOf<String, Int>()
     private var currAudioFile: Int
