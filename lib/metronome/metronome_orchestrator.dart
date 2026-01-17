@@ -14,6 +14,7 @@ class MetronomeOrchestrator {
   int _currBeat = -1;
   int _currSubdivision = -1;
   late List<Beat> _beats;
+  late String currSoundId;
 
   final List<String> allMetronomeSounds = List.unmodifiable([
     SoundFile.clave808,
@@ -52,19 +53,19 @@ class MetronomeOrchestrator {
       if (_currSubdivision == 0) {
         _currBeat = (_currBeat + 1) % numBeats;
       }
-      _soundEngine.play();
+      _soundEngine.play(currSoundId);
       _setNextSound();
       userOnTick();
     };
   }
 
   Future<void> play() async {
-    await _validateEngineReadiness();
+    await _validateOrchestratorReadiness();
     await _metronomeEngine.play(_bpm * numSubdivisions);
   }
 
   Future<void> stop() async {
-    await _validateEngineReadiness();
+    await _validateOrchestratorReadiness();
     await _metronomeEngine.stop();
     _currBeat = -1;
     _currSubdivision = -1;
@@ -74,7 +75,7 @@ class MetronomeOrchestrator {
     return _metronomeEngine.isPlaying();
   }
 
-  Future<void> _validateEngineReadiness() async {
+  Future<void> _validateOrchestratorReadiness() async {
     if (!_metronomeEngine.isReady()) {
       await _metronomeEngine.init();
     }
@@ -83,7 +84,7 @@ class MetronomeOrchestrator {
       await _soundEngine.init();
     }
 
-    await _setNextSound();
+    _setNextSound();
   }
 
   List<Beat> get beats => _beats;
@@ -194,18 +195,18 @@ class MetronomeOrchestrator {
     _setNextSound();
   }
 
-  Future<void> _setNextSound() async {
-    int nextSound;
+  void _setNextSound() {
+    int nextSoundIdx;
 
     if (_currBeat == -1 || _currSubdivision == -1) {
-      nextSound = _beats[0].subDivisions[0];
+      nextSoundIdx = _beats[0].subDivisions[0];
     } else {
       int nextSubdivision = (_currSubdivision + 1) % numSubdivisions;
-      nextSound = nextSubdivision == 0
+      nextSoundIdx = nextSubdivision == 0
           ? _beats[(_currBeat + 1) % numBeats].subDivisions[0]
           : _beats[_currBeat].subDivisions[nextSubdivision];
     }
 
-    await _soundEngine.changeSound(allMetronomeSounds[nextSound]);
+    currSoundId = allMetronomeSounds[nextSoundIdx];
   }
 }

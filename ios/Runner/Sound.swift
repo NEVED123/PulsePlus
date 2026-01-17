@@ -14,8 +14,6 @@ class SoundEngine {
     private var players: [String: AVAudioPlayerNode] = [:]
     private var buffers: [String: AVAudioPCMBuffer] = [:]
 
-    private var currentAudioFile: String
-    
     private var audioFiles: [String] = [
         "clave808",
         "jam_block_hi",
@@ -33,7 +31,7 @@ class SoundEngine {
         "epiano_wurli_b3",
     ]
     
-    init(fileName: String) throws {
+    init() throws {
         do {
             let session = AVAudioSession.sharedInstance()
             try session.setCategory(.playback, options: [.mixWithOthers])
@@ -65,20 +63,15 @@ class SoundEngine {
                 player.play()
             }
 
-            currentAudioFile = fileName
         } catch let error {
             print("initSound threw error: \(error)")
             throw SoundError.initFailed
         }
     }
     
-    func changeSound(fileName: String) {
-        currentAudioFile = fileName
-    }
-    
-    func playSound() throws {
-        guard let buffer = buffers[currentAudioFile],
-              let player = players[currentAudioFile] else { return }
+    func playSound(fileName: String) throws {
+        guard let buffer = buffers[fileName],
+              let player = players[fileName] else { return }
 
         player.scheduleBuffer(buffer, at: nil, options: .interrupts)
     }

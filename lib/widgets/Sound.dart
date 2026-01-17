@@ -125,7 +125,6 @@ class _SoundState extends State<Sound> {
       SoundFile.epianoWurliB3,
     ];
 
-    widget.soundEngine.changeSound(epianoWurli3[pitchIndex]);
-    widget.soundEngine.play();
+    widget.soundEngine.play(epianoWurli3[pitchIndex]);
   }
 }

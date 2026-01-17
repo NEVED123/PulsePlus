@@ -22,16 +22,9 @@ import UIKit
         [weak self] (call: FlutterMethodCall, result: FlutterResult) -> Void in
         // This method is invoked on the UI thread.
         if call.method == "init" {
-            guard let args = call.arguments as? [String: Any],
-                  let filename = args["fileName"] as? String else {
-                result(FlutterError(code: "INVALID_ARGUMENT",
-                                    message: "Expected map with 'filename' (String)",
-                                    details: nil))
-                return
-            }
-            
+
             do {
-                try self?.soundEngine = SoundEngine(fileName: filename)
+                try self?.soundEngine = SoundEngine()
             } catch let error {
                 result(FlutterError(code: "\(error)",
                                     message: "\(error)",
@@ -42,24 +35,18 @@ import UIKit
             result(true)
             return
         }
-        
-        if call.method == "changeSound" {
-            guard let args = call.arguments as? [String: Any],
-                  let fileName = args["fileName"] as? String else {
-                result(FlutterError(code: "INVALID_ARGUMENT",
-                    message: "Expected map with 'fileName' (String)",
-                    details: nil))
-                return
-            }
-            
-            self?.soundEngine?.changeSound(fileName: fileName)
-            result(true)
-            return
-        }
-        
+                
         if call.method == "play" {
             do {
-                try self?.soundEngine?.playSound()
+                guard let args = call.arguments as? [String: Any],
+                      let fileName = args["fileName"] as? String else {
+                    result(FlutterError(code: "INVALID_ARGUMENT",
+                        message: "Expected map with 'fileName' (String)",
+                        details: nil))
+                    return
+                }
+                
+                try self?.soundEngine?.playSound(fileName: fileName)
                 result(true)
             } catch let error {
                 result(FlutterError(code: "\(error)",

@@ -20,8 +20,7 @@ class MainActivity: FlutterActivity() {
             // This method is invoked on the main thread.
                 call, result ->
             if (call.method == "init") {
-                val fileName = call.argument<String>("fileName")
-                soundEngine = SoundEngine(this, fileName!!)
+                soundEngine = SoundEngine(this)
                 result.success(true)
                 return@setMethodCallHandler
             }
@@ -31,19 +30,14 @@ class MainActivity: FlutterActivity() {
                     return@setMethodCallHandler
                 }
                 try {
-                    soundEngine!!.playSound()
+                    val fileName = call.argument<String>("fileName")
+                    soundEngine!!.playSound(fileName!!)
                     result.success(true)
                     return@setMethodCallHandler
                 } catch (e: Error) {
                     result.error(e.message ?: "No Message" , e.message, null)
                     return@setMethodCallHandler
                 }
-            }
-            if (call.method == "changeSound") {
-                val fileName = call.argument<String>("fileName")
-                soundEngine!!.changeSound(fileName!!)
-                result.success(true)
-                return@setMethodCallHandler
             }
             else {
                 result.notImplemented()

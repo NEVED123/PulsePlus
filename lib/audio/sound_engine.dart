@@ -4,28 +4,18 @@ import 'package:pulseplus/audio/sound_files.dart';
 class SoundEngine {
   static const platform = MethodChannel('us.pulsepl/engine');
   bool _isReady = false;
-  late String currentSound;
 
   bool isReady() {
     return _isReady;
   }
 
-  Future<void> init([String fileName = "clave808"]) async {
-    await platform.invokeMethod<bool>('init', {"fileName": fileName});
+  Future<void> init() async {
+    await platform.invokeMethod<bool>('init');
     _isReady = true;
-    currentSound = fileName;
   }
 
-  Future<void> changeSound(String soundId) async {
-    currentSound = soundId;
-
-    if (currentSound == SoundFile.silence) return;
-
-    await platform.invokeMethod<bool>('changeSound', {"fileName": soundId});
-  }
-
-  Future<void> play() async {
-    if (currentSound == SoundFile.silence) return;
-    await platform.invokeMethod('play');
+  Future<void> play(String soundId) async {
+    if (soundId == SoundFile.silence) return;
+    await platform.invokeMethod('play', {"fileName": soundId});
   }
 }
